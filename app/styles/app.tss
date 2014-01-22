@@ -1,0 +1,78 @@
+"Window":{
+	 backgroundColor:'#fff'
+},
+".container": {
+	/*backgroundImage:'bg.png'*/
+	layout:'vertical',
+	left:50,
+	right:50
+},
+"Button":{
+	textAlign:Ti.UI.TEXT_ALIGNMENT_CENTER,
+	width:Ti.UI.FILL,
+		font:{
+		fontSize:'25sp'
+	},
+	zIndex:2,
+	height:Ti.UI.SIZE,
+	backgroundColor:'#ff3974',
+	backgroundFocusedColor:'#e4f7ff',
+	backgroundSelectedColor:'#e4f7ff',
+	color:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10,
+}
+"Label": {
+	width: Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	color: "#333",
+	zIndex:1,
+	textAlign:Ti.UI.TEXT_ALIGNMENT_LEFT,
+	font:{
+		fontSize:'20sp'
+	}
+},
+"TextArea":{
+	width:Ti.UI.FILL,
+	height: Ti.UI.SIZE,
+	backgroundColor:'#f8ecee',
+	backgroundFocusedColor:'#f0f0f0',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10,
+	borderColor:'#fff',
+},
+"TextField":{
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	bottom:'10',
+	width: Ti.UI.FILL,
+	backgroundColor:'#f8ecee',
+	backgroundFocusedColor:'#f0f0f0',
+	borderRadius:10,
+	borderColor:'#fff',
+},
+"#tabMenu":{
+	backgroundColor:'#ededed',
+	width:Ti.UI.FILL,
+	heigth:Ti.UI.SIZE
+},
+".btnTabMenu":{
+	width:'40dp',
+	height:'40dp',
+	backgroundColor:'#ededed',
+	top:'5dp',
+	bottom:'5dp'
+},
+"TableViewRow":{
+	height:Ti.UI.SIZE,
+	top:20,
+	bottom:20,
+	color:'#666',
+		font:{
+		fontSize:'20sp'
+	}
+},
+"ScrollView":{
+	top:20,
+	bottom:20
+}
+

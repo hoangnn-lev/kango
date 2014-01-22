@@ -1,0 +1,29 @@
+<Alloy>
+	<Window>
+		<View layout="vertical" top="0">
+			<View backgroundColor="#ff3974">
+				<Label textAlign="center" color="#fff"  top="5dp" bottom="5dp"  height="30dp">設定</Label>
+			</View>
+			<View left="10dp" right="10dp" top="5dp" width="Ti.UI.FILL" layout="vertical">
+				<View>
+					<Label width="Ti.UI.SIZE" top="0" left="0">ID</Label>
+					<Label width="Ti.UI.SIZE"  right="0" top="0" color="#666" id="uid"></Label>
+				</View>
+				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
+				<View>
+					<Label width="Ti.UI.SIZE" top="0" left="0">名前</Label>
+					<Label width="Ti.UI.SIZE"  right="0" top="0" color="#666" id="name">ホァン　グェン</Label>
+				</View>
+				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
+				<View>
+					<Label width="Ti.UI.SIZE" left="0">カレンダー設定</Label>
+					<Picker right="0" id="dayOffset" onChange="changeDayOffset">
+						<PickerRow  title="日曜始まり"></PickerRow>
+						<PickerRow title="月曜始まり"></PickerRow>
+					</Picker>
+				</View>
+			</View>
+		</View>
+		<Require type="view" src="tab_menu" id="tabMenu"></Require>
+	</Window>
+</Alloy>

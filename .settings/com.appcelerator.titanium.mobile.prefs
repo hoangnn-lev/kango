@@ -1,0 +1,10 @@
+android/ATTR_MINIFY=true
+android/ATTR_PROJECT_NAME=Kango app
+android/abi=armeabi-v7a
+android/distribute_path=C\:\\Users\\hoangnn\\Desktop\\keystore
+android/keystore_alias=keystore
+android/keystore_password=levlevlev
+android/keystore_path=C\:\\Users\\hoangnn\\Desktop\\keystore\\keystore
+android/recent_output=C\:\\Users\\hoangnn\\Desktop\\keystore
+android/sdk_version=Android 4.3
+eclipse.preferences.version=1

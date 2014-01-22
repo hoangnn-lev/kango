@@ -1,0 +1,18 @@
+".title":{
+	font: {
+        fontSize: "25sp",
+     },
+    color:'#ff3974',
+	top:'30dp',
+	bottom:'10sp',
+	textAlign:'center'
+},
+".descTitle":{
+	bottom:'3dp',
+	color:'#888888',
+	font:{
+		fontSize:'18sp'
+	}
+}
+
+

@@ -1,0 +1,24 @@
+<Alloy>
+	<Window>
+		<View id="top" layout="vertical" top="0">
+			<View height="Ti.UI.SIZE" right="10dp" left="10dp">
+				<ImageView zIndex="10" class="btnTop"  width="30dp"  top="5dp" bottom="5dp"  height="30dp"  left="0" image="/icons/cancel.png" onClick="cancelEditSchulde"/>
+				<Label zIndex="0" textAlign="center" color="#fff">スケジュール追加</Label>
+				<ImageView zIndex="10"  class="btnTop"  width="30dp"  top="5dp" bottom="5dp"  height="30dp"  right="0"  image="/icons/add.png" onClick="saveSchedule"/>
+			</View>
+		</View>
+		<ScrollView id="content" layout="vertical" top="40dp" bottom="55dp" >
+			<Label zIndex="0" top="15dp">タイトル</Label>
+			<TextField maxLength="30" id="title" hintText="タイトル"/>
+			<Label zIndex="0" top="5dp">メモ</Label>
+			<TextArea maxLength="120" height="80dp" id="memo" hintText="メモ"></TextArea>
+			<Label zIndex="0" top="5dp">アイコン</Label>
+			<View width="Ti.UI.FILL" layout="vertical" class="wicon" id="wicon" height="Ti.UI.SIZE">
+				<View id="listIcon"></View>
+				<ScrollView scrollType="horizontal" id="buttonTabs" height="40dp" backgroundColor="#f3f3f3" bottom="0" width="Ti.UI.FILL" layout="horizontal"></ScrollView>
+			</View>
+
+		</ScrollView>
+		<Require type="view" src="tab_menu" id="tabMenu"></Require>
+	</Window>
+</Alloy>

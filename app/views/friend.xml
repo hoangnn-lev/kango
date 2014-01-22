@@ -1,0 +1,36 @@
+<Alloy>
+	<Window>
+		<View id="leftMenu" layout="vertical">
+			<View class="header">
+				<Label class="lbHeader">友達一覧</Label>
+				<ImageView width="30dp"  top="5dp" bottom="5dp" zIndex="5"  right="5dp"  height="30dp" image="/icons/closeLeftMenu.png" id="closeMenu" onClick="closeMenu" class="btnHeader"></ImageView>
+			</View>
+			<View id="listFriend"left="5dp" right="5dp" height="auto" top="0" ></View>
+		</View>
+		<View backgroundColor="#ff3974" top="0">
+			<View left="20dp" right="20dp">
+				<ImageView  width="30dp" top="5dp" bottom="5dp" height="30dp" zIndex="5" image="/icons/openLeftMenu.png"  id="openMenu" onClick="openMenu"  left="0" width="Ti.UI.SIZE"></ImageView>
+				<Label textAlign="center" color="#fff">共有</Label>
+			</View>
+		</View>
+		<ScrollView layout="vertical" top="40dp" bottom="55dp" id="main">
+			<View left="10dp" right="10dp" top="30dp" layout="vertical">
+				<Label textAlign="center" zIndex="0">送る方法を選ぶ</Label>
+				<View class="border">
+					<ImageView image="/icons/email.png" width="50dp" height="50dp" zIndex="3"  id="inviteFriendByEmail" left="0"></ImageView>
+					<Label textAlign="center">OR</Label>
+					<ImageView width="50dp" height="50dp"  id="inviteFriendByLine" image="/icons/line.png" zIndex="3" right="0"></ImageView>
+				</View>
+			</View>
+			<View left="10dp" right="10dp" top="30dp" layout="vertical">
+				<Label zIndex="0" bottom="10dp">ユーザーID</Label>
+				<View height="Ti.UI.SIZE">
+					<TextField keyboardType="Ti.UI.KEYBOARD_NUMBER_PAD" maxLength="25" hintText="IDを入力してください。" id="usrId"></TextField>
+					<Button width="Ti.UI.SIZE" top="7dp" id="searchUsr" right="5dp">検索</Button>
+				</View>
+				<View top="20dp" id="searchResult"></View>
+			</View>
+		</ScrollView>
+		<Require type="view" src="tab_menu" id="tabMenu"></Require>
+	</Window>
+</Alloy>

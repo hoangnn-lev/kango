@@ -1,0 +1,26 @@
+".calenderTitle":{
+	color:'#fff',
+	height:Ti.UI.SIZE
+},
+".scheduleTitle":{
+	width:Ti.UI.FILL,
+	height:'40dp',
+	backgroundColor:'#e4f7ff'
+},
+".scheduleDateInfo":{
+	color:'#333',
+	font:{
+		fontSize:'20sp'
+	}
+},
+".editScheduleButton":{
+	font:{
+		fontSize:'20sp'
+	}
+},
+'#days': {
+    layout: 'horizontal',
+    top: 0,
+    height: '22dp',
+    backgroundColor:'#ff3974'
+}

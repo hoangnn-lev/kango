@@ -1,0 +1,44 @@
+"#top":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	backgroundColor:'#ff3974',
+	top:0,
+	bottom:20
+},
+"#content":{
+	top:0,
+	left:'10dp',
+	right:'10dp',
+},
+".pink":{
+	color:'#ff3974'
+},
+".wicon":{
+	backgroundColor:'#e4f7ff',
+	borderRadius:10,
+	borderColor:'#e4f7ff',
+},
+".iconMemo":{
+	width:'19%',
+	height:Ti.UI.SIZE,
+	backgroundColor:'#fff',
+	borderColor:'#fff'
+},
+".btnTop":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.SIZE
+},
+".tab":{
+	width:Ti.UI.SIZE,
+	left:10,
+	right:10,
+	top:10,
+	bottom:0,
+	height:Ti.UI.FILL,
+	backgroundColor:'#f3f3f3',
+	color:'#999',
+	font:{
+		fontSize:'14sp'
+	},
+	borderRadius:0
+}

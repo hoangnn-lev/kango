@@ -1,0 +1,10 @@
+"View":{
+	height:Ti.UI.SIZE
+},
+"Label":{
+	width:Ti.UI.SIZE
+},
+".line":{
+	top:20,
+	bottom:20
+}
