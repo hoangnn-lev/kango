@@ -29,7 +29,7 @@
 	zIndex:1,
 	textAlign:Ti.UI.TEXT_ALIGNMENT_LEFT,
 	font:{
-		fontSize:'20sp'
+		fontSize:'18sp'
 	}
 },
 "TextArea":{
@@ -51,16 +51,13 @@
 	borderColor:'#fff',
 },
 "#tabMenu":{
-	backgroundColor:'#ededed',
+	backgroundColor:'#f8f8f8',
 	width:Ti.UI.FILL,
-	heigth:Ti.UI.SIZE
+	heigth:'39dp'
 },
 ".btnTabMenu":{
-	width:'40dp',
-	height:'40dp',
-	backgroundColor:'#ededed',
-	top:'5dp',
-	bottom:'5dp'
+	width:'30dp',
+	height:'30dp'
 },
 "TableViewRow":{
 	height:Ti.UI.SIZE,

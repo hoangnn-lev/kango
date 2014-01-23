@@ -35,7 +35,7 @@ module.exports = [ {
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         }
     }
 }, {
@@ -99,11 +99,8 @@ module.exports = [ {
     priority: 10000.0008,
     key: "btnTabMenu",
     style: {
-        width: "40dp",
-        height: "40dp",
-        backgroundColor: "#ededed",
-        top: "5dp",
-        bottom: "5dp"
+        width: "30dp",
+        height: "30dp"
     }
 }, {
     isClass: true,
@@ -134,8 +131,8 @@ module.exports = [ {
     priority: 100000.0007,
     key: "tabMenu",
     style: {
-        backgroundColor: "#ededed",
+        backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: Ti.UI.SIZE
+        heigth: "39dp"
     }
 } ];

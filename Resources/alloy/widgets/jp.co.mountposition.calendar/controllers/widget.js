@@ -100,7 +100,7 @@ function Controller() {
             textAlign: "center",
             text: prevMonth.daysInMonth() - i,
             font: {
-                fontSize: "22sp"
+                fontSize: "18sp"
             },
             width: TILE_WIDTH,
             height: TILE_WIDTH,
@@ -121,7 +121,7 @@ function Controller() {
             color: DAY_COLOR[period.day()],
             backgroundImage: tileImg,
             font: {
-                fontSize: "22sp"
+                fontSize: "18sp"
             },
             textAlign: "center",
             text: period.date(),
@@ -147,7 +147,7 @@ function Controller() {
             textAlign: "center",
             text: nextMonth.date(),
             font: {
-                fontSize: "22sp"
+                fontSize: "18sp"
             },
             width: TILE_WIDTH,
             height: TILE_WIDTH,

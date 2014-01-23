@@ -116,7 +116,7 @@ if (dayOfWeek !== 0) {
 			textAlign : 'center',
 			text : prevMonth.daysInMonth() - i,
 			font : {
-				fontSize : '22sp'
+				fontSize : '18sp'
 			},
 			//backgroundImage : WPATH('/images/calendar/inactive.png'),
 			width : TILE_WIDTH,
@@ -144,7 +144,7 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 		color : DAY_COLOR[period.day()],
 		backgroundImage : tileImg,
 		font : {
-			fontSize : '22sp'
+			fontSize : '18sp'
 		},
 		textAlign : 'center',
 		text : period.date(),
@@ -171,7 +171,7 @@ while (col !== 0) {
 		textAlign : 'center',
 		text : nextMonth.date(),
 		font : {
-			fontSize : '22sp'
+			fontSize : '18sp'
 		},
 		//backgroundImage : WPATH('/images/calendar/inactive.png'),
 		width : TILE_WIDTH,

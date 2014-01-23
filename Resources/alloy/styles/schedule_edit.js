@@ -35,7 +35,7 @@ module.exports = [ {
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         }
     }
 }, {
@@ -99,22 +99,19 @@ module.exports = [ {
     priority: 10000.0008,
     key: "btnTabMenu",
     style: {
-        width: "40dp",
-        height: "40dp",
-        backgroundColor: "#ededed",
-        top: "5dp",
-        bottom: "5dp"
+        width: "30dp",
+        height: "30dp"
     }
 }, {
     isClass: true,
-    priority: 10000.0039,
+    priority: 10000.0042,
     key: "pink",
     style: {
         color: "#ff3974"
     }
 }, {
     isClass: true,
-    priority: 10000.004,
+    priority: 10000.0043,
     key: "wicon",
     style: {
         backgroundColor: "#e4f7ff",
@@ -123,7 +120,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0041,
+    priority: 10000.0044,
     key: "iconMemo",
     style: {
         width: "19%",
@@ -133,7 +130,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0042,
+    priority: 10000.0045,
     key: "btnTop",
     style: {
         height: Ti.UI.SIZE,
@@ -141,7 +138,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0043,
+    priority: 10000.0046,
     key: "tab",
     style: {
         width: Ti.UI.SIZE,
@@ -162,13 +159,13 @@ module.exports = [ {
     priority: 100000.0007,
     key: "tabMenu",
     style: {
-        backgroundColor: "#ededed",
+        backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: Ti.UI.SIZE
+        heigth: "39dp"
     }
 }, {
     isId: true,
-    priority: 100000.0037,
+    priority: 100000.004,
     key: "top",
     style: {
         width: Ti.UI.FILL,
@@ -179,7 +176,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0038,
+    priority: 100000.0041,
     key: "content",
     style: {
         top: 0,

@@ -113,14 +113,14 @@ function Controller() {
         layout: "vertical"
     });
     $.__views.schedule_edit.add($.__views.top);
-    $.__views.__alloyId22 = Ti.UI.createView({
+    $.__views.__alloyId23 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         right: "10dp",
         left: "10dp",
-        id: "__alloyId22"
+        id: "__alloyId23"
     });
-    $.__views.top.add($.__views.__alloyId22);
-    $.__views.__alloyId23 = Ti.UI.createImageView({
+    $.__views.top.add($.__views.__alloyId23);
+    $.__views.__alloyId24 = Ti.UI.createImageView({
         height: "30dp",
         width: "30dp",
         zIndex: "10",
@@ -128,24 +128,24 @@ function Controller() {
         bottom: "5dp",
         left: "0",
         image: "/icons/cancel.png",
-        id: "__alloyId23"
+        id: "__alloyId24"
     });
-    $.__views.__alloyId22.add($.__views.__alloyId23);
-    cancelEditSchulde ? $.__views.__alloyId23.addEventListener("click", cancelEditSchulde) : __defers["$.__views.__alloyId23!click!cancelEditSchulde"] = true;
-    $.__views.__alloyId24 = Ti.UI.createLabel({
+    $.__views.__alloyId23.add($.__views.__alloyId24);
+    cancelEditSchulde ? $.__views.__alloyId24.addEventListener("click", cancelEditSchulde) : __defers["$.__views.__alloyId24!click!cancelEditSchulde"] = true;
+    $.__views.__alloyId25 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#fff",
         zIndex: "0",
         textAlign: "center",
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "スケジュール追加",
-        id: "__alloyId24"
+        id: "__alloyId25"
     });
-    $.__views.__alloyId22.add($.__views.__alloyId24);
-    $.__views.__alloyId25 = Ti.UI.createImageView({
+    $.__views.__alloyId23.add($.__views.__alloyId25);
+    $.__views.__alloyId26 = Ti.UI.createImageView({
         height: "30dp",
         width: "30dp",
         zIndex: "10",
@@ -153,10 +153,10 @@ function Controller() {
         bottom: "5dp",
         right: "0",
         image: "/icons/add.png",
-        id: "__alloyId25"
+        id: "__alloyId26"
     });
-    $.__views.__alloyId22.add($.__views.__alloyId25);
-    saveSchedule ? $.__views.__alloyId25.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId25!click!saveSchedule"] = true;
+    $.__views.__alloyId23.add($.__views.__alloyId26);
+    saveSchedule ? $.__views.__alloyId26.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId26!click!saveSchedule"] = true;
     $.__views.content = Ti.UI.createScrollView({
         top: "40dp",
         bottom: "55dp",
@@ -166,20 +166,20 @@ function Controller() {
         layout: "vertical"
     });
     $.__views.schedule_edit.add($.__views.content);
-    $.__views.__alloyId26 = Ti.UI.createLabel({
+    $.__views.__alloyId27 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#333",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "タイトル",
         top: "15dp",
-        id: "__alloyId26"
+        id: "__alloyId27"
     });
-    $.__views.content.add($.__views.__alloyId26);
+    $.__views.content.add($.__views.__alloyId27);
     $.__views.title = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -193,20 +193,20 @@ function Controller() {
         hintText: "タイトル"
     });
     $.__views.content.add($.__views.title);
-    $.__views.__alloyId27 = Ti.UI.createLabel({
+    $.__views.__alloyId28 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#333",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "メモ",
         top: "5dp",
-        id: "__alloyId27"
+        id: "__alloyId28"
     });
-    $.__views.content.add($.__views.__alloyId27);
+    $.__views.content.add($.__views.__alloyId28);
     $.__views.memo = Ti.UI.createTextArea({
         width: Ti.UI.FILL,
         height: "80dp",
@@ -220,20 +220,20 @@ function Controller() {
         hintText: "メモ"
     });
     $.__views.content.add($.__views.memo);
-    $.__views.__alloyId28 = Ti.UI.createLabel({
+    $.__views.__alloyId29 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#333",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "アイコン",
         top: "5dp",
-        id: "__alloyId28"
+        id: "__alloyId29"
     });
-    $.__views.content.add($.__views.__alloyId28);
+    $.__views.content.add($.__views.__alloyId29);
     $.__views.wicon = Ti.UI.createView({
         backgroundColor: "#e4f7ff",
         borderRadius: 10,
@@ -260,9 +260,9 @@ function Controller() {
     });
     $.__views.wicon.add($.__views.buttonTabs);
     $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#ededed",
+        backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: Ti.UI.SIZE,
+        heigth: "39dp",
         id: "tabMenu",
         __parentSymbol: $.__views.schedule_edit
     });
@@ -311,8 +311,8 @@ function Controller() {
         $.buttonTabs.add(buttontab);
     }
     $.buttonTabs.setContentWidth(Ti.Platform.displayCaps.platformWidth + Ti.Platform.displayCaps.platformWidth / 4);
-    __defers["$.__views.__alloyId23!click!cancelEditSchulde"] && $.__views.__alloyId23.addEventListener("click", cancelEditSchulde);
-    __defers["$.__views.__alloyId25!click!saveSchedule"] && $.__views.__alloyId25.addEventListener("click", saveSchedule);
+    __defers["$.__views.__alloyId24!click!cancelEditSchulde"] && $.__views.__alloyId24.addEventListener("click", cancelEditSchulde);
+    __defers["$.__views.__alloyId26!click!saveSchedule"] && $.__views.__alloyId26.addEventListener("click", saveSchedule);
     _.extend($, exports);
 }
 

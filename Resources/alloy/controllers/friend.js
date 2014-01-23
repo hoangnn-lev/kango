@@ -257,7 +257,7 @@ function Controller() {
         zIndex: 1,
         textAlign: "center",
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "友達一覧",
         id: "__alloyId1"
@@ -319,7 +319,7 @@ function Controller() {
         zIndex: 1,
         textAlign: "center",
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "共有",
         id: "__alloyId4"
@@ -349,7 +349,7 @@ function Controller() {
         zIndex: "0",
         textAlign: "center",
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "送る方法を選ぶ",
         id: "__alloyId6"
@@ -380,7 +380,7 @@ function Controller() {
         zIndex: 1,
         textAlign: "center",
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "OR",
         id: "__alloyId8"
@@ -412,7 +412,7 @@ function Controller() {
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         text: "ユーザーID",
         bottom: "10dp",
@@ -471,9 +471,9 @@ function Controller() {
     });
     $.__views.__alloyId9.add($.__views.searchResult);
     $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#ededed",
+        backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: Ti.UI.SIZE,
+        heigth: "39dp",
         id: "tabMenu",
         __parentSymbol: $.__views.friend
     });

@@ -35,12 +35,12 @@ $.schedule.addEventListener('android:back', function(e) {
 });
 
 //add swipe left right for calendar
-// $.calendar.addEventListener('swipe', function(e) {
-// if (e.direction == 'left')
-// doNextMonth();
-// else if (e.direction == 'right')
-// doPrevMonth();
-// });
+$.calendar.addEventListener('swipe', function(e) {
+	if (e.direction == 'left')
+		doNextMonth();
+	else if (e.direction == 'right')
+		doPrevMonth();
+});
 
 /*
  * function doPrevMonth
@@ -158,8 +158,8 @@ function getListScheduleByDate(date) {
 		return;
 	var tableView = Ti.UI.createTableView({
 		top : 0,
-		left : 20,
-		right : 20,
+		left : '7dp',
+		right : '7dp',
 		height : 'auto'
 	});
 	var item = [];
@@ -179,13 +179,13 @@ function getListScheduleByDate(date) {
 				bottom : '10dp',
 				color : '#666',
 				font : {
-					fontSize : '20sp'
+					fontSize : '18sp'
 				},
-				left : '40dp'
+				left : '30dp'
 			});
 
 			row.add(Ti.UI.createImageView({
-				height : '32dp',
+				height : '20dp',
 				image : data[i].img,
 				left : 0
 			}));
@@ -197,12 +197,22 @@ function getListScheduleByDate(date) {
 				bottom : '10dp',
 				color : '#666',
 				font : {
-					fontSize : '20sp'
+					fontSize : '18sp'
 				},
 				left : '0'
 			});
 		}
 
+		var date = Ti.UI.createLabel({
+			text : '| 20:00',
+			font : {
+				fontSize : '18dp'
+			},
+			color:'#666',
+			right : '10dp'
+		});
+
+		row.add(date);
 		row.add(scheduleTitle);
 		item.push(row);
 	}
@@ -360,5 +370,32 @@ function _initFriend() {
 			}
 		}
 	});
+}
+
+loadFriendByDay();
+function loadFriendByDay() {
+	for (var i = 0; i < 4; ++i) {
+		var left = '0';
+		if (i > 0) {
+			left = i * 25;
+		}
+		var view = Ti.UI.createView({
+			backgroundColor : '#f19c98',
+			height : '30dp',
+			width : '23%',
+			left : left + '%'
+		});
+		if (i == 2) {
+			view.setBackgroundColor('#c3c3c3');
+		}
+		view.add(Ti.UI.createLabel({
+			text : 'Aさん',
+			color : '#000',
+			font : {
+				fontSize : '16dp'
+			}
+		}));
+		$.friend.add(view);
+	}
 }
 

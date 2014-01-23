@@ -59,8 +59,8 @@ function Controller() {
         if (!data) return;
         var tableView = Ti.UI.createTableView({
             top: 0,
-            left: 20,
-            right: 20,
+            left: "7dp",
+            right: "7dp",
             height: "auto"
         });
         var item = [];
@@ -77,12 +77,12 @@ function Controller() {
                     bottom: "10dp",
                     color: "#666",
                     font: {
-                        fontSize: "20sp"
+                        fontSize: "18sp"
                     },
-                    left: "40dp"
+                    left: "30dp"
                 });
                 row.add(Ti.UI.createImageView({
-                    height: "32dp",
+                    height: "20dp",
                     image: data[i].img,
                     left: 0
                 }));
@@ -93,10 +93,19 @@ function Controller() {
                 bottom: "10dp",
                 color: "#666",
                 font: {
-                    fontSize: "20sp"
+                    fontSize: "18sp"
                 },
                 left: "0"
             });
+            var date = Ti.UI.createLabel({
+                text: "| 20:00",
+                font: {
+                    fontSize: "18dp"
+                },
+                color: "#666",
+                right: "10dp"
+            });
+            row.add(date);
             row.add(scheduleTitle);
             item.push(row);
         }
@@ -182,6 +191,27 @@ function Controller() {
             }
         });
     }
+    function loadFriendByDay() {
+        for (var i = 0; 4 > i; ++i) {
+            var left = "0";
+            i > 0 && (left = 25 * i);
+            var view = Ti.UI.createView({
+                backgroundColor: "#f19c98",
+                height: "30dp",
+                width: "23%",
+                left: left + "%"
+            });
+            2 == i && view.setBackgroundColor("#c3c3c3");
+            view.add(Ti.UI.createLabel({
+                text: "Aさん",
+                color: "#000",
+                font: {
+                    fontSize: "16dp"
+                }
+            }));
+            $.friend.add(view);
+        }
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "schedule";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -230,9 +260,8 @@ function Controller() {
         zIndex: 1,
         textAlign: "center",
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
-        text: "",
         id: "currentDate"
     });
     $.__views.__alloyId16.add($.__views.currentDate);
@@ -303,18 +332,32 @@ function Controller() {
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
-        text: "",
         left: "5dp",
         id: "scheduleDateInfo"
     });
     $.__views.__alloyId20.add($.__views.scheduleDateInfo);
-    $.__views.__alloyId21 = Ti.UI.createButton({
+    $.__views.__alloyId21 = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
+        height: "25dp",
+        color: "#000",
+        zIndex: 1,
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "16sp"
+        },
+        left: "145dp",
+        backgroundColor: "#ffbf00",
+        text: " 日勤 ",
+        id: "__alloyId21"
+    });
+    $.__views.__alloyId20.add($.__views.__alloyId21);
+    $.__views.__alloyId22 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.SIZE,
         font: {
-            fontSize: "20sp"
+            fontSize: "18sp"
         },
         zIndex: 2,
         height: Ti.UI.SIZE,
@@ -324,21 +367,29 @@ function Controller() {
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
-        title: "追加",
         right: "5dp",
-        id: "__alloyId21"
+        title: "追加",
+        id: "__alloyId22"
     });
-    $.__views.__alloyId20.add($.__views.__alloyId21);
-    editScheduleView ? $.__views.__alloyId21.addEventListener("click", editScheduleView) : __defers["$.__views.__alloyId21!click!editScheduleView"] = true;
+    $.__views.__alloyId20.add($.__views.__alloyId22);
+    editScheduleView ? $.__views.__alloyId22.addEventListener("click", editScheduleView) : __defers["$.__views.__alloyId22!click!editScheduleView"] = true;
+    $.__views.friend = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        top: "10dp",
+        left: "7dp",
+        id: "friend"
+    });
+    $.__views.scheduleInfo.add($.__views.friend);
     $.__views.scheduleList = Ti.UI.createView({
+        top: "10dp",
         id: "scheduleList",
         height: Ti.UI.SIZE
     });
     $.__views.scheduleInfo.add($.__views.scheduleList);
     $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#ededed",
+        backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: Ti.UI.SIZE,
+        heigth: "39dp",
         id: "tabMenu",
         __parentSymbol: $.__views.schedule
     });
@@ -368,10 +419,14 @@ function Controller() {
         });
         confirm.show();
     });
+    $.calendar.addEventListener("swipe", function(e) {
+        "left" == e.direction ? doNextMonth() : "right" == e.direction && doPrevMonth();
+    });
+    loadFriendByDay();
     __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
     __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);
     __defers["$.__views.calendar!click!clickCalendar"] && $.__views.calendar.addEventListener("click", clickCalendar);
-    __defers["$.__views.__alloyId21!click!editScheduleView"] && $.__views.__alloyId21.addEventListener("click", editScheduleView);
+    __defers["$.__views.__alloyId22!click!editScheduleView"] && $.__views.__alloyId22.addEventListener("click", editScheduleView);
     _.extend($, exports);
 }
 

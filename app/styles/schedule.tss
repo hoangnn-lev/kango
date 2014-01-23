@@ -10,12 +10,12 @@
 ".scheduleDateInfo":{
 	color:'#333',
 	font:{
-		fontSize:'20sp'
+		fontSize:'18sp'
 	}
 },
 ".editScheduleButton":{
 	font:{
-		fontSize:'20sp'
+		fontSize:'18sp'
 	}
 },
 '#days': {
@@ -23,4 +23,23 @@
     top: 0,
     height: '22dp',
     backgroundColor:'#ff3974'
+},
+'.shiftLabel':{
+	left:'120dp',
+	backgroundColor:'#ffbf00',
+	color:'#000',
+	left:'145dp',
+	width:Ti.UI.SIZE,
+	font:{
+		fontSize:'16sp'
+	},
+	height:'25dp'
+},
+"#friend":{
+	height:Ti.UI.SIZE,
+	top:'10dp',
+	left:'7dp'
+},
+"#scheduleList":{
+	top:'10dp'
 }
