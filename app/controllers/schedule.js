@@ -17,7 +17,7 @@ refreshCalendar();
 _initFriend();
 
 //set activetab
-$.tabMenu.getView('schedule').setImage(Ti.API.TABMENU['schedule_active']);
+//$.tabMenu.getView('schedule').setImage(Ti.API.TABMENU['schedule_active']);
 
 //add back button
 $.schedule.addEventListener('android:back', function(e) {
@@ -158,9 +158,8 @@ function getListScheduleByDate(date) {
 		return;
 	var tableView = Ti.UI.createTableView({
 		top : 0,
-		left : '7dp',
-		right : '7dp',
-		height : 'auto'
+		height : 'auto',
+		separatorColor : '#fff'
 	});
 	var item = [];
 
@@ -168,7 +167,11 @@ function getListScheduleByDate(date) {
 		var row = Ti.UI.createTableViewRow({
 			title : data[i].title,
 			content : data[i].content,
-
+			selectionStyle : 'none',
+			selectedBackgroundColor : 'transparent',
+			backgroundColor : '#f0f0f0',
+			left : '7dp',
+			right : '7dp'
 		});
 
 		if (data[i].img) {
@@ -181,13 +184,15 @@ function getListScheduleByDate(date) {
 				font : {
 					fontSize : '18sp'
 				},
+				touchEnabled : false,
 				left : '30dp'
 			});
 
 			row.add(Ti.UI.createImageView({
 				height : '20dp',
 				image : data[i].img,
-				left : 0
+				left : '5dp',
+				touchEnabled : false,
 			}));
 		} else {
 			var scheduleTitle = Ti.UI.createLabel({
@@ -199,7 +204,8 @@ function getListScheduleByDate(date) {
 				font : {
 					fontSize : '18sp'
 				},
-				left : '0'
+				left : '5dp',
+				touchEnabled : false,
 			});
 		}
 
@@ -208,7 +214,8 @@ function getListScheduleByDate(date) {
 			font : {
 				fontSize : '18dp'
 			},
-			color:'#666',
+			touchEnabled : false,
+			color : '#666',
 			right : '10dp'
 		});
 
@@ -333,6 +340,7 @@ function _initCalendar() {
 			},
 			text : _ref[i],
 			width : TILE_WIDTH,
+			touchEnabled : false
 		}));
 	}
 }

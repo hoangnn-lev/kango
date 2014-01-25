@@ -19,7 +19,7 @@ function Controller() {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         id: "view",
-        backgroundColor: "#fff"
+        backgroundColor: "#f7f7f7"
     });
     $.__views.view && $.addTopLevelView($.__views.view);
     $.__views.container = Ti.UI.createView({
@@ -63,9 +63,9 @@ function Controller() {
     doClick = function(e) {
         var _ref, _ref1, _ref2;
         if (null != e.source.date && !e.source._isEntry) {
-            null != $.selected && null != (_ref = $.selected.children[0]) && (_ref.backgroundImage = WPATH("/images/calendar/tile.png"));
+            null != $.selected && null != (_ref = $.selected.children[0]);
             $.selected = e.source;
-            return null != (_ref1 = $.selected) ? null != (_ref2 = _ref1.children[0]) ? _ref2.backgroundImage = WPATH("/images/calendar/selected.png") : void 0 : void 0;
+            return null != (_ref1 = $.selected) ? null != (_ref2 = _ref1.children[0]) ? 0 : void 0 : void 0;
         }
     };
     $.calendar = {};
@@ -81,7 +81,30 @@ function Controller() {
             day = holidays[i].date;
             day = moment(day, "YYYY-MM-DD").date();
             ui = null != (_ref1 = $.calendar) ? _ref1["" + day] : void 0;
-            null != (null != ui ? ui.date : void 0) && (ui.children[0].color = "#ff3974");
+            if (null != (null != ui ? ui.date : void 0)) {
+                ui.add(Ti.UI.createLabel({
+                    text: "★",
+                    font: {
+                        fontSize: "18dp"
+                    },
+                    color: "#666",
+                    top: "5dp",
+                    right: "5dp",
+                    touchEnabled: false,
+                    zIndex: 0
+                }));
+                ui.add(Ti.UI.createLabel({
+                    text: "夜勤",
+                    font: {
+                        fontSize: "14dp"
+                    },
+                    color: "#666",
+                    bottom: "3dp",
+                    touchEnabled: false,
+                    zIndex: 0
+                }));
+                ui.backgroundColor = "#d3e1f5";
+            }
         }
     });
     col = 0;
@@ -98,37 +121,41 @@ function Controller() {
         weekView.add(Ti.UI.createLabel({
             color: OUTDAY_COLOR[col],
             textAlign: "center",
-            text: prevMonth.daysInMonth() - i,
-            font: {
-                fontSize: "18sp"
-            },
             width: TILE_WIDTH,
             height: TILE_WIDTH,
-            prevMonth: true
+            prevMonth: true,
+            className: "dayOfWeek"
         }));
         col++;
     }
-    var tileImg = WPATH("/images/calendar/tile.png");
     for (i = _k = 1, _ref2 = period.daysInMonth(); _ref2 >= 1 ? _ref2 >= _k : _k >= _ref2; i = _ref2 >= 1 ? ++_k : --_k) {
         tile = Ti.UI.createView({
-            backgroundColor: "transparent",
-            width: TILE_WIDTH,
+            backgroundColor: "#fff",
+            width: TILE_WIDTH - 2,
             height: TILE_WIDTH,
-            date: period.unix()
+            date: period.unix(),
+            left: "1sp",
+            top: "1sp",
+            className: "row"
         });
-        currentDate == calendarMonth.format("YYYY-MM-") + i && tile.setBackgroundImage(WPATH("/images/calendar/current.png"));
+        i == _ref2 && tile.setRight("1sp");
+        currentDate == calendarMonth.format("YYYY-MM-") + i && tile.setBackgroundColor("#ffcde2");
         tile.add(Ti.UI.createLabel({
             color: DAY_COLOR[period.day()],
-            backgroundImage: tileImg,
+            top: "5dp",
+            left: "5dp",
             font: {
                 fontSize: "18sp"
             },
+            border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+            borderRadius: 10,
             textAlign: "center",
             text: period.date(),
-            width: TILE_WIDTH,
-            height: TILE_WIDTH,
+            width: Ti.UI.SIZE,
+            height: Ti.UI.SIZE,
             _isEntry: false,
-            touchEnabled: false
+            touchEnabled: false,
+            className: "day"
         }));
         weekView.add(tile);
         $.calendar["" + period.date()] = tile;
@@ -142,17 +169,6 @@ function Controller() {
         }
     }
     while (0 !== col) {
-        weekView.add(Ti.UI.createLabel({
-            color: OUTDAY_COLOR[col],
-            textAlign: "center",
-            text: nextMonth.date(),
-            font: {
-                fontSize: "18sp"
-            },
-            width: TILE_WIDTH,
-            height: TILE_WIDTH,
-            nextMonth: true
-        }));
         nextMonth.add("days", 1);
         col++;
         if (7 === col) {

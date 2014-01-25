@@ -1,0 +1,21 @@
+"View":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL
+},
+"#friend":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL,
+	top:'50dp'
+},
+".error":{
+	color:'red',
+	font:{
+		fontSize:'12dp'
+	}
+},
+".mainPopup":{
+	backgroundColor:'#fff'
+},
+".popupField":{
+	borderRadius:0
+}

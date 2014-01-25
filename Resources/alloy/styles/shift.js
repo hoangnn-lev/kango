@@ -96,103 +96,53 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0046,
-    key: "pink",
+    priority: 10000.0061,
+    key: "calenderTitle",
     style: {
-        color: "#ff3974"
+        color: "#fff",
+        height: Ti.UI.SIZE
     }
 }, {
     isClass: true,
-    priority: 10000.0047,
-    key: "wicon",
+    priority: 10000.0062,
+    key: "scheduleTitle",
     style: {
-        backgroundColor: "#e4f7ff",
-        borderRadius: 10,
-        borderColor: "#e4f7ff"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0048,
-    key: "iconMemo",
-    style: {
-        width: "19%",
-        height: Ti.UI.SIZE,
-        backgroundColor: "#fff",
-        borderColor: "#fff"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0049,
-    key: "btnTop",
-    style: {
-        height: Ti.UI.SIZE,
-        width: Ti.UI.SIZE
-    }
-}, {
-    isClass: true,
-    priority: 10000.005,
-    key: "tab",
-    style: {
-        width: Ti.UI.SIZE,
-        left: 10,
-        right: 10,
-        top: 10,
-        bottom: 0,
-        height: Ti.UI.FILL,
-        backgroundColor: "#f3f3f3",
-        color: "#999",
-        font: {
-            fontSize: "14sp"
-        },
-        borderRadius: 0
-    }
-}, {
-    isClass: true,
-    priority: 10000.0051,
-    key: "time",
-    style: {
-        height: "45dp",
-        width: Ti.UI.FILL
-    }
-}, {
-    isClass: true,
-    priority: 10000.0052,
-    key: "timeBackground",
-    style: {
-        height: "35dp",
-        width: "55dp",
-        backgroundColor: "#ccc",
-        left: 0
-    }
-}, {
-    isClass: true,
-    priority: 10000.0053,
-    key: "labelTime",
-    style: {
-        left: "10dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0054,
-    key: "inputTime",
-    style: {
-        left: "60dp",
-        font: {
-            fontWeight: "bold",
-            fontSize: "20dp"
-        },
-        height: "35dp",
-        width: Ti.UI.SIZE
-    }
-}, {
-    isClass: true,
-    priority: 10000.0055,
-    key: "groupButton",
-    style: {
-        height: "80dp",
         width: Ti.UI.FILL,
-        backgroundColor: "#ccc",
-        top: "10dp"
+        height: "40dp",
+        backgroundColor: "#e4f7ff"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0063,
+    key: "scheduleDateInfo",
+    style: {
+        color: "#333",
+        font: {
+            fontSize: "18sp"
+        }
+    }
+}, {
+    isClass: true,
+    priority: 10000.0064,
+    key: "editScheduleButton",
+    style: {
+        font: {
+            fontSize: "18sp"
+        }
+    }
+}, {
+    isClass: true,
+    priority: 10000.0066,
+    key: "shiftLabel",
+    style: {
+        left: "145dp",
+        backgroundColor: "#ffbf00",
+        color: "#000",
+        width: Ti.UI.SIZE,
+        font: {
+            fontSize: "16sp"
+        },
+        height: "25dp"
     }
 }, {
     isId: true,
@@ -205,22 +155,21 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0044,
-    key: "top",
+    priority: 100000.0065,
+    key: "days",
     style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
+        layout: "horizontal",
         top: 0,
-        bottom: 20
+        height: "22dp",
+        backgroundColor: "#ff3974"
     }
 }, {
     isId: true,
-    priority: 100000.0045,
-    key: "content",
+    priority: 100000.0067,
+    key: "friend",
     style: {
-        top: 0,
-        left: "10dp",
-        right: "10dp"
+        height: Ti.UI.SIZE,
+        top: "10dp",
+        left: "7dp"
     }
 } ];

@@ -1,14 +1,23 @@
 Ti.include('activityScreen.js');
 
 //config tabmenu
-Ti.API.TABMENU = {
-	schedule : '/tabmenu/schedule.png',
-	friend : '/tabmenu/friend.png',
-	setting : '/tabmenu/setting.png',
-	schedule_active : '/tabmenu/schedule_active.png',
-	friend_active : '/tabmenu/friend_active.png',
-	setting_active : '/tabmenu/setting_active.png'
-};
+Ti.API.TABMENU = [{
+	img : '/tabmenu/schedule.png',
+	action : 'schedule',
+	text:'ホーム'
+}, {
+	img : '/tabmenu/shift.png',
+	action : 'shift',
+	text:'シフト'
+}, {
+	img : '/tabmenu/group.png',
+	action : 'group',
+	text:'グループ'
+}, {
+	img : '/tabmenu/setting.png',
+	action : 'setting',
+	text:'設定'
+}];
 
 Ti.API.ICON = [{
 	title : '履歴',

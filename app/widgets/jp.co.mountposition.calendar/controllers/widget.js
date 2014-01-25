@@ -28,18 +28,20 @@ $.dates.width = CALENDAR_WIDTH;
 $.selected = null;
 
 doClick = function(e) {
+
 	var _ref, _ref1, _ref2;
 
 	if ((e.source.date != null) && !e.source._isEntry) {
 
 		if ($.selected != null) {
 			if (( _ref = $.selected.children[0]) != null) {
-				_ref.backgroundImage = WPATH('/images/calendar/tile.png');
+				//_ref.backgroundColor = 'transparent';
 			}
 		}
 
 		$.selected = e.source;
-		return ( _ref1 = $.selected) != null ? ( _ref2 = _ref1.children[0]) != null ? _ref2.backgroundImage = WPATH('/images/calendar/selected.png') :
+
+		return ( _ref1 = $.selected) != null ? ( _ref2 = _ref1.children[0]) != null ? /*_ref2.backgroundColor = '#74c149'*/ 0 :
 		void 0 :
 		void 0;
 	}
@@ -53,15 +55,14 @@ period.date(1);
 
 dayOfWeek = period.day() - dayOffset;
 
-while(dayOfWeek < 0) dayOfWeek += 7;
+while (dayOfWeek < 0)
+dayOfWeek += 7;
 
 prevMonth = moment(period).subtract('months', 1);
 
 nextMonth = moment(period).add('months', 1);
 
 _.defer(function() {
-	//require(WPATH('holiday')).fetch(calendarMonth, function(holidays) {
-
 	var name, ui, _ref1;
 	for (var i = 0, n = holidays.length; i < n; ++i) {
 		day = holidays[i].date;
@@ -70,27 +71,33 @@ _.defer(function() {
 		void 0;
 		if ((ui != null ? ui.date :
 		void 0) != null) {
-			// ui.add(Ti.UI.createLabel({
-			// //text : name,
-			// text : '★',
-			// font : {
-			// fontSize : '20dp'
-			// },
-			// //color : EVENT_COLOR[0],
-			// color : '#ff3974',
-			// top : 0,
-			// textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER,
-			// touchEnabled : false,
-			// width : Ti.UI.FILL,
-			// height : Ti.UI.FILL,
-			// zIndex : 0
-			// }));
-			//ui.children[0].backgroundImage = WPATH('/images/calendar/event.png');
-			//ui.children[0].color = DAY_COLOR[0];
-			ui.children[0].color = '#ff3974';
+
+			ui.add(Ti.UI.createLabel({
+				text : '★',
+				font : {
+					fontSize : '18dp'
+				},
+				color : '#666',
+				top : '5dp',
+				right : '5dp',
+				touchEnabled : false,
+				zIndex : 0
+			}));
+
+			ui.add(Ti.UI.createLabel({
+				text : '夜勤',
+				font : {
+					fontSize : '14dp'
+				},
+				color : '#666',
+				bottom : '3dp',
+				touchEnabled : false,
+				zIndex : 0
+			}));
+
+			ui.backgroundColor = '#d3e1f5';
 		}
 	}
-	//});
 });
 
 col = 0;
@@ -114,44 +121,49 @@ if (dayOfWeek !== 0) {
 		weekView.add(Ti.UI.createLabel({
 			color : OUTDAY_COLOR[col],
 			textAlign : 'center',
-			text : prevMonth.daysInMonth() - i,
-			font : {
-				fontSize : '18sp'
-			},
-			//backgroundImage : WPATH('/images/calendar/inactive.png'),
 			width : TILE_WIDTH,
 			height : TILE_WIDTH,
-			prevMonth : true
+			prevMonth : true,
+			className : 'dayOfWeek'
 		}));
 		col++;
 	}
 }
 
-var tileImg = WPATH('/images/calendar/tile.png');
-
 for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >= _ref2; i = 1 <= _ref2 ? ++_k : --_k) {
 	tile = Ti.UI.createView({
-		backgroundColor : 'transparent',
-		width : TILE_WIDTH,
+		backgroundColor : '#fff',
+		width : TILE_WIDTH - 2,
 		height : TILE_WIDTH,
-		date : period.unix()
+		date : period.unix(),
+		left : '1sp',
+		top : '1sp',
+		className : 'row'
 	});
 
+	if (i == _ref2) {
+		tile.setRight('1sp');
+	}
+
 	if (currentDate == (calendarMonth.format('YYYY-MM-') + i)) {
-		tile.setBackgroundImage(WPATH('/images/calendar/current.png'));
+		tile.setBackgroundColor('#ffcde2');
 	}
 	tile.add(Ti.UI.createLabel({
 		color : DAY_COLOR[period.day()],
-		backgroundImage : tileImg,
+		top : '5dp',
+		left : '5dp',
 		font : {
 			fontSize : '18sp'
 		},
+		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		borderRadius : 10,
 		textAlign : 'center',
 		text : period.date(),
-		width : TILE_WIDTH,
-		height : TILE_WIDTH,
+		width : Ti.UI.SIZE,
+		height : Ti.UI.SIZE,
 		_isEntry : false,
-		touchEnabled : false
+		touchEnabled : false,
+		className : 'day'
 	}));
 	weekView.add(tile);
 	$.calendar["" + (period.date())] = tile;
@@ -166,18 +178,7 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 }
 
 while (col !== 0) {
-	weekView.add(Ti.UI.createLabel({
-		color : OUTDAY_COLOR[col],
-		textAlign : 'center',
-		text : nextMonth.date(),
-		font : {
-			fontSize : '18sp'
-		},
-		//backgroundImage : WPATH('/images/calendar/inactive.png'),
-		width : TILE_WIDTH,
-		height : TILE_WIDTH,
-		nextMonth : true
-	}));
+
 	nextMonth.add('days', 1);
 	col++;
 	if (col === 7) {

@@ -109,7 +109,7 @@ function Controller() {
         zIndex: "-1"
     });
     $.__views.index.add($.__views.loginForm);
-    $.__views.__alloyId13 = Ti.UI.createLabel({
+    $.__views.__alloyId24 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#ff3974",
@@ -121,10 +121,10 @@ function Controller() {
         top: "50dp",
         bottom: "10sp",
         text: "アカウント登録",
-        id: "__alloyId13"
+        id: "__alloyId24"
     });
-    $.__views.loginForm.add($.__views.__alloyId13);
-    $.__views.__alloyId14 = Ti.UI.createLabel({
+    $.__views.loginForm.add($.__views.__alloyId24);
+    $.__views.__alloyId25 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#888888",
@@ -135,9 +135,9 @@ function Controller() {
         },
         bottom: "20dp",
         text: "登録は簡単・無料なので、今すぐ登録してください。",
-        id: "__alloyId14"
+        id: "__alloyId25"
     });
-    $.__views.loginForm.add($.__views.__alloyId14);
+    $.__views.loginForm.add($.__views.__alloyId25);
     $.__views.fullname = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -197,7 +197,7 @@ function Controller() {
             id: configs.models[0].get("cg_value"),
             name: configs.models[1].get("cg_value")
         };
-        scheduleView();
+        openView("schedule");
     } else $.index.open();
     $.index.addEventListener("android:back", function() {
         Titanium.Android.currentActivity.finish();

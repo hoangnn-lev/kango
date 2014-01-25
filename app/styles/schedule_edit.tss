@@ -41,4 +41,34 @@
 		fontSize:'14sp'
 	},
 	borderRadius:0
+},
+".time":{
+	height:'45dp',
+	width:Ti.UI.FILL,
+	
+},
+'.timeBackground':{
+	height:'35dp',
+	width:'55dp',
+	backgroundColor:'#ccc',
+	
+	left:0
+},
+'.labelTime':{
+	left:'10dp'
+},
+".inputTime":{
+	left:'60dp',
+	font:{
+		fontWeight:'bold',
+		fontSize:'20dp'
+	},
+	height:'35dp',
+	width:Ti.UI.SIZE
+},
+".groupButton":{
+	height:'80dp',
+	width:Ti.UI.FILL,
+	backgroundColor:'#ccc',
+	top:'10dp'
 }

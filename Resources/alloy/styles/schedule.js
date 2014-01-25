@@ -35,7 +35,7 @@ module.exports = [ {
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "18sp"
+            fontSize: "16sp"
         }
     }
 }, {
@@ -66,7 +66,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.0008,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -79,7 +79,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.001,
+    priority: 1000.0009,
     key: "ScrollView",
     style: {
         top: 20,
@@ -96,15 +96,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0008,
-    key: "btnTabMenu",
-    style: {
-        width: "30dp",
-        height: "30dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0031,
+    priority: 10000.0036,
     key: "calenderTitle",
     style: {
         color: "#fff",
@@ -112,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0032,
+    priority: 10000.0037,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
@@ -121,7 +113,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0033,
+    priority: 10000.0038,
     key: "scheduleDateInfo",
     style: {
         color: "#333",
@@ -131,7 +123,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0034,
+    priority: 10000.0039,
     key: "editScheduleButton",
     style: {
         font: {
@@ -140,7 +132,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0036,
+    priority: 10000.0041,
     key: "shiftLabel",
     style: {
         left: "145dp",
@@ -159,11 +151,11 @@ module.exports = [ {
     style: {
         backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: "39dp"
+        height: "50dp"
     }
 }, {
     isId: true,
-    priority: 100000.0035,
+    priority: 100000.004,
     key: "days",
     style: {
         layout: "horizontal",
@@ -173,18 +165,11 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0037,
+    priority: 100000.0042,
     key: "friend",
     style: {
         height: Ti.UI.SIZE,
         top: "10dp",
         left: "7dp"
-    }
-}, {
-    isId: true,
-    priority: 100000.0038,
-    key: "scheduleList",
-    style: {
-        top: "10dp"
     }
 } ];

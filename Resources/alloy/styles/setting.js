@@ -35,7 +35,7 @@ module.exports = [ {
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "18sp"
+            fontSize: "16sp"
         }
     }
 }, {
@@ -66,7 +66,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.0008,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -79,7 +79,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.001,
+    priority: 1000.0009,
     key: "ScrollView",
     style: {
         top: 20,
@@ -87,14 +87,14 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0048,
+    priority: 1000.0057,
     key: "View",
     style: {
         height: Ti.UI.SIZE
     }
 }, {
     isApi: true,
-    priority: 1000.0049,
+    priority: 1000.0058,
     key: "Label",
     style: {
         width: Ti.UI.SIZE
@@ -110,15 +110,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0008,
-    key: "btnTabMenu",
-    style: {
-        width: "30dp",
-        height: "30dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.005,
+    priority: 10000.0059,
     key: "line",
     style: {
         top: 20,
@@ -131,6 +123,6 @@ module.exports = [ {
     style: {
         backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: "39dp"
+        height: "50dp"
     }
 } ];

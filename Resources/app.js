@@ -1,16 +1,16 @@
-function scheduleView() {
-    scheduleViewObj || (scheduleViewObj = Alloy.createController("schedule").getView());
-    activityScreen.nextWindowByLoading(scheduleViewObj);
-}
-
-function settingView() {
-    settingViewObj = Alloy.createController("setting").getView();
-    activityScreen.nextWindow(settingViewObj);
-}
-
-function friendView() {
-    friendViewObj || (friendViewObj = Alloy.createController("friend").getView());
-    activityScreen.nextWindow(friendViewObj);
+function openView(view) {
+    var action;
+    for (var i = 0, n = viewObj.length; n > i; ++i) if (viewObj[i].name == view) {
+        action = viewObj[i].action;
+        activityScreen.nextWindow(action);
+        return;
+    }
+    action = Alloy.createController(view).getView();
+    viewObj.push({
+        name: view,
+        action: action
+    });
+    activityScreen.nextWindow(action);
 }
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
@@ -21,6 +21,6 @@ var frd = require("friend");
 
 var gcm = require("com.activate.gcm");
 
-var scheduleViewObj, settingViewObj, friendViewObj, scheduleEditViewObj;
+var viewObj = [];
 
 Alloy.createController("index");

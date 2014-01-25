@@ -1,8 +1,4 @@
 <Alloy>
 	<Label backgroundColor="#c3c3c3" bottom="49dp" height="1sp"/>
-	<View id="tabMenu">
-		<ImageView id="schedule" image="Ti.API.TABMENU['schedule']" left="20" class="btnTabMenu"></ImageView>
-		<ImageView id="friend" image="Ti.API.TABMENU['friend']" class="btnTabMenu"></ImageView>
-		<ImageView id="setting" image="Ti.API.TABMENU['setting']" right="20" class="btnTabMenu"></ImageView>
-	</View>
+	<View id="tabMenu"></View>
 </Alloy>

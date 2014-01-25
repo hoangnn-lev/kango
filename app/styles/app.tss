@@ -29,7 +29,7 @@
 	zIndex:1,
 	textAlign:Ti.UI.TEXT_ALIGNMENT_LEFT,
 	font:{
-		fontSize:'18sp'
+		fontSize:'16sp'
 	}
 },
 "TextArea":{
@@ -53,11 +53,7 @@
 "#tabMenu":{
 	backgroundColor:'#f8f8f8',
 	width:Ti.UI.FILL,
-	heigth:'39dp'
-},
-".btnTabMenu":{
-	width:'30dp',
-	height:'30dp'
+	height:'50dp'
 },
 "TableViewRow":{
 	height:Ti.UI.SIZE,

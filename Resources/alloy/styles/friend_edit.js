@@ -35,7 +35,7 @@ module.exports = [ {
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "18sp"
+            fontSize: "16sp"
         }
     }
 }, {
@@ -66,7 +66,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.0008,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -79,7 +79,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.001,
+    priority: 1000.0009,
     key: "ScrollView",
     style: {
         top: 20,
@@ -87,7 +87,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0019,
+    priority: 1000.0018,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -104,46 +104,27 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0008,
-    key: "btnTabMenu",
+    priority: 10000.002,
+    key: "error",
     style: {
-        width: "30dp",
-        height: "30dp"
+        color: "red",
+        font: {
+            fontSize: "12dp"
+        }
     }
 }, {
     isClass: true,
-    priority: 10000.002,
-    key: "border",
+    priority: 10000.0021,
+    key: "mainPopup",
     style: {
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 10,
-        borderColor: "#eee"
+        backgroundColor: "#fff"
     }
 }, {
     isClass: true,
     priority: 10000.0022,
-    key: "header",
+    key: "popupField",
     style: {
-        top: 0,
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        backgroundColor: "#ff3974"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0023,
-    key: "lbHeader",
-    style: {
-        textAlign: "center",
-        color: "#fff"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0024,
-    key: "btnHeader",
-    style: {
-        right: 0,
-        width: Ti.UI.SIZE
+        borderRadius: 0
     }
 }, {
     isId: true,
@@ -152,38 +133,15 @@ module.exports = [ {
     style: {
         backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: "39dp"
+        height: "50dp"
     }
 }, {
     isId: true,
-    priority: 100000.0021,
-    key: "leftMenu",
+    priority: 100000.0019,
+    key: "friend",
     style: {
-        backgroundColor: "#f3f3f3",
-        width: "80%",
-        height: Ti.UI.FILL,
-        left: "-80%",
-        zIndex: 3
-    }
-}, {
-    isId: true,
-    priority: 100000.0025,
-    key: "searchResult",
-    style: {
-        width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        backgroundColor: "#f8ecee",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 10,
-        borderColor: "#f8ecee"
-    }
-}, {
-    isId: true,
-    priority: 100000.0026,
-    key: "searchUsr",
-    style: {
-        font: {
-            fontSize: "20sp"
-        }
+        width: Ti.UI.FILL,
+        top: "50dp"
     }
 } ];

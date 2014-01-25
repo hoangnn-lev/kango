@@ -1,0 +1,26 @@
+<Alloy>
+	<Window exitOnClose="true">
+		<View height="35dp" backgroundColor="#ff3974" top="0">
+			<View top="5dp" bottom="5dp"  height="Ti.UI.SIZE" left="10dp" right="10dp">
+				<ImageView zIndex="5" width="25dp" height="25dp" image="/icons/pre.png" class="calenderTitle" onClick="doPrevMonth" id="prevMonth" left="0"/>
+				<Label zIndex="0" touchEnabled="false" class="calenderTitle" textAlign="center" id="currentDate"/>
+				<ImageView zIndex="5"  width="25dp"  height="25dp"  image="/icons/next.png"  class="calenderTitle" onClick="doNextMonth" id="nextMonth" right="0"/>
+			</View>
+		</View>
+		<View layout="vertical" top="35dp"  bottom="50dp">
+			<View height="Ti.UI.SIZE" width="Ti.UI.FILL" layout="vertical">
+				<View id="days" height="Ti.UI.SIZE" width="Ti.UI.FILL"/>
+				<View id="calendar" onClick="clickCalendar" height="Ti.UI.SIZE"/>
+			</View>
+			<View backgroundColor="#f0f0f0" width="Ti.UI.FILL" height="1sp">
+			</View>
+			<View id="scheduleInfo" height="Ti.UI.SIZE" layout="vertical">
+				<View class="scheduleTitle">
+					<Label left="5dp" class="scheduleDateInfo" id="scheduleDateInfo"/>
+				</View>
+			</View>
+		</View>
+		<Require type="view" src="tab_menu" id="tabMenu">
+		</Require>
+	</Window>
+</Alloy>

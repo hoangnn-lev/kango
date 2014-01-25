@@ -13,7 +13,7 @@ if (configs.models.length > 0) {
 		name : configs.models[1].get('cg_value')
 	};
 
-	scheduleView();
+	openView('schedule');
 } else {
 	$.index.open();
 }

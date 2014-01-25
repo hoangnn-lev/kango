@@ -10,11 +10,11 @@ if (Ti.API.rowIndex != null) {
 }
 
 //active tabmenu
-$.tabMenu.getView('schedule').setImage(Ti.API.TABMENU['schedule_active']);
+//$.tabMenu.getView('schedule').setImage(Ti.API.TABMENU['schedule_active']);
 
 //add back button
 $.schedule_edit.addEventListener('android:back', function(e) {
-	scheduleView();
+	openView('schedule');
 });
 
 $.listIcon.setHeight(40 + imgWidth * 2 + 'dp');
@@ -197,20 +197,29 @@ function cancelEditSchulde(e) {
 	$.title.blur();
 	$.memo.blur();
 	resetData();
-	scheduleView();
+	openView('schedule');
 }
 
-//add swipe left right for calendar
-// $.schedule_edit.addEventListener('swipe', function(e) {
-	// if (e.direction == 'down') {
-		// $.title.blur();
-		// $.memo.blur();
-	// }
-// });
-
+/*
+ * function resetData
+ * empty data after save
+ * input : null
+ * output : void
+ * */
 function resetData() {
 	Ti.API.id = null;
 	Ti.API.day = null;
 	Ti.API.data = null;
 	Ti.API.rowIndex = null;
+}
+
+/*
+ * function timePicker
+ * set time for event
+ * input : null
+ * output : void
+ * */
+function timePicker() {
+	
+	$.time.setText('20:00~21:00');
 }

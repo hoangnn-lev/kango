@@ -1,5 +1,5 @@
 //set activetab
-$.tabMenu.getView('friend').setImage(Ti.API.TABMENU['friend_active']);
+//$.tabMenu.getView('friend').setImage(Ti.API.TABMENU['friend_active']);
 
 //time slide
 var duration = 200;
@@ -186,7 +186,7 @@ function closeMenu(e) {
 // });
 
 //add back button
-$.friend.addEventListener('android:back', function(e) {
+$.group.addEventListener('android:back', function(e) {
 	if (flg)
 		closeMenu();
 	else

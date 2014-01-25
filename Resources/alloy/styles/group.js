@@ -86,6 +86,14 @@ module.exports = [ {
         bottom: 20
     }
 }, {
+    isApi: true,
+    priority: 1000.0024,
+    key: "View",
+    style: {
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL
+    }
+}, {
     isClass: true,
     priority: 10000.0002,
     key: "container",
@@ -96,103 +104,38 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0046,
-    key: "pink",
+    priority: 10000.0025,
+    key: "border",
     style: {
-        color: "#ff3974"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0047,
-    key: "wicon",
-    style: {
-        backgroundColor: "#e4f7ff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
-        borderColor: "#e4f7ff"
+        borderColor: "#eee"
     }
 }, {
     isClass: true,
-    priority: 10000.0048,
-    key: "iconMemo",
+    priority: 10000.0027,
+    key: "header",
     style: {
-        width: "19%",
+        top: 0,
         height: Ti.UI.SIZE,
-        backgroundColor: "#fff",
-        borderColor: "#fff"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0049,
-    key: "btnTop",
-    style: {
-        height: Ti.UI.SIZE,
-        width: Ti.UI.SIZE
-    }
-}, {
-    isClass: true,
-    priority: 10000.005,
-    key: "tab",
-    style: {
-        width: Ti.UI.SIZE,
-        left: 10,
-        right: 10,
-        top: 10,
-        bottom: 0,
-        height: Ti.UI.FILL,
-        backgroundColor: "#f3f3f3",
-        color: "#999",
-        font: {
-            fontSize: "14sp"
-        },
-        borderRadius: 0
-    }
-}, {
-    isClass: true,
-    priority: 10000.0051,
-    key: "time",
-    style: {
-        height: "45dp",
-        width: Ti.UI.FILL
-    }
-}, {
-    isClass: true,
-    priority: 10000.0052,
-    key: "timeBackground",
-    style: {
-        height: "35dp",
-        width: "55dp",
-        backgroundColor: "#ccc",
-        left: 0
-    }
-}, {
-    isClass: true,
-    priority: 10000.0053,
-    key: "labelTime",
-    style: {
-        left: "10dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0054,
-    key: "inputTime",
-    style: {
-        left: "60dp",
-        font: {
-            fontWeight: "bold",
-            fontSize: "20dp"
-        },
-        height: "35dp",
-        width: Ti.UI.SIZE
-    }
-}, {
-    isClass: true,
-    priority: 10000.0055,
-    key: "groupButton",
-    style: {
-        height: "80dp",
         width: Ti.UI.FILL,
-        backgroundColor: "#ccc",
-        top: "10dp"
+        backgroundColor: "#ff3974"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0028,
+    key: "lbHeader",
+    style: {
+        textAlign: "center",
+        color: "#fff"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0029,
+    key: "btnHeader",
+    style: {
+        right: 0,
+        width: Ti.UI.SIZE
     }
 }, {
     isId: true,
@@ -205,22 +148,34 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0044,
-    key: "top",
+    priority: 100000.0026,
+    key: "leftMenu",
     style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
-        top: 0,
-        bottom: 20
+        backgroundColor: "#f3f3f3",
+        width: "80%",
+        height: Ti.UI.FILL,
+        left: "-80%",
+        zIndex: 3
     }
 }, {
     isId: true,
-    priority: 100000.0045,
-    key: "content",
+    priority: 100000.003,
+    key: "searchResult",
     style: {
-        top: 0,
-        left: "10dp",
-        right: "10dp"
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        backgroundColor: "#f8ecee",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        borderColor: "#f8ecee"
+    }
+}, {
+    isId: true,
+    priority: 100000.0031,
+    key: "searchUsr",
+    style: {
+        font: {
+            fontSize: "20sp"
+        }
     }
 } ];

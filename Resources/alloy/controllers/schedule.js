@@ -59,15 +59,19 @@ function Controller() {
         if (!data) return;
         var tableView = Ti.UI.createTableView({
             top: 0,
-            left: "7dp",
-            right: "7dp",
-            height: "auto"
+            height: "auto",
+            separatorColor: "#fff"
         });
         var item = [];
         for (var i = 0, n = data.length; n > i; ++i) {
             var row = Ti.UI.createTableViewRow({
                 title: data[i].title,
-                content: data[i].content
+                content: data[i].content,
+                selectionStyle: "none",
+                selectedBackgroundColor: "transparent",
+                backgroundColor: "#f0f0f0",
+                left: "7dp",
+                right: "7dp"
             });
             if (data[i].img) {
                 var scheduleTitle = Ti.UI.createLabel({
@@ -79,12 +83,14 @@ function Controller() {
                     font: {
                         fontSize: "18sp"
                     },
+                    touchEnabled: false,
                     left: "30dp"
                 });
                 row.add(Ti.UI.createImageView({
                     height: "20dp",
                     image: data[i].img,
-                    left: 0
+                    left: "5dp",
+                    touchEnabled: false
                 }));
             } else var scheduleTitle = Ti.UI.createLabel({
                 height: Ti.UI.SIZE,
@@ -95,13 +101,15 @@ function Controller() {
                 font: {
                     fontSize: "18sp"
                 },
-                left: "0"
+                left: "5dp",
+                touchEnabled: false
             });
             var date = Ti.UI.createLabel({
                 text: "| 20:00",
                 font: {
                     fontSize: "18dp"
                 },
+                touchEnabled: false,
                 color: "#666",
                 right: "10dp"
             });
@@ -171,7 +179,8 @@ function Controller() {
                 fontSize: "18sp"
             },
             text: _ref[i],
-            width: TILE_WIDTH
+            width: TILE_WIDTH,
+            touchEnabled: false
         }));
     }
     function _initFriend() {
@@ -226,22 +235,22 @@ function Controller() {
         id: "schedule"
     });
     $.__views.schedule && $.addTopLevelView($.__views.schedule);
-    $.__views.__alloyId15 = Ti.UI.createView({
+    $.__views.__alloyId26 = Ti.UI.createView({
         height: "35dp",
         backgroundColor: "#ff3974",
         top: "0",
-        id: "__alloyId15"
+        id: "__alloyId26"
     });
-    $.__views.schedule.add($.__views.__alloyId15);
-    $.__views.__alloyId16 = Ti.UI.createView({
+    $.__views.schedule.add($.__views.__alloyId26);
+    $.__views.__alloyId27 = Ti.UI.createView({
         top: "5dp",
-        bottom: "",
+        bottom: "5dp",
         height: Ti.UI.SIZE,
         left: "10dp",
         right: "10dp",
-        id: "__alloyId16"
+        id: "__alloyId27"
     });
-    $.__views.__alloyId15.add($.__views.__alloyId16);
+    $.__views.__alloyId26.add($.__views.__alloyId27);
     $.__views.prevMonth = Ti.UI.createImageView({
         color: "#fff",
         height: "25dp",
@@ -251,20 +260,21 @@ function Controller() {
         id: "prevMonth",
         left: "0"
     });
-    $.__views.__alloyId16.add($.__views.prevMonth);
+    $.__views.__alloyId27.add($.__views.prevMonth);
     doPrevMonth ? $.__views.prevMonth.addEventListener("click", doPrevMonth) : __defers["$.__views.prevMonth!click!doPrevMonth"] = true;
     $.__views.currentDate = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#fff",
-        zIndex: 1,
+        zIndex: "0",
         textAlign: "center",
         font: {
-            fontSize: "18sp"
+            fontSize: "16sp"
         },
+        touchEnabled: "false",
         id: "currentDate"
     });
-    $.__views.__alloyId16.add($.__views.currentDate);
+    $.__views.__alloyId27.add($.__views.currentDate);
     $.__views.nextMonth = Ti.UI.createImageView({
         color: "#fff",
         height: "25dp",
@@ -274,22 +284,22 @@ function Controller() {
         id: "nextMonth",
         right: "0"
     });
-    $.__views.__alloyId16.add($.__views.nextMonth);
+    $.__views.__alloyId27.add($.__views.nextMonth);
     doNextMonth ? $.__views.nextMonth.addEventListener("click", doNextMonth) : __defers["$.__views.nextMonth!click!doNextMonth"] = true;
-    $.__views.__alloyId17 = Ti.UI.createScrollView({
+    $.__views.__alloyId28 = Ti.UI.createView({
+        layout: "vertical",
         top: "35dp",
         bottom: "50dp",
-        layout: "vertical",
-        id: "__alloyId17"
+        id: "__alloyId28"
     });
-    $.__views.schedule.add($.__views.__alloyId17);
-    $.__views.__alloyId18 = Ti.UI.createView({
+    $.__views.schedule.add($.__views.__alloyId28);
+    $.__views.__alloyId29 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         layout: "vertical",
-        id: "__alloyId18"
+        id: "__alloyId29"
     });
-    $.__views.__alloyId17.add($.__views.__alloyId18);
+    $.__views.__alloyId28.add($.__views.__alloyId29);
     $.__views.days = Ti.UI.createView({
         layout: "horizontal",
         top: 0,
@@ -298,33 +308,33 @@ function Controller() {
         id: "days",
         width: Ti.UI.FILL
     });
-    $.__views.__alloyId18.add($.__views.days);
+    $.__views.__alloyId29.add($.__views.days);
     $.__views.calendar = Ti.UI.createView({
         id: "calendar",
         height: Ti.UI.SIZE
     });
-    $.__views.__alloyId18.add($.__views.calendar);
+    $.__views.__alloyId29.add($.__views.calendar);
     clickCalendar ? $.__views.calendar.addEventListener("click", clickCalendar) : __defers["$.__views.calendar!click!clickCalendar"] = true;
-    $.__views.__alloyId19 = Ti.UI.createView({
-        backgroundColor: "#ff3974",
+    $.__views.__alloyId30 = Ti.UI.createView({
+        backgroundColor: "#f0f0f0",
         width: Ti.UI.FILL,
-        height: "2",
-        id: "__alloyId19"
+        height: "1sp",
+        id: "__alloyId30"
     });
-    $.__views.__alloyId17.add($.__views.__alloyId19);
+    $.__views.__alloyId28.add($.__views.__alloyId30);
     $.__views.scheduleInfo = Ti.UI.createView({
         id: "scheduleInfo",
         height: Ti.UI.SIZE,
         layout: "vertical"
     });
-    $.__views.__alloyId17.add($.__views.scheduleInfo);
-    $.__views.__alloyId20 = Ti.UI.createView({
+    $.__views.__alloyId28.add($.__views.scheduleInfo);
+    $.__views.__alloyId31 = Ti.UI.createView({
         width: Ti.UI.FILL,
         height: "40dp",
         backgroundColor: "#e4f7ff",
-        id: "__alloyId20"
+        id: "__alloyId31"
     });
-    $.__views.scheduleInfo.add($.__views.__alloyId20);
+    $.__views.scheduleInfo.add($.__views.__alloyId31);
     $.__views.scheduleDateInfo = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -337,8 +347,8 @@ function Controller() {
         left: "5dp",
         id: "scheduleDateInfo"
     });
-    $.__views.__alloyId20.add($.__views.scheduleDateInfo);
-    $.__views.__alloyId21 = Ti.UI.createLabel({
+    $.__views.__alloyId31.add($.__views.scheduleDateInfo);
+    $.__views.__alloyId32 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: "25dp",
         color: "#000",
@@ -350,10 +360,10 @@ function Controller() {
         left: "145dp",
         backgroundColor: "#ffbf00",
         text: " 日勤 ",
-        id: "__alloyId21"
+        id: "__alloyId32"
     });
-    $.__views.__alloyId20.add($.__views.__alloyId21);
-    $.__views.__alloyId22 = Ti.UI.createButton({
+    $.__views.__alloyId31.add($.__views.__alloyId32);
+    $.__views.__alloyId33 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.SIZE,
         font: {
@@ -369,10 +379,10 @@ function Controller() {
         borderRadius: 10,
         right: "5dp",
         title: "追加",
-        id: "__alloyId22"
+        id: "__alloyId33"
     });
-    $.__views.__alloyId20.add($.__views.__alloyId22);
-    editScheduleView ? $.__views.__alloyId22.addEventListener("click", editScheduleView) : __defers["$.__views.__alloyId22!click!editScheduleView"] = true;
+    $.__views.__alloyId31.add($.__views.__alloyId33);
+    editScheduleView ? $.__views.__alloyId33.addEventListener("click", editScheduleView) : __defers["$.__views.__alloyId33!click!editScheduleView"] = true;
     $.__views.friend = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "10dp",
@@ -380,8 +390,15 @@ function Controller() {
         id: "friend"
     });
     $.__views.scheduleInfo.add($.__views.friend);
-    $.__views.scheduleList = Ti.UI.createView({
+    $.__views.__alloyId34 = Ti.UI.createView({
+        backgroundColor: "#ffbf00",
+        width: Ti.UI.FILL,
         top: "10dp",
+        height: "1sp",
+        id: "__alloyId34"
+    });
+    $.__views.scheduleInfo.add($.__views.__alloyId34);
+    $.__views.scheduleList = Ti.UI.createView({
         id: "scheduleList",
         height: Ti.UI.SIZE
     });
@@ -389,7 +406,7 @@ function Controller() {
     $.__views.tabMenu = Alloy.createController("tab_menu", {
         backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
-        heigth: "39dp",
+        height: "50dp",
         id: "tabMenu",
         __parentSymbol: $.__views.schedule
     });
@@ -407,7 +424,6 @@ function Controller() {
     _initCalendar();
     refreshCalendar();
     _initFriend();
-    $.tabMenu.getView("schedule").setImage(Ti.API.TABMENU["schedule_active"]);
     $.schedule.addEventListener("android:back", function() {
         var confirm = Ti.UI.createAlertDialog({
             title: "看護アプル",
@@ -426,7 +442,7 @@ function Controller() {
     __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
     __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);
     __defers["$.__views.calendar!click!clickCalendar"] && $.__views.calendar.addEventListener("click", clickCalendar);
-    __defers["$.__views.__alloyId22!click!editScheduleView"] && $.__views.__alloyId22.addEventListener("click", editScheduleView);
+    __defers["$.__views.__alloyId33!click!editScheduleView"] && $.__views.__alloyId33.addEventListener("click", editScheduleView);
     _.extend($, exports);
 }
 

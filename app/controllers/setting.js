@@ -1,5 +1,5 @@
 //active tab
-$.tabMenu.getView('setting').setImage(Ti.API.TABMENU['setting_active']);
+//$.tabMenu.getView('setting').setImage(Ti.API.TABMENU['setting_active']);
 
 //create collection configs and get data
 Alloy.Collections.configs = Alloy.createCollection('configs');
@@ -119,3 +119,8 @@ $.name.addEventListener('click', function(e) {
 	});
 	dialog.show();
 });
+
+
+function friend_edit(){
+	openView('friend_edit');
+}
