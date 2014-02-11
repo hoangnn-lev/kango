@@ -2,7 +2,7 @@
 	<Window>
 		<View id="leftMenu" layout="vertical">
 			<View class="header">
-				<Label class="lbHeader">友達一覧</Label>
+				<Label class="lbHeader" text="友達一覧"/>
 				<ImageView width="30dp"  top="5dp" bottom="5dp" zIndex="5"  right="5dp"  height="30dp" image="/icons/closeLeftMenu.png" id="closeMenu" onClick="closeMenu" class="btnHeader"></ImageView>
 			</View>
 			<View id="listFriend"left="5dp" right="5dp" height="auto" top="0" ></View>
@@ -10,7 +10,7 @@
 		<View backgroundColor="#ff3974" top="0">
 			<View left="20dp" right="20dp">
 				<ImageView  width="30dp" top="5dp" bottom="5dp" height="30dp" zIndex="5" image="/icons/openLeftMenu.png"  id="openMenu" onClick="openMenu"  left="0" width="Ti.UI.SIZE"></ImageView>
-				<Label textAlign="center" color="#fff">共有</Label>
+				<Label textAlign="center" color="#fff" text="共有"/>
 			</View>
 		</View>
 		<ScrollView layout="vertical" top="40dp" bottom="55dp" id="main">

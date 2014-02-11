@@ -45,6 +45,7 @@
 ".time":{
 	height:'45dp',
 	width:Ti.UI.FILL,
+	top:'10dp'
 	
 },
 '.timeBackground':{
@@ -66,9 +67,18 @@
 	height:'35dp',
 	width:Ti.UI.SIZE
 },
-".groupButton":{
-	height:'80dp',
+"#groupButton":{
+	top:'15dp',
 	width:Ti.UI.FILL,
-	backgroundColor:'#ccc',
-	top:'10dp'
+	height:Ti.UI.SIZE
+},
+".button":{
+	color:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:'15',
+	font:{
+		fontSize:'16dp'
+	},
+	height:'40dp',
+	top:0
 }

@@ -1,0 +1,66 @@
+"View":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL
+},
+"TextField":{
+	zIndex:0
+},
+"Button":{
+	zIndex:0
+},
+"Label":{
+	zIndex:0
+},
+"#content":{
+	left:'10dp',
+	right:'10dp',
+	width:Ti.UI.FILL,
+	height:Ti.UI.FILL,
+	top:'40dp',
+	bottom:'55dp',
+	layout:'vertical'
+},
+"#shiftName":{
+	width:'120dp',
+	height:'35dp',
+	backgroundColor:'#f19c98',
+	left:0,
+	top:'10dp',
+	font:{
+		fontSize:'15dp'
+	}
+},
+"#shiftAlias":{
+	height:"35dp",
+	width:'120dp',
+	left:0
+},
+".smallText":{
+	font:{
+		fontSize:'13dp'
+	},
+	color:'#000',
+	top:'10dp'
+},
+".timeBlock":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE
+},
+"#timeStart":{
+	left:0,
+	width:'160dp',
+	height:'35dp',
+	backgroundColor:'#f19c98',
+	font:{
+		fontSize:'15dp'
+	}
+},
+"#timeEnd":{
+	right:0,
+	width:'160dp',
+	height:'35dp',
+	backgroundColor:'#f19c98',
+	font:{
+		fontSize:'15dp'
+	}
+}

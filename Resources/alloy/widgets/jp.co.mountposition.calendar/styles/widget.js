@@ -93,7 +93,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0012,
+    priority: 1000.0013,
     key: "View",
     style: {
         width: Ti.UI.FILL,
@@ -110,7 +110,17 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0016,
+    priority: 10000.001,
+    key: "error",
+    style: {
+        font: {
+            fontSize: "12dp"
+        },
+        color: "red"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0017,
     key: "week",
     style: {
         color: "#fff",
@@ -132,7 +142,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0013,
+    priority: 100000.0014,
     key: "container",
     style: {
         top: 0,
@@ -142,7 +152,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0014,
+    priority: 100000.0015,
     key: "days",
     style: {
         layout: "horizontal",
@@ -151,7 +161,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0015,
+    priority: 100000.0016,
     key: "dates",
     style: {
         layout: "vertical",

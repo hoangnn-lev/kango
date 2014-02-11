@@ -5,12 +5,17 @@ var gcm = require('com.activate.gcm');
 
 var viewObj = [];
 
-function openView(view) {
+function openView(view, callback) {
 	var action;
 	for (var i = 0, n = viewObj.length; i < n; ++i) {
 
 		if (viewObj[i].name == view) {
 			action = viewObj[i].action;
+			if (callback) {
+				action.callback = function() {
+					callback();
+				};
+			}
 			activityScreen.nextWindow(action);
 			return;
 		}
@@ -20,5 +25,10 @@ function openView(view) {
 		name : view,
 		action : action
 	});
+	if (callback) {
+		action.callback = function() {
+			callback();
+		};
+	}
 	activityScreen.nextWindow(action);
 }

@@ -13,30 +13,28 @@
 		fontSize:'18sp'
 	}
 },
-".editScheduleButton":{
-	font:{
-		fontSize:'18sp'
-	}
-},
 '#days': {
     layout: 'horizontal',
     top: 0,
     height: '22dp',
     backgroundColor:'#ff3974'
 },
-'.shiftLabel':{
-	left:'120dp',
-	backgroundColor:'#ffbf00',
-	color:'#000',
-	left:'145dp',
-	width:Ti.UI.SIZE,
-	font:{
-		fontSize:'16sp'
-	},
-	height:'25dp'
-},
-"#friend":{
+
+"#shiftList":{
 	height:Ti.UI.SIZE,
 	top:'10dp',
-	left:'7dp'
+	left:'10dp'
+},
+".shiftSetting":{
+	backgroundColor:"#a9c4eb",
+	backgroundFocusedColor:'#90b5ea',
+	backgroundSelectedColor:'#90b5ea',
+	width:"46%",
+	height:"40dp",
+	right:"10dp",
+	border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius : 10,
+	font : {
+			fontSize : '15dp'
+	}
 }

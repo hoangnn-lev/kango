@@ -86,6 +86,14 @@ module.exports = [ {
         bottom: 20
     }
 }, {
+    isApi: true,
+    priority: 1000.0093,
+    key: "View",
+    style: {
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL
+    }
+}, {
     isClass: true,
     priority: 10000.0002,
     key: "container",
@@ -96,103 +104,13 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0046,
-    key: "pink",
+    priority: 10000.001,
+    key: "error",
     style: {
-        color: "#ff3974"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0047,
-    key: "wicon",
-    style: {
-        backgroundColor: "#e4f7ff",
-        borderRadius: 10,
-        borderColor: "#e4f7ff"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0048,
-    key: "iconMemo",
-    style: {
-        width: "19%",
-        height: Ti.UI.SIZE,
-        backgroundColor: "#fff",
-        borderColor: "#fff"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0049,
-    key: "btnTop",
-    style: {
-        height: Ti.UI.SIZE,
-        width: Ti.UI.SIZE
-    }
-}, {
-    isClass: true,
-    priority: 10000.005,
-    key: "tab",
-    style: {
-        width: Ti.UI.SIZE,
-        left: 10,
-        right: 10,
-        top: 10,
-        bottom: 0,
-        height: Ti.UI.FILL,
-        backgroundColor: "#f3f3f3",
-        color: "#999",
         font: {
-            fontSize: "14sp"
+            fontSize: "12dp"
         },
-        borderRadius: 0
-    }
-}, {
-    isClass: true,
-    priority: 10000.0051,
-    key: "time",
-    style: {
-        height: "45dp",
-        width: Ti.UI.FILL
-    }
-}, {
-    isClass: true,
-    priority: 10000.0052,
-    key: "timeBackground",
-    style: {
-        height: "35dp",
-        width: "55dp",
-        backgroundColor: "#ccc",
-        left: 0
-    }
-}, {
-    isClass: true,
-    priority: 10000.0053,
-    key: "labelTime",
-    style: {
-        left: "10dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0054,
-    key: "inputTime",
-    style: {
-        left: "60dp",
-        font: {
-            fontWeight: "bold",
-            fontSize: "20dp"
-        },
-        height: "35dp",
-        width: Ti.UI.SIZE
-    }
-}, {
-    isClass: true,
-    priority: 10000.0055,
-    key: "groupButton",
-    style: {
-        height: "80dp",
-        width: Ti.UI.FILL,
-        backgroundColor: "#ccc",
-        top: "10dp"
+        color: "red"
     }
 }, {
     isId: true,
@@ -205,22 +123,11 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0044,
-    key: "top",
+    priority: 100000.0094,
+    key: "shift",
     style: {
-        width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
-        top: 0,
-        bottom: 20
-    }
-}, {
-    isId: true,
-    priority: 100000.0045,
-    key: "content",
-    style: {
-        top: 0,
-        left: "10dp",
-        right: "10dp"
+        width: Ti.UI.FILL,
+        top: "40dp"
     }
 } ];

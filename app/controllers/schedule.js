@@ -209,7 +209,7 @@ function getListScheduleByDate(date) {
 			});
 		}
 
-		var date = Ti.UI.createLabel({
+		row.add(Ti.UI.createLabel({
 			text : '| 20:00',
 			font : {
 				fontSize : '18dp'
@@ -217,9 +217,7 @@ function getListScheduleByDate(date) {
 			touchEnabled : false,
 			color : '#666',
 			right : '10dp'
-		});
-
-		row.add(date);
+		}));
 		row.add(scheduleTitle);
 		item.push(row);
 	}
@@ -248,7 +246,7 @@ function getListScheduleByDate(date) {
 				updateRow(updateData, _id, date);
 			} else if (e.index == 1) {
 				Ti.API.rowIndex = index;
-				editScheduleView();
+				openView('schedule_detail');
 			}
 		});
 		confirm.show();
@@ -294,11 +292,12 @@ function editScheduleView(e) {
 	Ti.API.day = choiceDay.format('YYYY-MM-DD');
 	Ti.API.holidayItem = holidayItem[Ti.API.day];
 	Ti.API.id = dayId[Ti.API.day];
-	var nextWin = Alloy.createController('schedule_edit').getView();
-	nextWin.callback = function() {
-		refreshCalendar();
-	};
-	activityScreen.nextWindow(nextWin);
+	openView('schedule_detail','refreshCalendar');
+	//var nextWin = Alloy.createController('schedule_detail').getView();
+	//nextWin.callback = function() {
+		//refreshCalendar();
+	//};
+	//activityScreen.nextWindow(nextWin);
 }
 
 /*

@@ -1,7 +1,10 @@
-function openView(view) {
+function openView(view, callback) {
     var action;
     for (var i = 0, n = viewObj.length; n > i; ++i) if (viewObj[i].name == view) {
         action = viewObj[i].action;
+        callback && (action.callback = function() {
+            callback();
+        });
         activityScreen.nextWindow(action);
         return;
     }
@@ -9,6 +12,9 @@ function openView(view) {
     viewObj.push({
         name: view,
         action: action
+    });
+    callback && (action.callback = function() {
+        callback();
     });
     activityScreen.nextWindow(action);
 }

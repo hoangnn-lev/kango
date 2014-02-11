@@ -1,0 +1,47 @@
+<Alloy>
+	<Window>
+		<View id="top" layout="vertical" top="0">
+			<View height="40dp">
+				<Label zIndex="0" textAlign="center" text="スケジュール追加" color="#fff"/>
+			</View>
+		</View>
+		<ScrollView id="content" layout="vertical" top="40dp" bottom="55dp" >
+			<Label zIndex="0" text="何の予定？" top="10dp"/>
+			<TextField maxLength="30" id="title" hintText="タイトル"/>
+			<Label zIndex="0" text="文字量が多すぎます（最大●文字）" class="error"/>
+			<View class="time">
+				<View class="timeBackground">
+					<Label text="時間" class="labelTime" />
+				</View>
+				<Label text="--:-- ~ --:--" onClick="timePicker" id="time" class="inputTime" />
+			</View>
+			<Label zIndex="0" top="10dp" text="メモ"/>
+			<TextArea maxLength="120" height="80dp" id="memo" hintText="メモ"/>
+			<Label class="error" text="文字量が多すぎます（最大●文字）" zIndex="0" />
+			<Label zIndex="0" text="アイコン" top="10dp"/>
+			<View width="Ti.UI.FILL" layout="vertical" class="wicon" id="wicon" height="Ti.UI.SIZE">
+				<View top="5dp" bottom="5dp" left="5dp" right="5dp" id="listIcon"/>
+				<ScrollView scrollType="horizontal" id="buttonTabs" height="40dp" backgroundColor="#f3f3f3" bottom="0" width="Ti.UI.FILL" layout="horizontal"/>
+			</View>
+			<View id="groupButton">
+				<Button class="button" width="45%"
+				backgroundColor = '#d1463f'
+				backgroundFocusedColor = '#c2433d'
+				backgroundSelectedColor = '#c2433d'
+				left="0"  title="キャンセル"/>
+				<Button width="45%" class="button"
+				backgroundColor = '#4bcd61'
+				backgroundFocusedColor = '#48c25d'
+				backgroundSelectedColor = '#48c25d'
+				right="0" title="保存する"/>
+				<Button top="50dp" class="button"
+				backgroundColor = '#afd7e3'
+				backgroundFocusedColor = '#69c0db'
+				backgroundSelectedColor = '#69c0db'
+				color='#000'
+				title="保存して次の日の予定を入力"/>
+			</View>
+		</ScrollView>
+		<Require type="view" src="tab_menu" id="tabMenu"/>
+	</Window>
+</Alloy>

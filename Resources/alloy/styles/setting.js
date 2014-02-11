@@ -87,14 +87,14 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0057,
+    priority: 1000.007,
     key: "View",
     style: {
         height: Ti.UI.SIZE
     }
 }, {
     isApi: true,
-    priority: 1000.0058,
+    priority: 1000.0071,
     key: "Label",
     style: {
         width: Ti.UI.SIZE
@@ -110,7 +110,17 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0059,
+    priority: 10000.001,
+    key: "error",
+    style: {
+        font: {
+            fontSize: "12dp"
+        },
+        color: "red"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0072,
     key: "line",
     style: {
         top: 20,

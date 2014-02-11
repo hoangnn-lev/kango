@@ -1,0 +1,9 @@
+"View":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL
+},
+"#shift":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL,
+	top:'40dp'
+}

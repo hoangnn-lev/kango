@@ -1,0 +1,70 @@
+"#top":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	backgroundColor:'#ff3974',
+	top:0,
+	bottom:20
+},
+"#content":{
+	left:'10dp',
+	right:'10dp'
+},
+".btnTop":{
+	height:'25dp',
+	width:'14dp',
+	zIndex:10,
+	top:'10dp',
+	bottom:'10dp'
+},
+".titleCenter":{
+	height:Ti.UI.SIZE,
+	width:'60dp',
+	left:'50%',
+	zIndex:0,
+	backgroundColor:'#ffcc33',
+},
+"#dateTitle":{
+	color:'#fff',
+	height:'30dp',
+	width:'70dp',
+	left:'30%'
+},
+
+"#friendBlock":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	top:'10dp'
+},
+"#friendList":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	top:'25dp'
+},
+".smallTitle":{
+	font:{
+		fontSize:'13dp'
+	},
+	color:'#666',
+	top:0,
+	width:Ti.UI.SIZE
+},
+".scheduleTitle":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	top:'10dp'
+},
+"#groupButton":{
+	top:'15dp',
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE
+},
+".button":{
+	color:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:'15',
+	font:{
+		fontSize:'16dp'
+	},
+	height:'40dp',
+	top:0
+}

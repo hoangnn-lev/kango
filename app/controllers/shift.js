@@ -146,3 +146,80 @@ function _initCalendar() {
 	}
 }
 
+loadShift();
+/*
+ * function loadShift
+ * load shift
+ * input : null
+ * output : void
+ * */
+function loadShift() {
+
+	var shift_data = [{
+		name : '日勤',
+		color : '#f19c98'
+	}, {
+		name : '夜勤',
+		color : '#d3e1f5'
+	}, {
+		name : '休み',
+		color : '#ffe498'
+	}, {
+		name : '早番',
+		color : '#b9e0a5'
+	}, {
+		name : '遅番',
+		color : '#ccc'
+	}, {
+		name : '準夜勤',
+		color : '#f19c98'
+	}, {
+		name : '深夜',
+		color : '#ffe498'
+	}, {
+		name : '日長',
+		color : '#d3e1f5'
+	}, {
+		name : '入り',
+		color : '#b9e0a5'
+	}];
+
+	var column = 4, record = shift_data.length, row = Math.ceil(record / column), count = 0, height = '30', top = 0;
+
+	for (var i = 0; i < row; i++) {
+
+		for (var j = 0; j < column; j++) {
+
+			if (count >= record)
+				return;
+
+			if (i > 0) {
+				top = i * height + i * 10;
+			}
+
+			var view = Ti.UI.createView({
+				backgroundColor : shift_data[count].color,
+				height : height + 'dp',
+				width : '23%',
+				left : (j * 25) + '%',
+				top : top + 'dp'
+			});
+
+			view.add(Ti.UI.createLabel({
+				text : shift_data[count].name,
+				color : '#000',
+				font : {
+					fontSize : '16dp'
+				}
+			}));
+			$.shiftList.add(view);
+			count++;
+		}
+
+	}
+
+}
+
+function shiftSetting(e) {
+	openView('shift_setting');
+}

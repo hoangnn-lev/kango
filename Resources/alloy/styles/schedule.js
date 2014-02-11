@@ -96,7 +96,17 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0036,
+    priority: 10000.001,
+    key: "error",
+    style: {
+        font: {
+            fontSize: "12dp"
+        },
+        color: "red"
+    }
+}, {
+    isClass: true,
+    priority: 10000.005,
     key: "calenderTitle",
     style: {
         color: "#fff",
@@ -104,7 +114,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0037,
+    priority: 10000.0051,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
@@ -113,7 +123,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0038,
+    priority: 10000.0052,
     key: "scheduleDateInfo",
     style: {
         color: "#333",
@@ -123,7 +133,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0039,
+    priority: 10000.0053,
     key: "editScheduleButton",
     style: {
         font: {
@@ -132,7 +142,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0041,
+    priority: 10000.0055,
     key: "shiftLabel",
     style: {
         left: "145dp",
@@ -155,7 +165,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.004,
+    priority: 100000.0054,
     key: "days",
     style: {
         layout: "horizontal",
@@ -165,7 +175,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0042,
+    priority: 100000.0056,
     key: "friend",
     style: {
         height: Ti.UI.SIZE,

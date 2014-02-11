@@ -120,7 +120,10 @@ $.name.addEventListener('click', function(e) {
 	dialog.show();
 });
 
+function edit_members(){
+	openView('edit_member');
+}
 
-function friend_edit(){
-	openView('friend_edit');
+function shift_setting(){
+	openView('shift_setting');
 }

@@ -2,16 +2,10 @@
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL
 },
-"#friend":{
+"#members":{
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL,
-	top:'50dp'
-},
-".error":{
-	color:'red',
-	font:{
-		fontSize:'12dp'
-	}
+	top:'40dp'
 },
 ".mainPopup":{
 	backgroundColor:'#fff'

@@ -96,7 +96,17 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0061,
+    priority: 10000.001,
+    key: "error",
+    style: {
+        font: {
+            fontSize: "12dp"
+        },
+        color: "red"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0074,
     key: "calenderTitle",
     style: {
         color: "#fff",
@@ -104,7 +114,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0062,
+    priority: 10000.0075,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
@@ -113,7 +123,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0063,
+    priority: 10000.0076,
     key: "scheduleDateInfo",
     style: {
         color: "#333",
@@ -123,26 +133,20 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0064,
-    key: "editScheduleButton",
+    priority: 10000.0079,
+    key: "shiftSetting",
     style: {
+        backgroundColor: "#a9c4eb",
+        backgroundFocusedColor: "#90b5ea",
+        backgroundSelectedColor: "#90b5ea",
+        width: "46%",
+        height: "40dp",
+        right: "10dp",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
         font: {
-            fontSize: "18sp"
+            fontSize: "15dp"
         }
-    }
-}, {
-    isClass: true,
-    priority: 10000.0066,
-    key: "shiftLabel",
-    style: {
-        left: "145dp",
-        backgroundColor: "#ffbf00",
-        color: "#000",
-        width: Ti.UI.SIZE,
-        font: {
-            fontSize: "16sp"
-        },
-        height: "25dp"
     }
 }, {
     isId: true,
@@ -155,7 +159,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0065,
+    priority: 100000.0077,
     key: "days",
     style: {
         layout: "horizontal",
@@ -165,11 +169,11 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0067,
-    key: "friend",
+    priority: 100000.0078,
+    key: "shiftList",
     style: {
         height: Ti.UI.SIZE,
         top: "10dp",
-        left: "7dp"
+        left: "10dp"
     }
 } ];

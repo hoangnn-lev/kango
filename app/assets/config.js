@@ -26,7 +26,7 @@ Ti.API.ICON = [{
 }, {
 	title : '記号',
 	folder : '/memo/symbol/',
-	icons : ['2.png', '5.png']
+	icons : ['001.png','002.png','003.png','004.png','005.png','006.png','007.png','008.png','009.png','010.png','011.png','012.png','013.png','014.png','015.png','016.png','017.png','018.png','019.png','020.png']
 }, {
 	title : 'イベント',
 	folder : '/memo/event/',

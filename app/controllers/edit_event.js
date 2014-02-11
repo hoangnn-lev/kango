@@ -1,5 +1,6 @@
 var selectedIcon = '';
-var imgWidth = Ti.Platform.displayCaps.platformWidth / 16;
+var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
+
 //set data for edit schedule
 if (Ti.API.rowIndex != null) {
 	var row = Ti.API.holidayItem;
@@ -13,11 +14,9 @@ if (Ti.API.rowIndex != null) {
 //$.tabMenu.getView('schedule').setImage(Ti.API.TABMENU['schedule_active']);
 
 //add back button
-$.schedule_edit.addEventListener('android:back', function(e) {
+$.edit_event.addEventListener('android:back', function(e) {
 	openView('schedule');
 });
-
-$.listIcon.setHeight(40 + imgWidth * 2 + 'dp');
 
 var buttonTabs = Ti.API.ICON;
 var currentButton = null;
@@ -71,54 +70,66 @@ function createIconByScrollView(icon, folder) {
 	var views = [];
 	var iconCurrent;
 
-	for (var i = 0, n = icon.length; i < n; i++) {
+	var column = 7, row = 2, num = column * row, n = icon.length, m = Math.ceil(icon.length / num), imgSize = deviceWidth / column, icon_index = 0;
 
-		//create view
-		if (i == 0 || (i + 1) % 10 == 0) {
+	//create view
+	for (var i = 0; i < m; ++i) {
 
-			var view = Ti.UI.createView({
-				width : Ti.UI.FILL,
-				layout : 'horizontal',
-				height : Ti.UI.SIZE
-			});
-		}
-
-		//create image view
-		var iconView = Ti.UI.createImageView({
-			image : folder + icon[i],
-			left : '15dp',
-			top : '10dp',
-			bottom : '10dp',
-			opacity : '0.3',
-			width : imgWidth + 'dp',
-			height : imgWidth + 'dp',
+		var view = Ti.UI.createView({
+			width : Ti.UI.FILL,
+			height : Ti.UI.SIZE
 		});
 
-		//selected icon
-		if (selectedIcon == (folder + icon[i])) {
-			iconView.setOpacity(1);
-			iconCurrent = iconView;
-		}
+		//create image with column and row
+		for (var r = 0; r < row; ++r) {
 
-		//add event
-		iconView.addEventListener('click', function(e) {
+			for (var c = 0; c < column; ++c) {
+				var left = 0;
+				if (c > 0)
+					left = imgSize * c - 12;
+				//create image view
+				var iconView = Ti.UI.createImageView({
+					image : folder + icon[icon_index],
+					left : left + 'dp',
+					top : imgSize * r + 5 + 'dp',
+					bottom : '10dp',
+					opacity : '0.1',
+					width : imgSize - 15 + 'dp',
+					height : imgSize - 15 + 'dp',
+					right : '3dp'
+				});
+				
 
-			if (this.getOpacity() == '1') {
-				this.setOpacity(0.3);
-				selectedIcon = '';
-			} else {
-				if (iconCurrent)
-					iconCurrent.setOpacity(0.3);
-				this.setOpacity(1);
-				selectedIcon = e.source.image;
+				//active selected icon
+				if (selectedIcon == (folder + icon[icon_index])) {
+					iconView.setOpacity(1);
+					iconCurrent = iconView;
+				}
+				
+				//click icon
+				iconView.addEventListener('click', function(e) {
+
+					if (this.getOpacity() == '1') {
+						this.setOpacity(0.1);
+						selectedIcon = '';
+					} else {
+						if (iconCurrent)
+							iconCurrent.setOpacity(0.1);
+						this.setOpacity(1);
+						selectedIcon = e.source.image;
+					}
+
+					iconCurrent = this;
+				});
+				icon_index++;
+				view.add(iconView);
 			}
 
-			iconCurrent = this;
-		});
-		view.add(iconView);
-		if ((i + 1) % 10 == 0 || (i + 1) == n)
-			views.push(view);
+		}
+		views.push(view);
 	}
+
+	$.listIcon.setHeight(imgSize * row + 'dp');
 
 	return Ti.UI.createScrollableView({
 		views : views
@@ -181,9 +192,9 @@ function saveSchedule() {
 		scheduleModel.add(schedule);
 		schedule.save();
 		resetData();
-		scheduleView();
-		if ('callback' in $.schedule_edit)
-			$.schedule_edit.callback();
+		openView('schedule');
+		if ('callback' in $.edit_event)
+			$.edit_event.callback();
 	}
 }
 
@@ -220,6 +231,6 @@ function resetData() {
  * output : void
  * */
 function timePicker() {
-	
+
 	$.time.setText('20:00~21:00');
 }

@@ -96,7 +96,17 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0033,
+    priority: 10000.001,
+    key: "error",
+    style: {
+        font: {
+            fontSize: "12dp"
+        },
+        color: "red"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0047,
     key: "title",
     style: {
         font: {
@@ -109,7 +119,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0034,
+    priority: 10000.0048,
     key: "descTitle",
     style: {
         bottom: "3dp",

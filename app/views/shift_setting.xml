@@ -1,0 +1,9 @@
+<Alloy>
+	<Window>
+		<View backgroundColor="#ff3974" top="0" height="40dp">
+			<Label left="10dp" color="#fff" text="タップで名前を変更できます"/>
+		</View>
+		<TableView onClick="edit" separatorColor="#eeeeee" id="shift"/>
+		<Require type="view" src="tab_menu" id="tabMenu"/>
+	</Window>
+</Alloy>

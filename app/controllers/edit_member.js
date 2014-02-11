@@ -1,4 +1,4 @@
-var friend = [{
+var members = [{
 	name : '日勤'
 }, {
 	name : '夜勤'
@@ -14,7 +14,7 @@ var friend = [{
 	name : '入り'
 }];
 var row = [];
-for (var i = 0, n = friend.length; i < n; i++) {
+for (var i = 0, n = members.length; i < n; i++) {
 	var item = Ti.UI.createTableViewRow({
 		touchEnabled : false,
 		selectionStyle : 'none',
@@ -22,35 +22,38 @@ for (var i = 0, n = friend.length; i < n; i++) {
 	});
 	item.add(Ti.UI.createLabel({
 		left : '10dp',
-		text : friend[i].name,
-		color : '#666',
+		text : members[i].name,
+		color : '#000',
 		font : {
-			fontSize : '18dp'
+			fontSize : '15dp'
 		},
-		top : '10dp',
-		bottom : '10dp',
 		className : 'row-left',
+		width : Ti.UI.FILL,
+		right : '90dp',
 		idf : 'name'
 	}));
-	var color = '#fff', background = '#51b11c', text = '使う';
+	var background = '#4bcd61', text = '使う';
 
 	if (i > 3) {
-		color = '#3c3e40';
 		background = '#9c9c9c';
 		text = '要らない';
 	}
 
 	var box = Ti.UI.createView({
-		height : '25dp',
-		width : '70dp',
+		height : '35dp',
+		width : '75dp',
 		backgroundColor : background,
 		right : '10dp',
+		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+		borderRadius : 10,
+		top : '10dp',
+		bottom : '10dp',
 		className : 'box'
 	});
 
 	box.add(Ti.UI.createLabel({
 		text : text,
-		color : color,
+		color : '#fff',
 		font : {
 			fontSize : '15dp'
 		},
@@ -60,7 +63,7 @@ for (var i = 0, n = friend.length; i < n; i++) {
 	item.add(box);
 	row.push(item);
 }
-$.friend.setData(row);
+$.members.setData(row);
 
 function edit(e) {
 	if (e.source.idf == 'name') {

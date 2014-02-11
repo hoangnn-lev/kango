@@ -67,5 +67,11 @@
 "ScrollView":{
 	top:20,
 	bottom:20
+},
+".error":{
+	font:{
+		fontSize:'12dp'
+	},
+	color:'red'
 }
 

@@ -23,9 +23,14 @@
 					</Picker>
 				</View>
 				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
-				<View onClick="friend_edit">
-					<Label width="Ti.UI.SIZE" top="0" left="0">aa</Label>
-					<Label width="Ti.UI.SIZE"  right="0" top="0" color="#666" id="name">aaa</Label>
+				<View onClick="edit_members">
+					<Label width="Ti.UI.SIZE" top="0" left="0">Edit members</Label>
+					
+				</View>
+				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
+				<View onClick="shift_setting">
+					<Label width="Ti.UI.SIZE" top="0" left="0">Shift setting</Label>
+					
 				</View>
 			</View>
 		</View>

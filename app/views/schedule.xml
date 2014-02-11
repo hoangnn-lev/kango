@@ -2,9 +2,9 @@
 	<Window exitOnClose="true">
 		<View height="35dp" backgroundColor="#ff3974" top="0">
 			<View top="5dp" bottom="5dp"  height="Ti.UI.SIZE" left="10dp" right="10dp">
-				<ImageView zIndex="5" width="25dp" height="25dp" image="/icons/pre.png" class="calenderTitle" onClick="doPrevMonth" id="prevMonth" left="0"></ImageView>
+				<ImageView zIndex="5" width="14dp" height="25dp" image="/icons/prev.png" class="calenderTitle" onClick="doPrevMonth" id="prevMonth" left="0"></ImageView>
 				<Label zIndex="0" touchEnabled="false" class="calenderTitle" textAlign="center" id="currentDate"></Label>
-				<ImageView zIndex="5"  width="25dp"  height="25dp"  image="/icons/next.png"  class="calenderTitle" onClick="doNextMonth" id="nextMonth" right="0"></ImageView>
+				<ImageView zIndex="5"  width="14dp"  height="25dp"  image="/icons/next.png"  class="calenderTitle" onClick="doNextMonth" id="nextMonth" right="0"></ImageView>
 			</View>
 		</View>
 		<View layout="vertical" top="35dp"  bottom="50dp">

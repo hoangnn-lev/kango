@@ -2,110 +2,66 @@ function Controller() {
     function createIconByScrollView(icon, folder) {
         var views = [];
         var iconCurrent;
-        for (var i = 0, n = icon.length; n > i; i++) {
-            if (0 == i || 0 == (i + 1) % 10) var view = Ti.UI.createView({
+        var column = 7, row = 2, num = column * row, m = (icon.length, Math.ceil(icon.length / num)), imgSize = deviceWidth / column, icon_index = 0;
+        for (var i = 0; m > i; ++i) {
+            var view = Ti.UI.createView({
                 width: Ti.UI.FILL,
-                layout: "horizontal",
                 height: Ti.UI.SIZE
             });
-            var iconView = Ti.UI.createImageView({
-                image: folder + icon[i],
-                left: "15dp",
-                top: "10dp",
-                bottom: "10dp",
-                opacity: "0.3",
-                width: imgWidth + "dp",
-                height: imgWidth + "dp"
-            });
-            if (selectedIcon == folder + icon[i]) {
-                iconView.setOpacity(1);
-                iconCurrent = iconView;
-            }
-            iconView.addEventListener("click", function(e) {
-                if ("1" == this.getOpacity()) {
-                    this.setOpacity(.3);
-                    selectedIcon = "";
-                } else {
-                    iconCurrent && iconCurrent.setOpacity(.3);
-                    this.setOpacity(1);
-                    selectedIcon = e.source.image;
+            for (var r = 0; row > r; ++r) for (var c = 0; column > c; ++c) {
+                var left = 0;
+                c > 0 && (left = imgSize * c - 12);
+                var iconView = Ti.UI.createImageView({
+                    image: folder + icon[icon_index],
+                    left: left + "dp",
+                    top: imgSize * r + 5 + "dp",
+                    bottom: "10dp",
+                    opacity: "0.1",
+                    width: imgSize - 15 + "dp",
+                    height: imgSize - 15 + "dp",
+                    right: "3dp"
+                });
+                if (selectedIcon == folder + icon[icon_index]) {
+                    iconView.setOpacity(1);
+                    iconCurrent = iconView;
                 }
-                iconCurrent = this;
-            });
-            view.add(iconView);
-            (0 == (i + 1) % 10 || i + 1 == n) && views.push(view);
+                iconView.addEventListener("click", function(e) {
+                    if ("1" == this.getOpacity()) {
+                        this.setOpacity(.1);
+                        selectedIcon = "";
+                    } else {
+                        iconCurrent && iconCurrent.setOpacity(.1);
+                        this.setOpacity(1);
+                        selectedIcon = e.source.image;
+                    }
+                    iconCurrent = this;
+                });
+                icon_index++;
+                view.add(iconView);
+            }
+            views.push(view);
         }
+        $.listIcon.setHeight(imgSize * row + "dp");
         return Ti.UI.createScrollableView({
             views: views
         });
-    }
-    function saveSchedule() {
-        var title = $.title.getValue();
-        if (title) {
-            $.title.blur();
-            $.memo.blur();
-            Alloy.Collections.schedule = Alloy.createCollection("schedule");
-            var scheduleModel = Alloy.Collections.schedule;
-            var data = [];
-            var day = Ti.API.day;
-            if (Ti.API.holidayItem) var data = Ti.API.holidayItem;
-            if (null != Ti.API.rowIndex) {
-                data[Ti.API.rowIndex].img = selectedIcon;
-                data[Ti.API.rowIndex].title = title;
-                data[Ti.API.rowIndex].content = $.memo.getValue();
-            } else data.push({
-                img: selectedIcon,
-                title: title,
-                content: $.memo.getValue()
-            });
-            if (Ti.API.id) var row = {
-                id: Ti.API.id,
-                _schedule: JSON.stringify(data),
-                _date: day
-            }; else var row = {
-                _schedule: JSON.stringify(data),
-                _date: day
-            };
-            var schedule = Alloy.createModel("schedule", row);
-            scheduleModel.add(schedule);
-            schedule.save();
-            resetData();
-            scheduleView();
-            "callback" in $.schedule_edit && $.schedule_edit.callback();
-        } else Ti.UI.createAlertDialog({
-            title: "お知らせ",
-            message: "タイトルを入力してください。",
-            buttonNames: [ "OK" ]
-        }).show();
-    }
-    function cancelEditSchulde() {
-        $.title.blur();
-        $.memo.blur();
-        resetData();
-        openView("schedule");
-    }
-    function resetData() {
-        Ti.API.id = null;
-        Ti.API.day = null;
-        Ti.API.data = null;
-        Ti.API.rowIndex = null;
     }
     function timePicker() {
         $.time.setText("20:00~21:00");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
-    this.__controllerPath = "schedule_edit";
+    this.__controllerPath = "edit_event";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
     arguments[0] ? arguments[0]["$model"] : null;
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
     var __defers = {};
-    $.__views.schedule_edit = Ti.UI.createWindow({
+    $.__views.edit_event = Ti.UI.createWindow({
         backgroundColor: "#fff",
-        id: "schedule_edit"
+        id: "edit_event"
     });
-    $.__views.schedule_edit && $.addTopLevelView($.__views.schedule_edit);
+    $.__views.edit_event && $.addTopLevelView($.__views.edit_event);
     $.__views.top = Ti.UI.createView({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -115,27 +71,13 @@ function Controller() {
         id: "top",
         layout: "vertical"
     });
-    $.__views.schedule_edit.add($.__views.top);
-    $.__views.__alloyId35 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        right: "10dp",
-        left: "10dp",
-        id: "__alloyId35"
+    $.__views.edit_event.add($.__views.top);
+    $.__views.__alloyId0 = Ti.UI.createView({
+        height: "40dp",
+        id: "__alloyId0"
     });
-    $.__views.top.add($.__views.__alloyId35);
-    $.__views.__alloyId36 = Ti.UI.createImageView({
-        height: "30dp",
-        width: "30dp",
-        zIndex: "10",
-        top: "5dp",
-        bottom: "5dp",
-        left: "0",
-        image: "/icons/cancel.png",
-        id: "__alloyId36"
-    });
-    $.__views.__alloyId35.add($.__views.__alloyId36);
-    cancelEditSchulde ? $.__views.__alloyId36.addEventListener("click", cancelEditSchulde) : __defers["$.__views.__alloyId36!click!cancelEditSchulde"] = true;
-    $.__views.__alloyId37 = Ti.UI.createLabel({
+    $.__views.top.add($.__views.__alloyId0);
+    $.__views.__alloyId1 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -145,21 +87,9 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "スケジュール追加",
-        id: "__alloyId37"
+        id: "__alloyId1"
     });
-    $.__views.__alloyId35.add($.__views.__alloyId37);
-    $.__views.__alloyId38 = Ti.UI.createImageView({
-        height: "30dp",
-        width: "30dp",
-        zIndex: "10",
-        top: "5dp",
-        bottom: "5dp",
-        right: "0",
-        image: "/icons/add.png",
-        id: "__alloyId38"
-    });
-    $.__views.__alloyId35.add($.__views.__alloyId38);
-    saveSchedule ? $.__views.__alloyId38.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId38!click!saveSchedule"] = true;
+    $.__views.__alloyId0.add($.__views.__alloyId1);
     $.__views.content = Ti.UI.createScrollView({
         top: "40dp",
         bottom: "55dp",
@@ -168,8 +98,8 @@ function Controller() {
         id: "content",
         layout: "vertical"
     });
-    $.__views.schedule_edit.add($.__views.content);
-    $.__views.__alloyId39 = Ti.UI.createLabel({
+    $.__views.edit_event.add($.__views.content);
+    $.__views.__alloyId2 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#333",
@@ -179,10 +109,10 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "何の予定？",
-        top: "15dp",
-        id: "__alloyId39"
+        top: "10dp",
+        id: "__alloyId2"
     });
-    $.__views.content.add($.__views.__alloyId39);
+    $.__views.content.add($.__views.__alloyId2);
     $.__views.title = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -196,21 +126,35 @@ function Controller() {
         hintText: "タイトル"
     });
     $.__views.content.add($.__views.title);
-    $.__views.__alloyId40 = Ti.UI.createView({
+    $.__views.__alloyId3 = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        color: "red",
+        zIndex: "0",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "12dp"
+        },
+        text: "文字量が多すぎます（最大●文字）",
+        id: "__alloyId3"
+    });
+    $.__views.content.add($.__views.__alloyId3);
+    $.__views.__alloyId4 = Ti.UI.createView({
         height: "45dp",
         width: Ti.UI.FILL,
-        id: "__alloyId40"
+        top: "10dp",
+        id: "__alloyId4"
     });
-    $.__views.content.add($.__views.__alloyId40);
-    $.__views.__alloyId41 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId4);
+    $.__views.__alloyId5 = Ti.UI.createView({
         height: "35dp",
         width: "55dp",
         backgroundColor: "#ccc",
         left: 0,
-        id: "__alloyId41"
+        id: "__alloyId5"
     });
-    $.__views.__alloyId40.add($.__views.__alloyId41);
-    $.__views.__alloyId42 = Ti.UI.createLabel({
+    $.__views.__alloyId4.add($.__views.__alloyId5);
+    $.__views.__alloyId6 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#333",
@@ -221,9 +165,9 @@ function Controller() {
         },
         left: "10dp",
         text: "時間",
-        id: "__alloyId42"
+        id: "__alloyId6"
     });
-    $.__views.__alloyId41.add($.__views.__alloyId42);
+    $.__views.__alloyId5.add($.__views.__alloyId6);
     $.__views.time = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: "35dp",
@@ -238,9 +182,9 @@ function Controller() {
         text: "--:-- ~ --:--",
         id: "time"
     });
-    $.__views.__alloyId40.add($.__views.time);
+    $.__views.__alloyId4.add($.__views.time);
     timePicker ? $.__views.time.addEventListener("click", timePicker) : __defers["$.__views.time!click!timePicker"] = true;
-    $.__views.__alloyId43 = Ti.UI.createLabel({
+    $.__views.__alloyId7 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#333",
@@ -249,11 +193,11 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
+        top: "10dp",
         text: "メモ",
-        top: "5dp",
-        id: "__alloyId43"
+        id: "__alloyId7"
     });
-    $.__views.content.add($.__views.__alloyId43);
+    $.__views.content.add($.__views.__alloyId7);
     $.__views.memo = Ti.UI.createTextArea({
         width: Ti.UI.FILL,
         height: "80dp",
@@ -267,7 +211,20 @@ function Controller() {
         hintText: "メモ"
     });
     $.__views.content.add($.__views.memo);
-    $.__views.__alloyId44 = Ti.UI.createLabel({
+    $.__views.__alloyId8 = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        color: "red",
+        zIndex: "0",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "12dp"
+        },
+        text: "文字量が多すぎます（最大●文字）",
+        id: "__alloyId8"
+    });
+    $.__views.content.add($.__views.__alloyId8);
+    $.__views.__alloyId9 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#333",
@@ -277,10 +234,10 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "アイコン",
-        top: "5dp",
-        id: "__alloyId44"
+        top: "10dp",
+        id: "__alloyId9"
     });
-    $.__views.content.add($.__views.__alloyId44);
+    $.__views.content.add($.__views.__alloyId9);
     $.__views.wicon = Ti.UI.createView({
         backgroundColor: "#e4f7ff",
         borderRadius: 10,
@@ -292,6 +249,10 @@ function Controller() {
     });
     $.__views.content.add($.__views.wicon);
     $.__views.listIcon = Ti.UI.createView({
+        top: "5dp",
+        bottom: "5dp",
+        left: "5dp",
+        right: "5dp",
         id: "listIcon"
     });
     $.__views.wicon.add($.__views.listIcon);
@@ -306,26 +267,84 @@ function Controller() {
         layout: "horizontal"
     });
     $.__views.wicon.add($.__views.buttonTabs);
-    $.__views.__alloyId45 = Ti.UI.createView({
-        height: "80dp",
+    $.__views.groupButton = Ti.UI.createView({
+        top: "15dp",
         width: Ti.UI.FILL,
-        backgroundColor: "#ccc",
-        top: "10dp",
-        id: "__alloyId45"
+        height: Ti.UI.SIZE,
+        id: "groupButton"
     });
-    $.__views.content.add($.__views.__alloyId45);
+    $.__views.content.add($.__views.groupButton);
+    $.__views.__alloyId10 = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: "45%",
+        font: {
+            fontSize: "16dp"
+        },
+        zIndex: 2,
+        height: "40dp",
+        backgroundColor: "#d1463f",
+        backgroundFocusedColor: "#c2433d",
+        backgroundSelectedColor: "#c2433d",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: "15",
+        top: 0,
+        left: "0",
+        title: "キャンセル",
+        id: "__alloyId10"
+    });
+    $.__views.groupButton.add($.__views.__alloyId10);
+    $.__views.__alloyId11 = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: "45%",
+        font: {
+            fontSize: "16dp"
+        },
+        zIndex: 2,
+        height: "40dp",
+        backgroundColor: "#4bcd61",
+        backgroundFocusedColor: "#48c25d",
+        backgroundSelectedColor: "#48c25d",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: "15",
+        top: 0,
+        right: "0",
+        title: "保存する",
+        id: "__alloyId11"
+    });
+    $.__views.groupButton.add($.__views.__alloyId11);
+    $.__views.__alloyId12 = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: Ti.UI.FILL,
+        font: {
+            fontSize: "16dp"
+        },
+        zIndex: 2,
+        height: "40dp",
+        backgroundColor: "#afd7e3",
+        backgroundFocusedColor: "#69c0db",
+        backgroundSelectedColor: "#69c0db",
+        color: "#000",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: "15",
+        top: "50dp",
+        title: "保存して次の日の予定を入力",
+        id: "__alloyId12"
+    });
+    $.__views.groupButton.add($.__views.__alloyId12);
     $.__views.tabMenu = Alloy.createController("tab_menu", {
         backgroundColor: "#f8f8f8",
         width: Ti.UI.FILL,
         height: "50dp",
         id: "tabMenu",
-        __parentSymbol: $.__views.schedule_edit
+        __parentSymbol: $.__views.edit_event
     });
-    $.__views.tabMenu.setParent($.__views.schedule_edit);
+    $.__views.tabMenu.setParent($.__views.edit_event);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var selectedIcon = "";
-    var imgWidth = Ti.Platform.displayCaps.platformWidth / 16;
+    var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
     if (null != Ti.API.rowIndex) {
         var row = Ti.API.holidayItem;
         row = row[Ti.API.rowIndex];
@@ -333,10 +352,9 @@ function Controller() {
         $.memo.setValue(row.content);
         selectedIcon = row.img;
     }
-    $.schedule_edit.addEventListener("android:back", function() {
+    $.edit_event.addEventListener("android:back", function() {
         openView("schedule");
     });
-    $.listIcon.setHeight(40 + 2 * imgWidth + "dp");
     var buttonTabs = Ti.API.ICON;
     var currentButton = null;
     for (var i = 0, l = buttonTabs.length; l > i; i++) {
@@ -365,8 +383,6 @@ function Controller() {
         $.buttonTabs.add(buttontab);
     }
     $.buttonTabs.setContentWidth(Ti.Platform.displayCaps.platformWidth + Ti.Platform.displayCaps.platformWidth / 4);
-    __defers["$.__views.__alloyId36!click!cancelEditSchulde"] && $.__views.__alloyId36.addEventListener("click", cancelEditSchulde);
-    __defers["$.__views.__alloyId38!click!saveSchedule"] && $.__views.__alloyId38.addEventListener("click", saveSchedule);
     __defers["$.__views.time!click!timePicker"] && $.__views.time.addEventListener("click", timePicker);
     _.extend($, exports);
 }

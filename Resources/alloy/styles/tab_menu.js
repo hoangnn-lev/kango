@@ -95,6 +95,16 @@ module.exports = [ {
         right: 50
     }
 }, {
+    isClass: true,
+    priority: 10000.001,
+    key: "error",
+    style: {
+        font: {
+            fontSize: "12dp"
+        },
+        color: "red"
+    }
+}, {
     isId: true,
     priority: 100000.0007,
     key: "tabMenu",
