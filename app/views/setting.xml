@@ -1,39 +1,34 @@
 <Alloy>
 	<Window>
-		<View layout="vertical" top="0">
-			<View backgroundColor="#ff3974">
-				<Label textAlign="center" color="#fff"  top="5dp" bottom="5dp"  height="30dp">設定</Label>
-			</View>
-			<View left="10dp" right="10dp" top="5dp" width="Ti.UI.FILL" layout="vertical">
-				<View>
-					<Label width="Ti.UI.SIZE" top="0" left="0">ID</Label>
-					<Label width="Ti.UI.SIZE"  right="0" top="0" color="#666" id="uid"></Label>
+		<Require type="view" src="tab_menu" id="tabMenu"/>
+		<View id="main">
+			<View layout="vertical" top="0">
+				<View backgroundColor="#ff3974">
+					<Label class="title">設定</Label>
 				</View>
-				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
-				<View>
-					<Label width="Ti.UI.SIZE" top="0" left="0">名前</Label>
-					<Label width="Ti.UI.SIZE"  right="0" top="0" color="#666" id="name">ホァン　グェン</Label>
-				</View>
-				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
-				<View>
-					<Label width="Ti.UI.SIZE" left="0">カレンダー設定</Label>
-					<Picker right="0" id="dayOffset" onChange="changeDayOffset">
-						<PickerRow  title="日曜始まり"></PickerRow>
-						<PickerRow title="月曜始まり"></PickerRow>
-					</Picker>
-				</View>
-				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
-				<View onClick="edit_members">
-					<Label width="Ti.UI.SIZE" top="0" left="0">Edit members</Label>
-					
-				</View>
-				<Label class="line" zIndex="0" backgroundColor="#ccc" width="Ti.UI.FILL" height="1"></Label>
-				<View onClick="shift_setting">
-					<Label width="Ti.UI.SIZE" top="0" left="0">Shift setting</Label>
-					
+				<View id="content">
+					<View>
+						<Label left="0" text="ID"/>
+						<Label id="uid" right="0" />
+					</View>
+					<Label class="line"/>
+					<View bottom="10dp">
+						<Label left="0" text="名前"/>
+						<Label  right="0"  id="name" text="ホァン　グェン" />
+					</View>
+					<Button class="item"  onClick="edit_members" title="勤務メンバーの名前を変える"/>
+					<Button class="item" onClick="shift_setting"  title="シフトの時間や名前を変える" />
+					<View class="item">
+						<Label top="5dp" text="勤務メンバーを表示しない"/>
+						<Button  class="on" title="ON" />
+					</View>
+					<View class="item">
+						<Label top="5dp" text="カレンダーを月曜始まりにする"/>
+						<Button id="monday_set" onClick="changeDayOffset" class="off" title="OFF" />
+					</View>
+
 				</View>
 			</View>
 		</View>
-		<Require type="view" src="tab_menu" id="tabMenu"></Require>
 	</Window>
 </Alloy>

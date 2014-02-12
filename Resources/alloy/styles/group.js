@@ -7,7 +7,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0003,
+    priority: 1000.0004,
     key: "Button",
     style: {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -26,12 +26,12 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0004,
+    priority: 1000.0005,
     key: "Label",
     style: {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -40,7 +40,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0005,
+    priority: 1000.0006,
     key: "TextArea",
     style: {
         width: Ti.UI.FILL,
@@ -53,7 +53,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0006,
+    priority: 1000.0007,
     key: "TextField",
     style: {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -66,7 +66,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0008,
+    priority: 1000.0009,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -79,7 +79,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.001,
     key: "ScrollView",
     style: {
         top: 20,
@@ -87,7 +87,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0038,
+    priority: 1000.0039,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -95,7 +95,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0002,
+    priority: 10000.0003,
     key: "container",
     style: {
         layout: "vertical",
@@ -104,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.001,
+    priority: 10000.0011,
     key: "error",
     style: {
         font: {
@@ -114,7 +114,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0039,
+    priority: 10000.004,
     key: "border",
     style: {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -123,7 +123,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0041,
+    priority: 10000.0042,
     key: "header",
     style: {
         top: 0,
@@ -133,7 +133,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0042,
+    priority: 10000.0043,
     key: "lbHeader",
     style: {
         textAlign: "center",
@@ -141,24 +141,37 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0043,
+    priority: 10000.0044,
     key: "btnHeader",
     style: {
-        right: 0,
-        width: Ti.UI.SIZE
+        right: "5dp",
+        width: "30dp",
+        top: "5dp",
+        bottom: "5dp",
+        zIndex: "5",
+        height: "30dp"
     }
 }, {
     isId: true,
-    priority: 100000.0007,
+    priority: 100000.0002,
+    key: "main",
+    style: {
+        top: "50dp",
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL
+    }
+}, {
+    isId: true,
+    priority: 100000.0008,
     key: "tabMenu",
     style: {
-        backgroundColor: "#f8f8f8",
+        backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp"
     }
 }, {
     isId: true,
-    priority: 100000.004,
+    priority: 100000.0041,
     key: "leftMenu",
     style: {
         backgroundColor: "#f3f3f3",
@@ -169,7 +182,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0044,
+    priority: 100000.0045,
     key: "searchResult",
     style: {
         width: Ti.UI.FILL,
@@ -181,7 +194,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0045,
+    priority: 100000.0046,
     key: "searchUsr",
     style: {
         font: {

@@ -1,4 +1,3 @@
 <Alloy>
-	<Label backgroundColor="#c3c3c3" bottom="49dp" height="1sp"/>
-	<View id="tabMenu"></View>
+	<View top="0" id="tabMenu"/>
 </Alloy>

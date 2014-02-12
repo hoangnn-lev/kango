@@ -7,7 +7,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0003,
+    priority: 1000.0004,
     key: "Button",
     style: {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -26,12 +26,12 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0004,
+    priority: 1000.0005,
     key: "Label",
     style: {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -40,7 +40,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0005,
+    priority: 1000.0006,
     key: "TextArea",
     style: {
         width: Ti.UI.FILL,
@@ -53,7 +53,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0006,
+    priority: 1000.0007,
     key: "TextField",
     style: {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -66,7 +66,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0008,
+    priority: 1000.0009,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -79,7 +79,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.001,
     key: "ScrollView",
     style: {
         top: 20,
@@ -87,7 +87,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0081,
+    priority: 1000.0101,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -95,28 +95,28 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0082,
+    priority: 1000.0102,
     key: "TextField",
     style: {
         zIndex: 0
     }
 }, {
     isApi: true,
-    priority: 1000.0083,
+    priority: 1000.0103,
     key: "Button",
     style: {
         zIndex: 0
     }
 }, {
     isApi: true,
-    priority: 1000.0084,
+    priority: 1000.0104,
     key: "Label",
     style: {
         zIndex: 0
     }
 }, {
     isClass: true,
-    priority: 10000.0002,
+    priority: 10000.0003,
     key: "container",
     style: {
         layout: "vertical",
@@ -125,7 +125,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.001,
+    priority: 10000.0011,
     key: "error",
     style: {
         font: {
@@ -135,7 +135,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0088,
+    priority: 10000.0108,
     key: "smallText",
     style: {
         font: {
@@ -146,24 +146,47 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0089,
+    priority: 10000.0109,
     key: "timeBlock",
     style: {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE
     }
 }, {
+    isClass: true,
+    priority: 10000.0113,
+    key: "button",
+    style: {
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: "15",
+        font: {
+            fontSize: "16dp"
+        },
+        height: "40dp",
+        top: 0
+    }
+}, {
     isId: true,
-    priority: 100000.0007,
+    priority: 100000.0002,
+    key: "main",
+    style: {
+        top: "50dp",
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL
+    }
+}, {
+    isId: true,
+    priority: 100000.0008,
     key: "tabMenu",
     style: {
-        backgroundColor: "#f8f8f8",
+        backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp"
     }
 }, {
     isId: true,
-    priority: 100000.0085,
+    priority: 100000.0105,
     key: "content",
     style: {
         left: "10dp",
@@ -176,51 +199,71 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0086,
+    priority: 100000.0106,
     key: "shiftName",
     style: {
-        width: "120dp",
+        width: "80dp",
         height: "35dp",
         backgroundColor: "#f19c98",
+        borderColor: "#666",
+        borderWidth: 1,
         left: 0,
         top: "10dp",
         font: {
             fontSize: "15dp"
-        }
+        },
+        textAlign: "center"
     }
 }, {
     isId: true,
-    priority: 100000.0087,
+    priority: 100000.0107,
     key: "shiftAlias",
     style: {
-        height: "35dp",
-        width: "120dp",
+        font: {
+            fontSize: "16dp"
+        },
+        width: "100dp",
         left: 0
     }
 }, {
     isId: true,
-    priority: 100000.009,
+    priority: 100000.011,
     key: "timeStart",
     style: {
         left: 0,
-        width: "160dp",
-        height: "35dp",
-        backgroundColor: "#f19c98",
+        width: "120dp",
         font: {
-            fontSize: "15dp"
-        }
+            fontSize: "16dp"
+        },
+        textAlign: "center"
     }
 }, {
     isId: true,
-    priority: 100000.0091,
+    priority: 100000.0111,
     key: "timeEnd",
     style: {
         right: 0,
-        width: "160dp",
-        height: "35dp",
-        backgroundColor: "#f19c98",
+        width: "120dp",
         font: {
-            fontSize: "15dp"
-        }
+            fontSize: "16dp"
+        },
+        textAlign: "center"
+    }
+}, {
+    isId: true,
+    priority: 100000.0112,
+    key: "groupButton",
+    style: {
+        top: "15dp",
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE
+    }
+}, {
+    isId: true,
+    priority: 100000.0114,
+    key: "groupShiftColor",
+    style: {
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE
     }
 } ];

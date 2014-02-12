@@ -13,7 +13,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0003,
+    priority: 1000.0004,
     key: "Button",
     style: {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -32,12 +32,12 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0004,
+    priority: 1000.0005,
     key: "Label",
     style: {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -46,7 +46,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0005,
+    priority: 1000.0006,
     key: "TextArea",
     style: {
         width: Ti.UI.FILL,
@@ -59,7 +59,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0006,
+    priority: 1000.0007,
     key: "TextField",
     style: {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -72,7 +72,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0008,
+    priority: 1000.0009,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.001,
     key: "ScrollView",
     style: {
         top: 20,
@@ -93,7 +93,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0013,
+    priority: 1000.0014,
     key: "View",
     style: {
         width: Ti.UI.FILL,
@@ -101,7 +101,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0002,
+    priority: 10000.0003,
     key: "container",
     style: {
         layout: "vertical",
@@ -110,7 +110,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.001,
+    priority: 10000.0011,
     key: "error",
     style: {
         font: {
@@ -120,7 +120,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0017,
+    priority: 10000.0018,
     key: "week",
     style: {
         color: "#fff",
@@ -133,16 +133,25 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0007,
+    priority: 100000.0002,
+    key: "main",
+    style: {
+        top: "50dp",
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL
+    }
+}, {
+    isId: true,
+    priority: 100000.0008,
     key: "tabMenu",
     style: {
-        backgroundColor: "#f8f8f8",
+        backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp"
     }
 }, {
     isId: true,
-    priority: 100000.0014,
+    priority: 100000.0015,
     key: "container",
     style: {
         top: 0,
@@ -152,7 +161,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0015,
+    priority: 100000.0016,
     key: "days",
     style: {
         layout: "horizontal",
@@ -161,7 +170,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0016,
+    priority: 100000.0017,
     key: "dates",
     style: {
         layout: "vertical",

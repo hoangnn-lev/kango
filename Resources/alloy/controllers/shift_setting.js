@@ -15,15 +15,30 @@ function Controller() {
         id: "shift_setting"
     });
     $.__views.shift_setting && $.addTopLevelView($.__views.shift_setting);
-    $.__views.__alloyId99 = Ti.UI.createView({
+    $.__views.tabMenu = Alloy.createController("tab_menu", {
+        backgroundColor: "#f3acbd",
+        width: Ti.UI.FILL,
+        height: "50dp",
+        id: "tabMenu",
+        __parentSymbol: $.__views.shift_setting
+    });
+    $.__views.tabMenu.setParent($.__views.shift_setting);
+    $.__views.main = Ti.UI.createView({
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL,
+        top: "50dp",
+        id: "main"
+    });
+    $.__views.shift_setting.add($.__views.main);
+    $.__views.__alloyId92 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ff3974",
         top: "0",
-        id: "__alloyId99"
+        id: "__alloyId92"
     });
-    $.__views.shift_setting.add($.__views.__alloyId99);
-    $.__views.__alloyId100 = Ti.UI.createLabel({
+    $.__views.main.add($.__views.__alloyId92);
+    $.__views.__alloyId93 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -34,9 +49,9 @@ function Controller() {
         },
         left: "10dp",
         text: "タップで名前を変更できます",
-        id: "__alloyId100"
+        id: "__alloyId93"
     });
-    $.__views.__alloyId99.add($.__views.__alloyId100);
+    $.__views.__alloyId92.add($.__views.__alloyId93);
     $.__views.shift = Ti.UI.createTableView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -44,16 +59,8 @@ function Controller() {
         separatorColor: "#eeeeee",
         id: "shift"
     });
-    $.__views.shift_setting.add($.__views.shift);
+    $.__views.main.add($.__views.shift);
     edit ? $.__views.shift.addEventListener("click", edit) : __defers["$.__views.shift!click!edit"] = true;
-    $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#f8f8f8",
-        width: Ti.UI.FILL,
-        height: "50dp",
-        id: "tabMenu",
-        __parentSymbol: $.__views.shift_setting
-    });
-    $.__views.tabMenu.setParent($.__views.shift_setting);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var shift = [ {
@@ -104,6 +111,8 @@ function Controller() {
             title: shift[i].name,
             touchEnabled: true,
             id: i,
+            borderColor: "#666",
+            borderWidth: 1,
             className: "row-left-name"
         }));
         item.add(Ti.UI.createLabel({

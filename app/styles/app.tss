@@ -1,6 +1,11 @@
 "Window":{
 	 backgroundColor:'#fff'
 },
+"#main":{
+	top:'50dp',
+	height:Ti.UI.FILL,
+	width:Ti.UI.FILL
+},
 ".container": {
 	/*backgroundImage:'bg.png'*/
 	layout:'vertical',
@@ -25,7 +30,7 @@
 "Label": {
 	width: Ti.UI.FILL,
 	height: Ti.UI.SIZE,
-	color: "#333",
+	color: "#676767",
 	zIndex:1,
 	textAlign:Ti.UI.TEXT_ALIGNMENT_LEFT,
 	font:{
@@ -51,7 +56,7 @@
 	borderColor:'#fff',
 },
 "#tabMenu":{
-	backgroundColor:'#f8f8f8',
+	backgroundColor:'#f3acbd',
 	width:Ti.UI.FILL,
 	height:'50dp'
 },

@@ -114,7 +114,7 @@ function doRegister(name) {
 								buttonNames : ['OK']
 							});
 							confirm.addEventListener('click', function(e) {
-								scheduleView();
+								openView('schedule');
 								$.index.close();
 							});
 							progressIndicator.hide();

@@ -6,33 +6,19 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    $.__views.tab_menu = Ti.UI.createLabel({
-        width: Ti.UI.FILL,
-        height: "1sp",
-        color: "#333",
-        zIndex: 1,
-        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-        font: {
-            fontSize: "16sp"
-        },
-        backgroundColor: "#c3c3c3",
-        bottom: "49dp",
-        id: "tab_menu"
-    });
-    $.__views.tab_menu && $.addTopLevelView($.__views.tab_menu);
     $.__views.tabMenu = Ti.UI.createView({
-        backgroundColor: "#f8f8f8",
+        backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp",
+        top: "0",
         id: "tabMenu"
     });
     $.__views.tabMenu && $.addTopLevelView($.__views.tabMenu);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var top = Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.dpi / 160);
+    Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.dpi / 160);
     var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
-    $.tabMenu.setTop(top - 75 + "dp");
-    var menu = Ti.API.TABMENU;
+    var menu = Ti.API.TABMENU, activeColor = "#ed829c";
     for (var i = 0, n = menu.length; n > i; i++) {
         var menuItemWidth = deviceWidth / n;
         var view = Ti.UI.createView({
@@ -41,10 +27,11 @@ function Controller() {
             left: i * menuItemWidth + "dp",
             action: menu[i].action
         });
+        1 == i && view.setBackgroundColor(activeColor);
         view.add(Ti.UI.createImageView({
             image: menu[i].img,
-            height: "27dp",
-            width: "27dp",
+            height: "22dp",
+            width: "22dp",
             zIndex: 0,
             top: "3dp",
             touchEnabled: false,
@@ -55,9 +42,9 @@ function Controller() {
             font: {
                 fontSize: "11dp"
             },
-            color: "#666",
+            color: "#fff",
             zIndex: 0,
-            top: "32dp",
+            top: "28dp",
             touchEnabled: false,
             className: "menu-text"
         }));

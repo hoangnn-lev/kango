@@ -232,6 +232,14 @@ function Controller() {
         id: "group"
     });
     $.__views.group && $.addTopLevelView($.__views.group);
+    $.__views.tabMenu = Alloy.createController("tab_menu", {
+        backgroundColor: "#f3acbd",
+        width: Ti.UI.FILL,
+        height: "50dp",
+        id: "tabMenu",
+        __parentSymbol: $.__views.group
+    });
+    $.__views.tabMenu.setParent($.__views.group);
     $.__views.leftMenu = Ti.UI.createView({
         height: Ti.UI.FILL,
         width: "80%",
@@ -284,6 +292,13 @@ function Controller() {
         top: "0"
     });
     $.__views.leftMenu.add($.__views.listFriend);
+    $.__views.main = Ti.UI.createView({
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL,
+        top: "50dp",
+        id: "main"
+    });
+    $.__views.group.add($.__views.main);
     $.__views.__alloyId26 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -291,7 +306,7 @@ function Controller() {
         top: "0",
         id: "__alloyId26"
     });
-    $.__views.group.add($.__views.__alloyId26);
+    $.__views.main.add($.__views.__alloyId26);
     $.__views.__alloyId27 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -325,45 +340,45 @@ function Controller() {
         id: "__alloyId28"
     });
     $.__views.__alloyId27.add($.__views.__alloyId28);
-    $.__views.main = Ti.UI.createScrollView({
+    $.__views.__alloyId29 = Ti.UI.createScrollView({
         top: "40dp",
-        bottom: "55dp",
+        bottom: 20,
         layout: "vertical",
-        id: "main"
+        id: "__alloyId29"
     });
-    $.__views.group.add($.__views.main);
-    $.__views.__alloyId29 = Ti.UI.createView({
+    $.__views.main.add($.__views.__alloyId29);
+    $.__views.__alloyId30 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         left: "10dp",
         right: "10dp",
         top: "30dp",
         layout: "vertical",
-        id: "__alloyId29"
+        id: "__alloyId30"
     });
-    $.__views.main.add($.__views.__alloyId29);
-    $.__views.__alloyId30 = Ti.UI.createLabel({
+    $.__views.__alloyId29.add($.__views.__alloyId30);
+    $.__views.__alloyId31 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: "0",
         textAlign: "center",
         font: {
             fontSize: "16sp"
         },
         text: "送る方法を選ぶ",
-        id: "__alloyId30"
+        id: "__alloyId31"
     });
-    $.__views.__alloyId29.add($.__views.__alloyId30);
-    $.__views.__alloyId31 = Ti.UI.createView({
+    $.__views.__alloyId30.add($.__views.__alloyId31);
+    $.__views.__alloyId32 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
         borderColor: "#eee",
-        id: "__alloyId31"
+        id: "__alloyId32"
     });
-    $.__views.__alloyId29.add($.__views.__alloyId31);
+    $.__views.__alloyId30.add($.__views.__alloyId32);
     $.__views.inviteFriendByEmail = Ti.UI.createImageView({
         image: "/icons/email.png",
         width: "50dp",
@@ -372,20 +387,20 @@ function Controller() {
         id: "inviteFriendByEmail",
         left: "0"
     });
-    $.__views.__alloyId31.add($.__views.inviteFriendByEmail);
-    $.__views.__alloyId32 = Ti.UI.createLabel({
+    $.__views.__alloyId32.add($.__views.inviteFriendByEmail);
+    $.__views.__alloyId33 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: 1,
         textAlign: "center",
         font: {
             fontSize: "16sp"
         },
         text: "OR",
-        id: "__alloyId32"
+        id: "__alloyId33"
     });
-    $.__views.__alloyId31.add($.__views.__alloyId32);
+    $.__views.__alloyId32.add($.__views.__alloyId33);
     $.__views.inviteFriendByLine = Ti.UI.createImageView({
         width: "50dp",
         height: "50dp",
@@ -394,21 +409,21 @@ function Controller() {
         zIndex: "3",
         right: "0"
     });
-    $.__views.__alloyId31.add($.__views.inviteFriendByLine);
-    $.__views.__alloyId33 = Ti.UI.createView({
+    $.__views.__alloyId32.add($.__views.inviteFriendByLine);
+    $.__views.__alloyId34 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         left: "10dp",
         right: "10dp",
         top: "30dp",
         layout: "vertical",
-        id: "__alloyId33"
+        id: "__alloyId34"
     });
-    $.__views.main.add($.__views.__alloyId33);
-    $.__views.__alloyId34 = Ti.UI.createLabel({
+    $.__views.__alloyId29.add($.__views.__alloyId34);
+    $.__views.__alloyId35 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -416,15 +431,15 @@ function Controller() {
         },
         text: "ユーザーID",
         bottom: "10dp",
-        id: "__alloyId34"
-    });
-    $.__views.__alloyId33.add($.__views.__alloyId34);
-    $.__views.__alloyId35 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
         id: "__alloyId35"
     });
-    $.__views.__alloyId33.add($.__views.__alloyId35);
+    $.__views.__alloyId34.add($.__views.__alloyId35);
+    $.__views.__alloyId36 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
+        id: "__alloyId36"
+    });
+    $.__views.__alloyId34.add($.__views.__alloyId36);
     $.__views.usrId = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -438,7 +453,7 @@ function Controller() {
         hintText: "IDを入力してください。",
         id: "usrId"
     });
-    $.__views.__alloyId35.add($.__views.usrId);
+    $.__views.__alloyId36.add($.__views.usrId);
     $.__views.searchUsr = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.SIZE,
@@ -458,7 +473,7 @@ function Controller() {
         id: "searchUsr",
         right: "5dp"
     });
-    $.__views.__alloyId35.add($.__views.searchUsr);
+    $.__views.__alloyId36.add($.__views.searchUsr);
     $.__views.searchResult = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -469,15 +484,7 @@ function Controller() {
         top: "20dp",
         id: "searchResult"
     });
-    $.__views.__alloyId33.add($.__views.searchResult);
-    $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#f8f8f8",
-        width: Ti.UI.FILL,
-        height: "50dp",
-        id: "tabMenu",
-        __parentSymbol: $.__views.group
-    });
-    $.__views.tabMenu.setParent($.__views.group);
+    $.__views.__alloyId34.add($.__views.searchResult);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var duration = 200;

@@ -13,7 +13,11 @@ var dayOffset = configs.models[0].get('cg_value');
 //set data
 $.uid.setText(Ti.API.UID['id']);
 $.name.setText(Ti.API.UID['name']);
-$.dayOffset.setSelectedRow(0, dayOffset);
+
+if (dayOffset == 1) {
+	$.monday_set.setBackgroundColor('#fff2cc');
+	$.monday_set.setTitle('ON');
+}
 
 /*
  * function changedayOffset
@@ -22,25 +26,32 @@ $.dayOffset.setSelectedRow(0, dayOffset);
  * output : void
  * */
 function changeDayOffset(e) {
-	if (dayOffset != e.rowIndex) {
 
-		dayOffset = e.rowIndex;
-		var model = Alloy.createModel('configs', {
-			id : configs.models[0].get('id'),
-			cg_name : 'dayOffset',
-			cg_value : dayOffset
-		});
-		Alloy.Collections.configs.add(model);
-		model.save();
-
-		//reset schedule view
-		scheduleViewObj = '';
+	if (dayOffset == 0) {
+		$.monday_set.setBackgroundColor('#fff2cc');
+		$.monday_set.setTitle('ON');
+		dayOffset = 1;
+	} else {
+		$.monday_set.setBackgroundColor('#cccccc');
+		$.monday_set.setTitle('OFF');
+		dayOffset = 0;
 	}
+
+	var model = Alloy.createModel('configs', {
+		id : configs.models[0].get('id'),
+		cg_name : 'dayOffset',
+		cg_value : dayOffset
+	});
+	Alloy.Collections.configs.add(model);
+	model.save();
+
+	//reload schedule
+	delete_view('schedule');
 }
 
 //add back button
 $.setting.addEventListener('android:back', function(e) {
-	scheduleView();
+	openView('schedule');
 });
 
 //copy uid user
@@ -120,10 +131,10 @@ $.name.addEventListener('click', function(e) {
 	dialog.show();
 });
 
-function edit_members(){
+function edit_members() {
 	openView('edit_member');
 }
 
-function shift_setting(){
+function shift_setting() {
 	openView('shift_setting');
 }

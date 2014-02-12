@@ -48,6 +48,8 @@ for (var i = 0, n = shift.length; i < n; i++) {
 		title : shift[i].name,
 		touchEnabled : true,
 		id : i,
+		borderColor : '#666',
+		borderWidth : 1,
 		className : 'row-left-name',
 	}));
 

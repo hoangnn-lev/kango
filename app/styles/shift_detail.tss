@@ -21,18 +21,23 @@
 	layout:'vertical'
 },
 "#shiftName":{
-	width:'120dp',
+	width:'80dp',
 	height:'35dp',
 	backgroundColor:'#f19c98',
+	borderColor:'#666',
+	borderWidth:1,
 	left:0,
 	top:'10dp',
 	font:{
 		fontSize:'15dp'
-	}
+	},
+	textAlign:'center'
 },
 "#shiftAlias":{
-	height:"35dp",
-	width:'120dp',
+	font:{
+		fontSize:'16dp'
+	},
+	width:'100dp',
 	left:0
 },
 ".smallText":{
@@ -48,19 +53,38 @@
 },
 "#timeStart":{
 	left:0,
-	width:'160dp',
-	height:'35dp',
-	backgroundColor:'#f19c98',
+	width:'120dp',
+
 	font:{
-		fontSize:'15dp'
-	}
+		fontSize:'16dp'
+	},
+	textAlign:'center'
 },
 "#timeEnd":{
 	right:0,
-	width:'160dp',
-	height:'35dp',
-	backgroundColor:'#f19c98',
+	width:'120dp',
+
 	font:{
-		fontSize:'15dp'
-	}
+		fontSize:'16dp'
+	},
+	textAlign:'center'
+},
+"#groupButton":{
+	top:'15dp',
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE
+},
+".button":{
+	color:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:'15',
+	font:{
+		fontSize:'16dp'
+	},
+	height:'40dp',
+	top:0
+},
+"#groupShiftColor":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE
 }

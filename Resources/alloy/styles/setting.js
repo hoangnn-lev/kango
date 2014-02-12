@@ -7,7 +7,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0003,
+    priority: 1000.0004,
     key: "Button",
     style: {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -26,12 +26,12 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0004,
+    priority: 1000.0005,
     key: "Label",
     style: {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -40,7 +40,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0005,
+    priority: 1000.0006,
     key: "TextArea",
     style: {
         width: Ti.UI.FILL,
@@ -53,7 +53,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0006,
+    priority: 1000.0007,
     key: "TextField",
     style: {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -66,7 +66,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0008,
+    priority: 1000.0009,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -79,7 +79,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.001,
     key: "ScrollView",
     style: {
         top: 20,
@@ -87,21 +87,32 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.007,
+    priority: 1000.0084,
     key: "View",
     style: {
-        height: Ti.UI.SIZE
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL
     }
 }, {
     isApi: true,
-    priority: 1000.0071,
+    priority: 1000.0085,
     key: "Label",
     style: {
-        width: Ti.UI.SIZE
+        width: Ti.UI.SIZE,
+        top: 0,
+        height: Ti.UI.SIZE,
+        zIndex: 0
+    }
+}, {
+    isApi: true,
+    priority: 1000.0086,
+    key: "Button",
+    style: {
+        zIndex: 0
     }
 }, {
     isClass: true,
-    priority: 10000.0002,
+    priority: 10000.0003,
     key: "container",
     style: {
         layout: "vertical",
@@ -110,7 +121,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.001,
+    priority: 10000.0011,
     key: "error",
     style: {
         font: {
@@ -120,19 +131,104 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0072,
+    priority: 10000.0087,
     key: "line",
     style: {
-        top: 20,
-        bottom: 20
+        top: "10dp",
+        bottom: "10dp",
+        zIndex: "0",
+        backgroundColor: "#ccc",
+        width: Ti.UI.FILL,
+        height: "1"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0088,
+    key: "item",
+    style: {
+        backgroundColor: "#f19c99",
+        borderRadius: 0,
+        borderColor: "#ed4580",
+        borderWidth: 1,
+        color: "#000",
+        left: 0,
+        top: "10dp",
+        width: Ti.UI.FILL,
+        font: {
+            fontSize: "14dp"
+        },
+        height: "35dp"
+    }
+}, {
+    isClass: true,
+    priority: 10000.009,
+    key: "title",
+    style: {
+        right: "10dp",
+        color: "#fff",
+        top: "5dp",
+        bottom: "5dp",
+        height: "30dp",
+        left: "10dp"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0091,
+    key: "on",
+    style: {
+        backgroundColor: "#fff2cc",
+        width: "60dp",
+        height: Ti.UI.FILL,
+        color: "#000",
+        font: {
+            fontSize: "14dp"
+        },
+        borderRadius: 0,
+        right: 0
+    }
+}, {
+    isClass: true,
+    priority: 10000.0092,
+    key: "off",
+    style: {
+        backgroundColor: "#cccccc",
+        width: "60dp",
+        height: Ti.UI.FILL,
+        color: "#000",
+        font: {
+            fontSize: "14dp"
+        },
+        borderRadius: 0,
+        right: 0
     }
 }, {
     isId: true,
-    priority: 100000.0007,
+    priority: 100000.0002,
+    key: "main",
+    style: {
+        top: "50dp",
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL
+    }
+}, {
+    isId: true,
+    priority: 100000.0008,
     key: "tabMenu",
     style: {
-        backgroundColor: "#f8f8f8",
+        backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0089,
+    key: "content",
+    style: {
+        left: "10dp",
+        right: "10dp",
+        top: "10dp",
+        width: Ti.UI.FILL,
+        height: Ti.UI.FILL,
+        layout: "vertical"
     }
 } ];

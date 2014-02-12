@@ -54,7 +54,7 @@ function getListScheduleByDate() {
 	scheduleModel.fetch({
 		query : 'SELECT * from schedule where _date =  "' + Ti.API.day + '"'
 	});
-alert(Ti.API.day);
+
 	var data = scheduleModel.models;
 
 	if (!data[0])
@@ -166,7 +166,9 @@ function loadFriend() {
 				height : height + 'dp',
 				width : '23%',
 				left : (j * 25) + '%',
-				top : top + 'dp'
+				top : top + 'dp',
+				borderColor : '#666',
+				borderWidth : 1
 			});
 
 			if ((i == 0 && j == 1) || (i == 1 && j == 2))

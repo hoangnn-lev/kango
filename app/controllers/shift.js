@@ -160,7 +160,7 @@ function loadShift() {
 		color : '#f19c98'
 	}, {
 		name : '夜勤',
-		color : '#d3e1f5'
+		color : '#fff'
 	}, {
 		name : '休み',
 		color : '#ffe498'
@@ -202,7 +202,9 @@ function loadShift() {
 				height : height + 'dp',
 				width : '23%',
 				left : (j * 25) + '%',
-				top : top + 'dp'
+				top : top + 'dp',
+				borderColor : '#666',
+				borderWidth : 1
 			});
 
 			view.add(Ti.UI.createLabel({

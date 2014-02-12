@@ -1,9 +1,7 @@
 var top = Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.dpi / 160);
 var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
 
-$.tabMenu.setTop(top - 75 + 'dp');
-
-var menu = Ti.API.TABMENU;
+var menu = Ti.API.TABMENU, activeColor = '#ed829c';
 
 for (var i = 0, n = menu.length; i < n; i++) {
 
@@ -14,16 +12,19 @@ for (var i = 0, n = menu.length; i < n; i++) {
 		height : '50dp',
 		left : i * menuItemWidth + 'dp',
 		action : menu[i].action	});
+	if (i == 1) {
+		view.setBackgroundColor(activeColor);
+	}
 
 	//button image
 	view.add(Ti.UI.createImageView({
 		image : menu[i].img,
-		height : '27dp',
-		width : '27dp',
+		height : '22dp',
+		width : '22dp',
 		zIndex : 0,
 		top : '3dp',
 		touchEnabled : false,
-		className:'menu'
+		className : 'menu'
 	}));
 
 	//text
@@ -32,11 +33,11 @@ for (var i = 0, n = menu.length; i < n; i++) {
 		font : {
 			fontSize : '11dp'
 		},
-		color : '#666',
+		color : '#fff',
 		zIndex : 0,
-		top : '32dp',
+		top : '28dp',
 		touchEnabled : false,
-		className:'menu-text'
+		className : 'menu-text'
 	}));
 
 	view.addEventListener('click', function(e) {

@@ -26,7 +26,13 @@
 },
 ".btnHeader":{
 	right:0,
-	width:Ti.UI.SIZE
+	width:Ti.UI.SIZE,
+	width:"30dp",
+	top:"5dp",
+	bottom:"5dp",
+	zIndex:"5",
+	right:"5dp",
+	height:"30dp"
 },
 "#searchResult":{
 	width:Ti.UI.FILL,

@@ -62,6 +62,21 @@ function Controller() {
         id: "edit_event"
     });
     $.__views.edit_event && $.addTopLevelView($.__views.edit_event);
+    $.__views.tabMenu = Alloy.createController("tab_menu", {
+        backgroundColor: "#f3acbd",
+        width: Ti.UI.FILL,
+        height: "50dp",
+        id: "tabMenu",
+        __parentSymbol: $.__views.edit_event
+    });
+    $.__views.tabMenu.setParent($.__views.edit_event);
+    $.__views.main = Ti.UI.createView({
+        top: "50dp",
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL,
+        id: "main"
+    });
+    $.__views.edit_event.add($.__views.main);
     $.__views.top = Ti.UI.createView({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -71,7 +86,7 @@ function Controller() {
         id: "top",
         layout: "vertical"
     });
-    $.__views.edit_event.add($.__views.top);
+    $.__views.main.add($.__views.top);
     $.__views.__alloyId0 = Ti.UI.createView({
         height: "40dp",
         id: "__alloyId0"
@@ -92,17 +107,17 @@ function Controller() {
     $.__views.__alloyId0.add($.__views.__alloyId1);
     $.__views.content = Ti.UI.createScrollView({
         top: "40dp",
-        bottom: "55dp",
+        bottom: 20,
         left: "10dp",
         right: "10dp",
         id: "content",
         layout: "vertical"
     });
-    $.__views.edit_event.add($.__views.content);
+    $.__views.main.add($.__views.content);
     $.__views.__alloyId2 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -157,7 +172,7 @@ function Controller() {
     $.__views.__alloyId6 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -171,7 +186,7 @@ function Controller() {
     $.__views.time = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: "35dp",
-        color: "#333",
+        color: "#676767",
         zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -187,7 +202,7 @@ function Controller() {
     $.__views.__alloyId7 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -227,7 +242,7 @@ function Controller() {
     $.__views.__alloyId9 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -333,14 +348,6 @@ function Controller() {
         id: "__alloyId12"
     });
     $.__views.groupButton.add($.__views.__alloyId12);
-    $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#f8f8f8",
-        width: Ti.UI.FILL,
-        height: "50dp",
-        id: "tabMenu",
-        __parentSymbol: $.__views.edit_event
-    });
-    $.__views.tabMenu.setParent($.__views.edit_event);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var selectedIcon = "";

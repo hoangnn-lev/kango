@@ -15,6 +15,21 @@ function Controller() {
         id: "edit_member"
     });
     $.__views.edit_member && $.addTopLevelView($.__views.edit_member);
+    $.__views.tabMenu = Alloy.createController("tab_menu", {
+        backgroundColor: "#f3acbd",
+        width: Ti.UI.FILL,
+        height: "50dp",
+        id: "tabMenu",
+        __parentSymbol: $.__views.edit_member
+    });
+    $.__views.tabMenu.setParent($.__views.edit_member);
+    $.__views.main = Ti.UI.createView({
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL,
+        top: "50dp",
+        id: "main"
+    });
+    $.__views.edit_member.add($.__views.main);
     $.__views.__alloyId13 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -35,7 +50,7 @@ function Controller() {
     $.__views.__alloyId15 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -101,7 +116,7 @@ function Controller() {
     $.__views.__alloyId15 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#333",
+        color: "#676767",
         zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
@@ -143,7 +158,7 @@ function Controller() {
         top: "0",
         id: "__alloyId22"
     });
-    $.__views.edit_member.add($.__views.__alloyId22);
+    $.__views.main.add($.__views.__alloyId22);
     $.__views.__alloyId23 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -165,16 +180,8 @@ function Controller() {
         separatorColor: "#eeeeee",
         id: "members"
     });
-    $.__views.edit_member.add($.__views.members);
+    $.__views.main.add($.__views.members);
     edit ? $.__views.members.addEventListener("click", edit) : __defers["$.__views.members!click!edit"] = true;
-    $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#f8f8f8",
-        width: Ti.UI.FILL,
-        height: "50dp",
-        id: "tabMenu",
-        __parentSymbol: $.__views.edit_member
-    });
-    $.__views.tabMenu.setParent($.__views.edit_member);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var members = [ {
