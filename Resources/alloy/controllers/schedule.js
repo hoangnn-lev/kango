@@ -8,6 +8,7 @@ function Controller() {
         day = wday.format("DD");
         if (gdate != $.scheduleDateInfo.getText()) {
             $.scheduleDateInfo.setText(gdate);
+            $.dayName.setText(lib.convertDayName(wday.format("dddd")));
             $.shiftLabel.removeAllChildren();
             shiftOfDate[day] && $.shiftLabel.add(Ti.UI.createLabel({
                 text: shiftOfDate[day]["text"],
@@ -35,7 +36,7 @@ function Controller() {
         refreshCalendar();
     }
     function getScheduleByMonthYear(month, year) {
-        holidaysDate = dayId = [];
+        holidaysDate = id = [];
         holidayItem = {};
         scheduleModel.fetch({
             query: 'SELECT * from schedule where _date BETWEEN  "' + year + "-" + month + '-01" and "' + year + "-" + month + '-31"'
@@ -48,13 +49,12 @@ function Controller() {
                 date: item._date
             });
             holidayItem[item._date] = JSON.parse(item._schedule);
-            dayId[item._date] = item.id;
+            id[item._date] = item.id;
         }
     }
     function getListScheduleByDate(date) {
         $.scheduleList.removeAllChildren();
         var data = holidayItem[date];
-        var _id = dayId[date];
         if (!data) return;
         var tableView = Ti.UI.createTableView({
             top: 0,
@@ -64,8 +64,8 @@ function Controller() {
         var item = [];
         for (var i = 0, n = data.length; n > i; ++i) {
             var row = Ti.UI.createTableViewRow({
-                title: data[i].title,
-                content: data[i].content,
+                data: data[i],
+                id: id[date],
                 selectionStyle: "none",
                 selectedBackgroundColor: "transparent",
                 backgroundColor: "#fff",
@@ -117,46 +117,21 @@ function Controller() {
         }
         tableView.setData(item);
         tableView.addEventListener("click", function(e) {
-            var confirm = Ti.UI.createAlertDialog({
-                title: e.source.title,
-                buttonNames: [ "削除", "編集", "OK" ],
-                message: e.source.content
+            var postdata = e.source.data;
+            postdata["day"] = choiceDay.format("YYYY-MM-DD");
+            postdata["id"] = e.source.id;
+            openView("edit_event", {
+                data: postdata
             });
-            var index = e.index;
-            var thisRow = this;
-            confirm.addEventListener("click", function(e) {
-                if (0 == e.index) {
-                    var updateData = [];
-                    for (var i = 0, n = data.length; n > i; i++) index != i ? updateData.push(data[i]) : thisRow.deleteRow(index);
-                    data = updateData;
-                    updateRow(updateData, _id, date);
-                } else if (1 == e.index) {
-                    Ti.API.rowIndex = index;
-                    openView("schedule_detail");
-                }
-            });
-            confirm.show();
         });
         $.scheduleList.add(tableView);
     }
-    function updateRow(data, _id, _date) {
-        scheduleModel.fetch();
-        var _schedule = JSON.stringify(data);
-        var schedule = Alloy.createModel("schedule", {
-            id: _id,
-            _schedule: _schedule,
-            _date: _date
+    function addEvent() {
+        openView("edit_event", {
+            data: {
+                day: choiceDay.format("YYYY-MM-DD")
+            }
         });
-        scheduleModel.add(schedule);
-        data.length > 0 ? schedule.save() : schedule.destroy();
-        refreshCalendar();
-    }
-    function editScheduleView() {
-        Ti.API.day = choiceDay.format("YYYY-MM-DD");
-        Ti.API.holidayItem = holidayItem[Ti.API.day];
-        Ti.API.id = dayId[Ti.API.day];
-        delete_view("schedule_detail");
-        openView("schedule_detail");
     }
     function refreshCalendar() {
         shiftOfDate["18"] = {
@@ -217,7 +192,7 @@ function Controller() {
         }
         refreshCalendar();
     }
-    function _initFriend() {
+    function checkFriendRequest() {
         frd.checkFriendRequest();
         var currentIntentData = [];
         var currentActivity = Ti.Android.currentActivity;
@@ -235,24 +210,26 @@ function Controller() {
         });
     }
     function loadFriendByDay() {
+        var friend_data = [ "大島", "黒運", "上野", "春" ];
         for (var i = 0; 4 > i; ++i) {
             var left = "0";
             i > 0 && (left = 25 * i);
-            $.friend.add(Ti.UI.createLabel({
-                text: "Aさん",
+            var label = Ti.UI.createLabel({
+                text: " " + friend_data[i] + " ",
                 color: "#68790b",
                 font: {
                     fontSize: "16dp"
                 },
                 backgroundColor: "#d7e682",
                 height: "30dp",
-                width: "23%",
-                left: left + "%",
+                width: Ti.UI.SIZE,
+                left: "5dp",
                 border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
                 borderRadius: 10,
                 textAlign: "center",
                 className: "friend-item"
-            }));
+            });
+            $.friend.add(label);
         }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -317,7 +294,6 @@ function Controller() {
         width: Ti.UI.SIZE,
         height: Ti.UI.FILL,
         color: "#b4a186",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16dp"
@@ -333,7 +309,6 @@ function Controller() {
         width: Ti.UI.SIZE,
         height: Ti.UI.FILL,
         color: "#666666",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "28dp"
@@ -348,7 +323,6 @@ function Controller() {
         width: Ti.UI.SIZE,
         height: Ti.UI.FILL,
         color: "#b4a186",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16dp"
@@ -401,7 +375,6 @@ function Controller() {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#8d8d8d",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "24sp"
@@ -414,14 +387,12 @@ function Controller() {
         width: "25dp",
         height: "25dp",
         color: "#fff",
-        zIndex: 1,
         textAlign: "center",
         font: {
             fontSize: "14dp"
         },
         backgroundImage: "/icons/bg-circle.png",
         left: "85dp",
-        text: "金",
         id: "dayName"
     });
     $.__views.scheduleTitle.add($.__views.dayName);
@@ -429,13 +400,12 @@ function Controller() {
         id: "shiftLabel"
     });
     $.__views.scheduleTitle.add($.__views.shiftLabel);
-    $.__views.__alloyId40 = Ti.UI.createButton({
+    $.__views.__alloyId30 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.SIZE,
         font: {
             fontSize: "16sp"
         },
-        zIndex: 2,
         height: Ti.UI.SIZE,
         backgroundColor: "#f3acbd",
         backgroundFocusedColor: "#e4f7ff",
@@ -445,10 +415,10 @@ function Controller() {
         borderRadius: 10,
         right: "5dp",
         title: "＋予定を追加",
-        id: "__alloyId40"
+        id: "__alloyId30"
     });
-    $.__views.scheduleTitle.add($.__views.__alloyId40);
-    editScheduleView ? $.__views.__alloyId40.addEventListener("click", editScheduleView) : __defers["$.__views.__alloyId40!click!editScheduleView"] = true;
+    $.__views.scheduleTitle.add($.__views.__alloyId30);
+    addEvent ? $.__views.__alloyId30.addEventListener("click", addEvent) : __defers["$.__views.__alloyId30!click!addEvent"] = true;
     $.__views.blockFriend = Ti.UI.createView({
         top: "2dp",
         backgroundColor: "#fff",
@@ -458,26 +428,33 @@ function Controller() {
         id: "blockFriend"
     });
     $.__views.scheduleInfo.add($.__views.blockFriend);
-    $.__views.__alloyId41 = Ti.UI.createView({
+    $.__views.__alloyId31 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "10dp",
-        id: "__alloyId41"
+        id: "__alloyId31"
     });
-    $.__views.blockFriend.add($.__views.__alloyId41);
-    $.__views.__alloyId42 = Ti.UI.createImageView({
+    $.__views.blockFriend.add($.__views.__alloyId31);
+    $.__views.__alloyId32 = Ti.UI.createImageView({
         width: "20dp",
         height: "20dp",
         touchEnabled: false,
         image: "/icons/friend.png",
         left: "10dp",
-        id: "__alloyId42"
+        id: "__alloyId32"
     });
-    $.__views.__alloyId41.add($.__views.__alloyId42);
+    $.__views.__alloyId31.add($.__views.__alloyId32);
+    $.__views.__alloyId33 = Ti.UI.createImageView({
+        image: "/icons/btn_Open.png",
+        width: "25dp",
+        height: "25dp",
+        right: "10dp",
+        id: "__alloyId33"
+    });
+    $.__views.__alloyId31.add($.__views.__alloyId33);
     $.__views.serviceMember = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#757575",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "14dp"
@@ -486,12 +463,13 @@ function Controller() {
         id: "serviceMember",
         text: "勤務メンバー"
     });
-    $.__views.__alloyId41.add($.__views.serviceMember);
+    $.__views.__alloyId31.add($.__views.serviceMember);
     $.__views.friend = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "7dp",
         top: "10dp",
         bottom: "10dp",
+        layout: "horizontal",
         id: "friend"
     });
     $.__views.blockFriend.add($.__views.friend);
@@ -504,9 +482,9 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Collections.schedule = Alloy.createCollection("schedule");
-    var day, choiceDay, activeWidget, dayId, holidaysDate, holidayItem, shiftOfDate = [], moment = require("alloy/moment"), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = "";
+    var day, choiceDay, activeWidget, id, holidaysDate, holidayItem, shiftOfDate = [], moment = require("alloy/moment"), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = "";
     _initCalendar();
-    _initFriend();
+    checkFriendRequest();
     loadFriendByDay();
     $.schedule.addEventListener("android:back", function() {
         var confirm = Ti.UI.createAlertDialog({
@@ -525,7 +503,7 @@ function Controller() {
     __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
     __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);
     __defers["$.__views.calendar!click!clickCalendar"] && $.__views.calendar.addEventListener("click", clickCalendar);
-    __defers["$.__views.__alloyId40!click!editScheduleView"] && $.__views.__alloyId40.addEventListener("click", editScheduleView);
+    __defers["$.__views.__alloyId30!click!addEvent"] && $.__views.__alloyId30.addEventListener("click", addEvent);
     _.extend($, exports);
 }
 

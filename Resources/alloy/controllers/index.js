@@ -109,11 +109,10 @@ function Controller() {
         zIndex: "-1"
     });
     $.__views.index.add($.__views.loginForm);
-    $.__views.__alloyId38 = Ti.UI.createLabel({
+    $.__views.__alloyId28 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#ff3974",
-        zIndex: 1,
         textAlign: "center",
         font: {
             fontSize: "25sp"
@@ -121,23 +120,22 @@ function Controller() {
         top: "50dp",
         bottom: "10sp",
         text: "アカウント登録",
-        id: "__alloyId38"
+        id: "__alloyId28"
     });
-    $.__views.loginForm.add($.__views.__alloyId38);
-    $.__views.__alloyId39 = Ti.UI.createLabel({
+    $.__views.loginForm.add($.__views.__alloyId28);
+    $.__views.__alloyId29 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#888888",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "18sp"
         },
         bottom: "20dp",
         text: "登録は簡単・無料なので、今すぐ登録してください。",
-        id: "__alloyId39"
+        id: "__alloyId29"
     });
-    $.__views.loginForm.add($.__views.__alloyId39);
+    $.__views.loginForm.add($.__views.__alloyId29);
     $.__views.fullname = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -171,7 +169,6 @@ function Controller() {
         font: {
             fontSize: "25sp"
         },
-        zIndex: 2,
         height: Ti.UI.SIZE,
         backgroundColor: "#ff3974",
         backgroundFocusedColor: "#e4f7ff",

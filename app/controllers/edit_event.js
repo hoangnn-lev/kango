@@ -1,22 +1,11 @@
 var selectedIcon = '';
 var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
 
-//set data for edit schedule
-if (Ti.API.rowIndex != null) {
-	var row = Ti.API.holidayItem;
-	row = row[Ti.API.rowIndex];
-	$.title.setValue(row.title);
-	$.memo.setValue(row.content);
-	selectedIcon = row.img;
-}
+var args = arguments[0] || {};
+var date = (args['data'].day).split('-');
 
-//active tabmenu
-//$.tabMenu.getView('schedule').setImage(Ti.API.TABMENU['schedule_active']);
-
-//add back button
-$.edit_event.addEventListener('android:back', function(e) {
-	openView('schedule');
-});
+$.date.setText(date[1] + ' / ' + date[2]);
+$.dayName.setText(lib.convertDayName((new Date(args['data'].day)).getDay()));
 
 var buttonTabs = Ti.API.ICON;
 var currentButton = null;
@@ -27,25 +16,28 @@ for (var i = 0, l = buttonTabs.length; i < l; i++) {
 		'title' : buttonTabs[i].title,
 		'data' : buttonTabs[i].icons,
 		'folder' : buttonTabs[i].folder,
-		backgroundColor : '#f3f3f3',
+		backgroundColor : '#f9dce3',
+		color : '#ed829c',
 		height : Ti.UI.FILL,
-		width : Ti.UI.SIZE
+		width : '20%',
+		textAlign : 'center',
+		className : 'buttonTabs'
 	});
 
 	//add event
 	buttontab.addEventListener('click', function(e) {
 		if (this !== currentButton) {
 			if (currentButton)
-				currentButton.setBackgroundColor("#f3f3f3");
+				currentButton.setBackgroundColor("#f9dce3");
 			currentButton = this;
-			currentButton.setBackgroundColor("#e4f7ff");
+			currentButton.setBackgroundColor("#fff");
 			$.listIcon.removeAllChildren();
 			$.listIcon.add(createIconByScrollView(e.source.data, e.source.folder));
 		}
 	});
 	if (i == 0 && selectedIcon == '') {
 		currentButton = buttontab;
-		currentButton.setBackgroundColor("#e4f7ff");
+		currentButton.setBackgroundColor("#fff");
 		$.listIcon.add(createIconByScrollView(buttonTabs[i].icons, buttonTabs[i].folder));
 	} else if (selectedIcon != '') {
 
@@ -70,7 +62,7 @@ function createIconByScrollView(icon, folder) {
 	var views = [];
 	var iconCurrent;
 
-	var column = 7, row = 2, num = column * row, n = icon.length, m = Math.ceil(icon.length / num), imgSize = deviceWidth / column, icon_index = 0;
+	var column = 5, row = 2, num = column * row, n = icon.length, m = Math.ceil(icon.length / num), imgSize = deviceWidth / column, icon_index = 0;
 
 	//create view
 	for (var i = 0; i < m; ++i) {
@@ -98,14 +90,13 @@ function createIconByScrollView(icon, folder) {
 					height : imgSize - 15 + 'dp',
 					right : '3dp'
 				});
-				
 
 				//active selected icon
 				if (selectedIcon == (folder + icon[icon_index])) {
 					iconView.setOpacity(1);
 					iconCurrent = iconView;
 				}
-				
+
 				//click icon
 				iconView.addEventListener('click', function(e) {
 
@@ -198,39 +189,15 @@ function saveSchedule() {
 	}
 }
 
-/*
- * function cancelEditSchulde
- * cancel and return schedule view
- * input : null
- * output : void
- * */
-function cancelEditSchulde(e) {
-	$.title.blur();
-	$.memo.blur();
-	resetData();
+//add back button
+$.edit_event.addEventListener('android:back', function(e) {
 	openView('schedule');
-}
+});
 
-/*
- * function resetData
- * empty data after save
- * input : null
- * output : void
- * */
-function resetData() {
-	Ti.API.id = null;
-	Ti.API.day = null;
-	Ti.API.data = null;
-	Ti.API.rowIndex = null;
-}
-
-/*
- * function timePicker
- * set time for event
- * input : null
- * output : void
- * */
-function timePicker() {
-
-	$.time.setText('20:00~21:00');
-}
+$.startTime.addEventListener('click', function(e) {
+	var picker1 = Titanium.UI.createPicker({
+		type : Titanium.UI.PICKER_TYPE_TIME,
+		format24 : true
+	});
+	$.edit_event.add(picker1);
+});

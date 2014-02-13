@@ -2,32 +2,31 @@
 	<Window>
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
-			<View layout="vertical" top="0">
-				<View backgroundColor="#ff3974">
-					<Label class="title">設定</Label>
+			<View id="content">
+				<!--<View>
+				<Label left="0" text="ID"/>
+				<Label id="uid" right="0" />
 				</View>
-				<View id="content">
-					<View>
-						<Label left="0" text="ID"/>
-						<Label id="uid" right="0" />
-					</View>
-					<Label class="line"/>
-					<View bottom="10dp">
-						<Label left="0" text="名前"/>
-						<Label  right="0"  id="name" text="ホァン　グェン" />
-					</View>
-					<Button class="item"  onClick="edit_members" title="勤務メンバーの名前を変える"/>
-					<Button class="item" onClick="shift_setting"  title="シフトの時間や名前を変える" />
-					<View class="item">
-						<Label top="5dp" text="勤務メンバーを表示しない"/>
-						<Button  class="on" title="ON" />
-					</View>
-					<View class="item">
-						<Label top="5dp" text="カレンダーを月曜始まりにする"/>
-						<Button id="monday_set" onClick="changeDayOffset" class="off" title="OFF" />
-					</View>
-
+				<Label class="line"/>
+				<View bottom="10dp">
+				<Label left="0" text="名前"/>
+				<Label  right="0"  id="name" text="ホァン　グェン" />
+				</View>-->
+				<Label class="title" text="シフトや勤務メンバーを変更できます"/>
+				<Button class="item"  onClick="edit_members" title="勤務メンバーの名前を変える"/>
+				<Button class="item" onClick="shift_setting"  title="シフトの時間や名前を変える" />
+				<View class="item">
+					<Label color="#000" top="5dp" text="勤務メンバーを表示しない"/>
+					<Button  class="on" title="ON" />
 				</View>
+				<View class="item">
+					<Label color="#000" top="5dp" text="カレンダーを月曜始まりにする"/>
+					<Button id="monday_set" onClick="changeDayOffset" class="off" title="OFF" />
+				</View>
+				<Label class="title" text="つかいかた　　ご意見"/>
+				<Button class="item" title="カレンダーの使い方を見る"/>
+				<Button class="item" title="アプリの感想・要望を書く"/>
+				<Button class="item" title="不具合やエラーを報告する"/>
 			</View>
 		</View>
 	</Window>

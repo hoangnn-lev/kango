@@ -1,10 +1,17 @@
-"#top":{
-	width:Ti.UI.FILL,
-	height:Ti.UI.SIZE,
-	backgroundColor:'#ff3974',
-	top:0,
-	bottom:20
+"#main":{
+	backgroundColor:'#f5f1e9'
 },
+"TextField":{
+	backgroundColor:'#fff',
+	backgroundFocusedColor:'#fff',
+	color:'#999999'
+},
+"TextArea":{
+	backgroundColor:'#fff',
+	backgroundFocusedColor:'#fff',
+	color:'#999999'
+},
+
 "#content":{
 	top:0,
 	left:'10dp',
@@ -13,10 +20,27 @@
 ".pink":{
 	color:'#ff3974'
 },
-".wicon":{
-	backgroundColor:'#e4f7ff',
+"#wicon":{
+	top:'10dp',
+	backgroundColor:'#fff',
 	borderRadius:10,
 	borderColor:'#e4f7ff',
+	width:Ti.UI.FILL,
+	layout:"vertical",
+	height:Ti.UI.SIZE
+},
+"#listIcon":{
+	top:"5dp",
+	bottom:"5dp",
+	left:"5dp",
+	right:"5dp" 
+},
+"#buttonTabs":{
+	height:"40dp",
+	backgroundColor:"#f9dce3",
+	bottom:"0",
+	width:Ti.UI.FILL,
+	layout:"horizontal"
 },
 ".iconMemo":{
 	width:'19%',
@@ -24,10 +48,7 @@
 	backgroundColor:'#fff',
 	borderColor:'#fff'
 },
-".btnTop":{
-	height:Ti.UI.SIZE,
-	width:Ti.UI.SIZE
-},
+
 ".tab":{
 	width:Ti.UI.SIZE,
 	left:10,
@@ -42,33 +63,8 @@
 	},
 	borderRadius:0
 },
-".time":{
-	height:'45dp',
-	width:Ti.UI.FILL,
-	top:'10dp'
-	
-},
-'.timeBackground':{
-	height:'35dp',
-	width:'55dp',
-	backgroundColor:'#ccc',
-	
-	left:0
-},
-'.labelTime':{
-	left:'10dp'
-},
-".inputTime":{
-	left:'60dp',
-	font:{
-		fontWeight:'bold',
-		fontSize:'20dp'
-	},
-	height:'35dp',
-	width:Ti.UI.SIZE
-},
 "#groupButton":{
-	top:'15dp',
+	layout:'vertical',
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE
 },
@@ -80,5 +76,23 @@
 		fontSize:'16dp'
 	},
 	height:'40dp',
-	top:0
+	top:'15dp'
+},
+"#dayName":{
+	backgroundImage:'/icons/bg-circle.png',
+	height: '25dp',
+	width:'25dp',
+	color:'#fff',
+	font:{
+		fontSize:'14dp'
+	},
+	textAlign:'center',
+	left:'85dp'
+},
+"#date":{
+	color:'#8d8d8d',
+	font:{
+		fontSize:'20dp'
+	},
+	left:'5dp'
 }

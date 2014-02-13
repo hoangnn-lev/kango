@@ -15,7 +15,6 @@ module.exports = [ {
         font: {
             fontSize: "25sp"
         },
-        zIndex: 2,
         height: Ti.UI.SIZE,
         backgroundColor: "#ff3974",
         backgroundFocusedColor: "#e4f7ff",
@@ -32,7 +31,6 @@ module.exports = [ {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -87,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0034,
+    priority: 1000.0035,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -114,14 +112,14 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0036,
+    priority: 10000.0037,
     key: "mainPopup",
     style: {
         backgroundColor: "#fff"
     }
 }, {
     isClass: true,
-    priority: 10000.0037,
+    priority: 10000.0038,
     key: "popupField",
     style: {
         borderRadius: 0
@@ -146,7 +144,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0035,
+    priority: 100000.0036,
     key: "members",
     style: {
         height: Ti.UI.SIZE,

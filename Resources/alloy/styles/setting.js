@@ -15,7 +15,6 @@ module.exports = [ {
         font: {
             fontSize: "25sp"
         },
-        zIndex: 2,
         height: Ti.UI.SIZE,
         backgroundColor: "#ff3974",
         backgroundFocusedColor: "#e4f7ff",
@@ -32,7 +31,6 @@ module.exports = [ {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -87,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0084,
+    priority: 1000.0085,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -95,7 +93,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0085,
+    priority: 1000.0086,
     key: "Label",
     style: {
         width: Ti.UI.SIZE,
@@ -105,7 +103,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0086,
+    priority: 1000.0087,
     key: "Button",
     style: {
         zIndex: 0
@@ -131,7 +129,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0087,
+    priority: 10000.0088,
     key: "line",
     style: {
         top: "10dp",
@@ -143,7 +141,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0088,
+    priority: 10000.0089,
     key: "item",
     style: {
         backgroundColor: "#f19c99",
@@ -161,19 +159,19 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.009,
+    priority: 10000.0091,
     key: "title",
     style: {
-        right: "10dp",
-        color: "#fff",
-        top: "5dp",
-        bottom: "5dp",
-        height: "30dp",
-        left: "10dp"
+        color: "#000",
+        top: "20dp",
+        bottom: "0",
+        height: "20dp",
+        width: Ti.UI.FILL,
+        textAlign: "left"
     }
 }, {
     isClass: true,
-    priority: 10000.0091,
+    priority: 10000.0092,
     key: "on",
     style: {
         backgroundColor: "#fff2cc",
@@ -188,7 +186,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0092,
+    priority: 10000.0093,
     key: "off",
     style: {
         backgroundColor: "#cccccc",
@@ -221,7 +219,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0089,
+    priority: 100000.009,
     key: "content",
     style: {
         left: "10dp",

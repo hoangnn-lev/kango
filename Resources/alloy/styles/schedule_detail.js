@@ -15,7 +15,6 @@ module.exports = [ {
         font: {
             fontSize: "25sp"
         },
-        zIndex: 2,
         height: Ti.UI.SIZE,
         backgroundColor: "#ff3974",
         backgroundFocusedColor: "#e4f7ff",
@@ -32,7 +31,6 @@ module.exports = [ {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -106,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0074,
+    priority: 10000.0075,
     key: "btnTop",
     style: {
         height: "25dp",
@@ -117,7 +115,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0075,
+    priority: 10000.0076,
     key: "titleCenter",
     style: {
         height: Ti.UI.SIZE,
@@ -128,7 +126,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0079,
+    priority: 10000.008,
     key: "smallTitle",
     style: {
         font: {
@@ -140,7 +138,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.008,
+    priority: 10000.0081,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
@@ -149,7 +147,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0082,
+    priority: 10000.0083,
     key: "button",
     style: {
         color: "#fff",
@@ -181,7 +179,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0072,
+    priority: 100000.0073,
     key: "top",
     style: {
         width: Ti.UI.FILL,
@@ -192,7 +190,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0073,
+    priority: 100000.0074,
     key: "content",
     style: {
         left: "10dp",
@@ -200,7 +198,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0076,
+    priority: 100000.0077,
     key: "dateTitle",
     style: {
         color: "#fff",
@@ -210,7 +208,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0077,
+    priority: 100000.0078,
     key: "friendBlock",
     style: {
         width: Ti.UI.FILL,
@@ -219,7 +217,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0078,
+    priority: 100000.0079,
     key: "friendList",
     style: {
         width: Ti.UI.FILL,
@@ -228,7 +226,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0081,
+    priority: 100000.0082,
     key: "groupButton",
     style: {
         top: "15dp",

@@ -10,8 +10,8 @@ Ti.API.TABMENU = [{
 	action : 'schedule',
 	text:'月カレンダー'
 }, {
-	img : '/tabmenu/group.png',
-	action : 'group',
+	img : '/tabmenu/share.png',
+	action : 'share',
 	text:'シフト共有'
 }, {
 	img : '/tabmenu/setting.png',
@@ -27,11 +27,7 @@ Ti.API.ICON = [{
 	title : '記号',
 	folder : '/memo/symbol/',
 	icons : ['001.png','002.png','003.png','004.png','005.png','006.png','007.png','008.png','009.png','010.png','011.png','012.png','013.png','014.png','015.png','016.png','017.png','018.png','019.png','020.png']
-}, {
-	title : 'イベント',
-	folder : '/memo/event/',
-	icons : ['1.png', '2.png', '3.png', '4.png', '5.png']
-}, {
+},  {
 	title : '性別/ママ',
 	folder : '/memo/sex_mom/',
 	icons : ['6.png']

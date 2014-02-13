@@ -39,7 +39,7 @@ for (var i = 0, n = menu.length; i < n; i++) {
 		touchEnabled : false,
 		className : 'menu-text'
 	}));
-
+	
 	view.addEventListener('click', function(e) {
 		openView(e.source.action);
 	});

@@ -15,7 +15,6 @@ module.exports = [ {
         font: {
             fontSize: "25sp"
         },
-        zIndex: 2,
         height: Ti.UI.SIZE,
         backgroundColor: "#ff3974",
         backgroundFocusedColor: "#e4f7ff",
@@ -32,7 +31,6 @@ module.exports = [ {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -106,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0094,
+    priority: 10000.0106,
     key: "calenderTitle",
     style: {
         color: "#fff",
@@ -114,39 +112,32 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0095,
+    priority: 10000.0107,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
         height: "40dp",
-        backgroundColor: "#e4f7ff"
+        backgroundColor: "#fff",
+        top: "10dp"
     }
 }, {
     isClass: true,
-    priority: 10000.0096,
-    key: "scheduleDateInfo",
+    priority: 10000.011,
+    key: "calendarButton",
     style: {
-        color: "#333",
-        font: {
-            fontSize: "18sp"
-        }
+        zIndex: "5",
+        width: "30dp",
+        height: "30dp"
     }
 }, {
     isClass: true,
-    priority: 10000.0099,
-    key: "shiftSetting",
+    priority: 10000.0116,
+    key: "editScheduleButton",
     style: {
-        backgroundColor: "#a9c4eb",
-        backgroundFocusedColor: "#90b5ea",
-        backgroundSelectedColor: "#90b5ea",
-        width: "46%",
-        height: "40dp",
-        right: "10dp",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 10,
         font: {
-            fontSize: "15dp"
-        }
+            fontSize: "16sp"
+        },
+        backgroundColor: "#f3acbd"
     }
 }, {
     isId: true,
@@ -168,21 +159,131 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0097,
+    priority: 100000.0105,
+    key: "main",
+    style: {
+        backgroundColor: "#f5f1e9"
+    }
+}, {
+    isId: true,
+    priority: 100000.0108,
+    key: "calendar",
+    style: {
+        height: Ti.UI.SIZE,
+        top: "5dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0109,
+    key: "calendarTitle",
+    style: {
+        height: "40dp",
+        width: Ti.UI.FILL,
+        top: 0,
+        left: "10dp",
+        right: "10dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0111,
+    key: "dateInfo",
+    style: {
+        width: "110dp",
+        top: 0,
+        height: Ti.UI.FILL,
+        touchEnabled: false
+    }
+}, {
+    isId: true,
+    priority: 100000.0112,
+    key: "year",
+    style: {
+        color: "#b4a186",
+        font: {
+            fontSize: "16dp"
+        },
+        left: 0,
+        top: "10dp",
+        height: Ti.UI.FILL,
+        width: Ti.UI.SIZE,
+        touchEnabled: false
+    }
+}, {
+    isId: true,
+    priority: 100000.0113,
+    key: "month",
+    style: {
+        color: "#666666",
+        font: {
+            fontSize: "28dp"
+        },
+        left: "42dp",
+        height: Ti.UI.FILL,
+        width: Ti.UI.SIZE,
+        touchEnabled: false
+    }
+}, {
+    isId: true,
+    priority: 100000.0114,
+    key: "monthName",
+    style: {
+        color: "#b4a186",
+        font: {
+            fontSize: "16dp"
+        },
+        height: Ti.UI.FILL,
+        width: Ti.UI.SIZE,
+        right: 0,
+        top: "10dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0115,
+    key: "shiftDateInfo",
+    style: {
+        color: "#8d8d8d",
+        font: {
+            fontSize: "24sp"
+        },
+        left: "5dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0117,
     key: "days",
     style: {
         layout: "horizontal",
         top: 0,
-        height: "22dp",
-        backgroundColor: "#ff3974"
+        height: "22dp"
     }
 }, {
     isId: true,
-    priority: 100000.0098,
-    key: "shiftList",
+    priority: 100000.0118,
+    key: "dayName",
+    style: {
+        backgroundImage: "/icons/bg-circle.png",
+        height: "25dp",
+        width: "25dp",
+        color: "#fff",
+        font: {
+            fontSize: "14dp"
+        },
+        textAlign: "center",
+        left: "85dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0119,
+    key: "scheduleInfo",
     style: {
         height: Ti.UI.SIZE,
-        top: "10dp",
-        left: "10dp"
+        layout: "vertical"
+    }
+}, {
+    isId: true,
+    priority: 100000.012,
+    key: "scheduleList",
+    style: {
+        top: "1dp"
     }
 } ];

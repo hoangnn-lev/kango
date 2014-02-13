@@ -1,0 +1,12 @@
+<Alloy>
+	<Window>
+		<Require type="view" src="tab_menu" id="tabMenu"/>
+		<View id="main">
+			<View id="content">
+				<Label class="title" text="どの方法で予定を共有しますか"/>
+				<Button class="item"  title="画像で送る"/>
+				<Button class="item" title="文章で送る" />
+			</View>
+		</View>
+	</Window>
+</Alloy>

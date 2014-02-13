@@ -15,12 +15,20 @@
 			<View id="calendar" onClick="clickCalendar" />
 			<View id="scheduleInfo">
 				<View class="scheduleTitle" id="scheduleTitle">
-					<Label id="shiftDateInfo"/>
+					<Label id="scheduleDateInfo"/>
 					<Label id="dayName"/>
 					<View id="shiftLabel"/>
+					<Button right="5dp" width="Ti.UI.SIZE" title="＋予定を追加" class="editScheduleButton" onClick="addEvent"/>
 				</View>
-				
-				
+				<View id="blockFriend">
+					<View height="Ti.UI.SIZE" top="10dp">
+						<ImageView image="/icons/friend.png" class="imgTitleFriend" left="10dp" />
+						<ImageView image="/icons/btn_Open.png" width="25dp" height="25dp" right="10dp" />
+						<Label id="serviceMember" text="勤務メンバー"/>
+					</View>
+					<View id="friend"/>
+				</View>
+				<View id="scheduleList" height="Ti.UI.SIZE"/>
 			</View>
 		</View>
 	</Window>

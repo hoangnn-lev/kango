@@ -1,34 +1,50 @@
 //create collection users
 Alloy.Collections.schedule = Alloy.createCollection('schedule');
-var day, choiceDay, activeWidget, moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset;
-
-//create collection configs and get start day
-Alloy.Collections.configs = Alloy.createCollection('configs');
-var configs = Alloy.Collections.configs;
-configs.fetch({
-	query : 'select id,cg_value from configs where cg_name="dayOffset"'
-});
-
-dayOffset = configs.models[0].get('cg_value');
+var day, choiceDay, activeWidget, id, holidaysDate, shiftOfDate = [], holidayItem, moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '';
 
 _initCalendar();
-refreshCalendar();
 
-//set activetab
-//$.tabMenu.getView('schedule').setImage(Ti.API.TABMENU['schedule_active']);
+/*
+ * function clickCalendar
+ * event click calendar
+ * input : null
+ * output : void
+ * */
 
-//add back button
-$.shift.addEventListener('android:back', function(e) {
-	openView('schedule');
-});
+function clickCalendar(e) {
+	if (!activeWidget)
+		return
+		void 0;
 
-//add swipe left right for calendar
-$.calendar.addEventListener('swipe', function(e) {
-	if (e.direction == 'left')
-		doNextMonth();
-	else if (e.direction == 'right')
-		doPrevMonth();
-});
+	var wday = activeWidget.selectedDate();
+	choiceDay = wday;
+	var gdate = wday.format('MM / DD');
+	day = wday.format('DD');
+
+	if (gdate != $.shiftDateInfo.getText()) {
+		$.shiftDateInfo.setText(gdate);
+		$.dayName.setText(lib.convertDayName(wday.format('dddd')));
+		//create shift label
+		$.shiftLabel.removeAllChildren();
+		if (shiftOfDate[day]) {
+			$.shiftLabel.add(Ti.UI.createLabel({
+				text : shiftOfDate[day]['text'],
+				left : '120dp',
+				backgroundColor : shiftOfDate[day]['color'],
+				color : '#fff',
+				width : '60dp',
+				font : {
+					fontSize : '16sp'
+				},
+				textAlign : 'center',
+				border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+				borderRadius : 10,
+				height : Ti.UI.SIZE
+			}));
+		}
+
+	}
+}
 
 /*
  * function doPrevMonth
@@ -38,7 +54,7 @@ $.calendar.addEventListener('swipe', function(e) {
  * */
 function doPrevMonth() {
 	currentMonth = currentMonth.subtract('months', 1);
-	refreshCalendar();
+	calendar();
 }
 
 /*
@@ -49,30 +65,60 @@ function doPrevMonth() {
  * */
 function doNextMonth() {
 	currentMonth = currentMonth.add('months', 1);
-	refreshCalendar();
+	calendar();
 }
 
+
+
 /*
- * function getCalendar
- * Create caledar
- * input : month
+ * function calendar
+ * force refreshing new list
+ * input : null
  * output : void
  * */
-function getCalendar(currentMonth) {
+function calendar() {
+
+	//test
+	shiftOfDate['18'] = {
+		color : '#25b4a5',
+		text : '夜勤'
+	};
+	shiftOfDate['19'] = {
+		color : '#25b4a5',
+		text : '夜勤'
+	};
+	shiftOfDate['12'] = {
+		color : '#e68200',
+		text : '日勤'
+	};
+
+	if (choiceDay)
+		day = choiceDay.format('DD');
+	else
+		day = currentMonth.format('DD');
+
 	if (activeWidget) {
 		activeWidget = null;
 	}
 
 	//get day schedule
+	
 	var current = $.calendar.children[0];
+
 	activeWidget = Alloy.createWidget('jp.co.mountposition.calendar', 'widget', {
 		period : currentMonth,
-		//holidays : holidaysDate,
+		holidays : holidaysDate,
+		shiftOfDate : shiftOfDate,
 		dayOffset : dayOffset
 	});
 
 	var c = activeWidget.getView();
-	$.currentDate.setText(activeWidget.calendarMonth().format('YYYY年MM月'));
+	var gdate = activeWidget.calendarMonth().format('YYYY-MM-MMM').split('-');
+
+	$.year.setText(gdate[0]);
+	$.month.setText(gdate[1]);
+	$.monthName.setText(gdate[2].toUpperCase());
+
 	$.calendar.add(c);
 
 	activeWidget.select(day);
@@ -83,145 +129,71 @@ function getCalendar(currentMonth) {
 }
 
 /*
- * function clickCalendar
- * Create event click caledar
- * input : e
- * output : void
- * */
-function clickCalendar(e) {
-	if (!activeWidget)
-		return
-		void 0;
-
-	var wday = activeWidget.selectedDate();
-	choiceDay = wday;
-	var gdate = wday.format('YYYY年MM月DD日');
-	day = wday.format('DD');
-	if (gdate != $.scheduleDateInfo.getText()) {
-		$.scheduleDateInfo.setText(gdate);
-	}
-}
-
-/*
- * function refreshCalendar
- * force refreshing new list
- * input : null
- * output : void
- * */
-function refreshCalendar() {
-	$.scheduleDateInfo.setText('Loading...');
-	if (choiceDay)
-		day = choiceDay.format('DD');
-	else
-		day = currentMonth.format('DD');
-
-	getCalendar(currentMonth);
-}
-
-/*
  * function _initCalendar
  * render week by config
  * input : null
  * output : void
  * */
 function _initCalendar() {
+
+	//create collection configs and get start day
+	Alloy.Collections.configs = Alloy.createCollection('configs');
+	var configs = Alloy.Collections.configs;
+	configs.fetch({
+		query : 'select id,cg_value from configs where cg_name="dayOffset"'
+	});
+
+	//check start with monday
+	dayOffset = configs.models[0].get('cg_value');
+
 	var _ref = ['日', '月', '火', '水', '木', '金', '土'];
 	if (dayOffset == 1) {
 		_ref = ['月', '火', '水', '木', '金', '土', '日'];
 	}
 	var TILE_WIDTH = Math.floor(Ti.Platform.displayCaps.platformWidth / 7);
-
+	var color;
 	for (var i = 0, _len = _ref.length; i < _len; i++) {
-
+		if (_ref[i] == '日') {
+			color = '#f08791';
+		} else if (_ref[i] == '土') {
+			color = '#9bb9e1';
+		} else {
+			color = '#676767';
+		}
 		$.days.add(Ti.UI.createLabel({
-			color : '#fff',
+			color : color,
 			textAlign : 'center',
 			font : {
-				fontSize : '18sp',
+				fontSize : '16sp',
 			},
 			text : _ref[i],
 			width : TILE_WIDTH,
 			touchEnabled : false
 		}));
 	}
+	calendar();
 }
 
-loadShift();
-/*
- * function loadShift
- * load shift
- * input : null
- * output : void
- * */
-function loadShift() {
-
-	var shift_data = [{
-		name : '日勤',
-		color : '#f19c98'
-	}, {
-		name : '夜勤',
-		color : '#fff'
-	}, {
-		name : '休み',
-		color : '#ffe498'
-	}, {
-		name : '早番',
-		color : '#b9e0a5'
-	}, {
-		name : '遅番',
-		color : '#ccc'
-	}, {
-		name : '準夜勤',
-		color : '#f19c98'
-	}, {
-		name : '深夜',
-		color : '#ffe498'
-	}, {
-		name : '日長',
-		color : '#d3e1f5'
-	}, {
-		name : '入り',
-		color : '#b9e0a5'
-	}];
-
-	var column = 4, record = shift_data.length, row = Math.ceil(record / column), count = 0, height = '30', top = 0;
-
-	for (var i = 0; i < row; i++) {
-
-		for (var j = 0; j < column; j++) {
-
-			if (count >= record)
-				return;
-
-			if (i > 0) {
-				top = i * height + i * 10;
-			}
-
-			var view = Ti.UI.createView({
-				backgroundColor : shift_data[count].color,
-				height : height + 'dp',
-				width : '23%',
-				left : (j * 25) + '%',
-				top : top + 'dp',
-				borderColor : '#666',
-				borderWidth : 1
-			});
-
-			view.add(Ti.UI.createLabel({
-				text : shift_data[count].name,
-				color : '#000',
-				font : {
-					fontSize : '16dp'
-				}
-			}));
-			$.shiftList.add(view);
-			count++;
+//add back button
+$.shift.addEventListener('android:back', function(e) {
+	var confirm = Ti.UI.createAlertDialog({
+		title : '看護アプル',
+		message : '終了しますか？',
+		buttonNames : ['はい', 'いいえ']
+	});
+	confirm.addEventListener('click', function(e) {
+		if (e.index == 0) {
+			Titanium.Android.currentActivity.finish();
 		}
+	});
+	confirm.show();
+});
 
-	}
+//add swipe left right for calendar
+$.calendar.addEventListener('swipe', function(e) {
+	if (e.direction == 'left')
+		doNextMonth();
+	else if (e.direction == 'right')
+		doPrevMonth();
+});
 
-}
-
-function shiftSetting(e) {
-	openView('shift_setting');
-}

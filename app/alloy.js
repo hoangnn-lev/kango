@@ -2,10 +2,9 @@ require('config');
 
 var frd = require('friend');
 var gcm = require('com.activate.gcm');
-require('lib');
+var lib = require('lib');
 
-
-var viewObj = [];
+var customView = {};
 
 /*
  * function openView
@@ -13,31 +12,18 @@ var viewObj = [];
  * input : null
  * output : void
  * */
-function openView(view, callback) {
-	var action;
-	for (var i = 0, n = viewObj.length; i < n; ++i) {
+function openView(view, data) {
 
-		if (viewObj[i].name == view) {
-			action = viewObj[i].action;
-			if (callback) {
-				action.callback = function() {
-					callback();
-				};
-			}
-			activityScreen.nextWindow(action);
-			return;
-		}
+	var action;
+	if (data) {
+		action = customView[view] = Alloy.createController(view, data).getView();
+	} else if (customView[view]) {
+		action = customView[view];
+	} else {
+		action = customView[view] = Alloy.createController(view).getView();
 	}
-	action = Alloy.createController(view).getView();
-	viewObj.push({
-		name : view,
-		action : action
-	});
-	if (callback) {
-		action.callback = function() {
-			callback();
-		};
-	}
+
+	
 	activityScreen.nextWindow(action);
 }
 
@@ -48,12 +34,5 @@ function openView(view, callback) {
  * output : void
  * */
 function delete_view(view) {
-	var temp = [];
-	for (var i = 0, n = viewObj.length; i < n; ++i) {
-		if (viewObj[i].name != view) {
-			temp.push(viewObj[i]);
-		}
-	}
-	viewObj = temp;
-	temp = '';
+	customView[view] = '';
 }

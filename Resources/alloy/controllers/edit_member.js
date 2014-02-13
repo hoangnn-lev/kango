@@ -30,13 +30,13 @@ function Controller() {
         id: "main"
     });
     $.__views.edit_member.add($.__views.main);
-    $.__views.__alloyId13 = Ti.UI.createView({
+    $.__views.__alloyId3 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
-        id: "__alloyId13"
+        id: "__alloyId3"
     });
-    $.__views.__alloyId14 = Ti.UI.createView({
+    $.__views.__alloyId4 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         left: "10dp",
@@ -44,23 +44,23 @@ function Controller() {
         layout: "vertical",
         bottom: "10dp",
         top: "10dp",
-        id: "__alloyId14"
+        id: "__alloyId4"
     });
-    $.__views.__alloyId13.add($.__views.__alloyId14);
-    $.__views.__alloyId15 = Ti.UI.createLabel({
+    $.__views.__alloyId3.add($.__views.__alloyId4);
+    $.__views.__alloyId5 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
-        zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
+        zIndex: "0",
         text: "メンバー名(最大8文字) ",
-        id: "__alloyId15"
+        id: "__alloyId5"
     });
-    $.__views.__alloyId14.add($.__views.__alloyId15);
-    $.__views.__alloyId16 = Ti.UI.createTextField({
+    $.__views.__alloyId4.add($.__views.__alloyId5);
+    $.__views.__alloyId6 = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
         width: Ti.UI.FILL,
@@ -69,40 +69,40 @@ function Controller() {
         borderRadius: 0,
         borderColor: "#fff",
         hintText: "アサコ先輩",
-        id: "__alloyId16"
+        id: "__alloyId6"
     });
-    $.__views.__alloyId14.add($.__views.__alloyId16);
-    $.__views.__alloyId17 = Ti.UI.createLabel({
+    $.__views.__alloyId4.add($.__views.__alloyId6);
+    $.__views.__alloyId7 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "red",
-        zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "12dp"
         },
+        zIndex: "0",
         text: "※文字数が多すぎます",
-        id: "__alloyId17"
+        id: "__alloyId7"
     });
-    $.__views.__alloyId14.add($.__views.__alloyId17);
-    var __alloyId19 = [];
-    __alloyId19.push("キャンセル");
-    __alloyId19.push("保存する");
+    $.__views.__alloyId4.add($.__views.__alloyId7);
+    var __alloyId9 = [];
+    __alloyId9.push("キャンセル");
+    __alloyId9.push("保存する");
     $.__views.dialog = Ti.UI.createAlertDialog({
-        androidView: $.__views.__alloyId13,
-        buttonNames: __alloyId19,
+        androidView: $.__views.__alloyId3,
+        buttonNames: __alloyId9,
         id: "dialog",
         title: "お知らせ",
         cancel: "1"
     });
-    $.__views.__alloyId13 = Ti.UI.createView({
+    $.__views.__alloyId3 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
-        id: "__alloyId13"
+        id: "__alloyId3"
     });
-    $.__views.dialog.add($.__views.__alloyId13);
-    $.__views.__alloyId14 = Ti.UI.createView({
+    $.__views.dialog.add($.__views.__alloyId3);
+    $.__views.__alloyId4 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         left: "10dp",
@@ -110,23 +110,23 @@ function Controller() {
         layout: "vertical",
         bottom: "10dp",
         top: "10dp",
-        id: "__alloyId14"
+        id: "__alloyId4"
     });
-    $.__views.__alloyId13.add($.__views.__alloyId14);
-    $.__views.__alloyId15 = Ti.UI.createLabel({
+    $.__views.__alloyId3.add($.__views.__alloyId4);
+    $.__views.__alloyId5 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
-        zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
+        zIndex: "0",
         text: "メンバー名(最大8文字) ",
-        id: "__alloyId15"
+        id: "__alloyId5"
     });
-    $.__views.__alloyId14.add($.__views.__alloyId15);
-    $.__views.__alloyId16 = Ti.UI.createTextField({
+    $.__views.__alloyId4.add($.__views.__alloyId5);
+    $.__views.__alloyId6 = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
         width: Ti.UI.FILL,
@@ -135,44 +135,43 @@ function Controller() {
         borderRadius: 0,
         borderColor: "#fff",
         hintText: "アサコ先輩",
-        id: "__alloyId16"
+        id: "__alloyId6"
     });
-    $.__views.__alloyId14.add($.__views.__alloyId16);
-    $.__views.__alloyId17 = Ti.UI.createLabel({
+    $.__views.__alloyId4.add($.__views.__alloyId6);
+    $.__views.__alloyId7 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "red",
-        zIndex: "0",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "12dp"
         },
+        zIndex: "0",
         text: "※文字数が多すぎます",
-        id: "__alloyId17"
+        id: "__alloyId7"
     });
-    $.__views.__alloyId14.add($.__views.__alloyId17);
-    $.__views.__alloyId22 = Ti.UI.createView({
+    $.__views.__alloyId4.add($.__views.__alloyId7);
+    $.__views.__alloyId12 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ff3974",
         top: "0",
-        id: "__alloyId22"
+        id: "__alloyId12"
     });
-    $.__views.main.add($.__views.__alloyId22);
-    $.__views.__alloyId23 = Ti.UI.createLabel({
+    $.__views.main.add($.__views.__alloyId12);
+    $.__views.__alloyId13 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#fff",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
         text: "タップで名前を変更できます",
         left: "10dp",
-        id: "__alloyId23"
+        id: "__alloyId13"
     });
-    $.__views.__alloyId22.add($.__views.__alloyId23);
+    $.__views.__alloyId12.add($.__views.__alloyId13);
     $.__views.members = Ti.UI.createTableView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,

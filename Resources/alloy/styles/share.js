@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0122,
+    priority: 1000.0095,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -93,22 +93,18 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0123,
-    key: "TextField",
-    style: {
-        zIndex: 0
-    }
-}, {
-    isApi: true,
-    priority: 1000.0124,
-    key: "Button",
-    style: {
-        zIndex: 0
-    }
-}, {
-    isApi: true,
-    priority: 1000.0125,
+    priority: 1000.0096,
     key: "Label",
+    style: {
+        width: Ti.UI.SIZE,
+        top: 0,
+        height: Ti.UI.SIZE,
+        zIndex: 0
+    }
+}, {
+    isApi: true,
+    priority: 1000.0097,
+    key: "Button",
     style: {
         zIndex: 0
     }
@@ -133,36 +129,75 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0129,
-    key: "smallText",
+    priority: 10000.0098,
+    key: "line",
     style: {
-        font: {
-            fontSize: "13dp"
-        },
-        color: "#000",
-        top: "10dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.013,
-    key: "timeBlock",
-    style: {
+        top: "10dp",
+        bottom: "10dp",
+        zIndex: "0",
+        backgroundColor: "#ccc",
         width: Ti.UI.FILL,
-        height: Ti.UI.SIZE
+        height: "1"
     }
 }, {
     isClass: true,
-    priority: 10000.0134,
-    key: "button",
+    priority: 10000.0099,
+    key: "item",
     style: {
-        color: "#fff",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: "15",
+        backgroundColor: "#f19c99",
+        borderRadius: 0,
+        borderColor: "#ed4580",
+        borderWidth: 1,
+        color: "#000",
+        left: 0,
+        top: "10dp",
+        width: Ti.UI.FILL,
         font: {
-            fontSize: "16dp"
+            fontSize: "14dp"
         },
-        height: "40dp",
-        top: 0
+        height: "35dp"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0101,
+    key: "title",
+    style: {
+        color: "#000",
+        top: "20dp",
+        bottom: "0",
+        height: "20dp",
+        width: Ti.UI.FILL,
+        textAlign: "left"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0102,
+    key: "on",
+    style: {
+        backgroundColor: "#fff2cc",
+        width: "60dp",
+        height: Ti.UI.FILL,
+        color: "#000",
+        font: {
+            fontSize: "14dp"
+        },
+        borderRadius: 0,
+        right: 0
+    }
+}, {
+    isClass: true,
+    priority: 10000.0103,
+    key: "off",
+    style: {
+        backgroundColor: "#cccccc",
+        width: "60dp",
+        height: Ti.UI.FILL,
+        color: "#000",
+        font: {
+            fontSize: "14dp"
+        },
+        borderRadius: 0,
+        right: 0
     }
 }, {
     isId: true,
@@ -184,84 +219,14 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0126,
+    priority: 100000.01,
     key: "content",
     style: {
         left: "10dp",
         right: "10dp",
+        top: "10dp",
         width: Ti.UI.FILL,
         height: Ti.UI.FILL,
-        top: "40dp",
-        bottom: "55dp",
         layout: "vertical"
-    }
-}, {
-    isId: true,
-    priority: 100000.0127,
-    key: "shiftName",
-    style: {
-        width: "80dp",
-        height: "35dp",
-        backgroundColor: "#f19c98",
-        borderColor: "#666",
-        borderWidth: 1,
-        left: 0,
-        top: "10dp",
-        font: {
-            fontSize: "15dp"
-        },
-        textAlign: "center"
-    }
-}, {
-    isId: true,
-    priority: 100000.0128,
-    key: "shiftAlias",
-    style: {
-        font: {
-            fontSize: "16dp"
-        },
-        width: "100dp",
-        left: 0
-    }
-}, {
-    isId: true,
-    priority: 100000.0131,
-    key: "timeStart",
-    style: {
-        left: 0,
-        width: "120dp",
-        font: {
-            fontSize: "16dp"
-        },
-        textAlign: "center"
-    }
-}, {
-    isId: true,
-    priority: 100000.0132,
-    key: "timeEnd",
-    style: {
-        right: 0,
-        width: "120dp",
-        font: {
-            fontSize: "16dp"
-        },
-        textAlign: "center"
-    }
-}, {
-    isId: true,
-    priority: 100000.0133,
-    key: "groupButton",
-    style: {
-        top: "15dp",
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE
-    }
-}, {
-    isId: true,
-    priority: 100000.0135,
-    key: "groupShiftColor",
-    style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE
     }
 } ];

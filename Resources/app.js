@@ -1,29 +1,11 @@
-function openView(view, callback) {
+function openView(view, data) {
     var action;
-    for (var i = 0, n = viewObj.length; n > i; ++i) if (viewObj[i].name == view) {
-        action = viewObj[i].action;
-        callback && (action.callback = function() {
-            callback();
-        });
-        activityScreen.nextWindow(action);
-        return;
-    }
-    action = Alloy.createController(view).getView();
-    viewObj.push({
-        name: view,
-        action: action
-    });
-    callback && (action.callback = function() {
-        callback();
-    });
+    action = data ? customView[view] = Alloy.createController(view, data).getView() : customView[view] ? customView[view] : customView[view] = Alloy.createController(view).getView();
     activityScreen.nextWindow(action);
 }
 
 function delete_view(view) {
-    var temp = [];
-    for (var i = 0, n = viewObj.length; n > i; ++i) viewObj[i].name != view && temp.push(viewObj[i]);
-    viewObj = temp;
-    temp = "";
+    customView[view] = "";
 }
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
@@ -34,8 +16,8 @@ var frd = require("friend");
 
 var gcm = require("com.activate.gcm");
 
-require("lib");
+var lib = require("lib");
 
-var viewObj = [];
+var customView = {};
 
 Alloy.createController("index");

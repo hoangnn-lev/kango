@@ -30,28 +30,27 @@ function Controller() {
         id: "main"
     });
     $.__views.shift_setting.add($.__views.main);
-    $.__views.__alloyId92 = Ti.UI.createView({
+    $.__views.__alloyId76 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ff3974",
         top: "0",
-        id: "__alloyId92"
+        id: "__alloyId76"
     });
-    $.__views.main.add($.__views.__alloyId92);
-    $.__views.__alloyId93 = Ti.UI.createLabel({
+    $.__views.main.add($.__views.__alloyId76);
+    $.__views.__alloyId77 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#fff",
-        zIndex: 1,
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
         left: "10dp",
         text: "タップで名前を変更できます",
-        id: "__alloyId93"
+        id: "__alloyId77"
     });
-    $.__views.__alloyId92.add($.__views.__alloyId93);
+    $.__views.__alloyId76.add($.__views.__alloyId77);
     $.__views.shift = Ti.UI.createTableView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
