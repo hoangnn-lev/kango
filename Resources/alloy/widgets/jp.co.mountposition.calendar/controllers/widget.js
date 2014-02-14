@@ -64,7 +64,7 @@ function Controller() {
     $.selected = null;
     doClick = function(e) {
         var _ref, _ref1, _ref2;
-        if (null != e.source.date && !e.source._isEntry) {
+        if (null != e.source.date) {
             null != $.selected && null != (_ref = $.selected.children[0]) && (_ref.getParent().borderColor = "#fff");
             $.selected = e.source;
             return null != (_ref1 = $.selected) ? null != (_ref2 = _ref1.children[0]) ? _ref2.getParent().borderColor = "#a1a1a0" : void 0 : void 0;
@@ -172,11 +172,12 @@ function Controller() {
             },
             backgroundColor: shiftOfDate[_perodDay]["color"],
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+            id: shiftOfDate[_perodDay]["id"],
             borderRadius: 10,
             width: Ti.UI.FILL,
             left: "3dp",
             right: "3dp",
-            color: "#fff",
+            color: "#676767",
             bottom: "3dp",
             touchEnabled: false,
             zIndex: 0,
@@ -213,6 +214,8 @@ function Controller() {
             textAlign: "center",
             text: nextMonth.date(),
             touchEnabled: false,
+            top: "3dp",
+            left: "3dp",
             font: {
                 fontSize: "18sp"
             },
@@ -228,6 +231,36 @@ function Controller() {
             row++;
         }
     }
+    exports.setShift = function(day, options) {
+        var _ref3;
+        var _isAdd = true;
+        null == options && (options = {});
+        moment.isMoment(day) && (day = day.date());
+        tile = null != (_ref3 = $.calendar) ? _ref3["" + day] : void 0;
+        if (null != (null != tile ? tile.date : void 0)) {
+            tile.children[1] && tile.children[1].id != options.id && tile.remove(tile.children[1]);
+            9 == options.id && (_isAdd = false);
+            if (_isAdd) return tile.add(Ti.UI.createLabel({
+                text: options.text,
+                font: {
+                    fontSize: "12dp"
+                },
+                backgroundColor: options.color,
+                border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+                borderRadius: 10,
+                width: Ti.UI.FILL,
+                left: "3dp",
+                right: "3dp",
+                color: "#676767",
+                id: options.id,
+                bottom: "3dp",
+                touchEnabled: false,
+                zIndex: 0,
+                textAlign: "center",
+                className: "set-label-calendar"
+            }));
+        }
+    };
     exports.setImage = function(day, image, options) {
         var _ref3;
         null == options && (options = {});

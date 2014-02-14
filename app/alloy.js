@@ -1,8 +1,8 @@
 require('config');
 
-var frd = require('friend');
+var frd = require('Lib/friend');
 var gcm = require('com.activate.gcm');
-var lib = require('lib');
+var func = require('Lib/function');
 
 var customView = {};
 
@@ -22,9 +22,8 @@ function openView(view, data) {
 	} else {
 		action = customView[view] = Alloy.createController(view).getView();
 	}
-
 	
-	activityScreen.nextWindow(action);
+	func.nextView(action);
 }
 
 /*

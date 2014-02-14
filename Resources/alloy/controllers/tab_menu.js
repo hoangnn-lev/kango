@@ -18,16 +18,22 @@ function Controller() {
     _.extend($, $.__views);
     Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.dpi / 160);
     var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
+    var activeTab;
     var menu = Ti.API.TABMENU, activeColor = "#ed829c";
     for (var i = 0, n = menu.length; n > i; i++) {
         var menuItemWidth = deviceWidth / n;
+        activeTab = i + 1;
         var view = Ti.UI.createView({
             width: menuItemWidth + "dp",
             height: "50dp",
             left: i * menuItemWidth + "dp",
-            action: menu[i].action
+            action: menu[i].action,
+            tab: activeTab
         });
-        1 == i && view.setBackgroundColor(activeColor);
+        if (Ti.API.activeTab || 1 != i) Ti.API.activeTab && i + 1 == Ti.API.activeTab && view.setBackgroundColor(activeColor); else {
+            Ti.API.activeTab = activeTab;
+            view.setBackgroundColor(activeColor);
+        }
         view.add(Ti.UI.createImageView({
             image: menu[i].img,
             height: "22dp",
@@ -49,6 +55,7 @@ function Controller() {
             className: "menu-text"
         }));
         view.addEventListener("click", function(e) {
+            Ti.API.activeTab = e.source.tab;
             openView(e.source.action);
         });
         $.tabMenu.add(view);

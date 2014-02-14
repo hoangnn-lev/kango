@@ -8,7 +8,7 @@ function Controller() {
         day = wday.format("DD");
         if (gdate != $.scheduleDateInfo.getText()) {
             $.scheduleDateInfo.setText(gdate);
-            $.dayName.setText(lib.convertDayName(wday.format("dddd")));
+            $.dayName.setText(func.convertDayName(wday.format("dddd")));
             $.shiftLabel.removeAllChildren();
             shiftOfDate[day] && $.shiftLabel.add(Ti.UI.createLabel({
                 text: shiftOfDate[day]["text"],
@@ -408,8 +408,8 @@ function Controller() {
         },
         height: Ti.UI.SIZE,
         backgroundColor: "#f3acbd",
-        backgroundFocusedColor: "#e4f7ff",
-        backgroundSelectedColor: "#e4f7ff",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,

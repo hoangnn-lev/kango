@@ -5,7 +5,7 @@ var args = arguments[0] || {};
 var date = (args['data'].day).split('-');
 
 $.date.setText(date[1] + ' / ' + date[2]);
-$.dayName.setText(lib.convertDayName((new Date(args['data'].day)).getDay()));
+$.dayName.setText(func.convertDayName((new Date(args['data'].day)).getDay()));
 
 var buttonTabs = Ti.API.ICON;
 var currentButton = null;

@@ -5,9 +5,9 @@
 			<View id="calendarTitle">
 				<ImageView image="/icons/prev.png" class="calendarButton" onClick="doPrevMonth" id="prevMonth" left="0"/>
 				<View id="dateInfo">
-					<Label text="2013" id="year"/>
-					<Label text="12" id="month"/>
-					<Label text="DEC" id="monthName"/>
+					<Label  id="year"/>
+					<Label  id="month"/>
+					<Label  id="monthName"/>
 				</View>
 				<ImageView  image="/icons/next.png"  class="calendarButton" onClick="doNextMonth" id="nextMonth" right="0"/>
 			</View>
@@ -19,8 +19,7 @@
 					<Label id="dayName"/>
 					<View id="shiftLabel"/>
 				</View>
-				
-				
+				<View id="shiftList"/>
 			</View>
 		</View>
 	</Window>

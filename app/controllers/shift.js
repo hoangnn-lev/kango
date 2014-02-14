@@ -1,74 +1,26 @@
 //create collection users
 Alloy.Collections.schedule = Alloy.createCollection('schedule');
-var day, choiceDay, activeWidget, id, holidaysDate, shiftOfDate = [], holidayItem, moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '';
+Alloy.Collections.configs = Alloy.createCollection('configs');
+var selectedDate, _calendar, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), month = moment(), dayOffset, selectedShift = [];
 
-_initCalendar();
+createCalendar();
 
 /*
- * function clickCalendar
- * event click calendar
+ * function createCalendar
+ * Create header calendar and first build calendar
  * input : null
  * output : void
  * */
+function createCalendar() {
 
-function clickCalendar(e) {
-	if (!activeWidget)
-		return
-		void 0;
-
-	var wday = activeWidget.selectedDate();
-	choiceDay = wday;
-	var gdate = wday.format('MM / DD');
-	day = wday.format('DD');
-
-	if (gdate != $.shiftDateInfo.getText()) {
-		$.shiftDateInfo.setText(gdate);
-		$.dayName.setText(lib.convertDayName(wday.format('dddd')));
-		//create shift label
-		$.shiftLabel.removeAllChildren();
-		if (shiftOfDate[day]) {
-			$.shiftLabel.add(Ti.UI.createLabel({
-				text : shiftOfDate[day]['text'],
-				left : '120dp',
-				backgroundColor : shiftOfDate[day]['color'],
-				color : '#fff',
-				width : '60dp',
-				font : {
-					fontSize : '16sp'
-				},
-				textAlign : 'center',
-				border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-				borderRadius : 10,
-				height : Ti.UI.SIZE
-			}));
-		}
-
-	}
+	var configs = Alloy.Collections.configs;
+	configs.fetch({
+		query : 'select id,cg_value from configs where cg_name="dayOffset"'
+	});
+	dayOffset = configs.models[0].get('cg_value');
+	func.createCalendarDay(dayOffset, $.days);
+	loadCalendarBody();
 }
-
-/*
- * function doPrevMonth
- * pre month calendar
- * input : null
- * output : void
- * */
-function doPrevMonth() {
-	currentMonth = currentMonth.subtract('months', 1);
-	calendar();
-}
-
-/*
- * function doNextMonth
- * back month calendar
- * input : null
- * output : void
- * */
-function doNextMonth() {
-	currentMonth = currentMonth.add('months', 1);
-	calendar();
-}
-
-
 
 /*
  * function calendar
@@ -76,102 +28,229 @@ function doNextMonth() {
  * input : null
  * output : void
  * */
-function calendar() {
+function loadCalendarBody() {
+
+	//reset
+	shiftOfMonth = [];
 
 	//test
-	shiftOfDate['18'] = {
+	shiftOfMonth['18'] = {
 		color : '#25b4a5',
-		text : '夜勤'
+		text : '夜勤',
+		id : 2
 	};
-	shiftOfDate['19'] = {
+	shiftOfMonth['19'] = {
 		color : '#25b4a5',
-		text : '夜勤'
+		text : '夜勤',
+		id : 1
 	};
-	shiftOfDate['12'] = {
+	shiftOfMonth['12'] = {
 		color : '#e68200',
-		text : '日勤'
+		text : '日勤',
+		id : 3
 	};
 
-	if (choiceDay)
-		day = choiceDay.format('DD');
-	else
-		day = currentMonth.format('DD');
+	_calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset);
 
-	if (activeWidget) {
-		activeWidget = null;
-	}
-
-	//get day schedule
-	
-	var current = $.calendar.children[0];
-
-	activeWidget = Alloy.createWidget('jp.co.mountposition.calendar', 'widget', {
-		period : currentMonth,
-		holidays : holidaysDate,
-		shiftOfDate : shiftOfDate,
-		dayOffset : dayOffset
-	});
-
-	var c = activeWidget.getView();
-	var gdate = activeWidget.calendarMonth().format('YYYY-MM-MMM').split('-');
+	var gdate = _calendar.calendarMonth().format('YYYY-MM-MMM').split('-');
 
 	$.year.setText(gdate[0]);
 	$.month.setText(gdate[1]);
 	$.monthName.setText(gdate[2].toUpperCase());
 
-	$.calendar.add(c);
+	var oldCalendar = $.calendar.children[0];
+	$.calendar.add(_calendar.getView());
 
-	activeWidget.select(day);
-	$.calendar.fireEvent('click');
+	//remove calendar after next/prev month
+	if (oldCalendar)
+		$.calendar.remove(oldCalendar);
 
-	if (current)
-		$.calendar.remove(current);
+	if (!selectedShift[1]) {
+		_calendar.select(month.format('DD'));
+		$.calendar.fireEvent('click');
+	}
+
+}
+
+function clickCalendar(e) {
+
+	selectedDate = _calendar.selectedDate();
+
+	updateShift(selectedDate.format('D'));
+
+	$.shiftDateInfo.setText(selectedDate.format('MM / DD'));
+	$.dayName.setText(func.convertDayName(selectedDate.format('dddd')));
+
+	$.shiftLabel.removeAllChildren();
+
+	var date = selectedDate.format('D');
+	if (shiftOfMonth[date]) {
+
+		$.shiftLabel.add(Ti.UI.createLabel({
+			text : shiftOfMonth[date]['text'],
+			left : '120dp',
+			backgroundColor : shiftOfMonth[date]['color'],
+			color : '#fff',
+			width : '60dp',
+			font : {
+				fontSize : '16sp'
+			},
+			textAlign : 'center',
+			border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+			borderRadius : 10,
+			height : Ti.UI.SIZE
+		}));
+
+	}
+
+}
+
+function doPrevMonth() {
+	month = month.subtract('months', 1);
+	loadCalendarBody();
+}
+
+function doNextMonth() {
+	month = month.add('months', 1);
+	loadCalendarBody();
 }
 
 /*
- * function _initCalendar
- * render week by config
- * input : null
+ * function getListScheduleByDate
+ * Get schedule list
+ * input : date
  * output : void
  * */
-function _initCalendar() {
 
-	//create collection configs and get start day
-	Alloy.Collections.configs = Alloy.createCollection('configs');
-	var configs = Alloy.Collections.configs;
-	configs.fetch({
-		query : 'select id,cg_value from configs where cg_name="dayOffset"'
-	});
+loadShiftList();
+function loadShiftList() {
 
-	//check start with monday
-	dayOffset = configs.models[0].get('cg_value');
+	var shift_data = [{
+		id : '1',
+		name : '日勤',
+		color : '#f19c98'
+	}, {
+		id : '2',
+		name : '夜勤',
+		color : '#ffe498'
+	}, {
+		id : '3',
+		name : '休み',
+		color : '#b9e0a5'
+	}, {
+		id : '4',
+		name : '早番',
+		color : '#25b4a5'
+	}, {
+		id : '5',
+		name : '遅番',
+		color : '#e68200'
+	}, {
+		id : '6',
+		name : '準夜勤',
+		color : '#fff'
+	}, {
+		id : '7',
+		name : '深夜',
+		color : '#d3e1f5'
+	}, {
+		id : '8',
+		name : '日長',
+		color : '#cccccc'
+	}, {
+		id : '9',
+		name : '入り',
+		color : '#fff'
+	}];
+	var index = 0;
+	for (var i = 0; i < 3; ++i) {
 
-	var _ref = ['日', '月', '火', '水', '木', '金', '土'];
-	if (dayOffset == 1) {
-		_ref = ['月', '火', '水', '木', '金', '土', '日'];
-	}
-	var TILE_WIDTH = Math.floor(Ti.Platform.displayCaps.platformWidth / 7);
-	var color;
-	for (var i = 0, _len = _ref.length; i < _len; i++) {
-		if (_ref[i] == '日') {
-			color = '#f08791';
-		} else if (_ref[i] == '土') {
-			color = '#9bb9e1';
-		} else {
-			color = '#676767';
+		for (var j = 0; j < 4; ++j) {
+
+			if (index >= shift_data.length) {
+				var button = Ti.UI.createButton({
+					textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER,
+					width : Ti.UI.FILL,
+					font : {
+						fontSize : '14dp'
+					},
+					height : Ti.UI.SIZE,
+					title : 'シフト名を変える',
+					backgroundColor : '#f3acbd',
+					backgroundFocusedColor : '#ef8fa6',
+					backgroundSelectedColor : '#ef8fa6',
+					color : '#fff',
+					border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+					borderRadius : 10,
+					width : '46%',
+					left : '5dp',
+					height : '30dp',
+				});
+				button.addEventListener('click', function(e) {
+					shiftSetting();
+				});
+				$.shiftList.add(Ti.UI.createLabel({
+					height : '30dp',
+					width : '23%',
+					top : '5dp',
+					bottom : '5dp',
+					left : '5dp',
+				}));
+				$.shiftList.add(button);
+
+				return;
+			}
+
+			var label = Ti.UI.createLabel({
+				text : ' ' + shift_data[index].name + ' ',
+				id : shift_data[index].id,
+				color : '#676767',
+				font : {
+					fontSize : '14dp'
+				},
+				backgroundColor : shift_data[index].color,
+				height : '30dp',
+				width : '23%',
+				top : '5dp',
+				bottom : '5dp',
+				left : '5dp',
+				border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+				borderRadius : 10,
+				borderWidth : 1,
+				borderColor : '#f0f0f0',
+				textAlign : 'center',
+				className : 'shift-item'
+			});
+
+			index++;
+			label.addEventListener('click', function(e) {
+
+				if (selectedShift[0]) {
+					selectedShift[0].setBorderColor('#f0f0f0');
+				}
+				this.setBorderColor('#676767');
+				selectedShift[0] = this;
+				selectedShift[1] = e.source;
+			});
+			$.shiftList.add(label);
 		}
-		$.days.add(Ti.UI.createLabel({
-			color : color,
-			textAlign : 'center',
-			font : {
-				fontSize : '16sp',
-			},
-			text : _ref[i],
-			width : TILE_WIDTH,
-			touchEnabled : false
-		}));
+
 	}
-	calendar();
+}
+
+function updateShift(date) {
+	if (selectedShift[1]) {
+		var _get_shift_selected = {
+			text : selectedShift[1].text,
+			color : selectedShift[1].backgroundColor
+		};
+
+		//update shiftOfMonth
+		shiftOfMonth[date] = _get_shift_selected;
+		_get_shift_selected['id'] = selectedShift[1].id;
+		_calendar.setShift(date, _get_shift_selected);
+	}
+
 }
 
 //add back button
@@ -196,4 +275,8 @@ $.calendar.addEventListener('swipe', function(e) {
 	else if (e.direction == 'right')
 		doPrevMonth();
 });
+
+function shiftSetting(e) {
+	openView('shift_setting');
+}
 

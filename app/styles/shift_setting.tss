@@ -2,8 +2,15 @@
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL
 },
+"#main":{
+	layout:'vertical'
+},
 "#shift":{
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL,
-	top:'40dp'
+	top:'20dp'
+},
+"#title":{
+	left:'10dp',
+	top:'10dp'
 }

@@ -23,7 +23,7 @@ function clickCalendar(e) {
 
 	if (gdate != $.scheduleDateInfo.getText()) {
 		$.scheduleDateInfo.setText(gdate);
-		$.dayName.setText(lib.convertDayName(wday.format('dddd')));
+		$.dayName.setText(func.convertDayName(wday.format('dddd')));
 		//create shift label
 		$.shiftLabel.removeAllChildren();
 		if (shiftOfDate[day]) {

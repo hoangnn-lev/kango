@@ -27,34 +27,28 @@ function Controller() {
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
         top: "50dp",
+        layout: "vertical",
         id: "main"
     });
     $.__views.shift_setting.add($.__views.main);
-    $.__views.__alloyId76 = Ti.UI.createView({
-        height: "40dp",
-        width: Ti.UI.FILL,
-        backgroundColor: "#ff3974",
-        top: "0",
-        id: "__alloyId76"
-    });
-    $.__views.main.add($.__views.__alloyId76);
-    $.__views.__alloyId77 = Ti.UI.createLabel({
+    $.__views.title = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#fff",
+        color: "#676767",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
         left: "10dp",
-        text: "タップで名前を変更できます",
-        id: "__alloyId77"
+        top: "10dp",
+        id: "title",
+        text: "タップで名前を変更できます"
     });
-    $.__views.__alloyId76.add($.__views.__alloyId77);
+    $.__views.main.add($.__views.title);
     $.__views.shift = Ti.UI.createTableView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        top: "40dp",
+        top: "20dp",
         separatorColor: "#eeeeee",
         id: "shift"
     });
@@ -110,7 +104,8 @@ function Controller() {
             title: shift[i].name,
             touchEnabled: true,
             id: i,
-            borderColor: "#666",
+            borderColor: "#f0f0f0",
+            color: "#676767",
             borderWidth: 1,
             className: "row-left-name"
         }));
@@ -120,9 +115,9 @@ function Controller() {
             font: {
                 fontSize: "15dp"
             },
-            color: "#000",
-            className: "row-left-alias",
-            touchEnabled: false
+            color: "#676767",
+            touchEnabled: false,
+            className: "row-left-alias"
         }));
         item.add(Ti.UI.createLabel({
             left: "160dp",
@@ -130,14 +125,14 @@ function Controller() {
             font: {
                 fontSize: "15dp"
             },
-            color: "#000",
+            color: "#676767",
             className: "time",
             touchEnabled: false
         }));
-        var background = "#9c9c9c", selectedColor = "#888888", text = "要らない";
+        var background = "#e6e6e6", selectedColor = "#dadada", text = "要らない";
         if (1 == shift[i].status) {
-            background = "#4bcd61";
-            selectedColor = "#45b858";
+            background = "#f3acbd";
+            selectedColor = "#ef8fa6";
             text = "使う";
         }
         item.add(Ti.UI.createButton({

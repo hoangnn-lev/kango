@@ -2,8 +2,8 @@
 	<Window>
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
-			<View backgroundColor="#ff3974" top="0" height="40dp">
-				<Label left="10dp" text="シフトの編集" color="#fff"/>
+			<View top="0" height="40dp">
+				<Label left="10dp" text="シフトの編集"/>
 			</View>
 			<View id="content">
 

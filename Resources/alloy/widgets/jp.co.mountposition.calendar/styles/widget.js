@@ -19,12 +19,12 @@ module.exports = [ {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
-            fontSize: "25sp"
+            fontSize: "14dp"
         },
         height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
-        backgroundFocusedColor: "#e4f7ff",
-        backgroundSelectedColor: "#e4f7ff",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10

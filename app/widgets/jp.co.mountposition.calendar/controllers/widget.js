@@ -33,7 +33,7 @@ doClick = function(e) {
 
 	var _ref, _ref1, _ref2;
 
-	if ((e.source.date != null) && !e.source._isEntry) {
+	if ((e.source.date != null)) {
 
 		if ($.selected != null) {
 			if (( _ref = $.selected.children[0]) != null) {
@@ -88,8 +88,6 @@ _.defer(function() {
 				touchEnabled : false,
 				zIndex : 0
 			}));
-
-			//ui.backgroundColor = '#d3e1f5';
 		}
 	}
 
@@ -154,7 +152,7 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		borderRadius : 10,
 		borderColor : '#fff',
-		borderWidth:'1',
+		borderWidth : '1',
 		className : 'row'
 	});
 
@@ -187,11 +185,12 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 			},
 			backgroundColor : shiftOfDate[_perodDay]['color'],
 			border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+			id : shiftOfDate[_perodDay]['id'],
 			borderRadius : 10,
 			width : Ti.UI.FILL,
 			left : '3dp',
 			right : '3dp',
-			color : '#fff',
+			color : '#676767',
 			bottom : '3dp',
 			touchEnabled : false,
 			zIndex : 0,
@@ -233,6 +232,8 @@ while (col !== 0) {
 		textAlign : 'center',
 		text : nextMonth.date(),
 		touchEnabled : false,
+		top : '3dp',
+		left : '3dp',
 		font : {
 			fontSize : '18sp'
 		},
@@ -250,6 +251,55 @@ while (col !== 0) {
 	}
 }
 //need optimization
+
+exports.setShift = function(day, options) {
+
+	var _ref3;
+	var _isAdd = true;
+	if (options == null) {
+		options = {};
+	}
+	if (moment.isMoment(day)) {
+		day = day.date();
+	}
+
+	tile = ( _ref3 = $.calendar) != null ? _ref3["" + day] :
+	void 0;
+	if ((tile != null ? tile.date :
+	void 0) != null) {
+
+		if (tile.children[1] && tile.children[1].id != options.id) {
+			tile.remove(tile.children[1]);
+		}
+		if (options.id == 9)
+			_isAdd = false;
+
+		//check label empty/null
+		if (_isAdd) {
+			return tile.add(Ti.UI.createLabel({
+				text : options.text,
+				font : {
+					fontSize : '12dp'
+				},
+				backgroundColor : options.color,
+				border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+				borderRadius : 10,
+				width : Ti.UI.FILL,
+				left : '3dp',
+				right : '3dp',
+				color : '#676767',
+				id : options.id,
+				bottom : '3dp',
+				touchEnabled : false,
+				zIndex : 0,
+				textAlign : 'center',
+				className : 'set-label-calendar'
+			}));
+		}
+
+	}
+};
+
 exports.setImage = function(day, image, options) {
 	var _ref3;
 	if (options == null) {
@@ -258,6 +308,7 @@ exports.setImage = function(day, image, options) {
 	if (moment.isMoment(day)) {
 		day = day.date();
 	}
+
 	tile = ( _ref3 = $.calendar) != null ? _ref3["" + day] :
 	void 0;
 	if ((tile != null ? tile.date :

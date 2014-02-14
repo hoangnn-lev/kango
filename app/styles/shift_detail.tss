@@ -24,7 +24,7 @@
 	width:'80dp',
 	height:'35dp',
 	backgroundColor:'#f19c98',
-	borderColor:'#666',
+	borderColor:'#f0f0f0',
 	borderWidth:1,
 	left:0,
 	top:'10dp',

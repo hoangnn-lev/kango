@@ -46,18 +46,19 @@ function loadShift() {
 				width : '30%',
 				left : (j * 33) + '%',
 				top : top + 'dp',
-				borderColor : '#666',
+				borderColor : '#f0f0f0',
+				color : '#676767',
 				borderWidth : 1
 			});
 
 			if (i == 0 && j == 0) {
 				selectedColor = view;
-				view.setBorderWidth(5);
+				view.setBorderWidth(3);
 			}
 
 			view.addEventListener('click', function(e) {
 				selectedColor.setBorderWidth(1);
-				this.setBorderWidth(5);
+				this.setBorderWidth(3);
 				selectedColor = this;
 
 			});

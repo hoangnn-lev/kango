@@ -1,16 +1,6 @@
 "#main":{
 	backgroundColor:'#f5f1e9'
 },
-".calenderTitle":{
-	color:'#fff',
-	height:Ti.UI.SIZE
-},
-".scheduleTitle":{
-	width:Ti.UI.FILL,
-	height:'40dp',
-	backgroundColor:'#fff',
-	top:'10dp'
-},
 "#calendar":{
 	height:Ti.UI.SIZE,
 	top:'5dp'
@@ -21,11 +11,6 @@
 	top:0,
 	left:'10dp',
 	right:'10dp'
-},
-".calendarButton":{
-	zIndex:"5",
-	width:"30dp",
-	height:"30dp" 
 },
 "#dateInfo":{
 	width:'110dp',
@@ -71,12 +56,6 @@
 	},
 	left:'5dp'
 },
-".editScheduleButton":{
-	font:{
-		fontSize:'16sp'
-	},
-	backgroundColor:'#f3acbd'
-},
 '#days': {
     layout: 'horizontal',
     top: 0,
@@ -100,4 +79,32 @@
 },
 "#scheduleList":{
 	top:'1dp'
+},
+"#shiftList":{
+	top:'2dp',
+	backgroundColor:'#fff',
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	layout:"horizontal"
+}
+".calenderTitle":{
+	color:'#fff',
+	height:Ti.UI.SIZE
+},
+".scheduleTitle":{
+	width:Ti.UI.FILL,
+	height:'40dp',
+	backgroundColor:'#fff',
+	top:'10dp'
+},
+".calendarButton":{
+	zIndex:"5",
+	width:"30dp",
+	height:"30dp" 
+},
+".editScheduleButton":{
+	font:{
+		fontSize:'16sp'
+	},
+	backgroundColor:'#f3acbd'
 }

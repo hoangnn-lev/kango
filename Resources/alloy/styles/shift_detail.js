@@ -13,12 +13,12 @@ module.exports = [ {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
-            fontSize: "25sp"
+            fontSize: "14dp"
         },
         height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
-        backgroundFocusedColor: "#e4f7ff",
-        backgroundSelectedColor: "#e4f7ff",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10
@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0122,
+    priority: 1000.0123,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -93,21 +93,21 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0123,
+    priority: 1000.0124,
     key: "TextField",
     style: {
         zIndex: 0
     }
 }, {
     isApi: true,
-    priority: 1000.0124,
+    priority: 1000.0125,
     key: "Button",
     style: {
         zIndex: 0
     }
 }, {
     isApi: true,
-    priority: 1000.0125,
+    priority: 1000.0126,
     key: "Label",
     style: {
         zIndex: 0
@@ -133,7 +133,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0129,
+    priority: 10000.013,
     key: "smallText",
     style: {
         font: {
@@ -144,7 +144,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.013,
+    priority: 10000.0131,
     key: "timeBlock",
     style: {
         width: Ti.UI.FILL,
@@ -152,7 +152,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0134,
+    priority: 10000.0135,
     key: "button",
     style: {
         color: "#fff",
@@ -184,7 +184,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0126,
+    priority: 100000.0127,
     key: "content",
     style: {
         left: "10dp",
@@ -197,13 +197,13 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0127,
+    priority: 100000.0128,
     key: "shiftName",
     style: {
         width: "80dp",
         height: "35dp",
         backgroundColor: "#f19c98",
-        borderColor: "#666",
+        borderColor: "#f0f0f0",
         borderWidth: 1,
         left: 0,
         top: "10dp",
@@ -214,7 +214,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0128,
+    priority: 100000.0129,
     key: "shiftAlias",
     style: {
         font: {
@@ -225,7 +225,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0131,
+    priority: 100000.0132,
     key: "timeStart",
     style: {
         left: 0,
@@ -237,7 +237,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0132,
+    priority: 100000.0133,
     key: "timeEnd",
     style: {
         right: 0,
@@ -249,7 +249,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0133,
+    priority: 100000.0134,
     key: "groupButton",
     style: {
         top: "15dp",
@@ -258,7 +258,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0135,
+    priority: 100000.0136,
     key: "groupShiftColor",
     style: {
         width: Ti.UI.FILL,

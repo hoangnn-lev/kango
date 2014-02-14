@@ -29,16 +29,17 @@ function Controller() {
                 width: "30%",
                 left: 33 * j + "%",
                 top: top + "dp",
-                borderColor: "#666",
+                borderColor: "#f0f0f0",
+                color: "#676767",
                 borderWidth: 1
             });
             if (0 == i && 0 == j) {
                 selectedColor = view;
-                view.setBorderWidth(5);
+                view.setBorderWidth(3);
             }
             view.addEventListener("click", function() {
                 selectedColor.setBorderWidth(1);
-                this.setBorderWidth(5);
+                this.setBorderWidth(3);
                 selectedColor = this;
             });
             $.groupShiftColor.add(view);
@@ -75,7 +76,6 @@ function Controller() {
     $.__views.__alloyId66 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
-        backgroundColor: "#ff3974",
         top: "0",
         id: "__alloyId66"
     });
@@ -83,7 +83,7 @@ function Controller() {
     $.__views.__alloyId67 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#fff",
+        color: "#676767",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -115,7 +115,7 @@ function Controller() {
         },
         zIndex: 0,
         backgroundColor: "#f19c98",
-        borderColor: "#666",
+        borderColor: "#f0f0f0",
         borderWidth: 1,
         left: 0,
         top: "10dp",

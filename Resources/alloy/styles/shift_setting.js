@@ -13,12 +13,12 @@ module.exports = [ {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
-            fontSize: "25sp"
+            fontSize: "14dp"
         },
         height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
-        backgroundFocusedColor: "#e4f7ff",
-        backgroundSelectedColor: "#e4f7ff",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10
@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0137,
+    priority: 1000.0138,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -130,11 +130,26 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0138,
+    priority: 100000.0139,
+    key: "main",
+    style: {
+        layout: "vertical"
+    }
+}, {
+    isId: true,
+    priority: 100000.014,
     key: "shift",
     style: {
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        top: "40dp"
+        top: "20dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0141,
+    key: "title",
+    style: {
+        left: "10dp",
+        top: "10dp"
     }
 } ];

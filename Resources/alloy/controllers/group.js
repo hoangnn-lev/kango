@@ -458,9 +458,9 @@ function Controller() {
             fontSize: "20sp"
         },
         height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
-        backgroundFocusedColor: "#e4f7ff",
-        backgroundSelectedColor: "#e4f7ff",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,

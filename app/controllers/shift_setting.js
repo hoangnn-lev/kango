@@ -48,7 +48,8 @@ for (var i = 0, n = shift.length; i < n; i++) {
 		title : shift[i].name,
 		touchEnabled : true,
 		id : i,
-		borderColor : '#666',
+		borderColor : '#f0f0f0',
+		color : '#676767',
 		borderWidth : 1,
 		className : 'row-left-name',
 	}));
@@ -59,9 +60,9 @@ for (var i = 0, n = shift.length; i < n; i++) {
 		font : {
 			fontSize : '15dp'
 		},
-		color : '#000',
-		className : 'row-left-alias',
+		color : '#676767',
 		touchEnabled : false,
+		className : 'row-left-alias',
 	}));
 
 	item.add(Ti.UI.createLabel({
@@ -70,16 +71,16 @@ for (var i = 0, n = shift.length; i < n; i++) {
 		font : {
 			fontSize : '15dp'
 		},
-		color : '#000',
+		color : '#676767',
 		className : 'time',
 		touchEnabled : false,
 	}));
 
-	var background = '#9c9c9c', selectedColor = '#888888', text = '要らない';
+	var background = '#e6e6e6', selectedColor = '#dadada', text = '要らない';
 
 	if (shift[i].status == 1) {
-		background = '#4bcd61';
-		selectedColor = '#45b858';
+		background = '#f3acbd';
+		selectedColor = '#ef8fa6';
 		text = '使う';
 	}
 
