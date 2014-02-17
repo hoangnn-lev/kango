@@ -1,5 +1,10 @@
 require('config');
 
+Alloy.Collections.schedule = Alloy.createCollection('schedule');
+Alloy.Collections.configs = Alloy.createCollection('configs');
+Alloy.Collections.shifts = Alloy.createCollection('shifts');
+Alloy.Collections.calendar_shift = Alloy.createCollection('calendar_shift');
+
 var frd = require('Lib/friend');
 var gcm = require('com.activate.gcm');
 var func = require('Lib/function');
@@ -22,7 +27,7 @@ function openView(view, data) {
 	} else {
 		action = customView[view] = Alloy.createController(view).getView();
 	}
-	
+
 	func.nextView(action);
 }
 

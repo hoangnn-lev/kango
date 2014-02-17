@@ -6,32 +6,28 @@
 				<Label left="10dp" text="シフトの編集"/>
 			</View>
 			<View id="content">
-
 				<Label id="shiftName" text="日勤"/>
 				<Label class="smallText" text="シフト名(最大4文字)"/>
 				<TextField hintText="日勤" id="shiftAlias"/>
 				<Label id="error" class="error" bottom="10dp" text="※文字数が多すぎます" top="-33dp" left="130dp" />
 				<Label class="smallText" text="時間(任意)"/>
 				<View class="timeBlock">
-					<TextField hintText="8:00" id="timeStart"/>
+					<TextField  id="timeStart"/>
 					<Label class="smallText" touchEnabled="false" width="Ti.UI.SIZE" text="から"/>
-					<TextField hintText="17:00" id="timeEnd"/>
+					<TextField id="timeEnd"/>
 				</View>
 				<Label class="error" text="※シフト終了時間が入力されていません" left="0"/>
 				<Label class="smallText" text="スタンプ"/>
 				<View id="groupShiftColor"/>
 				<View id="groupButton">
 					<Button class="button" width="45%"
-					backgroundColor = '#d1463f'
-					backgroundFocusedColor = '#c2433d'
-					backgroundSelectedColor = '#c2433d'
+					backgroundColor = '#ccc'
+					backgroundFocusedColor = '#bdbcbc'
+					backgroundSelectedColor = '#bdbcbc'
+					onClick="shift_setting"
 					left="0"  title="キャンセル"/>
 					<Button width="45%" class="button"
-					backgroundColor = '#4bcd61'
-					backgroundFocusedColor = '#48c25d'
-					backgroundSelectedColor = '#48c25d'
-					right="0" title="保存する"/>
-
+					right="0" onClick="shift_setting" title="保存する"/>
 				</View>
 			</View>
 		</View>

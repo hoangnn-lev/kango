@@ -1,62 +1,47 @@
-var shift = [{
-	name : '日勤',
-	alias : '日勤',
-	color : '#ccc',
-	time : '9:00-18:00',
-	status : 1
-}, {
-	name : '夜勤',
-	alias : '夜勤',
-	color : '#d3e1f5',
-	time : '22:00-10:00',
-	status : 1
-}, {
-	name : '休み',
-	alias : '休み',
-	color : '#b9e0a5',
-	time : '99:99-99:99',
-	status : 1
-}, {
-	name : '早番',
-	alias : '早番',
-	color : '#f19c98',
-	time : '5:00-15:00',
-	status : 1
-}, {
-	name : '入り',
-	alias : '入り',
-	color : '#ccc',
-	time : '99:99-99:99',
-	status : -1
-}];
+var shiftsCols = Alloy.Collections.shifts;
+
+var btnActiveBg = '#f3acbd', textActive = '使う', btnDeativeBg = '#e6e6e6', textDeactive = '要らない';
+
+shiftsCols.fetch({
+	query : 'SELECT * from shifts'
+});
+
+var n = shiftsCols.models.length;
+var shift = shiftsCols.models;
+
 var row = [];
-for (var i = 0, n = shift.length; i < n; i++) {
+for (var i = 0; i < n; i++) {
 	var item = Ti.UI.createTableViewRow({
 		touchEnabled : false,
 		selectionStyle : 'none',
 		selectedBackgroundColor : 'transparent',
 
 	});
-
-	item.add(Ti.UI.createButton({
-		backgroundColor : shift[i].color,
+	var button = Ti.UI.createButton({
+		backgroundColor : shift[i].get('color'),
 		width : '80dp',
 		height : '30dp',
 		left : '10dp',
 		top : '10dp',
 		bottom : '10dp',
-		title : shift[i].name,
+		title : shift[i].get('label'),
 		touchEnabled : true,
-		id : i,
+		id : shift[i].get('id'),
 		borderColor : '#f0f0f0',
 		color : '#676767',
 		borderWidth : 1,
 		className : 'row-left-name',
-	}));
+	});
+	button.addEventListener('click', function(e) {
+		openView('shift_detail', {
+			id : e.source.id
+		});
+	});
+	item.add(button);
 
 	item.add(Ti.UI.createLabel({
 		left : '100dp',
-		text : shift[i].alias,
+		text : shift[i].get('alias'),
 		font : {
 			fontSize : '15dp'
 		},
@@ -67,7 +52,7 @@ for (var i = 0, n = shift.length; i < n; i++) {
 
 	item.add(Ti.UI.createLabel({
 		left : '160dp',
-		text : shift[i].time,
+		text : shift[i].get('time'),
 		font : {
 			fontSize : '15dp'
 		},
@@ -76,43 +61,65 @@ for (var i = 0, n = shift.length; i < n; i++) {
 		touchEnabled : false,
 	}));
 
-	var background = '#e6e6e6', selectedColor = '#dadada', text = '要らない';
+	var background = btnDeativeBg, text = textDeactive;
 
-	if (shift[i].status == 1) {
-		background = '#f3acbd';
-		selectedColor = '#ef8fa6';
-		text = '使う';
+	if (shift[i].get('status') == 1) {
+		background = btnActiveBg;
+		text = textActive;
 	}
+	var button = Ti.UI.createButton({
+		id : shift[i].get('id'),
+		title : text,
+		label : shift[i].get('label'),
+		alias : shift[i].get('alias'),
+		time : shift[i].get('time'),
+		shiftcolor : shift[i].get('color'),
+		status : shift[i].get('status'),
 
-	item.add(Ti.UI.createButton({
 		height : '35dp',
 		width : '75dp',
 		backgroundColor : background,
-		backgroundSelectedColor : selectedColor,
+		backgroundSelectedColor : background,
 		right : '10dp',
 		touchEnabled : true,
 		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		borderRadius : 10,
-		status : shift[i].status,
-		id : i,
-		title : text,
+
 		font : {
 			fontSize : '15dp'
 		},
 		zIndex : 1,
 		color : '#fff',
 		className : 'button-right'
-	}));
+	});
+	button.addEventListener('click', function(e) {
+		if (e.source.status == 1) {
+			this.setBackgroundColor(btnDeativeBg);
+			this.setTitle(textDeactive);
+			e.source.status = 0;
+		} else {
+			this.setBackgroundColor(btnActiveBg);
+			this.setTitle(textActive);
+			e.source.status = 1;
+		}
+
+		var shift = Alloy.createModel('shifts', {
+			id : e.source.id,
+			status : e.source.status,
+			label : e.source.label,
+			alias : e.source.alias,
+			time : e.source.time,
+			color : e.source.shiftcolor
+		});
+
+		Alloy.Collections.shifts.add(shift);
+		shift.save();
+		Alloy.Collections.shifts.fetch();
+		delete_view('schedule');
+		delete_view('shift');
+	});
+	item.add(button);
 	row.push(item);
 }
 $.shift.setData(row);
-
-function edit(e) {
-	if (e.source.status) {
-		alert(e.source.id + 'status' + e.source.status);
-	} else {
-		openView('shift_detail');
-	}
-
-}
 

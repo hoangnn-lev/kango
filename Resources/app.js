@@ -12,6 +12,14 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 require("config");
 
+Alloy.Collections.schedule = Alloy.createCollection("schedule");
+
+Alloy.Collections.configs = Alloy.createCollection("configs");
+
+Alloy.Collections.shifts = Alloy.createCollection("shifts");
+
+Alloy.Collections.calendar_shift = Alloy.createCollection("calendar_shift");
+
 var frd = require("Lib/friend");
 
 var gcm = require("com.activate.gcm");

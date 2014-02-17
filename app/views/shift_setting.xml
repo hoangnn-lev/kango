@@ -5,7 +5,7 @@
 
 			<Label id="title" text="タップで名前を変更できます"/>
 			
-			<TableView onClick="edit" separatorColor="#eeeeee" id="shift"/>
+			<TableView separatorColor="#eeeeee" id="shift"/>
 		</View>
 	</Window>
 </Alloy>

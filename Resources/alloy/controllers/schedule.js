@@ -481,7 +481,6 @@ function Controller() {
     $.__views.scheduleInfo.add($.__views.scheduleList);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Alloy.Collections.schedule = Alloy.createCollection("schedule");
     var day, choiceDay, activeWidget, id, holidaysDate, holidayItem, shiftOfDate = [], moment = require("alloy/moment"), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = "";
     _initCalendar();
     checkFriendRequest();

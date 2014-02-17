@@ -1,5 +1,4 @@
 //create collection users
-Alloy.Collections.schedule = Alloy.createCollection('schedule');
 var day, choiceDay, activeWidget, id, holidaysDate, shiftOfDate = [], holidayItem, moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '';
 
 _initCalendar();
@@ -24,6 +23,7 @@ function clickCalendar(e) {
 	if (gdate != $.scheduleDateInfo.getText()) {
 		$.scheduleDateInfo.setText(gdate);
 		$.dayName.setText(func.convertDayName(wday.format('dddd')));
+		
 		//create shift label
 		$.shiftLabel.removeAllChildren();
 		if (shiftOfDate[day]) {

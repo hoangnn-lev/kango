@@ -1,39 +1,21 @@
 function Controller() {
-    function loadShift() {
-        var shift_data = [ {
-            id: "",
-            color: "#f19c98"
-        }, {
-            id: "",
-            color: "#ffe498"
-        }, {
-            id: "",
-            color: "#b9e0a5"
-        }, {
-            id: "",
-            color: "#d3e1f5"
-        }, {
-            id: "",
-            color: "#ccc"
-        }, {
-            id: "",
-            color: "#fff"
-        } ];
-        var column = 3, record = shift_data.length, row = Math.ceil(record / column), count = 0, height = "40", top = 0, selectedColor = "";
+    function loadColorBox(selected) {
+        var color = [ "#f19c98", "#ffe498", "#b9e0a5", "#d3e1f5", "#ccc", "#fff" ];
+        var column = 3, record = color.length, row = Math.ceil(record / column), count = 0, height = "40", top = 0, selectedColor = "";
         for (var i = 0; row > i; i++) for (var j = 0; column > j; j++) {
             if (count >= record) return;
             i > 0 && (top = i * height + 10 * i);
             var view = Ti.UI.createButton({
-                backgroundColor: shift_data[count].color,
+                backgroundColor: color[count],
                 height: height + "dp",
                 width: "30%",
                 left: 33 * j + "%",
                 top: top + "dp",
-                borderColor: "#f0f0f0",
+                borderColor: "#000",
                 color: "#676767",
                 borderWidth: 1
             });
-            if (0 == i && 0 == j) {
+            if (0 == i && 0 == j || selected == color[count]) {
                 selectedColor = view;
                 view.setBorderWidth(3);
             }
@@ -46,6 +28,9 @@ function Controller() {
             count++;
         }
     }
+    function shift_setting() {
+        openView("shift_setting");
+    }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "shift_detail";
     arguments[0] ? arguments[0]["__parentSymbol"] : null;
@@ -53,6 +38,7 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
+    var __defers = {};
     $.__views.shift_detail = Ti.UI.createWindow({
         backgroundColor: "#fff",
         id: "shift_detail"
@@ -204,7 +190,6 @@ function Controller() {
             fontSize: "16dp"
         },
         textAlign: "center",
-        hintText: "8:00",
         id: "timeStart"
     });
     $.__views.__alloyId70.add($.__views.timeStart);
@@ -237,7 +222,6 @@ function Controller() {
             fontSize: "16dp"
         },
         textAlign: "center",
-        hintText: "17:00",
         id: "timeEnd"
     });
     $.__views.__alloyId70.add($.__views.timeEnd);
@@ -278,7 +262,7 @@ function Controller() {
     $.__views.groupButton = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        top: "15dp",
+        top: "25dp",
         id: "groupButton"
     });
     $.__views.content.add($.__views.groupButton);
@@ -289,9 +273,9 @@ function Controller() {
             fontSize: "16dp"
         },
         height: "40dp",
-        backgroundColor: "#d1463f",
-        backgroundFocusedColor: "#c2433d",
-        backgroundSelectedColor: "#c2433d",
+        backgroundColor: "#ccc",
+        backgroundFocusedColor: "#bdbcbc",
+        backgroundSelectedColor: "#bdbcbc",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: "15",
@@ -302,6 +286,7 @@ function Controller() {
         id: "__alloyId74"
     });
     $.__views.groupButton.add($.__views.__alloyId74);
+    shift_setting ? $.__views.__alloyId74.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId74!click!shift_setting"] = true;
     $.__views.__alloyId75 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "45%",
@@ -309,9 +294,9 @@ function Controller() {
             fontSize: "16dp"
         },
         height: "40dp",
-        backgroundColor: "#4bcd61",
-        backgroundFocusedColor: "#48c25d",
-        backgroundSelectedColor: "#48c25d",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: "15",
@@ -322,9 +307,39 @@ function Controller() {
         id: "__alloyId75"
     });
     $.__views.groupButton.add($.__views.__alloyId75);
+    shift_setting ? $.__views.__alloyId75.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId75!click!shift_setting"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    loadShift();
+    var args = arguments[0] || {};
+    var shiftsCols = Alloy.Collections.shifts;
+    shiftsCols.fetch({
+        query: "SELECT * from shifts where id=" + args["id"]
+    });
+    var shift = shiftsCols.models[0];
+    $.shiftName.setText(shift.get("label"));
+    $.shiftAlias.setValue(shift.get("alias"));
+    if (shift.get("time")) {
+        var time = shift.get("time").split("-");
+        $.timeStart.setValue(time[0]);
+        $.timeEnd.setValue(time[1]);
+    }
+    loadColorBox();
+    $.timeStart.addEventListener("focus", function() {
+        var transformPicker = Titanium.UI.create2DMatrix().scale(.7);
+        var picker = Titanium.UI.createPicker({
+            type: Titanium.UI.PICKER_TYPE_TIME,
+            maxDate: new Date(),
+            heigth: 85,
+            bottom: 0,
+            transform: transformPicker
+        });
+        $.shift_detail.add(picker);
+    });
+    $.shift_detail.addEventListener("android:back", function() {
+        shift_setting();
+    });
+    __defers["$.__views.__alloyId74!click!shift_setting"] && $.__views.__alloyId74.addEventListener("click", shift_setting);
+    __defers["$.__views.__alloyId75!click!shift_setting"] && $.__views.__alloyId75.addEventListener("click", shift_setting);
     _.extend($, exports);
 }
 

@@ -252,7 +252,7 @@ module.exports = [ {
     priority: 100000.0134,
     key: "groupButton",
     style: {
-        top: "15dp",
+        top: "25dp",
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE
     }
