@@ -162,6 +162,9 @@ function Controller() {
         row.push(item);
     }
     $.shift.setData(row);
+    $.shift_setting.addEventListener("android:back", function() {
+        openView("shift");
+    });
     _.extend($, exports);
 }
 

@@ -162,7 +162,14 @@ module.exports = [ {
             fontSize: "16dp"
         },
         height: "40dp",
-        top: 0
+        top: "15dp"
+    }
+}, {
+    isClass: true,
+    priority: 10000.0137,
+    key: "error",
+    style: {
+        visible: false
     }
 }, {
     isId: true,
@@ -252,9 +259,10 @@ module.exports = [ {
     priority: 100000.0134,
     key: "groupButton",
     style: {
-        top: "25dp",
+        layout: "vertical",
         width: Ti.UI.FILL,
-        height: Ti.UI.SIZE
+        height: Ti.UI.SIZE,
+        top: "20dp"
     }
 }, {
     isId: true,

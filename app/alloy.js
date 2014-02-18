@@ -38,5 +38,6 @@ function openView(view, data) {
  * output : void
  * */
 function delete_view(view) {
-	customView[view] = '';
+	if (customView[view])
+		delete customView[view];
 }

@@ -123,3 +123,8 @@ for (var i = 0; i < n; i++) {
 }
 $.shift.setData(row);
 
+//add back button
+$.shift_setting.addEventListener('android:back', function(e) {
+	openView('shift');
+});
+

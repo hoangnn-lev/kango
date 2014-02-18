@@ -1,14 +1,14 @@
-var args = arguments[0] || {};
-
-var shiftsCols = Alloy.Collections.shifts;
+var args = arguments[0] || {}, selectedColor = '', shift, shiftsCols = Alloy.Collections.shifts, status, label;
 
 shiftsCols.fetch({
 	query : 'SELECT * from shifts where id=' + args['id']
 });
 
-var shift = shiftsCols.models[0];
+shift = shiftsCols.models[0];
+status = shift.get('status');
+label = shift.get('label');
 
-$.shiftName.setText(shift.get('label'));
+$.shiftName.setText(label);
 $.shiftAlias.setValue(shift.get('alias'));
 if (shift.get('time')) {
 	var time = (shift.get('time')).split('-');
@@ -16,7 +16,7 @@ if (shift.get('time')) {
 	$.timeEnd.setValue(time[1]);
 }
 
-loadColorBox();
+loadColorBox(shift.get('color'));
 /*
  * function loadShift
  * load shift
@@ -27,7 +27,7 @@ function loadColorBox(selected) {
 
 	var color = ['#f19c98', '#ffe498', '#b9e0a5', '#d3e1f5', '#ccc', '#fff'];
 
-	var column = 3, record = color.length, row = Math.ceil(record / column), count = 0, height = '40', top = 0, selectedColor = '';
+	var column = 3, record = color.length, row = Math.ceil(record / column), count = 0, height = '40', top = 0;
 
 	for (var i = 0; i < row; i++) {
 
@@ -51,13 +51,14 @@ function loadColorBox(selected) {
 				borderWidth : 1
 			});
 
-			if ((i == 0 && j == 0) || selected == color[count]) {
+			if (selected == color[count]) {
 				selectedColor = view;
 				view.setBorderWidth(3);
 			}
 
 			view.addEventListener('click', function(e) {
-				selectedColor.setBorderWidth(1);
+				if (selectedColor)
+					selectedColor.setBorderWidth(1);
 				this.setBorderWidth(3);
 				selectedColor = this;
 
@@ -70,17 +71,49 @@ function loadColorBox(selected) {
 
 }
 
-$.timeStart.addEventListener('focus', function(e) {
-	var transformPicker = Titanium.UI.create2DMatrix().scale(0.7);
-	var picker = Titanium.UI.createPicker({
-		type : Titanium.UI.PICKER_TYPE_TIME,
-		maxDate : new Date(),
-		heigth : 85,
-		//top:10,
-		bottom : 0,
-		transform : transformPicker
-	});
-	$.shift_detail.add(picker);
+$.saveShift.addEventListener('click', function(e) {
+
+	var alias = $.shiftAlias.getValue(), timeStart = $.timeStart.getValue(), timeEnd = $.timeEnd.getValue(), color, time;
+
+	if (timeStart && timeEnd) {
+		time = timeStart + '-' + timeEnd;
+	} else if ((timeStart && !timeEnd) || (!timeStart && timeEnd)) {
+		$.errorTime.setVisible(true);
+		return;
+	} else {
+		$.errorTime.setVisible(false);
+	}
+
+	if (alias.length > 4) {
+		$.errorLabel.setVisible(true);
+		return;
+	} else {
+		$.errorLabel.setVisible(false);
+	}
+
+	if (selectedColor) {
+		color = selectedColor.getBackgroundColor();
+	}
+
+	var _shift_data = {
+		id : args['id'],
+		label : label,
+		status : status,
+		alias : alias,
+		time : time,
+		color : color
+	};
+
+	var shift = Alloy.createModel('shifts', _shift_data);
+
+	Alloy.Collections.shifts.add(shift);
+	shift.save();
+	Alloy.Collections.shifts.fetch();
+
+	delete_view('shift');
+	delete_view('shift_setting');
+	shift_setting();
+
 });
 
 //add back button

@@ -5,7 +5,7 @@ function openView(view, data) {
 }
 
 function delete_view(view) {
-    customView[view] = "";
+    customView[view] && delete customView[view];
 }
 
 var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;

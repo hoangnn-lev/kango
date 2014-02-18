@@ -70,9 +70,10 @@
 	textAlign:'center'
 },
 "#groupButton":{
-	top:'25dp',
+	layout:'vertical',
 	width:Ti.UI.FILL,
-	height:Ti.UI.SIZE
+	height:Ti.UI.SIZE,
+	top:'20dp'
 },
 ".button":{
 	color:'#fff',
@@ -82,9 +83,12 @@
 		fontSize:'16dp'
 	},
 	height:'40dp',
-	top:0
+	top:'15dp'
 },
 "#groupShiftColor":{
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE
+},
+".error":{
+	visible:false
 }
