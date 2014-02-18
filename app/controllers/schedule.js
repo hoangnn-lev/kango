@@ -305,7 +305,7 @@ function createCalendar() {
  * input : date
  * output : void
  * */
-loadFriendByDay();
+
 function loadFriendByDay() {
 
 	var friend_data = ['大島', '黒運', '上野', '春'];
@@ -335,6 +335,9 @@ function loadFriendByDay() {
 
 		$.friend.add(label);
 	}
+	$.friend.addEventListener('click', function(e) {
+		openView('friend');
+	});
 }
 
 //add back button
@@ -350,6 +353,27 @@ $.schedule.addEventListener('android:back', function(e) {
 		}
 	});
 	confirm.show();
+});
+
+$.allFriend.addEventListener('click', function(e) {
+
+	var r = 180;
+	if (e.source.type == 'open') {
+		e.source.type = 'close';
+		loadFriendByDay();
+	} else {
+		e.source.type = 'open';
+		r = 0;
+		$.friend.removeAllChildren();
+	}
+
+	var t = Ti.UI.create2DMatrix();
+	var spin = Titanium.UI.createAnimation();
+	t = t.rotate(r);
+	spin.transform = t;
+	spin.duration = 200;
+	this.animate(spin);
+
 });
 
 //add swipe left right for calendar

@@ -21,6 +21,7 @@
 					backgroundFocusedColor = '#e6a3b3'
 					backgroundSelectedColor = '#e6a3b3'
 					title="保存してカレンダーに戻る"/>
+					
 					<Button onClick="saveSchedule" type="next" width="Ti.UI.FILL" class="button"
 					backgroundColor = '#cfba9c'
 					backgroundFocusedColor = '#c0ad91'

@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0085,
+    priority: 1000.0091,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -93,7 +93,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0086,
+    priority: 1000.0092,
     key: "Label",
     style: {
         width: Ti.UI.SIZE,
@@ -103,7 +103,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0087,
+    priority: 1000.0093,
     key: "Button",
     style: {
         zIndex: 0
@@ -129,7 +129,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0088,
+    priority: 10000.0094,
     key: "line",
     style: {
         top: "10dp",
@@ -141,7 +141,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0089,
+    priority: 10000.0095,
     key: "item",
     style: {
         backgroundColor: "#f19c99",
@@ -159,7 +159,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0091,
+    priority: 10000.0097,
     key: "title",
     style: {
         color: "#000",
@@ -171,7 +171,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0092,
+    priority: 10000.0098,
     key: "on",
     style: {
         backgroundColor: "#fff2cc",
@@ -186,7 +186,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0093,
+    priority: 10000.0099,
     key: "off",
     style: {
         backgroundColor: "#cccccc",
@@ -219,7 +219,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.009,
+    priority: 100000.0096,
     key: "content",
     style: {
         left: "10dp",

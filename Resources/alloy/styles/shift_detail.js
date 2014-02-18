@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0123,
+    priority: 1000.0129,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -93,21 +93,21 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0124,
+    priority: 1000.013,
     key: "TextField",
     style: {
         zIndex: 0
     }
 }, {
     isApi: true,
-    priority: 1000.0125,
+    priority: 1000.0131,
     key: "Button",
     style: {
         zIndex: 0
     }
 }, {
     isApi: true,
-    priority: 1000.0126,
+    priority: 1000.0132,
     key: "Label",
     style: {
         zIndex: 0
@@ -133,7 +133,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.013,
+    priority: 10000.0136,
     key: "smallText",
     style: {
         font: {
@@ -144,7 +144,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0131,
+    priority: 10000.0137,
     key: "timeBlock",
     style: {
         width: Ti.UI.FILL,
@@ -152,7 +152,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0135,
+    priority: 10000.0141,
     key: "button",
     style: {
         color: "#fff",
@@ -166,7 +166,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0137,
+    priority: 10000.0143,
     key: "error",
     style: {
         visible: false
@@ -191,7 +191,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0127,
+    priority: 100000.0133,
     key: "content",
     style: {
         left: "10dp",
@@ -204,7 +204,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0128,
+    priority: 100000.0134,
     key: "shiftName",
     style: {
         width: "80dp",
@@ -221,7 +221,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0129,
+    priority: 100000.0135,
     key: "shiftAlias",
     style: {
         font: {
@@ -232,7 +232,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0132,
+    priority: 100000.0138,
     key: "timeStart",
     style: {
         left: 0,
@@ -244,7 +244,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0133,
+    priority: 100000.0139,
     key: "timeEnd",
     style: {
         right: 0,
@@ -256,7 +256,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0134,
+    priority: 100000.014,
     key: "groupButton",
     style: {
         layout: "vertical",
@@ -266,7 +266,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0136,
+    priority: 100000.0142,
     key: "groupShiftColor",
     style: {
         width: Ti.UI.FILL,

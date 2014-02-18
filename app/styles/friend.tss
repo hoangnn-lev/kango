@@ -1,0 +1,16 @@
+"View":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL
+},
+"#main":{
+	layout:'vertical'
+},
+"#friendList":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL,
+	top:'20dp'
+},
+"#title":{
+	left:'10dp',
+	top:'10dp'
+}

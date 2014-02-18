@@ -194,6 +194,9 @@ function Controller() {
             });
             $.friend.add(label);
         }
+        $.friend.addEventListener("click", function() {
+            openView("friend");
+        });
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "schedule";
@@ -406,14 +409,17 @@ function Controller() {
         id: "__alloyId32"
     });
     $.__views.__alloyId31.add($.__views.__alloyId32);
-    $.__views.__alloyId33 = Ti.UI.createImageView({
-        image: "/icons/btn_Open.png",
+    $.__views.allFriend = Ti.UI.createImageView({
         width: "25dp",
         height: "25dp",
         right: "10dp",
-        id: "__alloyId33"
+        touchEnabled: true,
+        zIndex: 5,
+        image: "/icons/btn_Open.png",
+        id: "allFriend",
+        type: "open"
     });
-    $.__views.__alloyId31.add($.__views.__alloyId33);
+    $.__views.__alloyId31.add($.__views.allFriend);
     $.__views.serviceMember = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -449,11 +455,9 @@ function Controller() {
         var _date = args["date"].split("-");
         currentMonth = moment(args["date"]);
         day = _date[2];
-        alert(_date);
     }
     createCalendar();
     func.checkFriendRequest();
-    loadFriendByDay();
     $.schedule.addEventListener("android:back", function() {
         var confirm = Ti.UI.createAlertDialog({
             title: "看護アプル",
@@ -464,6 +468,23 @@ function Controller() {
             0 == e.index && Titanium.Android.currentActivity.finish();
         });
         confirm.show();
+    });
+    $.allFriend.addEventListener("click", function(e) {
+        var r = 180;
+        if ("open" == e.source.type) {
+            e.source.type = "close";
+            loadFriendByDay();
+        } else {
+            e.source.type = "open";
+            r = 0;
+            $.friend.removeAllChildren();
+        }
+        var t = Ti.UI.create2DMatrix();
+        var spin = Titanium.UI.createAnimation();
+        t = t.rotate(r);
+        spin.transform = t;
+        spin.duration = 200;
+        this.animate(spin);
     });
     __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
     __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);

@@ -127,4 +127,11 @@
 },
 "#scheduleList":{
 	top:'1dp'
+},
+"#allFriend":{
+	width:"25dp",
+	height:"25dp",
+	right:"10dp",
+	touchEnabled:true,
+	zIndex:5
 }

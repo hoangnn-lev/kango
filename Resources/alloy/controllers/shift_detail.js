@@ -59,14 +59,14 @@ function Controller() {
         id: "main"
     });
     $.__views.shift_detail.add($.__views.main);
-    $.__views.__alloyId66 = Ti.UI.createView({
+    $.__views.__alloyId65 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
         top: "0",
-        id: "__alloyId66"
+        id: "__alloyId65"
     });
-    $.__views.main.add($.__views.__alloyId66);
-    $.__views.__alloyId67 = Ti.UI.createLabel({
+    $.__views.main.add($.__views.__alloyId65);
+    $.__views.__alloyId66 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -77,9 +77,9 @@ function Controller() {
         zIndex: 0,
         left: "10dp",
         text: "シフトの編集",
-        id: "__alloyId67"
+        id: "__alloyId66"
     });
-    $.__views.__alloyId66.add($.__views.__alloyId67);
+    $.__views.__alloyId65.add($.__views.__alloyId66);
     $.__views.content = Ti.UI.createView({
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
@@ -109,7 +109,7 @@ function Controller() {
         text: "日勤"
     });
     $.__views.content.add($.__views.shiftName);
-    $.__views.__alloyId68 = Ti.UI.createLabel({
+    $.__views.__alloyId67 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -120,9 +120,9 @@ function Controller() {
         zIndex: 0,
         top: "10dp",
         text: "シフト名(最大4文字)",
-        id: "__alloyId68"
+        id: "__alloyId67"
     });
-    $.__views.content.add($.__views.__alloyId68);
+    $.__views.content.add($.__views.__alloyId67);
     $.__views.shiftAlias = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -158,7 +158,7 @@ function Controller() {
         left: "130dp"
     });
     $.__views.content.add($.__views.errorLabel);
-    $.__views.__alloyId69 = Ti.UI.createLabel({
+    $.__views.__alloyId68 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -169,15 +169,15 @@ function Controller() {
         zIndex: 0,
         top: "10dp",
         text: "時間(任意)",
+        id: "__alloyId68"
+    });
+    $.__views.content.add($.__views.__alloyId68);
+    $.__views.__alloyId69 = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
         id: "__alloyId69"
     });
     $.__views.content.add($.__views.__alloyId69);
-    $.__views.__alloyId70 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        id: "__alloyId70"
-    });
-    $.__views.content.add($.__views.__alloyId70);
     $.__views.timeStart = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -194,8 +194,8 @@ function Controller() {
         textAlign: "center",
         id: "timeStart"
     });
-    $.__views.__alloyId70.add($.__views.timeStart);
-    $.__views.__alloyId71 = Ti.UI.createLabel({
+    $.__views.__alloyId69.add($.__views.timeStart);
+    $.__views.__alloyId70 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -207,9 +207,9 @@ function Controller() {
         top: "10dp",
         touchEnabled: "false",
         text: "から",
-        id: "__alloyId71"
+        id: "__alloyId70"
     });
-    $.__views.__alloyId70.add($.__views.__alloyId71);
+    $.__views.__alloyId69.add($.__views.__alloyId70);
     $.__views.timeEnd = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
@@ -226,7 +226,7 @@ function Controller() {
         textAlign: "center",
         id: "timeEnd"
     });
-    $.__views.__alloyId70.add($.__views.timeEnd);
+    $.__views.__alloyId69.add($.__views.timeEnd);
     $.__views.errorTime = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -242,7 +242,7 @@ function Controller() {
         left: "0"
     });
     $.__views.content.add($.__views.errorTime);
-    $.__views.__alloyId72 = Ti.UI.createLabel({
+    $.__views.__alloyId71 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -253,9 +253,9 @@ function Controller() {
         zIndex: 0,
         top: "10dp",
         text: "スタンプ",
-        id: "__alloyId72"
+        id: "__alloyId71"
     });
-    $.__views.content.add($.__views.__alloyId72);
+    $.__views.content.add($.__views.__alloyId71);
     $.__views.groupShiftColor = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -289,7 +289,7 @@ function Controller() {
         title: "キャンセル"
     });
     $.__views.groupButton.add($.__views.saveShift);
-    $.__views.__alloyId73 = Ti.UI.createButton({
+    $.__views.__alloyId72 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -305,10 +305,10 @@ function Controller() {
         zIndex: 0,
         top: "15dp",
         title: "保存する",
-        id: "__alloyId73"
+        id: "__alloyId72"
     });
-    $.__views.groupButton.add($.__views.__alloyId73);
-    shift_setting ? $.__views.__alloyId73.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId73!click!shift_setting"] = true;
+    $.__views.groupButton.add($.__views.__alloyId72);
+    shift_setting ? $.__views.__alloyId72.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId72!click!shift_setting"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var shift, status, label, args = arguments[0] || {}, selectedColor = "", shiftsCols = Alloy.Collections.shifts;
@@ -360,7 +360,7 @@ function Controller() {
     $.shift_detail.addEventListener("android:back", function() {
         shift_setting();
     });
-    __defers["$.__views.__alloyId73!click!shift_setting"] && $.__views.__alloyId73.addEventListener("click", shift_setting);
+    __defers["$.__views.__alloyId72!click!shift_setting"] && $.__views.__alloyId72.addEventListener("click", shift_setting);
     _.extend($, exports);
 }
 

@@ -1,0 +1,10 @@
+<Alloy>
+	<Window>
+		<Require type="view" src="tab_menu" id="tabMenu"/>
+		<View id="main">
+
+			<Label id="title" text="タップで名前を変更できます"/>
+			<TableView separatorColor="#eeeeee" id="friendList"/>
+		</View>
+	</Window>
+</Alloy>

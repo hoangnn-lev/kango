@@ -84,6 +84,14 @@ module.exports = [ {
         bottom: 20
     }
 }, {
+    isApi: true,
+    priority: 1000.004,
+    key: "View",
+    style: {
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL
+    }
+}, {
     isClass: true,
     priority: 10000.0003,
     key: "container",
@@ -101,63 +109,6 @@ module.exports = [ {
             fontSize: "12dp"
         },
         color: "red"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0081,
-    key: "btnTop",
-    style: {
-        height: "25dp",
-        width: "14dp",
-        zIndex: 10,
-        top: "10dp",
-        bottom: "10dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0082,
-    key: "titleCenter",
-    style: {
-        height: Ti.UI.SIZE,
-        width: "60dp",
-        left: "50%",
-        zIndex: 0,
-        backgroundColor: "#ffcc33"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0086,
-    key: "smallTitle",
-    style: {
-        font: {
-            fontSize: "13dp"
-        },
-        color: "#666",
-        top: 0,
-        width: Ti.UI.SIZE
-    }
-}, {
-    isClass: true,
-    priority: 10000.0087,
-    key: "scheduleTitle",
-    style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        top: "10dp"
-    }
-}, {
-    isClass: true,
-    priority: 10000.0089,
-    key: "button",
-    style: {
-        color: "#fff",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: "15",
-        font: {
-            fontSize: "16dp"
-        },
-        height: "40dp",
-        top: 0
     }
 }, {
     isId: true,
@@ -179,58 +130,26 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0079,
-    key: "top",
+    priority: 100000.0041,
+    key: "main",
     style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        backgroundColor: "#ff3974",
-        top: 0,
-        bottom: 20
+        layout: "vertical"
     }
 }, {
     isId: true,
-    priority: 100000.008,
-    key: "content",
-    style: {
-        left: "10dp",
-        right: "10dp"
-    }
-}, {
-    isId: true,
-    priority: 100000.0083,
-    key: "dateTitle",
-    style: {
-        color: "#fff",
-        height: "30dp",
-        width: "70dp",
-        left: "30%"
-    }
-}, {
-    isId: true,
-    priority: 100000.0084,
-    key: "friendBlock",
-    style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        top: "10dp"
-    }
-}, {
-    isId: true,
-    priority: 100000.0085,
+    priority: 100000.0042,
     key: "friendList",
     style: {
-        width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        top: "25dp"
+        width: Ti.UI.FILL,
+        top: "20dp"
     }
 }, {
     isId: true,
-    priority: 100000.0088,
-    key: "groupButton",
+    priority: 100000.0043,
+    key: "title",
     style: {
-        top: "15dp",
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE
+        left: "10dp",
+        top: "10dp"
     }
 } ];
