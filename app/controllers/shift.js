@@ -35,7 +35,7 @@ function loadCalendarBody() {
 	shiftOfMonth = [];
 	dateShiftDB = {};
 	shiftMonthId = null;
-	
+
 	var calendar_shift = Alloy.Collections.calendar_shift;
 
 	//load shift by month
@@ -158,7 +158,10 @@ function updateShift(date) {
 
 		Alloy.Collections.calendar_shift.add(shift);
 		shift.save();
+		if (!shiftMonthId)
+			shiftMonthId = shift.get('id');
 
+		delete_view('schedule');
 	}
 
 }
@@ -177,6 +180,4 @@ $.shift.addEventListener('android:back', function(e) {
 	});
 	confirm.show();
 });
-
-
 

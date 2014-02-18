@@ -42,12 +42,12 @@ function Controller() {
     doClick ? $.__views.dates.addEventListener("click", doClick) : __defers["$.__views.dates!click!doClick"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, startDay, calendarMonth, col, createWeekView, day, dayOfWeek, doClick, i, moment, nextMonth, period, holidays, prevMonth, row, tile, weekView, _j, _k, _ref1, _ref2, dayOffset, shiftOfDate;
+    var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, startDay, calendarMonth, col, createWeekView, dayOfWeek, doClick, i, moment, nextMonth, period, dateIsEvent, prevMonth, row, tile, weekView, _j, _k, _ref1, _ref2, dayOffset, shiftOfDate;
     moment = require("alloy/moment");
     var currentDate = moment().format("YYYY-MM-D");
     args = arguments[0] || {};
     period = null != args.period ? moment(args.period) : moment();
-    holidays = null != args.holidays ? args.holidays : {};
+    dateIsEvent = null != args.dateIsEvent ? args.dateIsEvent : {};
     shiftOfDate = null != args.shiftOfDate ? args.shiftOfDate : {};
     dayOffset = null != args.dayOffset ? args.dayOffset : 0;
     WEEK_COLOR = [ "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff" ];
@@ -77,25 +77,7 @@ function Controller() {
     while (0 > dayOfWeek) dayOfWeek += 7;
     prevMonth = moment(period).subtract("months", 1);
     nextMonth = moment(period).add("months", 1);
-    _.defer(function() {
-        var ui, _ref1;
-        for (var i = 0, n = holidays.length; n > i; ++i) {
-            day = holidays[i].date;
-            day = moment(day, "YYYY-MM-DD").date();
-            ui = null != (_ref1 = $.calendar) ? _ref1["" + day] : void 0;
-            null != (null != ui ? ui.date : void 0) && ui.add(Ti.UI.createLabel({
-                text: "●",
-                font: {
-                    fontSize: "20dp"
-                },
-                color: "#666",
-                top: "3dp",
-                right: "12dp",
-                touchEnabled: false,
-                zIndex: 0
-            }));
-        }
-    });
+    _.defer(function() {});
     col = 0;
     row = 0;
     createWeekView = function() {
@@ -183,6 +165,18 @@ function Controller() {
             zIndex: 0,
             textAlign: "center",
             className: "label-calendar"
+        }));
+        (dateIsEvent[_perodDay] || dateIsEvent["0" + _perodDay]) && tile.add(Ti.UI.createLabel({
+            text: "●",
+            font: {
+                fontSize: "20dp"
+            },
+            color: "#666",
+            top: "3dp",
+            right: "12dp",
+            touchEnabled: false,
+            zIndex: 0,
+            className: "label-event"
         }));
         weekView.add(tile);
         $.calendar["" + period.date()] = tile;

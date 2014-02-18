@@ -8,28 +8,25 @@
 					<Label id="dayName"/>
 				</View>
 				<TextField maxLength="30" id="title" hintText="タイトル"/>
-				<TextField maxLength="30" id="startTime" hintText="開始時間"/>
-				<TextField maxLength="30" id="endTime" hintText="終了時間"/>
+				<TextField maxLength="5" id="startTime" hintText="開始時間"/>
+				<TextField maxLength="5" id="endTime" hintText="終了時間"/>
 				<TextArea maxLength="120" height="80dp" id="memo" hintText="メモ"/>
-				
 				<View id="wicon">
 					<View id="listIcon"/>
 					<ScrollView scrollType="horizontal" id="buttonTabs"/>
 				</View>
-				
 				<View id="groupButton">
-					<Button class="button" width="Ti.UI.FILL"
+					<Button onClick="saveSchedule" class="button" width="Ti.UI.FILL"
 					backgroundColor = '#f3acbd'
 					backgroundFocusedColor = '#e6a3b3'
 					backgroundSelectedColor = '#e6a3b3'
 					title="保存してカレンダーに戻る"/>
-					
-					<Button width="Ti.UI.FILL" class="button"
+					<Button onClick="saveSchedule" type="next" width="Ti.UI.FILL" class="button"
 					backgroundColor = '#cfba9c'
 					backgroundFocusedColor = '#c0ad91'
 					backgroundSelectedColor = '#c0ad91'
 					title="保存して別の予定を入力"/>
-					
+
 				</View>
 			</ScrollView>
 		</View>

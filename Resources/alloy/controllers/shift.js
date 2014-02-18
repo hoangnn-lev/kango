@@ -90,6 +90,8 @@ function Controller() {
             var shift = Alloy.createModel("calendar_shift", _shift_data);
             Alloy.Collections.calendar_shift.add(shift);
             shift.save();
+            shiftMonthId || (shiftMonthId = shift.get("id"));
+            delete_view("schedule");
         }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));

@@ -3,7 +3,7 @@ var currentWindow;
 exports.createCalendarBody = function(_month, _dateIsEvent, _shift, _dayOffset) {
     var calendar = Alloy.createWidget("jp.co.mountposition.calendar", "widget", {
         period: _month,
-        holidays: _dateIsEvent,
+        dateIsEvent: _dateIsEvent,
         shiftOfDate: _shift,
         dayOffset: _dayOffset
     });
@@ -83,6 +83,7 @@ exports.loadShiftsList = function(view, selectedShift) {
         };
         1 == data[i].get("status") && shift_data.push(data[i]);
     }
+    if (!view && !selectedShift) return allShifts;
     var index = 0, n = shift_data.length;
     for (var i = 0; 3 > i; ++i) for (var j = 0; 4 > j; ++j) {
         if (index >= n) {
@@ -150,4 +151,118 @@ exports.loadShiftsList = function(view, selectedShift) {
         });
         view.add(label);
     }
+};
+
+exports.checkFriendRequest = function() {
+    frd.checkFriendRequest();
+    var currentIntentData = [];
+    var currentActivity = Ti.Android.currentActivity;
+    frd.addNewFriend(currentActivity.getIntent().getData());
+    currentActivity.addEventListener("newintent", function(e) {
+        var newintent = e.intent;
+        currentIntentData = newintent.getData();
+        frd.addNewFriend(currentIntentData);
+    });
+    gcm.registerC2dm({
+        callback: function(e) {
+            var data = e.data;
+            "friend_request" == data.channel && frd.friendRequestC2dm(data);
+        }
+    });
+};
+
+exports.createBoxIcon = function(button, viewIcon, selectedIcon) {
+    var currentButton, buttonTabs = Ti.API.ICON;
+    for (var i = 0, l = buttonTabs.length; l > i; i++) {
+        var buttontab = Ti.UI.createButton({
+            title: buttonTabs[i].title,
+            data: buttonTabs[i].icons,
+            folder: buttonTabs[i].folder,
+            backgroundColor: "#f9dce3",
+            color: "#ed829c",
+            height: Ti.UI.FILL,
+            width: "20%",
+            textAlign: "center",
+            className: "buttonTabs"
+        });
+        buttontab.addEventListener("click", function(e) {
+            if (this !== currentButton) {
+                currentButton && currentButton.setBackgroundColor("#f9dce3");
+                currentButton = this;
+                currentButton.setBackgroundColor("#fff");
+                viewIcon.removeAllChildren();
+                viewIcon.add(exports.createScrollViewIcon(e.source.data, e.source.folder, viewIcon, selectedIcon));
+            }
+        });
+        if (0 == i && "" == selectedIcon) {
+            currentButton = buttontab;
+            currentButton.setBackgroundColor("#fff");
+            viewIcon.add(exports.createScrollViewIcon(buttonTabs[i].icons, buttonTabs[i].folder, viewIcon, selectedIcon));
+        } else "" != selectedIcon && "-1" != selectedIcon.indexOf(buttonTabs[i].folder) && buttontab.fireEvent("click");
+        button.add(buttontab);
+    }
+    button.setContentWidth(Ti.Platform.displayCaps.platformWidth + Ti.Platform.displayCaps.platformWidth / 4);
+};
+
+exports.createScrollViewIcon = function(icon, folder, viewIcon, selectedIcon) {
+    var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
+    var views = [];
+    var iconCurrent;
+    var column = 5, row = 2, num = column * row, m = (icon.length, Math.ceil(icon.length / num)), imgSize = deviceWidth / column, icon_index = 0;
+    for (var i = 0; m > i; ++i) {
+        var view = Ti.UI.createView({
+            width: Ti.UI.FILL,
+            height: Ti.UI.SIZE
+        });
+        for (var r = 0; row > r; ++r) for (var c = 0; column > c; ++c) {
+            var left = 0;
+            c > 0 && (left = imgSize * c - 12);
+            var iconView = Ti.UI.createImageView({
+                image: folder + icon[icon_index],
+                left: left + "dp",
+                top: imgSize * r + 5 + "dp",
+                bottom: "10dp",
+                opacity: "0.1",
+                width: imgSize - 15 + "dp",
+                height: imgSize - 15 + "dp",
+                right: "3dp"
+            });
+            if (selectedIcon == folder + icon[icon_index]) {
+                iconView.setOpacity(1);
+                iconCurrent = iconView;
+            }
+            iconView.addEventListener("click", function(e) {
+                if ("1" == this.getOpacity()) {
+                    this.setOpacity(.1);
+                    Ti.API.selectedIcon = selectedIcon = "";
+                } else {
+                    iconCurrent && iconCurrent.setOpacity(.1);
+                    this.setOpacity(1);
+                    Ti.API.selectedIcon = selectedIcon = e.source.image;
+                }
+                iconCurrent = this;
+            });
+            icon_index++;
+            view.add(iconView);
+        }
+        views.push(view);
+    }
+    viewIcon.setHeight(imgSize * row + "dp");
+    return Ti.UI.createScrollableView({
+        views: views
+    });
+};
+
+exports.getScheduleId = function(date) {
+    var scheduleModel = Alloy.Collections.schedule;
+    scheduleModel.fetch({
+        query: 'SELECT * from schedule where date = "' + date + '"'
+    });
+    if (scheduleModel.models.length > 0) return scheduleModel.models[0].get("id");
+    var schedule = Alloy.createModel("schedule", {
+        date: date
+    });
+    scheduleModel.add(schedule);
+    schedule.save();
+    return schedule.get("id");
 };

@@ -1,7 +1,14 @@
 //create collection users
-var day, choiceDay, activeWidget, id, holidaysDate, shiftOfDate = [], holidayItem, moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '';
+var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', allShifts = {}, args = arguments[0] || {};
 
-_initCalendar();
+if (args['date']) {
+	var _date = (args['date']).split('-');
+	currentMonth = moment(args['date']);
+	day = _date[2];
+}
+
+createCalendar();
+func.checkFriendRequest();
 
 /*
  * function clickCalendar
@@ -11,9 +18,6 @@ _initCalendar();
  * */
 
 function clickCalendar(e) {
-	if (!activeWidget)
-		return
-		void 0;
 
 	var wday = activeWidget.selectedDate();
 	choiceDay = wday;
@@ -21,16 +25,17 @@ function clickCalendar(e) {
 	day = wday.format('DD');
 
 	if (gdate != $.scheduleDateInfo.getText()) {
+
 		$.scheduleDateInfo.setText(gdate);
 		$.dayName.setText(func.convertDayName(wday.format('dddd')));
-		
+
 		//create shift label
 		$.shiftLabel.removeAllChildren();
-		if (shiftOfDate[day]) {
+		if (shiftOfMonth[day]) {
 			$.shiftLabel.add(Ti.UI.createLabel({
-				text : shiftOfDate[day]['text'],
+				text : shiftOfMonth[day]['text'],
 				left : '120dp',
-				backgroundColor : shiftOfDate[day]['color'],
+				backgroundColor : shiftOfMonth[day]['color'],
 				color : '#fff',
 				width : '60dp',
 				font : {
@@ -43,7 +48,8 @@ function clickCalendar(e) {
 			}));
 		}
 
-		getListScheduleByDate(wday.format('YYYY-MM-DD'));
+		//get event by day
+		getEvent(day);
 	}
 }
 
@@ -55,7 +61,7 @@ function clickCalendar(e) {
  * */
 function doPrevMonth() {
 	currentMonth = currentMonth.subtract('months', 1);
-	refreshCalendar();
+	loadCalendarBody();
 }
 
 /*
@@ -66,48 +72,29 @@ function doPrevMonth() {
  * */
 function doNextMonth() {
 	currentMonth = currentMonth.add('months', 1);
-	refreshCalendar();
+	loadCalendarBody();
 }
 
 /*
- * function getScheduleByMonthYear
- * Get schedule by month
- * input : month
- * output : void
- * */
-function getScheduleByMonthYear(month, year) {
-	holidaysDate = id = [];
-	holidayItem = {};
-
-	scheduleModel.fetch({
-		query : 'SELECT * from schedule where _date BETWEEN  "' + year + '-' + month + '-01" and "' + year + '-' + month + '-31"'
-	});
-
-	var n = scheduleModel.models.length;
-	var data = scheduleModel.models;
-	for (var i = 0; i < n; ++i) {
-		var item = data[i].toJSON();
-		holidaysDate.push({
-			'date' : item._date
-		});
-		//item = JSON.parse(item._schedule);
-		holidayItem[item._date] = JSON.parse(item._schedule);
-		id[item._date] = item.id;
-	}
-}
-
-/*
- * function getListScheduleByDate
+ * function getEvent
  * Get schedule list
  * input : date
  * output : void
  * */
-function getListScheduleByDate(date) {
-	$.scheduleList.removeAllChildren();
+function getEvent(day) {
 
-	var data = holidayItem[date];
-	if (!data)
+	$.scheduleList.removeAllChildren();
+	var id = dateIsEvent[day];
+	if (!id)
 		return;
+
+	var calendar_shift = Alloy.Collections.schedule_detail;
+	calendar_shift.fetch({
+		query : 'select * from schedule_detail  where schedule_id = ' + id
+	});
+
+	var data = calendar_shift.models;
+
 	var tableView = Ti.UI.createTableView({
 		top : 0,
 		height : 'auto',
@@ -117,132 +104,81 @@ function getListScheduleByDate(date) {
 
 	for (var i = 0, n = data.length; i < n; ++i) {
 		var row = Ti.UI.createTableViewRow({
-			//title : data[i].title,
-			//content : data[i].content,
-			data : data[i],
-			id : id[date],
+			id : data[i].get('id'),
 			selectionStyle : 'none',
 			selectedBackgroundColor : 'transparent',
 			backgroundColor : '#fff',
 			left : '7dp',
-			right : '7dp'
+			right : '7dp',
+			className : 'row-event'
 		});
 
-		if (data[i].img) {
+		if (data[i].get('img')) {
 			var scheduleTitle = Ti.UI.createLabel({
 				height : Ti.UI.SIZE,
 				top : '10dp',
-				text : data[i].title,
+				text : data[i].get('title'),
 				bottom : '10dp',
-				color : '#666',
+				color : '#676767',
 				font : {
-					fontSize : '18sp'
+					fontSize : '16sp'
 				},
 				touchEnabled : false,
-				left : '30dp'
+				left : '35dp',
+				className : 'title-event'
 			});
 
 			row.add(Ti.UI.createImageView({
 				height : '20dp',
-				image : data[i].img,
-				left : '5dp',
+				image : data[i].get('img'),
+				left : '10dp',
 				touchEnabled : false,
+				className : 'img-event'
 			}));
 		} else {
 			var scheduleTitle = Ti.UI.createLabel({
 				height : Ti.UI.SIZE,
 				top : '10dp',
-				text : data[i].title,
+				text : data[i].get('title'),
 				bottom : '10dp',
 				color : '#676767',
 				font : {
-					fontSize : '18sp'
+					fontSize : '16sp'
 				},
-				left : '5dp',
+				left : '10dp',
 				touchEnabled : false,
+				className : 'title-event-no-img'
 			});
 		}
 
-		row.add(Ti.UI.createLabel({
-			text : '20:00',
-			font : {
-				fontSize : '18dp'
-			},
-			touchEnabled : false,
-			color : '#676767',
-			right : '10dp'
-		}));
+		if (data[i].get('start_time')) {
+			row.add(Ti.UI.createLabel({
+				text : data[i].get('start_time') + '~' + data[i].get('end_time'),
+				font : {
+					fontSize : '16dp'
+				},
+				touchEnabled : false,
+				color : '#676767',
+				right : '10dp'
+			}));
+		}
+
 		row.add(scheduleTitle);
 		item.push(row);
 	}
 	tableView.setData(item);
 	tableView.addEventListener('click', function(e) {
 
-		var postdata = e.source.data;
-		postdata['day'] = choiceDay.format('YYYY-MM-DD');
-		postdata['id'] = e.source.id;
-
+		var postdata = {
+			day : choiceDay.format('YYYY-MM-DD'),
+			id : e.source.id
+		};
 		openView('edit_event', {
 			data : postdata
 		});
 
-		// var confirm = Ti.UI.createAlertDialog({
-		// title : e.source.title,
-		// buttonNames : ['削除', '編集', 'OK'],
-		// message : e.source.content
-		// });
-		// var index = e.index;
-		// var thisRow = this;
-		// var data = e.source.data;
-		// confirm.addEventListener('click', function(e) {
-		// if (e.index == 0) {
-		// var updateData = [];
-		// for (var i = 0, n = data.length; i < n; i++) {
-		//
-		// if (index != i)
-		// updateData.push(data[i]);
-		// else
-		// thisRow.deleteRow(index);
-		// }
-		// data = updateData;
-		// //update to database
-		// updateRow(updateData, _id, date);
-		// } else if (e.index == 1) {
-		// alert(JSON.stringify(data));
-		// //openView('edit_event');
-		// }
-		// });
-		// confirm.show();
-
 	});
 	$.scheduleList.add(tableView);
-}
-
-/*
- * function updateRow
- * update row when delete
- * input : object
- * output : void
- * */
-function updateRow(data, _id, _date) {
-	scheduleModel.fetch();
-
-	var _schedule = JSON.stringify(data);
-
-	var schedule = Alloy.createModel('schedule', {
-		id : _id,
-		_schedule : _schedule,
-		_date : _date
-	});
-
-	scheduleModel.add(schedule);
-
-	if (data.length > 0) {
-		schedule.save();
-	} else {
-		schedule.destroy();
-	}
-	refreshCalendar();
 }
 
 /*
@@ -261,46 +197,44 @@ function addEvent(e) {
 }
 
 /*
- * function refreshCalendar
+ * function loadCalendarBody
  * force refreshing new list
  * input : null
  * output : void
  * */
-function refreshCalendar() {
+function loadCalendarBody() {
 
-	//test
-	shiftOfDate['18'] = {
-		color : '#25b4a5',
-		text : '夜勤'
-	};
-	shiftOfDate['19'] = {
-		color : '#25b4a5',
-		text : '夜勤'
-	};
-	shiftOfDate['12'] = {
-		color : '#e68200',
-		text : '日勤'
-	};
+	var calendar_shift = Alloy.Collections.calendar_shift;
+	day = currentMonth.format('DD');
+	//load shift by month
+	calendar_shift.fetch({
+		query : 'select * from calendar_shift  where month_year="' + currentMonth.format('MM-YYYY') + '"'
+	});
+
+	var data = [];
+	//reset
+	shiftOfMonth = [];
+
+	if (calendar_shift.models[0]) {
+
+		data = JSON.parse(calendar_shift.models[0].get('date_shift'));
+		for (var key in data) {
+			shiftOfMonth[key] = allShifts[data[key]];
+		}
+
+	}
 
 	if (choiceDay)
 		day = choiceDay.format('DD');
-	else
-		day = currentMonth.format('DD');
 
 	if (activeWidget) {
 		activeWidget = null;
 	}
 
-	//get day schedule
-	getScheduleByMonthYear(currentMonth.format('MM'), currentMonth.format('YYYY'));
-	var current = $.calendar.children[0];
+	getScheduleMonth(currentMonth.format('MM'), currentMonth.format('YYYY'));
 
-	activeWidget = Alloy.createWidget('jp.co.mountposition.calendar', 'widget', {
-		period : currentMonth,
-		holidays : holidaysDate,
-		shiftOfDate : shiftOfDate,
-		dayOffset : dayOffset
-	});
+	var current = $.calendar.children[0];
+	activeWidget = func.createCalendarBody(currentMonth, dateIsEvent, shiftOfMonth, dayOffset);
 
 	var c = activeWidget.getView();
 	var gdate = activeWidget.calendarMonth().format('YYYY-MM-MMM').split('-');
@@ -319,12 +253,37 @@ function refreshCalendar() {
 }
 
 /*
- * function _initCalendar
+ * function getScheduleMonth
+ * Get schedule by month
+ * input : month
+ * output : void
+ * */
+function getScheduleMonth(month, year) {
+
+	dateIsEvent = {};
+
+	scheduleModel.fetch({
+		query : 'SELECT * from schedule where date BETWEEN  "' + year + '-' + month + '-01" and "' + year + '-' + month + '-31"'
+	});
+
+	var data = scheduleModel.models, n = data.length;
+
+	for (var i = 0; i < n; ++i) {
+		var date = (data[i].get('date')).split('-');
+		dateIsEvent[date[2]] = data[i].get('id');
+	}
+
+}
+
+/*
+ * function createCalendar
  * render week by config
  * input : null
  * output : void
  * */
-function _initCalendar() {
+function createCalendar() {
+
+	allShifts = func.loadShiftsList();
 
 	//create collection configs and get start day
 	Alloy.Collections.configs = Alloy.createCollection('configs');
@@ -336,72 +295,12 @@ function _initCalendar() {
 	//check start with monday
 	dayOffset = configs.models[0].get('cg_value');
 
-	var _ref = ['日', '月', '火', '水', '木', '金', '土'];
-	if (dayOffset == 1) {
-		_ref = ['月', '火', '水', '木', '金', '土', '日'];
-	}
-	var TILE_WIDTH = Math.floor(Ti.Platform.displayCaps.platformWidth / 7);
-	var color;
-	for (var i = 0, _len = _ref.length; i < _len; i++) {
-		if (_ref[i] == '日') {
-			color = '#f08791';
-		} else if (_ref[i] == '土') {
-			color = '#9bb9e1';
-		} else {
-			color = '#676767';
-		}
-		$.days.add(Ti.UI.createLabel({
-			color : color,
-			textAlign : 'center',
-			font : {
-				fontSize : '16sp',
-			},
-			text : _ref[i],
-			width : TILE_WIDTH,
-			touchEnabled : false
-		}));
-	}
-	refreshCalendar();
+	func.createCalendarDay(dayOffset, $.days);
+	loadCalendarBody();
 }
 
 /*
- * function checkFriendRequest
- * friend request check and add friend
- * input : null
- * output : void
- * */
-checkFriendRequest();
-function checkFriendRequest() {
-	//check friend request onload
-	frd.checkFriendRequest();
-
-	//add friend request onload
-	var currentIntentData = [];
-	var currentActivity = Ti.Android.currentActivity;
-
-	//add friend request from url
-	frd.addNewFriend(currentActivity.getIntent().getData());
-
-	//check and friend request from url
-	currentActivity.addEventListener('newintent', function(e) {
-		var newintent = e.intent;
-		currentIntentData = newintent.getData();
-		frd.addNewFriend(currentIntentData);
-	});
-
-	//pending push data
-	gcm.registerC2dm({
-		callback : function(e) {
-			var data = e.data;
-			if (data.channel == 'friend_request') {
-				frd.friendRequestC2dm(data);
-			}
-		}
-	});
-}
-
-/*
- * function getListScheduleByDate
+ * function loadFriendByDay
  * Get schedule list
  * input : date
  * output : void
@@ -454,10 +353,10 @@ $.schedule.addEventListener('android:back', function(e) {
 });
 
 //add swipe left right for calendar
-$.calendar.addEventListener('swipe', function(e) {
-	if (e.direction == 'left')
-		doNextMonth();
-	else if (e.direction == 'right')
-		doPrevMonth();
-});
+// $.calendar.addEventListener('swipe', function(e) {
+// if (e.direction == 'left')
+// doNextMonth();
+// else if (e.direction == 'right')
+// doPrevMonth();
+// });
 

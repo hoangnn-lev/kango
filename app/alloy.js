@@ -4,6 +4,7 @@ Alloy.Collections.schedule = Alloy.createCollection('schedule');
 Alloy.Collections.configs = Alloy.createCollection('configs');
 Alloy.Collections.shifts = Alloy.createCollection('shifts');
 Alloy.Collections.calendar_shift = Alloy.createCollection('calendar_shift');
+Alloy.Collections.schedule_detail = Alloy.createCollection('schedule_detail');
 
 var frd = require('Lib/friend');
 var gcm = require('com.activate.gcm');

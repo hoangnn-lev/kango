@@ -136,6 +136,7 @@ function Controller() {
             fontSize: "16dp"
         },
         left: 0,
+        maxLength: "4",
         hintText: "日勤",
         id: "shiftAlias"
     });
@@ -338,6 +339,7 @@ function Controller() {
             $.errorLabel.setVisible(true);
             return;
         }
+        $.errorLabel.setVisible(false);
         selectedColor && (color = selectedColor.getBackgroundColor());
         var _shift_data = {
             id: args["id"],

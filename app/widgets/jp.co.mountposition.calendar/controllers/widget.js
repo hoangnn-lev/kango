@@ -1,4 +1,4 @@
-var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, startDay, calendarMonth, col, createWeekView, day, dayOfWeek, doClick, i, moment, nextMonth, period, holidays, prevMonth, row, tile, weekView, _i, _j, _k, _len, _ref, _ref1, _ref2, dayOffset, shiftOfDate;
+var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, startDay, calendarMonth, col, createWeekView, day, dayOfWeek, doClick, i, moment, nextMonth, period, dateIsEvent, prevMonth, row, tile, weekView, _i, _j, _k, _len, _ref, _ref1, _ref2, dayOffset, shiftOfDate;
 
 moment = require('alloy/moment');
 
@@ -7,7 +7,7 @@ var currentDate = moment().format('YYYY-MM-D');
 args = arguments[0] || {};
 
 period = args.period != null ? moment(args.period) : moment();
-holidays = args.holidays != null ? args.holidays : {};
+dateIsEvent = args.dateIsEvent != null ? args.dateIsEvent : {};
 shiftOfDate = args.shiftOfDate != null ? args.shiftOfDate : {};
 
 dayOffset = args.dayOffset != null ? args.dayOffset : 0;
@@ -68,28 +68,28 @@ _.defer(function() {
 	var name, ui, _ref1;
 
 	//for day event
-	for (var i = 0, n = holidays.length; i < n; ++i) {
-
-		day = holidays[i].date;
-		day = moment(day, 'YYYY-MM-DD').date();
-		ui = ( _ref1 = $.calendar) != null ? _ref1["" + day] :
-		void 0;
-		if ((ui != null ? ui.date :
-		void 0) != null) {
-
-			ui.add(Ti.UI.createLabel({
-				text : '●',
-				font : {
-					fontSize : '20dp'
-				},
-				color : '#666',
-				top : '3dp',
-				right : '12dp',
-				touchEnabled : false,
-				zIndex : 0
-			}));
-		}
-	}
+	// for (var i = 0, n = dateIsEvent.length; i < n; ++i) {
+	//
+	// day = dateIsEvent[i].date;
+	// day = moment(day, 'YYYY-MM-DD').date();
+	// ui = ( _ref1 = $.calendar) != null ? _ref1["" + day] :
+	// void 0;
+	// if ((ui != null ? ui.date :
+	// void 0) != null) {
+	//
+	// ui.add(Ti.UI.createLabel({
+	// text : '●',
+	// font : {
+	// fontSize : '20dp'
+	// },
+	// color : '#666',
+	// top : '3dp',
+	// right : '12dp',
+	// touchEnabled : false,
+	// zIndex : 0
+	// }));
+	// }
+	// }
 
 });
 
@@ -198,6 +198,23 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 			className : 'label-calendar'
 		}));
 
+	}
+
+	//event
+	if (dateIsEvent[_perodDay] || dateIsEvent['0' + _perodDay]) {
+
+		tile.add(Ti.UI.createLabel({
+			text : '●',
+			font : {
+				fontSize : '20dp'
+			},
+			color : '#666',
+			top : '3dp',
+			right : '12dp',
+			touchEnabled : false,
+			zIndex : 0,
+			className : 'label-event'
+		}));
 	}
 
 	weekView.add(tile);
