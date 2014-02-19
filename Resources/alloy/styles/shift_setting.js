@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0145,
+    priority: 1000.0155,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -130,14 +130,14 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0146,
+    priority: 100000.0156,
     key: "main",
     style: {
         layout: "vertical"
     }
 }, {
     isId: true,
-    priority: 100000.0147,
+    priority: 100000.0157,
     key: "shift",
     style: {
         height: Ti.UI.SIZE,
@@ -146,7 +146,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0148,
+    priority: 100000.0158,
     key: "title",
     style: {
         left: "10dp",

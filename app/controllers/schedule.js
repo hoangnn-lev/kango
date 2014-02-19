@@ -1,6 +1,15 @@
 //create collection users
-var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', allShifts = {}, args = arguments[0] || {};
-
+var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
+	active : {
+		bg : '#d7e682',
+		text : '#68790b'
+	},
+	deactive : {
+		bg : '#ccc',
+		text : '#747474'
+	}
+};
+var friendInSchedule = {};
 if (args['date']) {
 	var _date = (args['date']).split('-');
 	currentMonth = moment(args['date']);
@@ -9,6 +18,7 @@ if (args['date']) {
 
 createCalendar();
 func.checkFriendRequest();
+getAllFriend();
 
 /*
  * function clickCalendar
@@ -50,6 +60,7 @@ function clickCalendar(e) {
 
 		//get event by day
 		getEvent(day);
+		
 	}
 }
 
@@ -179,6 +190,7 @@ function getEvent(day) {
 
 	});
 	$.scheduleList.add(tableView);
+	loadFriendByDay(day);
 }
 
 /*
@@ -271,6 +283,7 @@ function getScheduleMonth(month, year) {
 	for (var i = 0; i < n; ++i) {
 		var date = (data[i].get('date')).split('-');
 		dateIsEvent[date[2]] = data[i].get('id');
+		friendOfDay[date[2]] = data[i].get('friend');
 	}
 
 }
@@ -297,6 +310,7 @@ function createCalendar() {
 
 	func.createCalendarDay(dayOffset, $.days);
 	loadCalendarBody();
+
 }
 
 /*
@@ -306,38 +320,29 @@ function createCalendar() {
  * output : void
  * */
 
-function loadFriendByDay() {
+function loadFriendByDay(date) {
 
-	var friend_data = ['大島', '黒運', '上野', '春'];
+	var friend_name = friendOfDay[date];
 
-	for (var i = 0; i < 4; ++i) {
-		var left = '0';
-		if (i > 0) {
-			left = i * 25;
-		}
-		var label = Ti.UI.createLabel({
-			text : ' ' + friend_data[i] + ' ',
-			color : '#68790b',
-			font : {
-				fontSize : '16dp'
-			},
-			backgroundColor : '#d7e682',
-			height : '30dp',
-			//width : '23%',
-			width : Ti.UI.SIZE,
+	alert(friend_name);
 
-			left : '5dp',
-			border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-			borderRadius : 10,
-			textAlign : 'center',
-			className : 'friend-item'
-		});
+	//
+	// $.friend.removeAllChildren();
+	// for (var i = 0, n = friend_name.length; i < n; ++i) {
+	// $.friend.add(Ti.UI.createLabel({
+	// text : friend_name[i],
+	// width : Ti.UI.SIZE,
+	// height : Ti.UI.SIZE,
+	// right : '5dp',
+	// top : '5dp',
+	// color : "#676767",
+	// textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
+	// font : {
+	// fontSize : '16sp'
+	// }
+	// }));
+	// }
 
-		$.friend.add(label);
-	}
-	$.friend.addEventListener('click', function(e) {
-		openView('friend');
-	});
 }
 
 //add back button
@@ -355,16 +360,18 @@ $.schedule.addEventListener('android:back', function(e) {
 	confirm.show();
 });
 
-$.allFriend.addEventListener('click', function(e) {
+$.openAllFriend.addEventListener('click', function(e) {
 
 	var r = 180;
 	if (e.source.type == 'open') {
 		e.source.type = 'close';
-		loadFriendByDay();
+		$.groupAllFriend.setVisible(true);
+		$.groupAllFriend.setHeight(Ti.UI.SIZE);
 	} else {
 		e.source.type = 'open';
+		$.groupAllFriend.setVisible(false);
+		$.groupAllFriend.setHeight(0);
 		r = 0;
-		$.friend.removeAllChildren();
 	}
 
 	var t = Ti.UI.create2DMatrix();
@@ -376,6 +383,87 @@ $.allFriend.addEventListener('click', function(e) {
 
 });
 
+$.editFriend.addEventListener('click', function() {
+	openView('friend');
+});
+
+function getAllFriend() {
+
+	var friendCols = Alloy.Collections.friend;
+	friendCols.fetch({
+		query : 'SELECT * from friend'
+	});
+	var allFriend = friendCols.models;
+
+	for (var i = 0, n = allFriend.length; i < n; ++i) {
+
+		var label = Ti.UI.createLabel({
+			text : ' ' + allFriend[i].get('name') + ' ',
+			id : allFriend[i].get('id'),
+			color : friendStyle['deactive']['text'],
+			font : {
+				fontSize : '16dp'
+			},
+			type : 'deactive',
+			backgroundColor : friendStyle['deactive']['bg'],
+			height : '30dp',
+			width : Ti.UI.SIZE,
+			left : '5dp',
+			top : '5dp',
+			border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+			borderRadius : 10,
+			textAlign : 'center',
+			className : 'friend-item'
+		});
+		label.addEventListener('click', function(e) {
+
+			if (e.source.type == 'deactive') {
+				e.source.type = 'active';
+				this.setColor(friendStyle['active']['text']);
+				this.setBackgroundColor(friendStyle['active']['bg']);
+			} else {
+				e.source.type = 'deactive';
+				this.setColor(friendStyle['deactive']['text']);
+				this.setBackgroundColor(friendStyle['deactive']['bg']);
+			}
+			updateFriend(e.source.text, e.source.id);
+
+		});
+		$.allFriend.add(label);
+	}
+}
+
+function updateFriend(name, id) {
+	if (friendInSchedule[id]) {
+		delete friendInSchedule[id];
+
+		var getFriend = $.friend.children;
+
+		for (var i = 0, n = getFriend.length; i < n; ++i) {
+			if (getFriend[i].id == id)
+				$.friend.remove(getFriend[i]);
+		}
+	} else {
+		friendInSchedule[id] = name;
+		$.friend.add(Ti.UI.createLabel({
+			text : name,
+			id : id,
+			width : Ti.UI.SIZE,
+			height : Ti.UI.SIZE,
+			right : '5dp',
+			top : '5dp',
+			color : "#676767",
+			textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
+			font : {
+				fontSize : '16sp'
+			}
+		}));
+
+	}
+	var friendId = JSON.stringify(Object.keys(friendInSchedule));
+
+}
+
 //add swipe left right for calendar
 // $.calendar.addEventListener('swipe', function(e) {
 // if (e.direction == 'left')
@@ -383,4 +471,3 @@ $.allFriend.addEventListener('click', function(e) {
 // else if (e.direction == 'right')
 // doPrevMonth();
 // });
-

@@ -104,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0124,
+    priority: 10000.0134,
     key: "calenderTitle",
     style: {
         color: "#fff",
@@ -112,7 +112,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0125,
+    priority: 10000.0135,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
@@ -122,7 +122,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0126,
+    priority: 10000.0136,
     key: "calendarButton",
     style: {
         zIndex: "5",
@@ -131,7 +131,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0127,
+    priority: 10000.0137,
     key: "editScheduleButton",
     style: {
         font: {
@@ -159,14 +159,14 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0111,
+    priority: 100000.0121,
     key: "main",
     style: {
         backgroundColor: "#f5f1e9"
     }
 }, {
     isId: true,
-    priority: 100000.0112,
+    priority: 100000.0122,
     key: "calendar",
     style: {
         height: Ti.UI.SIZE,
@@ -174,7 +174,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0113,
+    priority: 100000.0123,
     key: "calendarTitle",
     style: {
         height: "40dp",
@@ -185,7 +185,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0114,
+    priority: 100000.0124,
     key: "dateInfo",
     style: {
         width: "110dp",
@@ -195,7 +195,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0115,
+    priority: 100000.0125,
     key: "year",
     style: {
         color: "#b4a186",
@@ -210,7 +210,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0116,
+    priority: 100000.0126,
     key: "month",
     style: {
         color: "#666666",
@@ -224,7 +224,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0117,
+    priority: 100000.0127,
     key: "monthName",
     style: {
         color: "#b4a186",
@@ -238,7 +238,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0118,
+    priority: 100000.0128,
     key: "shiftDateInfo",
     style: {
         color: "#8d8d8d",
@@ -249,7 +249,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0119,
+    priority: 100000.0129,
     key: "days",
     style: {
         layout: "horizontal",
@@ -258,7 +258,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.012,
+    priority: 100000.013,
     key: "dayName",
     style: {
         backgroundImage: "/icons/bg-circle.png",
@@ -273,7 +273,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0121,
+    priority: 100000.0131,
     key: "scheduleInfo",
     style: {
         height: Ti.UI.SIZE,
@@ -281,14 +281,14 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0122,
+    priority: 100000.0132,
     key: "scheduleList",
     style: {
         top: "1dp"
     }
 }, {
     isId: true,
-    priority: 100000.0123,
+    priority: 100000.0133,
     key: "shiftList",
     style: {
         top: "2dp",

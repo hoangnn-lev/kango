@@ -13,7 +13,7 @@
 			</View>
 			<View id="days"/>
 			<View id="calendar" onClick="clickCalendar" />
-			<View id="scheduleInfo">
+			<ScrollView id="scheduleInfo">
 				<View class="scheduleTitle" id="scheduleTitle">
 					<Label id="scheduleDateInfo"/>
 					<Label id="dayName"/>
@@ -23,13 +23,19 @@
 				<View id="blockFriend">
 					<View height="Ti.UI.SIZE" top="10dp">
 						<ImageView image="/icons/friend.png" class="imgTitleFriend" left="10dp" />
-						<ImageView image="/icons/btn_Open.png" id="allFriend" type="open" />
+						<ImageView image="/icons/btn_Open.png" id="openAllFriend" type="open" />
 						<Label id="serviceMember" text="勤務メンバー"/>
 					</View>
 					<View id="friend"/>
+					<Label class="line"/>
+					<View id="groupAllFriend">
+						<View id="allFriend"/>
+						<Button title="メンバー編集" id="editFriend" />
+					</View>
 				</View>
 				<View id="scheduleList" height="Ti.UI.SIZE"/>
-			</View>
+			</ScrollView>
+
 		</View>
 	</Window>
 </Alloy>

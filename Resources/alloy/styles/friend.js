@@ -111,6 +111,20 @@ module.exports = [ {
         color: "red"
     }
 }, {
+    isClass: true,
+    priority: 10000.0048,
+    key: "button",
+    style: {
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: "15",
+        font: {
+            fontSize: "16dp"
+        },
+        height: "40dp",
+        width: "40%"
+    }
+}, {
     isId: true,
     priority: 100000.0002,
     key: "main",
@@ -142,7 +156,8 @@ module.exports = [ {
     style: {
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        top: "20dp"
+        top: "10dp",
+        bottom: "10dp"
     }
 }, {
     isId: true,
@@ -150,6 +165,60 @@ module.exports = [ {
     key: "title",
     style: {
         left: "10dp",
+        top: "10dp",
+        right: "10dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0044,
+    key: "edit",
+    style: {
+        height: "30dp",
+        width: "60dp",
+        right: 0,
+        backgroundColor: "#fff",
+        color: "#676767",
+        borderColor: "#676767",
+        borderWidth: 1
+    }
+}, {
+    isId: true,
+    priority: 100000.0045,
+    key: "addFriend",
+    style: {
+        height: "45dp",
+        left: "30dp",
+        right: "30dp",
         top: "10dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0046,
+    key: "name",
+    style: {
+        borderWidth: 1,
+        borderColor: "#eeeeee",
+        color: "#676767",
+        left: "10dp",
+        right: "10dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0047,
+    key: "groupButton",
+    style: {
+        height: "120dp",
+        bottom: "-120dp",
+        width: Ti.UI.FILL,
+        backgroundImage: "/transparent.png"
+    }
+}, {
+    isId: true,
+    priority: 100000.0049,
+    key: "viewAddFriend",
+    style: {
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        layout: "vertical"
     }
 } ];

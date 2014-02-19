@@ -104,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0081,
+    priority: 10000.0091,
     key: "btnTop",
     style: {
         height: "25dp",
@@ -115,7 +115,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0082,
+    priority: 10000.0092,
     key: "titleCenter",
     style: {
         height: Ti.UI.SIZE,
@@ -126,7 +126,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0086,
+    priority: 10000.0096,
     key: "smallTitle",
     style: {
         font: {
@@ -138,7 +138,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0087,
+    priority: 10000.0097,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
@@ -147,7 +147,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0089,
+    priority: 10000.0099,
     key: "button",
     style: {
         color: "#fff",
@@ -179,7 +179,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0079,
+    priority: 100000.0089,
     key: "top",
     style: {
         width: Ti.UI.FILL,
@@ -190,7 +190,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.008,
+    priority: 100000.009,
     key: "content",
     style: {
         left: "10dp",
@@ -198,7 +198,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0083,
+    priority: 100000.0093,
     key: "dateTitle",
     style: {
         color: "#fff",
@@ -208,7 +208,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0084,
+    priority: 100000.0094,
     key: "friendBlock",
     style: {
         width: Ti.UI.FILL,
@@ -217,7 +217,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0085,
+    priority: 100000.0095,
     key: "friendList",
     style: {
         width: Ti.UI.FILL,
@@ -226,7 +226,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0088,
+    priority: 100000.0098,
     key: "groupButton",
     style: {
         top: "15dp",

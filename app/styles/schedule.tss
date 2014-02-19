@@ -103,7 +103,7 @@
 },
 "#friend":{
 	height:Ti.UI.SIZE,
-	left:'7dp',
+	left:'10dp',
 	top:'10dp',
 	bottom:'10dp',
 	layout:"horizontal"
@@ -111,7 +111,8 @@
 "#serviceMember":{
 	height:Ti.UI.SIZE,
 	font:{
-		fontSize:'14dp'
+		fontSize:'14dp',
+		fontWeight:'bold'
 	},
 	color:'#757575',
 	left:'35dp'
@@ -123,15 +124,39 @@
 },
 "#scheduleInfo":{
 	height:Ti.UI.SIZE,
-	layout:'vertical'
+	layout:'vertical',
+	top:0
 },
 "#scheduleList":{
 	top:'1dp'
 },
-"#allFriend":{
-	width:"25dp",
-	height:"25dp",
+"#openAllFriend":{
+	width:"40dp",
+	height:"40dp",
 	right:"10dp",
 	touchEnabled:true,
 	zIndex:5
+},
+"#editFriend":{
+	width:'120dp',
+	right:'5dp',
+	bottom:'10dp',
+	top:'10dp',
+	height:'30dp'
+},
+'.line':{
+	height:'1sp',
+	width:Ti.UI.FILL,
+	backgroundColor:'#ccc'
+},
+"#groupAllFriend":{
+	width:Ti.UI.FILL,
+	height:0,
+	layout:"vertical",
+	visible:'fasle'
+},
+"#allFriend":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	layout:"horizontal"
 }

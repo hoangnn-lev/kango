@@ -104,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0058,
+    priority: 10000.0064,
     key: "calenderTitle",
     style: {
         color: "#fff",
@@ -112,7 +112,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0059,
+    priority: 10000.0065,
     key: "scheduleTitle",
     style: {
         width: Ti.UI.FILL,
@@ -122,7 +122,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0062,
+    priority: 10000.0068,
     key: "calendarButton",
     style: {
         zIndex: "5",
@@ -131,7 +131,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0068,
+    priority: 10000.0074,
     key: "editScheduleButton",
     style: {
         font: {
@@ -141,12 +141,21 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0074,
+    priority: 10000.008,
     key: "imgTitleFriend",
     style: {
         width: "20dp",
         height: "20dp",
         touchEnabled: false
+    }
+}, {
+    isClass: true,
+    priority: 10000.0085,
+    key: "line",
+    style: {
+        height: "1sp",
+        width: Ti.UI.FILL,
+        backgroundColor: "#ccc"
     }
 }, {
     isId: true,
@@ -168,14 +177,14 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0057,
+    priority: 100000.0063,
     key: "main",
     style: {
         backgroundColor: "#f5f1e9"
     }
 }, {
     isId: true,
-    priority: 100000.006,
+    priority: 100000.0066,
     key: "calendar",
     style: {
         height: Ti.UI.SIZE,
@@ -183,7 +192,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0061,
+    priority: 100000.0067,
     key: "calendarTitle",
     style: {
         height: "40dp",
@@ -194,7 +203,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0063,
+    priority: 100000.0069,
     key: "dateInfo",
     style: {
         width: "110dp",
@@ -204,7 +213,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0064,
+    priority: 100000.007,
     key: "year",
     style: {
         color: "#b4a186",
@@ -219,7 +228,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0065,
+    priority: 100000.0071,
     key: "month",
     style: {
         color: "#666666",
@@ -233,7 +242,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0066,
+    priority: 100000.0072,
     key: "monthName",
     style: {
         color: "#b4a186",
@@ -247,7 +256,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0067,
+    priority: 100000.0073,
     key: "scheduleDateInfo",
     style: {
         color: "#8d8d8d",
@@ -258,7 +267,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0069,
+    priority: 100000.0075,
     key: "days",
     style: {
         layout: "horizontal",
@@ -267,7 +276,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.007,
+    priority: 100000.0076,
     key: "dayName",
     style: {
         backgroundImage: "/icons/bg-circle.png",
@@ -282,7 +291,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0071,
+    priority: 100000.0077,
     key: "blockFriend",
     style: {
         top: "2dp",
@@ -293,51 +302,83 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0072,
+    priority: 100000.0078,
     key: "friend",
     style: {
         height: Ti.UI.SIZE,
-        left: "7dp",
+        left: "10dp",
         top: "10dp",
         bottom: "10dp",
         layout: "horizontal"
     }
 }, {
     isId: true,
-    priority: 100000.0073,
+    priority: 100000.0079,
     key: "serviceMember",
     style: {
         height: Ti.UI.SIZE,
         font: {
-            fontSize: "14dp"
+            fontSize: "14dp",
+            fontWeight: "bold"
         },
         color: "#757575",
         left: "35dp"
     }
 }, {
     isId: true,
-    priority: 100000.0075,
+    priority: 100000.0081,
     key: "scheduleInfo",
     style: {
         height: Ti.UI.SIZE,
-        layout: "vertical"
+        layout: "vertical",
+        top: 0
     }
 }, {
     isId: true,
-    priority: 100000.0076,
+    priority: 100000.0082,
     key: "scheduleList",
     style: {
         top: "1dp"
     }
 }, {
     isId: true,
-    priority: 100000.0077,
-    key: "allFriend",
+    priority: 100000.0083,
+    key: "openAllFriend",
     style: {
-        width: "25dp",
-        height: "25dp",
+        width: "40dp",
+        height: "40dp",
         right: "10dp",
         touchEnabled: true,
         zIndex: 5
+    }
+}, {
+    isId: true,
+    priority: 100000.0084,
+    key: "editFriend",
+    style: {
+        width: "120dp",
+        right: "5dp",
+        bottom: "10dp",
+        top: "10dp",
+        height: "30dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0086,
+    key: "groupAllFriend",
+    style: {
+        width: Ti.UI.FILL,
+        height: 0,
+        layout: "vertical",
+        visible: "fasle"
+    }
+}, {
+    isId: true,
+    priority: 100000.0087,
+    key: "allFriend",
+    style: {
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        layout: "horizontal"
     }
 } ];

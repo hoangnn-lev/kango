@@ -36,7 +36,7 @@ function Controller() {
         id: "content"
     });
     $.__views.main.add($.__views.content);
-    $.__views.__alloyId62 = Ti.UI.createLabel({
+    $.__views.__alloyId64 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "20dp",
         color: "#000",
@@ -48,10 +48,10 @@ function Controller() {
         zIndex: 0,
         bottom: "0",
         text: "どの方法で予定を共有しますか",
-        id: "__alloyId62"
+        id: "__alloyId64"
     });
-    $.__views.content.add($.__views.__alloyId62);
-    $.__views.__alloyId63 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId64);
+    $.__views.__alloyId65 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -70,10 +70,10 @@ function Controller() {
         left: 0,
         top: "10dp",
         title: "画像で送る",
-        id: "__alloyId63"
+        id: "__alloyId65"
     });
-    $.__views.content.add($.__views.__alloyId63);
-    $.__views.__alloyId64 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId65);
+    $.__views.__alloyId66 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -92,9 +92,9 @@ function Controller() {
         left: 0,
         top: "10dp",
         title: "文章で送る",
-        id: "__alloyId64"
+        id: "__alloyId66"
     });
-    $.__views.content.add($.__views.__alloyId64);
+    $.__views.content.add($.__views.__alloyId66);
     exports.destroy = function() {};
     _.extend($, $.__views);
     _.extend($, exports);

@@ -85,7 +85,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0045,
+    priority: 1000.0051,
     key: "View",
     style: {
         height: Ti.UI.SIZE,
@@ -112,7 +112,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0046,
+    priority: 10000.0052,
     key: "border",
     style: {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -121,7 +121,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0048,
+    priority: 10000.0054,
     key: "header",
     style: {
         top: 0,
@@ -131,7 +131,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0049,
+    priority: 10000.0055,
     key: "lbHeader",
     style: {
         textAlign: "center",
@@ -139,7 +139,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.005,
+    priority: 10000.0056,
     key: "btnHeader",
     style: {
         right: "5dp",
@@ -169,7 +169,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0047,
+    priority: 100000.0053,
     key: "leftMenu",
     style: {
         backgroundColor: "#f3f3f3",
@@ -180,7 +180,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0051,
+    priority: 100000.0057,
     key: "searchResult",
     style: {
         width: Ti.UI.FILL,
@@ -192,7 +192,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0052,
+    priority: 100000.0058,
     key: "searchUsr",
     style: {
         font: {

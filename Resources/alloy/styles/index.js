@@ -104,7 +104,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0054,
+    priority: 10000.006,
     key: "title",
     style: {
         font: {
@@ -117,7 +117,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0055,
+    priority: 10000.0061,
     key: "descTitle",
     style: {
         bottom: "3dp",

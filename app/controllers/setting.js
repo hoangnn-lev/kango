@@ -132,7 +132,7 @@ $.setting.addEventListener('android:back', function(e) {
 // });
 
 function edit_members() {
-	openView('edit_member');
+	openView('friend');
 }
 
 function shift_setting() {

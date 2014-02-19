@@ -266,3 +266,34 @@ exports.getScheduleId = function(date) {
     schedule.save();
     return schedule.get("id");
 };
+
+exports.customeRowFriend = function(id, name) {
+    var row = Ti.UI.createTableViewRow({
+        touchEnabled: false,
+        selectionStyle: "none",
+        selectedBackgroundColor: "transparent",
+        value: id
+    });
+    row.check = Ti.UI.createSwitch({
+        style: Ti.UI.Android.SWITCH_STYLE_CHECKBOX,
+        left: "10dp",
+        height: "40dp",
+        width: "40dp",
+        type: "checkbox",
+        className: "checkbox-delete"
+    });
+    row.label = Ti.UI.createLabel({
+        left: "70dp",
+        height: "30dp",
+        text: name,
+        font: {
+            fontSize: "15dp"
+        },
+        color: "#676767",
+        touchEnabled: false,
+        className: "row-left-friend-name"
+    });
+    row.add(row.check);
+    row.add(row.label);
+    return row;
+};
