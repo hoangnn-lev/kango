@@ -61,6 +61,7 @@ function Controller() {
         bottom: 20,
         left: "10dp",
         right: "10dp",
+        height: Ti.UI.FILL,
         id: "content",
         layout: "vertical"
     });

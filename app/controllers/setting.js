@@ -138,3 +138,51 @@ function edit_members() {
 function shift_setting() {
 	openView('shift_setting');
 }
+
+createIntro();
+function createIntro() {
+
+	var view = [];
+
+	view.push(Ti.UI.createView({
+		backgroundColor : '#ccc',
+		height : Ti.UI.FILL,
+		width : Ti.UI.FILL,
+	}));
+
+	view.push(Ti.UI.createView({
+		backgroundColor : '#ffb373',
+		height : Ti.UI.FILL,
+		width : Ti.UI.FILL,
+	}));
+
+	view.push(Ti.UI.createView({
+		backgroundColor : '#075149',
+		height : Ti.UI.FILL,
+		width : Ti.UI.FILL,
+	}));
+	var scrollView = Ti.UI.createScrollableView({
+		backgroundColor : 'gray',
+		opacity : 0.8,
+		showPagingControl : false,
+		id : 'intro',
+		height : Ti.UI.FILL,
+		width : Ti.UI.FILL,
+		views : view,
+		currentPage : 0,
+		pagingControlColor : 'transparent',
+		zIndex : 2
+
+	});
+	var close = Ti.UI.createButton({
+		top : 0,
+		right : 0,
+		title : 'close',
+		zIndex : 3,
+	});
+	close.addEventListener('click', function(e) {
+		
+	});
+	$.setting.add(close);
+	$.setting.add(scrollView);
+}

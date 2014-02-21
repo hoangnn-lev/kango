@@ -140,7 +140,6 @@ function doRegister(name) {
 		callback : function(e) {
 		}
 	});
-
 }
 
 /*

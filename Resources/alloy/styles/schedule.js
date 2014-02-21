@@ -329,7 +329,7 @@ module.exports = [ {
     priority: 100000.0081,
     key: "scheduleInfo",
     style: {
-        height: Ti.UI.SIZE,
+        height: Ti.UI.FILL,
         layout: "vertical",
         top: 0
     }
@@ -349,7 +349,8 @@ module.exports = [ {
         height: "40dp",
         right: "10dp",
         touchEnabled: true,
-        zIndex: 5
+        zIndex: 5,
+        visible: false
     }
 }, {
     isId: true,

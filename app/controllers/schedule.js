@@ -1,5 +1,5 @@
 //create collection users
-var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
+var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
 	active : {
 		bg : '#d7e682',
 		text : '#68790b'
@@ -15,10 +15,9 @@ if (args['date']) {
 	currentMonth = moment(args['date']);
 	day = _date[2];
 }
-
+getAllFriend();
 createCalendar();
 func.checkFriendRequest();
-getAllFriend();
 
 /*
  * function clickCalendar
@@ -60,7 +59,7 @@ function clickCalendar(e) {
 
 		//get event by day
 		getEvent(day);
-		
+
 	}
 }
 
@@ -95,9 +94,16 @@ function doNextMonth() {
 function getEvent(day) {
 
 	$.scheduleList.removeAllChildren();
+	$.friend.removeAllChildren();
 	var id = dateIsEvent[day];
-	if (!id)
+	if (!id) {
+		$.openAllFriend.setVisible(false);
+		$.groupAllFriend.setVisible(false);
+		$.groupAllFriend.setHeight(0);
 		return;
+	}
+
+	$.openAllFriend.setVisible(true);
 
 	var calendar_shift = Alloy.Collections.schedule_detail;
 	calendar_shift.fetch({
@@ -218,6 +224,7 @@ function loadCalendarBody() {
 
 	var calendar_shift = Alloy.Collections.calendar_shift;
 	day = currentMonth.format('DD');
+
 	//load shift by month
 	calendar_shift.fetch({
 		query : 'select * from calendar_shift  where month_year="' + currentMonth.format('MM-YYYY') + '"'
@@ -285,7 +292,6 @@ function getScheduleMonth(month, year) {
 		dateIsEvent[date[2]] = data[i].get('id');
 		friendOfDay[date[2]] = data[i].get('friend');
 	}
-
 }
 
 /*
@@ -322,27 +328,44 @@ function createCalendar() {
 
 function loadFriendByDay(date) {
 
-	var friend_name = friendOfDay[date];
+	friendInSchedule = {};
 
-	alert(friend_name);
+	var friend = JSON.parse(friendOfDay[date]);
+	if (friend) {
+		for (var i = 0, n = friend.length; i < n; ++i) {
 
-	//
-	// $.friend.removeAllChildren();
-	// for (var i = 0, n = friend_name.length; i < n; ++i) {
-	// $.friend.add(Ti.UI.createLabel({
-	// text : friend_name[i],
-	// width : Ti.UI.SIZE,
-	// height : Ti.UI.SIZE,
-	// right : '5dp',
-	// top : '5dp',
-	// color : "#676767",
-	// textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
-	// font : {
-	// fontSize : '16sp'
-	// }
-	// }));
-	// }
+			if (_allFriend[friend[i]]) {
+				friendInSchedule[friend[i]] = _allFriend[friend[i]];
+				$.friend.add(Ti.UI.createLabel({
+					text : _allFriend[friend[i]],
+					width : Ti.UI.SIZE,
+					id : friend[i],
+					height : Ti.UI.SIZE,
+					right : '5dp',
+					top : '5dp',
+					color : "#676767",
+					textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
+					font : {
+						fontSize : '16sp'
+					}
+				}));
+			}
+		}
+	}
 
+	var all = $.allFriend.children;
+	for (var j = 0, m = all.length; j < m; ++j) {
+		var id = all[j].id;
+		if (friendInSchedule[id]) {
+			all[j].type = 'active';
+			all[j].setColor(friendStyle['active']['text']);
+			all[j].setBackgroundColor(friendStyle['active']['bg']);
+		} else {
+			all[j].type = 'deactive';
+			all[j].setColor(friendStyle['deactive']['text']);
+			all[j].setBackgroundColor(friendStyle['deactive']['bg']);
+		}
+	}
 }
 
 //add back button
@@ -374,12 +397,12 @@ $.openAllFriend.addEventListener('click', function(e) {
 		r = 0;
 	}
 
-	var t = Ti.UI.create2DMatrix();
-	var spin = Titanium.UI.createAnimation();
-	t = t.rotate(r);
-	spin.transform = t;
-	spin.duration = 200;
-	this.animate(spin);
+	// var t = Ti.UI.create2DMatrix();
+	// var spin = Titanium.UI.createAnimation();
+	// t = t.rotate(r);
+	// spin.transform = t;
+	// spin.duration = 200;
+	// this.animate(spin);
 
 });
 
@@ -393,13 +416,15 @@ function getAllFriend() {
 	friendCols.fetch({
 		query : 'SELECT * from friend'
 	});
-	var allFriend = friendCols.models;
+	var getAllFriend = friendCols.models;
 
-	for (var i = 0, n = allFriend.length; i < n; ++i) {
+	for (var i = 0, n = getAllFriend.length; i < n; ++i) {
+
+		_allFriend[getAllFriend[i].get('id')] = getAllFriend[i].get('name');
 
 		var label = Ti.UI.createLabel({
-			text : ' ' + allFriend[i].get('name') + ' ',
-			id : allFriend[i].get('id'),
+			text : ' ' + getAllFriend[i].get('name') + ' ',
+			id : getAllFriend[i].get('id'),
 			color : friendStyle['deactive']['text'],
 			font : {
 				fontSize : '16dp'
@@ -460,8 +485,23 @@ function updateFriend(name, id) {
 		}));
 
 	}
+
 	var friendId = JSON.stringify(Object.keys(friendInSchedule));
 
+	friendOfDay[day] = friendId;
+
+	//save to database
+	var scheduleModel = Alloy.Collections.schedule;
+
+	var data = {
+		id : dateIsEvent[day],
+		date : choiceDay.format('YYYY-MM-DD'),
+		friend : friendId
+	};
+
+	var schedule = Alloy.createModel('schedule', data);
+	scheduleModel.add(schedule);
+	schedule.save();
 }
 
 //add swipe left right for calendar

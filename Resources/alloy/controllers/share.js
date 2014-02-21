@@ -97,6 +97,12 @@ function Controller() {
     $.__views.content.add($.__views.__alloyId66);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    Titanium.Media.showCamera({
+        cancel: function() {},
+        saveToPhotoGallery: true,
+        allowEditing: false,
+        mediaTypes: [ "public.image" ]
+    });
     _.extend($, exports);
 }
 

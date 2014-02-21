@@ -201,7 +201,8 @@ module.exports = [ {
     style: {
         top: 0,
         left: "10dp",
-        right: "10dp"
+        right: "10dp",
+        height: Ti.UI.FILL
     }
 }, {
     isId: true,

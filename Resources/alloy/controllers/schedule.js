@@ -23,7 +23,6 @@ function Controller() {
                 height: Ti.UI.SIZE
             }));
             getEvent(day);
-            loadFriendByDay(day);
         }
     }
     function doPrevMonth() {
@@ -36,8 +35,15 @@ function Controller() {
     }
     function getEvent(day) {
         $.scheduleList.removeAllChildren();
+        $.friend.removeAllChildren();
         var id = dateIsEvent[day];
-        if (!id) return;
+        if (!id) {
+            $.openAllFriend.setVisible(false);
+            $.groupAllFriend.setVisible(false);
+            $.groupAllFriend.setHeight(0);
+            return;
+        }
+        $.openAllFriend.setVisible(true);
         var calendar_shift = Alloy.Collections.schedule_detail;
         calendar_shift.fetch({
             query: "select * from schedule_detail  where schedule_id = " + id
@@ -116,6 +122,7 @@ function Controller() {
             });
         });
         $.scheduleList.add(tableView);
+        loadFriendByDay(day);
     }
     function addEvent() {
         openView("edit_event", {
@@ -175,19 +182,49 @@ function Controller() {
         loadCalendarBody();
     }
     function loadFriendByDay(date) {
-        var friend_name = friendOfDay[date];
-        alert(friend_name);
+        friendInSchedule = {};
+        var friend = JSON.parse(friendOfDay[date]);
+        if (friend) for (var i = 0, n = friend.length; n > i; ++i) if (_allFriend[friend[i]]) {
+            friendInSchedule[friend[i]] = _allFriend[friend[i]];
+            $.friend.add(Ti.UI.createLabel({
+                text: _allFriend[friend[i]],
+                width: Ti.UI.SIZE,
+                id: friend[i],
+                height: Ti.UI.SIZE,
+                right: "5dp",
+                top: "5dp",
+                color: "#676767",
+                textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+                font: {
+                    fontSize: "16sp"
+                }
+            }));
+        }
+        var all = $.allFriend.children;
+        for (var j = 0, m = all.length; m > j; ++j) {
+            var id = all[j].id;
+            if (friendInSchedule[id]) {
+                all[j].type = "active";
+                all[j].setColor(friendStyle["active"]["text"]);
+                all[j].setBackgroundColor(friendStyle["active"]["bg"]);
+            } else {
+                all[j].type = "deactive";
+                all[j].setColor(friendStyle["deactive"]["text"]);
+                all[j].setBackgroundColor(friendStyle["deactive"]["bg"]);
+            }
+        }
     }
     function getAllFriend() {
         var friendCols = Alloy.Collections.friend;
         friendCols.fetch({
             query: "SELECT * from friend"
         });
-        var allFriend = friendCols.models;
-        for (var i = 0, n = allFriend.length; n > i; ++i) {
+        var getAllFriend = friendCols.models;
+        for (var i = 0, n = getAllFriend.length; n > i; ++i) {
+            _allFriend[getAllFriend[i].get("id")] = getAllFriend[i].get("name");
             var label = Ti.UI.createLabel({
-                text: " " + allFriend[i].get("name") + " ",
-                id: allFriend[i].get("id"),
+                text: " " + getAllFriend[i].get("name") + " ",
+                id: getAllFriend[i].get("id"),
                 color: friendStyle["deactive"]["text"],
                 font: {
                     fontSize: "16dp"
@@ -239,8 +276,17 @@ function Controller() {
                 }
             }));
         }
-        var id = Object.keys(friendInSchedule);
-        alert(JSON.stringify(id));
+        var friendId = JSON.stringify(Object.keys(friendInSchedule));
+        friendOfDay[day] = friendId;
+        var scheduleModel = Alloy.Collections.schedule;
+        var data = {
+            id: dateIsEvent[day],
+            date: choiceDay.format("YYYY-MM-DD"),
+            friend: friendId
+        };
+        var schedule = Alloy.createModel("schedule", data);
+        scheduleModel.add(schedule);
+        schedule.save();
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "schedule";
@@ -370,7 +416,7 @@ function Controller() {
     $.__views.scheduleInfo = Ti.UI.createScrollView({
         top: 0,
         bottom: 20,
-        height: Ti.UI.SIZE,
+        height: Ti.UI.FILL,
         layout: "vertical",
         id: "scheduleInfo"
     });
@@ -461,6 +507,7 @@ function Controller() {
         right: "10dp",
         touchEnabled: true,
         zIndex: 5,
+        visible: false,
         image: "/icons/btn_Open.png",
         id: "openAllFriend",
         type: "open"
@@ -544,7 +591,7 @@ function Controller() {
     $.__views.scheduleInfo.add($.__views.scheduleList);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require("alloy/moment"), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = "", allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
+    var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require("alloy/moment"), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = "", _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
         active: {
             bg: "#d7e682",
             text: "#68790b"
@@ -560,9 +607,9 @@ function Controller() {
         currentMonth = moment(args["date"]);
         day = _date[2];
     }
+    getAllFriend();
     createCalendar();
     func.checkFriendRequest();
-    getAllFriend();
     $.schedule.addEventListener("android:back", function() {
         var confirm = Ti.UI.createAlertDialog({
             title: "看護アプル",
@@ -586,12 +633,6 @@ function Controller() {
             $.groupAllFriend.setHeight(0);
             r = 0;
         }
-        var t = Ti.UI.create2DMatrix();
-        var spin = Titanium.UI.createAnimation();
-        t = t.rotate(r);
-        spin.transform = t;
-        spin.duration = 200;
-        this.animate(spin);
     });
     $.editFriend.addEventListener("click", function() {
         openView("friend");
