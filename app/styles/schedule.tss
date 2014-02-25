@@ -135,8 +135,7 @@
 	height:"40dp",
 	right:"10dp",
 	touchEnabled:true,
-	zIndex:5,
-	visible:false
+	zIndex:5
 },
 "#editFriend":{
 	width:'120dp',
@@ -153,8 +152,7 @@
 "#groupAllFriend":{
 	width:Ti.UI.FILL,
 	height:0,
-	layout:"vertical",
-	visible:'fasle'
+	layout:"vertical"
 },
 "#allFriend":{
 	width:Ti.UI.FILL,

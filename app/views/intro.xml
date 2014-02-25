@@ -1,0 +1,9 @@
+<Alloy>
+	<Window>
+		<ScrollableView>
+			<View class="view" backgroundColor="#ccc"></View>
+			<View class="view" backgroundColor="#000"></View>
+			<View class="view" backgroundColor="green"></View>
+		</ScrollableView>
+	</Window>
+</Alloy>

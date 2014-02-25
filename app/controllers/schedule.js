@@ -1,5 +1,5 @@
 //create collection users
-var day, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
+var on_flag = true, day, showMember = 1, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
 	active : {
 		bg : '#d7e682',
 		text : '#68790b'
@@ -93,17 +93,13 @@ function doNextMonth() {
  * */
 function getEvent(day) {
 
+	loadFriendByDay(day);
 	$.scheduleList.removeAllChildren();
-	$.friend.removeAllChildren();
+
 	var id = dateIsEvent[day];
 	if (!id) {
-		$.openAllFriend.setVisible(false);
-		$.groupAllFriend.setVisible(false);
-		$.groupAllFriend.setHeight(0);
 		return;
 	}
-
-	$.openAllFriend.setVisible(true);
 
 	var calendar_shift = Alloy.Collections.schedule_detail;
 	calendar_shift.fetch({
@@ -196,7 +192,6 @@ function getEvent(day) {
 
 	});
 	$.scheduleList.add(tableView);
-	loadFriendByDay(day);
 }
 
 /*
@@ -280,7 +275,7 @@ function loadCalendarBody() {
 function getScheduleMonth(month, year) {
 
 	dateIsEvent = {};
-
+	friendOfDay = {};
 	scheduleModel.fetch({
 		query : 'SELECT * from schedule where date BETWEEN  "' + year + '-' + month + '-01" and "' + year + '-' + month + '-31"'
 	});
@@ -308,11 +303,16 @@ function createCalendar() {
 	Alloy.Collections.configs = Alloy.createCollection('configs');
 	var configs = Alloy.Collections.configs;
 	configs.fetch({
-		query : 'select id,cg_value from configs where cg_name="dayOffset"'
+		query : 'select id,cg_value from configs where cg_name="dayOffset" or cg_name="showMember"'
 	});
 
 	//check start with monday
 	dayOffset = configs.models[0].get('cg_value');
+
+	if (configs.models[1] && configs.models[1].get('cg_value') != 1) {
+		$.blockFriend.setVisible(false);
+		$.blockFriend.setHeight(0);
+	}
 
 	func.createCalendarDay(dayOffset, $.days);
 	loadCalendarBody();
@@ -327,44 +327,43 @@ function createCalendar() {
  * */
 
 function loadFriendByDay(date) {
-
+	$.friend.removeAllChildren();
 	friendInSchedule = {};
+	if (friendOfDay[date]) {
+		var friend = JSON.parse(friendOfDay[date]);
 
-	var friend = JSON.parse(friendOfDay[date]);
-	if (friend) {
-		for (var i = 0, n = friend.length; i < n; ++i) {
+		if (friend) {
+			for (var i = 0, n = friend.length; i < n; ++i) {
 
-			if (_allFriend[friend[i]]) {
-				friendInSchedule[friend[i]] = _allFriend[friend[i]];
-				$.friend.add(Ti.UI.createLabel({
-					text : _allFriend[friend[i]],
-					width : Ti.UI.SIZE,
-					id : friend[i],
-					height : Ti.UI.SIZE,
-					right : '5dp',
-					top : '5dp',
-					color : "#676767",
-					textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
-					font : {
-						fontSize : '16sp'
-					}
-				}));
+				if (_allFriend[friend[i]]) {
+					friendInSchedule[friend[i]] = _allFriend[friend[i]];
+					$.friend.add(Ti.UI.createLabel({
+						text : _allFriend[friend[i]],
+						width : Ti.UI.SIZE,
+						id : friend[i],
+						height : Ti.UI.SIZE,
+						right : '5dp',
+						top : '5dp',
+						color : "#676767",
+						textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
+						font : {
+							fontSize : '16sp'
+						}
+					}));
+				}
 			}
 		}
 	}
 
 	var all = $.allFriend.children;
+
 	for (var j = 0, m = all.length; j < m; ++j) {
-		var id = all[j].id;
-		if (friendInSchedule[id]) {
-			all[j].type = 'active';
-			all[j].setColor(friendStyle['active']['text']);
-			all[j].setBackgroundColor(friendStyle['active']['bg']);
-		} else {
-			all[j].type = 'deactive';
-			all[j].setColor(friendStyle['deactive']['text']);
-			all[j].setBackgroundColor(friendStyle['deactive']['bg']);
-		}
+
+		var status = friendInSchedule[all[j].id] ? 'active' : 'deactive';
+		all[j].type = status;
+		all[j].setColor(friendStyle[status]['text']);
+		all[j].setBackgroundColor(friendStyle[status]['bg']);
+
 	}
 }
 
@@ -383,28 +382,24 @@ $.schedule.addEventListener('android:back', function(e) {
 	confirm.show();
 });
 
-$.openAllFriend.addEventListener('click', function(e) {
+function openAllFriend() {
 
-	var r = 180;
-	if (e.source.type == 'open') {
-		e.source.type = 'close';
-		$.groupAllFriend.setVisible(true);
-		$.groupAllFriend.setHeight(Ti.UI.SIZE);
-	} else {
-		e.source.type = 'open';
-		$.groupAllFriend.setVisible(false);
-		$.groupAllFriend.setHeight(0);
-		r = 0;
-	}
+	$.groupAllFriend.animate({
+		height : on_flag ? Ti.UI.SIZE : 0,
+		duration : 300,
+		curve : Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+	});
 
-	// var t = Ti.UI.create2DMatrix();
-	// var spin = Titanium.UI.createAnimation();
-	// t = t.rotate(r);
-	// spin.transform = t;
-	// spin.duration = 200;
-	// this.animate(spin);
+	var t = Ti.UI.create2DMatrix();
+	var spin = Titanium.UI.createAnimation();
+	t = t.rotate( on_flag ? 180 : 0);
+	spin.transform = t;
+	spin.duration = 200;
+	$.openAllFriend.animate(spin);
 
-});
+	on_flag = !on_flag;
+
+}
 
 $.editFriend.addEventListener('click', function() {
 	openView('friend');
@@ -414,7 +409,7 @@ function getAllFriend() {
 
 	var friendCols = Alloy.Collections.friend;
 	friendCols.fetch({
-		query : 'SELECT * from friend'
+		query : 'SELECT * from friend where status=1'
 	});
 	var getAllFriend = friendCols.models;
 
@@ -442,15 +437,15 @@ function getAllFriend() {
 		});
 		label.addEventListener('click', function(e) {
 
-			if (e.source.type == 'deactive') {
-				e.source.type = 'active';
-				this.setColor(friendStyle['active']['text']);
-				this.setBackgroundColor(friendStyle['active']['bg']);
-			} else {
-				e.source.type = 'deactive';
-				this.setColor(friendStyle['deactive']['text']);
-				this.setBackgroundColor(friendStyle['deactive']['bg']);
-			}
+			if ($.scheduleList.getChildren().length == 0)
+				return;
+
+			var type = e.source.type == 'deactive' ? 'active' : 'deactive';
+
+			e.source.type = type;
+			this.setColor(friendStyle[type]['text']);
+			this.setBackgroundColor(friendStyle[type]['bg']);
+
 			updateFriend(e.source.text, e.source.id);
 
 		});

@@ -17,14 +17,14 @@
 				<Button class="item" onClick="shift_setting"  title="シフトの時間や名前を変える" />
 				<View class="item">
 					<Label color="#000" top="5dp" text="勤務メンバーを表示しない"/>
-					<Button  class="on" title="ON" />
+					<Button  class="off" onClick="showMember" id="showMember"  title="OFF" />
 				</View>
 				<View class="item">
 					<Label color="#000" top="5dp" text="カレンダーを月曜始まりにする"/>
 					<Button id="monday_set" onClick="changeDayOffset" class="off" title="OFF" />
 				</View>
 				<Label class="title" text="つかいかた　　ご意見"/>
-				<Button class="item" title="カレンダーの使い方を見る"/>
+				<Button class="item" onClick="guideUseCalendar" title="カレンダーの使い方を見る"/>
 				<Button class="item" title="アプリの感想・要望を書く"/>
 				<Button class="item" title="不具合やエラーを報告する"/>
 			</View>

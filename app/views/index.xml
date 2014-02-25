@@ -3,8 +3,8 @@
 			<ScrollView class="container" id="loginForm" zIndex="-1">
 				<Label class="title" top="50dp">アカウント登録</Label>
 				<Label class="descTitle" bottom="20dp">登録は簡単・無料なので、今すぐ登録してください。</Label>
-				<TextField zIndex="2" maxLength="40"  id="fullname" hintText="名前"/>
-				<TextField zIndex="2" id="email" hintText="メール"/>
+				<TextField maxLength="40"  id="fullname" hintText="名前"/>
+				<TextField  id="email" hintText="メール"/>
 				<Button top="10dp" id="register" onClick="register">登録</Button>
 			</ScrollView>
 	</Window>

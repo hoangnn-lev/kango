@@ -3,13 +3,21 @@
 	width:Ti.UI.FILL
 },
 "#main":{
-	layout:'vertical'
+	layout:'vertical',
+	height:Ti.UI.FILL,
+	top:0
 },
 "#friendList":{
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL,
-	top:'10dp',
-	bottom:'10dp'
+	top:0
+},
+"#blockFriend":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL,
+	top:'20dp',
+	bottom:'40dp',
+	left:'-50dp'
 },
 "#title":{
 	left:'10dp',
@@ -20,6 +28,14 @@
 	height:'30dp',
 	width:'60dp',
 	right:0,
+	backgroundColor:'#fff',
+	color:'#676767',
+	borderColor:'#676767',
+	borderWidth:1
+},
+"#back":{
+	height:'30dp',
+	width:'60dp',
 	backgroundColor:'#fff',
 	color:'#676767',
 	borderColor:'#676767',
@@ -42,7 +58,7 @@
 	height:'120dp',
 	bottom:'-120dp',
 	width:Ti.UI.FILL,
-	backgroundImage:'/transparent.png'
+	backgroundImage:'#fff'
 },
 ".button":{
 	color:'#fff',
@@ -52,6 +68,11 @@
 		fontSize:'16dp'
 	},
 	height:'40dp',
+	shadowColor:'#cc',
+	shadowOffset:{
+		x:5,
+		y:5
+	},
 	width:'40%'
 },
 "#viewAddFriend":{
