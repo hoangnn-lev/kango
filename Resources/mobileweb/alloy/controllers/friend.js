@@ -6,7 +6,7 @@ function Controller() {
             duration: 200,
             curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
         });
-        $.blockFriend.setLeft(on_flag ? "10dp" : "-50dp");
+        $.blockFriend.setLeft(on_flag ? "0" : "-50dp");
         on_flag = !on_flag;
         $.viewAddFriend.setVisible(on_flag);
     }
@@ -57,9 +57,9 @@ function Controller() {
             $.deleteFriend.setEnabled(false);
         });
         row.label = Ti.UI.createTextField({
-            left: "70dp",
+            left: "50dp",
             height: "40dp",
-            width: "80dp",
+            width: "160dp",
             value: name,
             id: id,
             font: {
@@ -200,7 +200,7 @@ function Controller() {
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: "20dp",
-        bottom: "20dp",
+        bottom: "40dp",
         left: "-50dp",
         id: "blockFriend"
     });
@@ -352,6 +352,9 @@ function Controller() {
             rowModel.destroy();
         }
         delete_view("schedule");
+    });
+    $.main.addEventListener("click", function() {
+        alert("aa");
     });
     __defers["$.__views.edit!click!editFriend"] && $.__views.edit.addEventListener("click", editFriend);
     __defers["$.__views.__alloyId15!click!cancelEditing"] && $.__views.__alloyId15.addEventListener("click", cancelEditing);

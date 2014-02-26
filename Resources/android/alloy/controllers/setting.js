@@ -121,7 +121,7 @@ function Controller() {
         id: "content"
     });
     $.__views.main.add($.__views.content);
-    $.__views.__alloyId57 = Ti.UI.createLabel({
+    $.__views.__alloyId58 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "20dp",
         color: "#000",
@@ -133,32 +133,9 @@ function Controller() {
         zIndex: 0,
         bottom: "0",
         text: "シフトや勤務メンバーを変更できます",
-        id: "__alloyId57"
-    });
-    $.__views.content.add($.__views.__alloyId57);
-    $.__views.__alloyId58 = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: Ti.UI.FILL,
-        font: {
-            fontSize: "14dp"
-        },
-        height: "35dp",
-        backgroundColor: "#f19c99",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#000",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 0,
-        zIndex: 0,
-        borderColor: "#ed4580",
-        borderWidth: 1,
-        left: 0,
-        top: "10dp",
-        title: "勤務メンバーの名前を変える",
         id: "__alloyId58"
     });
     $.__views.content.add($.__views.__alloyId58);
-    edit_members ? $.__views.__alloyId58.addEventListener("click", edit_members) : __defers["$.__views.__alloyId58!click!edit_members"] = true;
     $.__views.__alloyId59 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -177,12 +154,35 @@ function Controller() {
         borderWidth: 1,
         left: 0,
         top: "10dp",
-        title: "シフトの時間や名前を変える",
+        title: "勤務メンバーの名前を変える",
         id: "__alloyId59"
     });
     $.__views.content.add($.__views.__alloyId59);
-    shift_setting ? $.__views.__alloyId59.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId59!click!shift_setting"] = true;
-    $.__views.__alloyId60 = Ti.UI.createView({
+    edit_members ? $.__views.__alloyId59.addEventListener("click", edit_members) : __defers["$.__views.__alloyId59!click!edit_members"] = true;
+    $.__views.__alloyId60 = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: Ti.UI.FILL,
+        font: {
+            fontSize: "14dp"
+        },
+        height: "35dp",
+        backgroundColor: "#f19c99",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#000",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 0,
+        zIndex: 0,
+        borderColor: "#ed4580",
+        borderWidth: 1,
+        left: 0,
+        top: "10dp",
+        title: "シフトの時間や名前を変える",
+        id: "__alloyId60"
+    });
+    $.__views.content.add($.__views.__alloyId60);
+    shift_setting ? $.__views.__alloyId60.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId60!click!shift_setting"] = true;
+    $.__views.__alloyId61 = Ti.UI.createView({
         height: "35dp",
         width: Ti.UI.FILL,
         backgroundColor: "#f19c99",
@@ -195,10 +195,10 @@ function Controller() {
         font: {
             fontSize: "14dp"
         },
-        id: "__alloyId60"
+        id: "__alloyId61"
     });
-    $.__views.content.add($.__views.__alloyId60);
-    $.__views.__alloyId61 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId61);
+    $.__views.__alloyId62 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -209,9 +209,9 @@ function Controller() {
         top: "5dp",
         zIndex: 0,
         text: "勤務メンバーを表示しない",
-        id: "__alloyId61"
+        id: "__alloyId62"
     });
-    $.__views.__alloyId60.add($.__views.__alloyId61);
+    $.__views.__alloyId61.add($.__views.__alloyId62);
     $.__views.showMember = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "60dp",
@@ -230,9 +230,9 @@ function Controller() {
         id: "showMember",
         title: "OFF"
     });
-    $.__views.__alloyId60.add($.__views.showMember);
+    $.__views.__alloyId61.add($.__views.showMember);
     showMember ? $.__views.showMember.addEventListener("click", showMember) : __defers["$.__views.showMember!click!showMember"] = true;
-    $.__views.__alloyId62 = Ti.UI.createView({
+    $.__views.__alloyId63 = Ti.UI.createView({
         height: "35dp",
         width: Ti.UI.FILL,
         backgroundColor: "#f19c99",
@@ -245,10 +245,10 @@ function Controller() {
         font: {
             fontSize: "14dp"
         },
-        id: "__alloyId62"
+        id: "__alloyId63"
     });
-    $.__views.content.add($.__views.__alloyId62);
-    $.__views.__alloyId63 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId63);
+    $.__views.__alloyId64 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -259,9 +259,9 @@ function Controller() {
         top: "5dp",
         zIndex: 0,
         text: "カレンダーを月曜始まりにする",
-        id: "__alloyId63"
+        id: "__alloyId64"
     });
-    $.__views.__alloyId62.add($.__views.__alloyId63);
+    $.__views.__alloyId63.add($.__views.__alloyId64);
     $.__views.monday_set = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "60dp",
@@ -280,9 +280,46 @@ function Controller() {
         id: "monday_set",
         title: "OFF"
     });
-    $.__views.__alloyId62.add($.__views.monday_set);
+    $.__views.__alloyId63.add($.__views.monday_set);
     changeDayOffset ? $.__views.monday_set.addEventListener("click", changeDayOffset) : __defers["$.__views.monday_set!click!changeDayOffset"] = true;
-    $.__views.__alloyId64 = Ti.UI.createLabel({
+    $.__views.__alloyId65 = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: "20dp",
+        color: "#000",
+        textAlign: "left",
+        font: {
+            fontSize: "16sp"
+        },
+        top: "20dp",
+        zIndex: 0,
+        bottom: "0",
+        text: "病院情報",
+        id: "__alloyId65"
+    });
+    $.__views.content.add($.__views.__alloyId65);
+    $.__views.allHospital = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: Ti.UI.FILL,
+        font: {
+            fontSize: "14dp"
+        },
+        height: "35dp",
+        backgroundColor: "#f19c99",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#000",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 0,
+        zIndex: 0,
+        borderColor: "#ed4580",
+        borderWidth: 1,
+        left: 0,
+        top: "10dp",
+        id: "allHospital",
+        title: "全国の病院情報を見る"
+    });
+    $.__views.content.add($.__views.allHospital);
+    $.__views.__alloyId66 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "20dp",
         color: "#000",
@@ -294,51 +331,6 @@ function Controller() {
         zIndex: 0,
         bottom: "0",
         text: "つかいかた　　ご意見",
-        id: "__alloyId64"
-    });
-    $.__views.content.add($.__views.__alloyId64);
-    $.__views.__alloyId65 = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: Ti.UI.FILL,
-        font: {
-            fontSize: "14dp"
-        },
-        height: "35dp",
-        backgroundColor: "#f19c99",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#000",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 0,
-        zIndex: 0,
-        borderColor: "#ed4580",
-        borderWidth: 1,
-        left: 0,
-        top: "10dp",
-        title: "カレンダーの使い方を見る",
-        id: "__alloyId65"
-    });
-    $.__views.content.add($.__views.__alloyId65);
-    guideUseCalendar ? $.__views.__alloyId65.addEventListener("click", guideUseCalendar) : __defers["$.__views.__alloyId65!click!guideUseCalendar"] = true;
-    $.__views.__alloyId66 = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: Ti.UI.FILL,
-        font: {
-            fontSize: "14dp"
-        },
-        height: "35dp",
-        backgroundColor: "#f19c99",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#000",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 0,
-        zIndex: 0,
-        borderColor: "#ed4580",
-        borderWidth: 1,
-        left: 0,
-        top: "10dp",
-        title: "アプリの感想・要望を書く",
         id: "__alloyId66"
     });
     $.__views.content.add($.__views.__alloyId66);
@@ -360,10 +352,55 @@ function Controller() {
         borderWidth: 1,
         left: 0,
         top: "10dp",
-        title: "不具合やエラーを報告する",
+        title: "カレンダーの使い方を見る",
         id: "__alloyId67"
     });
     $.__views.content.add($.__views.__alloyId67);
+    guideUseCalendar ? $.__views.__alloyId67.addEventListener("click", guideUseCalendar) : __defers["$.__views.__alloyId67!click!guideUseCalendar"] = true;
+    $.__views.__alloyId68 = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: Ti.UI.FILL,
+        font: {
+            fontSize: "14dp"
+        },
+        height: "35dp",
+        backgroundColor: "#f19c99",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#000",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 0,
+        zIndex: 0,
+        borderColor: "#ed4580",
+        borderWidth: 1,
+        left: 0,
+        top: "10dp",
+        title: "アプリの感想・要望を書く",
+        id: "__alloyId68"
+    });
+    $.__views.content.add($.__views.__alloyId68);
+    $.__views.report = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: Ti.UI.FILL,
+        font: {
+            fontSize: "14dp"
+        },
+        height: "35dp",
+        backgroundColor: "#f19c99",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#000",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 0,
+        zIndex: 0,
+        borderColor: "#ed4580",
+        borderWidth: 1,
+        left: 0,
+        top: "10dp",
+        id: "report",
+        title: "不具合やエラーを報告する"
+    });
+    $.__views.content.add($.__views.report);
     exports.destroy = function() {};
     _.extend($, $.__views);
     Alloy.Collections.configs = Alloy.createCollection("configs");
@@ -391,11 +428,23 @@ function Controller() {
     $.setting.addEventListener("android:back", function() {
         openView("schedule");
     });
-    __defers["$.__views.__alloyId58!click!edit_members"] && $.__views.__alloyId58.addEventListener("click", edit_members);
-    __defers["$.__views.__alloyId59!click!shift_setting"] && $.__views.__alloyId59.addEventListener("click", shift_setting);
+    $.allHospital.addEventListener("click", function() {
+        openView("hospital");
+    });
+    $.report.addEventListener("click", function() {
+        var emailDialog = Titanium.UI.createEmailDialog();
+        emailDialog.setSubject("Report app error");
+        emailDialog.setToRecipients([ "hoangnn@leverages.jp" ]);
+        emailDialog.addEventListener("complete", function(e) {
+            e.result == emailDialog.SENT;
+        });
+        emailDialog.open();
+    });
+    __defers["$.__views.__alloyId59!click!edit_members"] && $.__views.__alloyId59.addEventListener("click", edit_members);
+    __defers["$.__views.__alloyId60!click!shift_setting"] && $.__views.__alloyId60.addEventListener("click", shift_setting);
     __defers["$.__views.showMember!click!showMember"] && $.__views.showMember.addEventListener("click", showMember);
     __defers["$.__views.monday_set!click!changeDayOffset"] && $.__views.monday_set.addEventListener("click", changeDayOffset);
-    __defers["$.__views.__alloyId65!click!guideUseCalendar"] && $.__views.__alloyId65.addEventListener("click", guideUseCalendar);
+    __defers["$.__views.__alloyId67!click!guideUseCalendar"] && $.__views.__alloyId67.addEventListener("click", guideUseCalendar);
     _.extend($, exports);
 }
 

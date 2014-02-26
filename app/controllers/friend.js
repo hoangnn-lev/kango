@@ -150,7 +150,8 @@ function customeRowFriend(id, name, friend_status) {
 	row.label = Ti.UI.createTextField({
 		left : '50dp',
 		height : '40dp',
-		width : '160dp',
+		width : Ti.UI.FILL,
+		left : '80dp',
 		value : name,
 		id : id,
 		font : {
@@ -164,7 +165,9 @@ function customeRowFriend(id, name, friend_status) {
 	row.label.addEventListener('focus', function(e) {
 		on_flag ? '' : cancelEditing();
 	});
-
+	row.label.addEventListener('change', function(e) {
+		alert(e.source.value);
+	});
 	row.status = Ti.UI.createButton({
 		height : '30dp',
 		width : '60dp',

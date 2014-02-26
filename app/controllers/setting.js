@@ -137,3 +137,24 @@ function guideUseCalendar() {
 	$.setting.add(win);
 }
 
+$.allHospital.addEventListener('click', function(e) {
+	openView('hospital');
+});
+
+$.report.addEventListener('click', function(e) {
+
+	var emailDialog = Titanium.UI.createEmailDialog();
+	emailDialog.setSubject('Report app error');
+	emailDialog.setToRecipients(['hoangnn@leverages.jp']);
+
+	emailDialog.addEventListener('complete', function(e) {
+		if (e.result == emailDialog.SENT) {
+			if (Ti.Platform.osname != 'android') {
+				alert("Report successfull");
+			}
+		}
+	});
+	emailDialog.open();
+
+});
+

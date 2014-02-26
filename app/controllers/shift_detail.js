@@ -25,9 +25,9 @@ loadColorBox(shift.get('color'));
  * */
 function loadColorBox(selected) {
 
-	var color = ['#f19c98', '#ffe498', '#b9e0a5', '#d3e1f5', '#ccc', '#fff'];
+	var color = ['#e68200', '#f19c98', '#ffe498', '#25b4a5', '#51b11d ','#b9e0a5','#d7e682','#286bcc', '#f3acbd','#d3e1f5', '#ccc', '#fff'];
 
-	var column = 3, record = color.length, row = Math.ceil(record / column), count = 0, height = '40', top = 0;
+	var column = 4, record = color.length, row = Math.ceil(record / column), count = 0, height = '30', top = 0;
 
 	for (var i = 0; i < row; i++) {
 
@@ -44,7 +44,7 @@ function loadColorBox(selected) {
 				backgroundColor : color[count],
 				height : height + 'dp',
 				width : '30%',
-				left : (j * 33) + '%',
+				left : (j * 24) + '%',
 				top : top + 'dp',
 				borderColor : '#000',
 				color : '#676767',

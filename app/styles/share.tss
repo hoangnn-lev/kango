@@ -26,7 +26,6 @@
 	borderWidth:1,
 	color:'#000',
 	left:0,
-	top:'10dp',
 	width:Ti.UI.FILL,
 	font:{
 		fontSize:'14dp'
@@ -43,31 +42,47 @@
 },
 '.title':{
 	 color:"#000",
-	 top:'20dp',
+	 top:'10dp',
 	 bottom:"0",
 	 height:"20dp",
 	 width:Ti.UI.FILL,
 	 textAlign:'left'
 },
-".on":{
-	backgroundColor:'#fff2cc',
-	width:'60dp',
-	height:Ti.UI.FILL,
-	color:'#000',
-	font:{
-		fontSize:'14dp'
-	},
-	borderRadius:0,
-	right:0
+".blockSelectedTime":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL,
+	top:'20dp',
+	bottom:'20dp'
 },
-".off":{
-	backgroundColor:'#cccccc',
-	width:'60dp',
-	height:Ti.UI.FILL,
-	color:'#000',
+"#month":{
+	left:'140dp',
+	height:'30dp',
+	width:'120dp',
+	borderColor:'#ccc',
+	borderWidth:1,
+	textAlign:'center'
+},
+"#dayStart":{
+	left:'70dp',
+	width:'110dp',
+	height:'30dp',
+	borderColor:'#ccc',
+	borderWidth:1,
+	textAlign:'center',
 	font:{
 		fontSize:'14dp'
-	},
-	borderRadius:0,
-	right:0
+	}
+},
+"#to":{
+	left:'190dp',
+	width:'20dp',
+	height:'30dp',
+},
+"#dayEnd":{
+	left:'215dp',
+	height:'30dp',
+	width:'110dp',
+	borderColor:'#ccc',
+	borderWidth:1,
+	textAlign:'center'
 }

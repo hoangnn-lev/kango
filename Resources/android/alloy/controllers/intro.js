@@ -11,27 +11,27 @@ function Controller() {
         id: "intro"
     });
     $.__views.intro && $.addTopLevelView($.__views.intro);
-    var __alloyId32 = [];
-    $.__views.__alloyId33 = Ti.UI.createView({
-        backgroundColor: "#ccc",
-        id: "__alloyId33"
-    });
-    __alloyId32.push($.__views.__alloyId33);
+    var __alloyId33 = [];
     $.__views.__alloyId34 = Ti.UI.createView({
-        backgroundColor: "#000",
+        backgroundColor: "#ccc",
         id: "__alloyId34"
     });
-    __alloyId32.push($.__views.__alloyId34);
+    __alloyId33.push($.__views.__alloyId34);
     $.__views.__alloyId35 = Ti.UI.createView({
-        backgroundColor: "green",
+        backgroundColor: "#000",
         id: "__alloyId35"
     });
-    __alloyId32.push($.__views.__alloyId35);
-    $.__views.__alloyId31 = Ti.UI.createScrollableView({
-        views: __alloyId32,
-        id: "__alloyId31"
+    __alloyId33.push($.__views.__alloyId35);
+    $.__views.__alloyId36 = Ti.UI.createView({
+        backgroundColor: "green",
+        id: "__alloyId36"
     });
-    $.__views.intro.add($.__views.__alloyId31);
+    __alloyId33.push($.__views.__alloyId36);
+    $.__views.__alloyId32 = Ti.UI.createScrollableView({
+        views: __alloyId33,
+        id: "__alloyId32"
+    });
+    $.__views.intro.add($.__views.__alloyId32);
     exports.destroy = function() {};
     _.extend($, $.__views);
     _.extend($, exports);

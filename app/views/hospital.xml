@@ -1,0 +1,7 @@
+<Alloy>
+	<Window>
+		<View id="main">
+			<WebView url="http://kango-oshigoto.jp/hospital/"/>
+		</View>
+	</Window>
+</Alloy>

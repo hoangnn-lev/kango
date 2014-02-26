@@ -20,7 +20,6 @@
 	width:Ti.UI.FILL,
 	height:Ti.UI.FILL,
 	top:'40dp',
-	bottom:'55dp',
 	layout:'vertical'
 },
 "#shiftName":{

@@ -23,10 +23,12 @@
 					<Label color="#000" top="5dp" text="カレンダーを月曜始まりにする"/>
 					<Button id="monday_set" onClick="changeDayOffset" class="off" title="OFF" />
 				</View>
+				<Label class="title" text="病院情報"/>
+				<Button class="item" id="allHospital" title="全国の病院情報を見る"/>
 				<Label class="title" text="つかいかた　　ご意見"/>
 				<Button class="item" onClick="guideUseCalendar" title="カレンダーの使い方を見る"/>
 				<Button class="item" title="アプリの感想・要望を書く"/>
-				<Button class="item" title="不具合やエラーを報告する"/>
+				<Button class="item" id="report" title="不具合やエラーを報告する"/>
 			</View>
 		</View>
 	</Window>
