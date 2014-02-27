@@ -1,28 +1,11 @@
 <Alloy>
 	<Window>
-		<ScrollView id="main">
+		<View id="main">
 			<View id="title">
-				<Button id="back" left="0"  title="バック"/>
-				<Label left="80dp" text="勤務メンバー設定"/>
-				<Button id="edit" onClick="editFriend" title="編集"/>
+				<Label width="Ti.UI.SIZE" color="#fff" text="勤務メンバー設定"/>
 			</View>
-			<View id="blockFriend">
-				<TableView separatorColor="#ccc" editable="true" id="friendList"/>
-			</View>
-			<View id="viewAddFriend">
-				<TextField maxLength="8" id="name" hintText="メンバー名　最大8文字まで"/>
-				<Button id="addFriend" title="＋メンバーを追加"/>
-			</View>
-		</ScrollView>
-		<View id="groupButton">
-			<Button title="チェック取り消し" left="10dp" onClick="cancelEditing" class="button"/>
-			<Button title="削除する"
-			backgroundFocusedColor = '#c0ad91'
-			enabled = "false"
-			backgroundColor = '#ccc'
-			babackgroundDisabledColor="#ccc"
-			backgroundSelectedColor = '#c0ad91'
-			right="10dp" id="deleteFriend" class="button"/>
+			<TableView separatorColor="#ccc" editable="true" id="friendList"/>
 		</View>
+		<Button id="addFriend" title="＋メンバーを追加"/>
 	</Window>
 </Alloy>

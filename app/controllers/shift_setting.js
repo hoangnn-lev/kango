@@ -24,7 +24,7 @@ for (var i = 0; i < n; i++) {
 		left : '10dp',
 		top : '10dp',
 		bottom : '10dp',
-		title : shift[i].get('label'),
+		title : shift[i].get('alias'),
 		touchEnabled : true,
 		id : shift[i].get('id'),
 		borderColor : '#f0f0f0',
@@ -41,7 +41,7 @@ for (var i = 0; i < n; i++) {
 
 	item.add(Ti.UI.createLabel({
 		left : '100dp',
-		text : shift[i].get('alias'),
+		text : shift[i].get('label'),
 		font : {
 			fontSize : '15dp'
 		},

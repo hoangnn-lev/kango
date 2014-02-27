@@ -5,78 +5,30 @@
 "#main":{
 	layout:'vertical',
 	height:Ti.UI.FILL,
-	top:0
+	top:0,
+	backgroundColor:'#fff9e6',
+	bottom:0
 },
 "#friendList":{
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL,
-	top:0
+	top:0,
+	bottom:'120dp'
 },
 "#blockFriend":{
-	height:Ti.UI.SIZE,
+	height:Ti.UI.FILL,
 	width:Ti.UI.FILL,
-	top:'20dp',
-	bottom:'40dp',
-	left:'-50dp'
+	layout:'vertical',
+	top:0
 },
 "#title":{
-	left:'10dp',
-	top:'10dp',
-	right:'10dp'
+	height:'40dp',
+	backgroundColor:'#ed829c'
 },
-"#edit":{
-	height:'30dp',
-	width:'60dp',
-	right:0,
-	backgroundColor:'#fff',
-	color:'#676767',
-	borderColor:'#676767',
-	borderWidth:1
-},
-"#back":{
-	height:'30dp',
-	width:'60dp',
-	backgroundColor:'#fff',
-	color:'#676767',
-	borderColor:'#676767',
-	borderWidth:1
-},
+
 "#addFriend":{
 	height:'45dp',
 	left:'30dp',
 	right:'30dp',
-	top:'10dp'
-},
-"#name":{
-	borderWidth:1,
-	borderColor:'#eeeeee',
-	color:'#676767',
-	left:'10dp',
-	right:'10dp'
-},
-"#groupButton":{
-	height:'120dp',
-	bottom:'-120dp',
-	width:Ti.UI.FILL,
-	backgroundImage:'#fff'
-},
-".button":{
-	color:'#fff',
-	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-	borderRadius:'15',
-	font:{
-		fontSize:'16dp'
-	},
-	height:'40dp',
-	shadowColor:'#cc',
-	shadowOffset:{
-		x:5,
-		y:5
-	},
-	width:'40%'
-},
-"#viewAddFriend":{
-	width:Ti.UI.FILL,
-	height:Ti.UI.SIZE,
-	layout:'vertical'
+	bottom:'20dp'
 }

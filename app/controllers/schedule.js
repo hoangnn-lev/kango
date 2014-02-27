@@ -409,7 +409,7 @@ function getAllFriend() {
 
 	var friendCols = Alloy.Collections.friend;
 	friendCols.fetch({
-		query : 'SELECT * from friend where status=1'
+		query : 'SELECT * from friend where status=1 and name!=""'
 	});
 	var getAllFriend = friendCols.models;
 

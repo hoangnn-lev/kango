@@ -8,85 +8,26 @@ $.friend.addEventListener('android:back', function(e) {
 	openView('schedule');
 });
 
-$.back.addEventListener('click', function() {
-	openView('schedule');
-});
-
 //add new friend
 $.addFriend.addEventListener('click', function(e) {
 
-	var name = $.name.getValue();
-	$.name.blur();
-	$.name.setValue('');
-
-	if (name) {
-		var friendModel = Alloy.Collections.friend;
-		var friend = Alloy.createModel('friend', {
-			name : name,
-			status : 1,
-		});
-
-		friendModel.add(friend);
-		friend.save();
-		$.friendList.appendRow(customeRowFriend(friend.get('id'), name), 1);
-		delete_view('schedule');
+	if ($.friendList.data[0] && $.friendList.data[0].rows.length > 50) {
+		alert('You can add max 50 friend');
+		return;
 	}
-});
 
-//select friend delete
-function editFriend(e) {
-
-	$.name.blur();
-	$.groupButton.animate({
-		bottom : on_flag ? '0' : '-120dp',
-		duration : 200,
-		curve : Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+	var friendModel = Alloy.Collections.friend;
+	var friend = Alloy.createModel('friend', {
+		name : '',
+		status : 1,
 	});
 
-	$.blockFriend.setLeft( on_flag ? '0' : '-50dp');
-
-	on_flag = !on_flag;
-	$.viewAddFriend.setVisible(on_flag);
-
-}
-
-//delete friend in list
-$.deleteFriend.addEventListener('click', function(e) {
-
-	// get checked items
-	var items = $.friendList.data[0].rows;
-
-	if (items) {
-		for (var i = items.length - 1; i >= 0; i--) {
-			if (items[i].check.value) {
-
-				$.friendList.deleteRow(i);
-				var rowModel = Alloy.createModel('friend', {
-					id : items[i].check.id
-				});
-				rowModel.destroy();
-			}
-		}
-	}
+	friendModel.add(friend);
+	friend.save();
+	$.friendList.appendRow(customeRowFriend(friend.get('id'), ''), 1);
 	delete_view('schedule');
+
 });
-
-//cancel editing
-function cancelEditing(e) {
-
-	editFriend();
-
-	var items = $.friendList.data[0].rows;
-
-	if (items) {
-		for (var i = items.length - 1; i >= 0; i--) {
-			if (items[i].check.value) {
-				items[i].check.setValue(false);
-			}
-		}
-	}
-
-};
 
 //load all friend
 function loadFriend() {
@@ -116,42 +57,17 @@ function customeRowFriend(id, name, friend_status) {
 
 	var row = Ti.UI.createTableViewRow({
 		selectionStyle : 'none',
-		selectedBackgroundColor : 'transparent'
+		selectedBackgroundColor : 'transparent',
+		className : 'row-friend'
 	});
 
 	row.setBackgroundColor( friend_status ? '#fff' : '#f0f0f0');
 
-	row.check = Ti.UI.createSwitch({
-		style : Ti.UI.Android.SWITCH_STYLE_CHECKBOX,
+	row.label = Ti.UI.createTextField({
 		left : '10dp',
 		height : '40dp',
-		id : id,
-		width : '40dp',
-		type : 'checkbox',
-		className : 'checkbox-delete'
-	});
-
-	row.check.addEventListener('click', function(e) {
-		var items = $.friendList.data[0].rows;
-
-		if (items) {
-			for (var i = items.length - 1; i >= 0; i--) {
-				if (items[i].check.value) {
-					$.deleteFriend.setEnabled(true);
-					$.deleteFriend.setBackgroundColor('#cfba9c');
-					return;
-				}
-			}
-		}
-		$.deleteFriend.setBackgroundColor('#ccc');
-		$.deleteFriend.setEnabled(false);
-	});
-
-	row.label = Ti.UI.createTextField({
-		left : '50dp',
-		height : '40dp',
 		width : Ti.UI.FILL,
-		left : '80dp',
+		hintText : 'Enter name',
 		value : name,
 		id : id,
 		font : {
@@ -162,15 +78,19 @@ function customeRowFriend(id, name, friend_status) {
 		maxLength : 8,
 		className : 'friend-name',
 	});
-	row.label.addEventListener('focus', function(e) {
-		on_flag ? '' : cancelEditing();
-	});
+
 	row.label.addEventListener('change', function(e) {
-		alert(e.source.value);
+
+		// setTimeout(function save() {
+		//
+		// alert(e.source.value);
+		//
+		// }, 2000);
+
 	});
 	row.status = Ti.UI.createButton({
-		height : '30dp',
-		width : '60dp',
+		height : '25dp',
+		width : '70dp',
 		right : '10dp',
 		font : {
 			fontSize : '14dp'
@@ -208,8 +128,8 @@ function customeRowFriend(id, name, friend_status) {
 		delete_view('schedule');
 	});
 
-	row.add(row.check);
 	row.add(row.label);
 	row.add(row.status);
 	return row;
 }
+

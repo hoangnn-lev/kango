@@ -1,5 +1,7 @@
 "#main":{
-	height:Ti.UI.FILL
+	height:Ti.UI.FILL,
+	layout:'vertical',
+	top:0
 },
 "View":{
 	height:Ti.UI.SIZE,
@@ -19,28 +21,30 @@
 	right:'10dp',
 	width:Ti.UI.FILL,
 	height:Ti.UI.FILL,
-	top:'40dp',
 	layout:'vertical'
 },
 "#shiftName":{
+	top:0,
 	width:'80dp',
 	height:'35dp',
 	backgroundColor:'#f19c98',
 	borderColor:'#f0f0f0',
 	borderWidth:1,
 	left:0,
-	top:'10dp',
 	font:{
 		fontSize:'15dp'
 	},
 	textAlign:'center'
 },
 "#shiftAlias":{
+	top:0,
 	font:{
 		fontSize:'16dp'
 	},
+	height:'35dp',
 	width:'100dp',
-	left:0
+	left:'120dp',
+	borderRadius:0
 },
 ".smallText":{
 	font:{
@@ -54,22 +58,20 @@
 	height:Ti.UI.SIZE
 },
 "#timeStart":{
-	left:0,
-	width:'120dp',
-
+	width:Ti.UI.FILL,
+	height:Ti.UI.FILL,
 	font:{
 		fontSize:'16dp'
 	},
-	textAlign:'center'
+	left:'10dp'
 },
 "#timeEnd":{
-	right:0,
-	width:'120dp',
-
+	width:Ti.UI.FILL,
+	height:Ti.UI.FILL,
 	font:{
 		fontSize:'16dp'
 	},
-	textAlign:'center'
+	left:'10dp'
 },
 "#groupButton":{
 	layout:'vertical',
@@ -89,8 +91,25 @@
 },
 "#groupShiftColor":{
 	width:Ti.UI.FILL,
-	height:Ti.UI.SIZE
+	height:Ti.UI.SIZE,
+	layout:'horizontal'
 },
 ".error":{
 	visible:false
+},
+"#title":{
+	height:'40dp',
+	backgroundColor:'#ed829c',
+	top:0
+},
+".timeSet":{
+	height:'35dp',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	bottom:'10dp',
+	width: Ti.UI.FILL,
+	backgroundColor:'#f8ecee',
+	backgroundFocusedColor:'#f0f0f0',
+	borderRadius:10,
+	borderColor:'#fff',
 }
+

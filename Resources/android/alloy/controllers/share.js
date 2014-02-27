@@ -56,7 +56,7 @@ function Controller() {
         id: "content"
     });
     $.__views.main.add($.__views.content);
-    $.__views.__alloyId69 = Ti.UI.createLabel({
+    $.__views.__alloyId68 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "20dp",
         color: "#000",
@@ -68,18 +68,18 @@ function Controller() {
         zIndex: 0,
         bottom: "0",
         text: "どの方法で予定を共有しますか",
-        id: "__alloyId69"
+        id: "__alloyId68"
     });
-    $.__views.content.add($.__views.__alloyId69);
-    $.__views.__alloyId70 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId68);
+    $.__views.__alloyId69 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: "20dp",
         bottom: "20dp",
-        id: "__alloyId70"
+        id: "__alloyId69"
     });
-    $.__views.content.add($.__views.__alloyId70);
-    $.__views.__alloyId71 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId69);
+    $.__views.__alloyId70 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -91,9 +91,9 @@ function Controller() {
         zIndex: 0,
         left: "0",
         text: "カレンダー画像",
-        id: "__alloyId71"
+        id: "__alloyId70"
     });
-    $.__views.__alloyId70.add($.__views.__alloyId71);
+    $.__views.__alloyId69.add($.__views.__alloyId70);
     $.__views.month = Ti.UI.createLabel({
         width: "120dp",
         height: "30dp",
@@ -109,9 +109,9 @@ function Controller() {
         borderWidth: 1,
         id: "month"
     });
-    $.__views.__alloyId70.add($.__views.month);
+    $.__views.__alloyId69.add($.__views.month);
     showPicker ? $.__views.month.addEventListener("click", showPicker) : __defers["$.__views.month!click!showPicker"] = true;
-    $.__views.__alloyId72 = Ti.UI.createButton({
+    $.__views.__alloyId71 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -129,10 +129,10 @@ function Controller() {
         borderWidth: 1,
         left: 0,
         title: "メールで送る",
-        id: "__alloyId72"
+        id: "__alloyId71"
     });
-    $.__views.content.add($.__views.__alloyId72);
-    $.__views.__alloyId73 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId71);
+    $.__views.__alloyId72 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -150,18 +150,18 @@ function Controller() {
         borderWidth: 1,
         left: 0,
         title: "LINEで送る",
-        id: "__alloyId73"
+        id: "__alloyId72"
     });
-    $.__views.content.add($.__views.__alloyId73);
-    $.__views.__alloyId74 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId72);
+    $.__views.__alloyId73 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: "20dp",
         bottom: "20dp",
-        id: "__alloyId74"
+        id: "__alloyId73"
     });
-    $.__views.content.add($.__views.__alloyId74);
-    $.__views.__alloyId75 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId73);
+    $.__views.__alloyId74 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -173,9 +173,9 @@ function Controller() {
         zIndex: 0,
         left: "0",
         text: "テキスト",
-        id: "__alloyId75"
+        id: "__alloyId74"
     });
-    $.__views.__alloyId74.add($.__views.__alloyId75);
+    $.__views.__alloyId73.add($.__views.__alloyId74);
     $.__views.dayStart = Ti.UI.createLabel({
         width: "110dp",
         height: "30dp",
@@ -191,7 +191,7 @@ function Controller() {
         borderWidth: 1,
         id: "dayStart"
     });
-    $.__views.__alloyId74.add($.__views.dayStart);
+    $.__views.__alloyId73.add($.__views.dayStart);
     showPicker ? $.__views.dayStart.addEventListener("click", showPicker) : __defers["$.__views.dayStart!click!showPicker"] = true;
     $.__views.to = Ti.UI.createLabel({
         width: "20dp",
@@ -207,7 +207,7 @@ function Controller() {
         id: "to",
         text: "～"
     });
-    $.__views.__alloyId74.add($.__views.to);
+    $.__views.__alloyId73.add($.__views.to);
     $.__views.dayEnd = Ti.UI.createLabel({
         width: "110dp",
         height: "30dp",
@@ -223,9 +223,9 @@ function Controller() {
         borderWidth: 1,
         id: "dayEnd"
     });
-    $.__views.__alloyId74.add($.__views.dayEnd);
+    $.__views.__alloyId73.add($.__views.dayEnd);
     showPicker ? $.__views.dayEnd.addEventListener("click", showPicker) : __defers["$.__views.dayEnd!click!showPicker"] = true;
-    $.__views.__alloyId76 = Ti.UI.createButton({
+    $.__views.__alloyId75 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -244,11 +244,11 @@ function Controller() {
         left: 0,
         type: "mail",
         title: "メールで送る",
-        id: "__alloyId76"
+        id: "__alloyId75"
     });
-    $.__views.content.add($.__views.__alloyId76);
-    shareByText ? $.__views.__alloyId76.addEventListener("click", shareByText) : __defers["$.__views.__alloyId76!click!shareByText"] = true;
-    $.__views.__alloyId77 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId75);
+    shareByText ? $.__views.__alloyId75.addEventListener("click", shareByText) : __defers["$.__views.__alloyId75!click!shareByText"] = true;
+    $.__views.__alloyId76 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -267,10 +267,10 @@ function Controller() {
         left: 0,
         type: "line",
         title: "LINEで送る",
-        id: "__alloyId77"
+        id: "__alloyId76"
     });
-    $.__views.content.add($.__views.__alloyId77);
-    shareByText ? $.__views.__alloyId77.addEventListener("click", shareByText) : __defers["$.__views.__alloyId77!click!shareByText"] = true;
+    $.__views.content.add($.__views.__alloyId76);
+    shareByText ? $.__views.__alloyId76.addEventListener("click", shareByText) : __defers["$.__views.__alloyId76!click!shareByText"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var lastValue = {
@@ -286,8 +286,8 @@ function Controller() {
     __defers["$.__views.month!click!showPicker"] && $.__views.month.addEventListener("click", showPicker);
     __defers["$.__views.dayStart!click!showPicker"] && $.__views.dayStart.addEventListener("click", showPicker);
     __defers["$.__views.dayEnd!click!showPicker"] && $.__views.dayEnd.addEventListener("click", showPicker);
+    __defers["$.__views.__alloyId75!click!shareByText"] && $.__views.__alloyId75.addEventListener("click", shareByText);
     __defers["$.__views.__alloyId76!click!shareByText"] && $.__views.__alloyId76.addEventListener("click", shareByText);
-    __defers["$.__views.__alloyId77!click!shareByText"] && $.__views.__alloyId77.addEventListener("click", shareByText);
     _.extend($, exports);
 }
 

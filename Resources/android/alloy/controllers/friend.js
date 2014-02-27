@@ -1,20 +1,4 @@
 function Controller() {
-    function editFriend() {
-        $.name.blur();
-        $.groupButton.animate({
-            bottom: on_flag ? "0" : "-120dp",
-            duration: 200,
-            curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
-        });
-        $.blockFriend.setLeft(on_flag ? "0" : "-50dp");
-        on_flag = !on_flag;
-        $.viewAddFriend.setVisible(on_flag);
-    }
-    function cancelEditing() {
-        editFriend();
-        var items = $.friendList.data[0].rows;
-        if (items) for (var i = items.length - 1; i >= 0; i--) items[i].check.value && items[i].check.setValue(false);
-    }
     function loadFriend() {
         var friendCols = Alloy.Collections.friend;
         friendCols.fetch({
@@ -34,33 +18,15 @@ function Controller() {
         friend_status = 0 == friend_status ? false : true;
         var row = Ti.UI.createTableViewRow({
             selectionStyle: "none",
-            selectedBackgroundColor: "transparent"
+            selectedBackgroundColor: "transparent",
+            className: "row-friend"
         });
         row.setBackgroundColor(friend_status ? "#fff" : "#f0f0f0");
-        row.check = Ti.UI.createSwitch({
-            style: Ti.UI.Android.SWITCH_STYLE_CHECKBOX,
+        row.label = Ti.UI.createTextField({
             left: "10dp",
             height: "40dp",
-            id: id,
-            width: "40dp",
-            type: "checkbox",
-            className: "checkbox-delete"
-        });
-        row.check.addEventListener("click", function() {
-            var items = $.friendList.data[0].rows;
-            if (items) for (var i = items.length - 1; i >= 0; i--) if (items[i].check.value) {
-                $.deleteFriend.setEnabled(true);
-                $.deleteFriend.setBackgroundColor("#cfba9c");
-                return;
-            }
-            $.deleteFriend.setBackgroundColor("#ccc");
-            $.deleteFriend.setEnabled(false);
-        });
-        row.label = Ti.UI.createTextField({
-            left: "50dp",
-            height: "40dp",
             width: Ti.UI.FILL,
-            left: "80dp",
+            hintText: "Enter name",
             value: name,
             id: id,
             font: {
@@ -71,15 +37,10 @@ function Controller() {
             maxLength: 8,
             className: "friend-name"
         });
-        row.label.addEventListener("focus", function() {
-            on_flag ? "" : cancelEditing();
-        });
-        row.label.addEventListener("change", function(e) {
-            alert(e.source.value);
-        });
+        row.label.addEventListener("change", function() {});
         row.status = Ti.UI.createButton({
-            height: "30dp",
-            width: "60dp",
+            height: "25dp",
+            width: "70dp",
             right: "10dp",
             font: {
                 fontSize: "14dp"
@@ -110,7 +71,6 @@ function Controller() {
             friend.save();
             delete_view("schedule");
         });
-        row.add(row.check);
         row.add(row.label);
         row.add(row.status);
         return row;
@@ -122,126 +82,50 @@ function Controller() {
     arguments[0] ? arguments[0]["__itemTemplate"] : null;
     var $ = this;
     var exports = {};
-    var __defers = {};
     $.__views.friend = Ti.UI.createWindow({
         backgroundColor: "#fff",
         id: "friend"
     });
     $.__views.friend && $.addTopLevelView($.__views.friend);
-    $.__views.main = Ti.UI.createScrollView({
-        top: 0,
-        bottom: 20,
+    $.__views.main = Ti.UI.createView({
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
+        top: 0,
         layout: "vertical",
+        backgroundColor: "#fff9e6",
+        bottom: 0,
         id: "main"
     });
     $.__views.friend.add($.__views.main);
     $.__views.title = Ti.UI.createView({
-        height: Ti.UI.SIZE,
+        height: "40dp",
         width: Ti.UI.FILL,
-        left: "10dp",
-        top: "10dp",
-        right: "10dp",
+        backgroundColor: "#ed829c",
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.back = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: "60dp",
-        font: {
-            fontSize: "14dp"
-        },
-        height: "30dp",
-        backgroundColor: "#fff",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#676767",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 10,
-        borderColor: "#676767",
-        borderWidth: 1,
-        id: "back",
-        left: "0",
-        title: "バック"
-    });
-    $.__views.title.add($.__views.back);
     $.__views.__alloyId14 = Ti.UI.createLabel({
-        width: Ti.UI.FILL,
+        width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#fff",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
-        left: "80dp",
         text: "勤務メンバー設定",
         id: "__alloyId14"
     });
     $.__views.title.add($.__views.__alloyId14);
-    $.__views.edit = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: "60dp",
-        font: {
-            fontSize: "14dp"
-        },
-        height: "30dp",
-        backgroundColor: "#fff",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#676767",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 10,
-        right: 0,
-        borderColor: "#676767",
-        borderWidth: 1,
-        id: "edit",
-        title: "編集"
-    });
-    $.__views.title.add($.__views.edit);
-    editFriend ? $.__views.edit.addEventListener("click", editFriend) : __defers["$.__views.edit!click!editFriend"] = true;
-    $.__views.blockFriend = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        top: "20dp",
-        bottom: "40dp",
-        left: "-50dp",
-        id: "blockFriend"
-    });
-    $.__views.main.add($.__views.blockFriend);
     $.__views.friendList = Ti.UI.createTableView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: 0,
+        bottom: "120dp",
         separatorColor: "#ccc",
         editable: "true",
         id: "friendList"
     });
-    $.__views.blockFriend.add($.__views.friendList);
-    $.__views.viewAddFriend = Ti.UI.createView({
-        height: Ti.UI.SIZE,
-        width: Ti.UI.FILL,
-        layout: "vertical",
-        id: "viewAddFriend"
-    });
-    $.__views.main.add($.__views.viewAddFriend);
-    $.__views.name = Ti.UI.createTextField({
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        bottom: "10",
-        width: Ti.UI.FILL,
-        backgroundColor: "#f8ecee",
-        backgroundFocusedColor: "#f0f0f0",
-        borderRadius: 10,
-        borderColor: "#eeeeee",
-        borderWidth: 1,
-        color: "#676767",
-        left: "10dp",
-        right: "10dp",
-        maxLength: "8",
-        id: "name",
-        hintText: "メンバー名　最大8文字まで"
-    });
-    $.__views.viewAddFriend.add($.__views.name);
+    $.__views.main.add($.__views.friendList);
     $.__views.addFriend = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -257,108 +141,33 @@ function Controller() {
         borderRadius: 10,
         left: "30dp",
         right: "30dp",
-        top: "10dp",
+        bottom: "20dp",
         id: "addFriend",
         title: "＋メンバーを追加"
     });
-    $.__views.viewAddFriend.add($.__views.addFriend);
-    $.__views.groupButton = Ti.UI.createView({
-        height: "120dp",
-        width: Ti.UI.FILL,
-        bottom: "-120dp",
-        backgroundImage: "#fff",
-        id: "groupButton"
-    });
-    $.__views.friend.add($.__views.groupButton);
-    $.__views.__alloyId15 = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: "40%",
-        font: {
-            fontSize: "16dp"
-        },
-        height: "40dp",
-        backgroundColor: "#f3acbd",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#fff",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: "15",
-        shadowColor: "#cc",
-        shadowOffset: {
-            x: 5,
-            y: 5
-        },
-        title: "チェック取り消し",
-        left: "10dp",
-        id: "__alloyId15"
-    });
-    $.__views.groupButton.add($.__views.__alloyId15);
-    cancelEditing ? $.__views.__alloyId15.addEventListener("click", cancelEditing) : __defers["$.__views.__alloyId15!click!cancelEditing"] = true;
-    $.__views.deleteFriend = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: "40%",
-        font: {
-            fontSize: "16dp"
-        },
-        height: "40dp",
-        backgroundColor: "#ccc",
-        backgroundFocusedColor: "#c0ad91",
-        backgroundSelectedColor: "#c0ad91",
-        color: "#fff",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: "15",
-        shadowColor: "#cc",
-        shadowOffset: {
-            x: 5,
-            y: 5
-        },
-        title: "削除する",
-        enabled: "false",
-        babackgroundDisabledColor: "#ccc",
-        right: "10dp",
-        id: "deleteFriend"
-    });
-    $.__views.groupButton.add($.__views.deleteFriend);
+    $.__views.friend.add($.__views.addFriend);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var on_flag = true;
     var friendList;
     loadFriend();
     $.friend.addEventListener("android:back", function() {
         openView("schedule");
     });
-    $.back.addEventListener("click", function() {
-        openView("schedule");
-    });
     $.addFriend.addEventListener("click", function() {
-        var name = $.name.getValue();
-        $.name.blur();
-        $.name.setValue("");
-        if (name) {
-            var friendModel = Alloy.Collections.friend;
-            var friend = Alloy.createModel("friend", {
-                name: name,
-                status: 1
-            });
-            friendModel.add(friend);
-            friend.save();
-            $.friendList.appendRow(customeRowFriend(friend.get("id"), name), 1);
-            delete_view("schedule");
+        if ($.friendList.data[0] && $.friendList.data[0].rows.length > 50) {
+            alert("You can add max 50 friend");
+            return;
         }
-    });
-    $.deleteFriend.addEventListener("click", function() {
-        var items = $.friendList.data[0].rows;
-        if (items) for (var i = items.length - 1; i >= 0; i--) if (items[i].check.value) {
-            $.friendList.deleteRow(i);
-            var rowModel = Alloy.createModel("friend", {
-                id: items[i].check.id
-            });
-            rowModel.destroy();
-        }
+        var friendModel = Alloy.Collections.friend;
+        var friend = Alloy.createModel("friend", {
+            name: "",
+            status: 1
+        });
+        friendModel.add(friend);
+        friend.save();
+        $.friendList.appendRow(customeRowFriend(friend.get("id"), ""), 1);
         delete_view("schedule");
     });
-    __defers["$.__views.edit!click!editFriend"] && $.__views.edit.addEventListener("click", editFriend);
-    __defers["$.__views.__alloyId15!click!cancelEditing"] && $.__views.__alloyId15.addEventListener("click", cancelEditing);
     _.extend($, exports);
 }
 
