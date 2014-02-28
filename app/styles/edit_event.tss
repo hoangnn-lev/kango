@@ -37,11 +37,10 @@
 	right:"5dp" 
 },
 "#buttonTabs":{
-	height:"40dp",
-	backgroundColor:"#f9dce3",
+	height:"45dp",
+	backgroundColor:"#fff",
 	bottom:"0",
-	width:Ti.UI.FILL,
-	layout:"horizontal"
+	width:Ti.UI.FILL
 },
 ".iconMemo":{
 	width:'19%',
@@ -65,7 +64,6 @@
 	borderRadius:0
 },
 "#groupButton":{
-	layout:'vertical',
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE
 },
@@ -77,7 +75,8 @@
 		fontSize:'16dp'
 	},
 	height:'40dp',
-	top:'15dp'
+	top:'15dp',
+	width:'45%'
 },
 "#dayName":{
 	backgroundImage:'/icons/bg-circle.png',
@@ -96,4 +95,26 @@
 		fontSize:'20dp'
 	},
 	left:'5dp'
+},
+".timeSet":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	bottom:'10',
+	backgroundColor:'#fff',
+	borderRadius:10,
+	borderColor:'#fff',
+	height:'40dp'
+},
+".delete":{
+	height:'30dp',
+	right:'5dp',
+	width:'50dp',
+	color:'#fff',
+	backgroundColor:'#aeaeae',
+	textAlign:'center',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10,
+	zIndex:5,
+	visible:false
 }

@@ -1,6 +1,6 @@
 function Controller() {
-    function saveSchedule(e) {
-        var title = $.title.getValue(), startTime = $.startTime.getValue(), endTime = $.endTime.getValue(), content = $.memo.getValue();
+    function saveSchedule() {
+        var title = $.title.getValue(), startTime = $.startTime.getText(), endTime = $.endTime.getText(), content = $.memo.getValue();
         $.title.blur();
         $.memo.blur();
         var scheduleDetailModel = Alloy.Collections.schedule_detail;
@@ -12,20 +12,45 @@ function Controller() {
             content: content,
             img: Ti.API.selectedIcon
         };
+        func.writeLogImg(Ti.API.selectedIcon);
         args["data"].id && (data["id"] = args["data"].id);
         var detail = Alloy.createModel("schedule_detail", data);
         scheduleDetailModel.add(detail);
         detail.save();
-        if ("next" == e.source.type) {
-            delete_view("schedule");
-            openView("edit_event", {
-                data: {
-                    day: args["data"].day
-                }
-            });
-        } else openView("schedule", {
+        openView("schedule", {
             date: args["data"].day
         });
+    }
+    function timeSet(e) {
+        if ("delete" == e.source.type) return;
+        var get_time = new Date(), child = this.getChildren();
+        var time = child[1].text ? child[1].text.split(":") : [ 0, 0 ];
+        get_time.setHours(time[0]);
+        get_time.setMinutes(time[1]);
+        var picker = Titanium.UI.createPicker({
+            type: Titanium.UI.PICKER_TYPE_TIME,
+            format24: true,
+            useSpinner: true,
+            selectionIndicator: true
+        });
+        picker.showTimePickerDialog({
+            value: get_time,
+            format24: true,
+            callback: function(e) {
+                if (!e.cancel) {
+                    var result = pad_2(e.value.getHours()) + ":" + pad_2(e.value.getMinutes());
+                    child[1].setText(result);
+                    child[2].setVisible(true);
+                }
+            }
+        });
+    }
+    function pad_2(number) {
+        return (10 > number ? "0" : "") + number;
+    }
+    function clearTime(e) {
+        this.setVisible(false);
+        "clearStartTime" == e.source.id ? $.startTime.setText("") : $.endTime.setText("");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "edit_event";
@@ -56,9 +81,8 @@ function Controller() {
         id: "main"
     });
     $.__views.edit_event.add($.__views.main);
-    $.__views.content = Ti.UI.createScrollView({
+    $.__views.content = Ti.UI.createView({
         top: 0,
-        bottom: 20,
         left: "10dp",
         right: "10dp",
         height: Ti.UI.FILL,
@@ -111,34 +135,120 @@ function Controller() {
         hintText: "タイトル"
     });
     $.__views.content.add($.__views.title);
-    $.__views.startTime = Ti.UI.createTextField({
+    $.__views.__alloyId1 = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        height: "40dp",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
-        width: Ti.UI.FILL,
         backgroundColor: "#fff",
-        backgroundFocusedColor: "#fff",
         borderRadius: 10,
         borderColor: "#fff",
-        color: "#999999",
-        maxLength: "5",
-        id: "startTime",
-        hintText: "開始時間"
+        id: "__alloyId1"
     });
-    $.__views.content.add($.__views.startTime);
-    $.__views.endTime = Ti.UI.createTextField({
+    $.__views.content.add($.__views.__alloyId1);
+    timeSet ? $.__views.__alloyId1.addEventListener("click", timeSet) : __defers["$.__views.__alloyId1!click!timeSet"] = true;
+    $.__views.__alloyId2 = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        color: "#8d8d8d",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "16sp"
+        },
+        left: "10dp",
+        text: "開始時間",
+        id: "__alloyId2"
+    });
+    $.__views.__alloyId1.add($.__views.__alloyId2);
+    $.__views.startTime = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        color: "#676767",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "16sp"
+        },
+        left: "90dp",
+        id: "startTime"
+    });
+    $.__views.__alloyId1.add($.__views.startTime);
+    $.__views.clearStartTime = Ti.UI.createLabel({
+        width: "50dp",
+        height: "30dp",
+        color: "#fff",
+        textAlign: "center",
+        font: {
+            fontSize: "16sp"
+        },
+        right: "5dp",
+        backgroundColor: "#aeaeae",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        zIndex: 5,
+        visible: false,
+        type: "delete",
+        id: "clearStartTime",
+        text: "削除"
+    });
+    $.__views.__alloyId1.add($.__views.clearStartTime);
+    clearTime ? $.__views.clearStartTime.addEventListener("click", clearTime) : __defers["$.__views.clearStartTime!click!clearTime"] = true;
+    $.__views.__alloyId3 = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        height: "40dp",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
-        width: Ti.UI.FILL,
         backgroundColor: "#fff",
-        backgroundFocusedColor: "#fff",
         borderRadius: 10,
         borderColor: "#fff",
-        color: "#999999",
-        maxLength: "5",
-        id: "endTime",
-        hintText: "終了時間"
+        id: "__alloyId3"
     });
-    $.__views.content.add($.__views.endTime);
+    $.__views.content.add($.__views.__alloyId3);
+    timeSet ? $.__views.__alloyId3.addEventListener("click", timeSet) : __defers["$.__views.__alloyId3!click!timeSet"] = true;
+    $.__views.__alloyId4 = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        color: "#8d8d8d",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "16sp"
+        },
+        left: "10dp",
+        text: "終了時間",
+        id: "__alloyId4"
+    });
+    $.__views.__alloyId3.add($.__views.__alloyId4);
+    $.__views.endTime = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        color: "#676767",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "16sp"
+        },
+        left: "90dp",
+        id: "endTime"
+    });
+    $.__views.__alloyId3.add($.__views.endTime);
+    $.__views.clearEndTime = Ti.UI.createLabel({
+        width: "50dp",
+        height: "30dp",
+        color: "#fff",
+        textAlign: "center",
+        font: {
+            fontSize: "16sp"
+        },
+        right: "5dp",
+        backgroundColor: "#aeaeae",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        zIndex: 5,
+        visible: false,
+        type: "delete",
+        id: "clearEndTime",
+        text: "削除"
+    });
+    $.__views.__alloyId3.add($.__views.clearEndTime);
+    clearTime ? $.__views.clearEndTime.addEventListener("click", clearTime) : __defers["$.__views.clearEndTime!click!clearTime"] = true;
     $.__views.memo = Ti.UI.createTextArea({
         width: Ti.UI.FILL,
         height: "80dp",
@@ -148,7 +258,7 @@ function Controller() {
         borderRadius: 10,
         borderColor: "#fff",
         color: "#999999",
-        maxLength: "120",
+        maxLength: "300",
         id: "memo",
         hintText: "メモ"
     });
@@ -172,46 +282,23 @@ function Controller() {
         id: "listIcon"
     });
     $.__views.wicon.add($.__views.listIcon);
-    $.__views.buttonTabs = Ti.UI.createScrollView({
-        top: 20,
+    $.__views.buttonTabs = Ti.UI.createView({
+        height: "45dp",
+        backgroundColor: "#fff",
         bottom: "0",
-        height: "40dp",
-        backgroundColor: "#f9dce3",
         width: Ti.UI.FILL,
-        layout: "horizontal",
-        scrollType: "horizontal",
         id: "buttonTabs"
     });
     $.__views.wicon.add($.__views.buttonTabs);
     $.__views.groupButton = Ti.UI.createView({
-        layout: "vertical",
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         id: "groupButton"
     });
     $.__views.content.add($.__views.groupButton);
-    $.__views.__alloyId1 = Ti.UI.createButton({
+    $.__views.cancel = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: Ti.UI.FILL,
-        font: {
-            fontSize: "16dp"
-        },
-        height: "40dp",
-        backgroundColor: "#f3acbd",
-        backgroundFocusedColor: "#e6a3b3",
-        backgroundSelectedColor: "#e6a3b3",
-        color: "#fff",
-        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: "15",
-        top: "15dp",
-        title: "保存してカレンダーに戻る",
-        id: "__alloyId1"
-    });
-    $.__views.groupButton.add($.__views.__alloyId1);
-    saveSchedule ? $.__views.__alloyId1.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId1!click!saveSchedule"] = true;
-    $.__views.__alloyId2 = Ti.UI.createButton({
-        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: Ti.UI.FILL,
+        width: "45%",
         font: {
             fontSize: "16dp"
         },
@@ -223,27 +310,50 @@ function Controller() {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: "15",
         top: "15dp",
-        type: "next",
-        title: "保存して別の予定を入力",
-        id: "__alloyId2"
+        id: "cancel",
+        left: "0",
+        title: "キャンセル"
     });
-    $.__views.groupButton.add($.__views.__alloyId2);
-    saveSchedule ? $.__views.__alloyId2.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId2!click!saveSchedule"] = true;
+    $.__views.groupButton.add($.__views.cancel);
+    $.__views.__alloyId5 = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: "45%",
+        font: {
+            fontSize: "16dp"
+        },
+        height: "40dp",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#e6a3b3",
+        backgroundSelectedColor: "#e6a3b3",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: "15",
+        top: "15dp",
+        right: "0",
+        title: "保存",
+        id: "__alloyId5"
+    });
+    $.__views.groupButton.add($.__views.__alloyId5);
+    saveSchedule ? $.__views.__alloyId5.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId5!click!saveSchedule"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var args = arguments[0] || {}, date = args["data"].day.split("-");
+    var get_data, args = arguments[0] || {}, date = args["data"].day.split("-");
+    var scheduleDetailModel = Alloy.Collections.schedule_detail;
     Ti.API.selectedIcon = "";
     if (args["data"].id) {
-        var scheduleDetailModel = Alloy.Collections.schedule_detail;
         scheduleDetailModel.fetch({
             query: "SELECT * from schedule_detail where id=" + args["data"].id
         });
-        var data = scheduleDetailModel.models[0];
-        $.title.setValue(data.get("title"));
-        $.startTime.setValue(data.get("start_time"));
-        $.endTime.setValue(data.get("end_time"));
-        $.memo.setValue(data.get("content"));
-        Ti.API.selectedIcon = data.get("img");
+        get_data = scheduleDetailModel.models[0];
+        $.title.setValue(get_data.get("title"));
+        $.startTime.setText(get_data.get("start_time"));
+        $.endTime.setText(get_data.get("end_time"));
+        $.memo.setValue(get_data.get("content"));
+        Ti.API.selectedIcon = get_data.get("img");
+        get_data.get("start_time") ? $.clearStartTime.setVisible(true) : "";
+        get_data.get("end_time") ? $.clearEndTime.setVisible(true) : "";
+        $.cancel.setTitle("削除");
+        $.cancel.type = "delete";
     }
     $.date.setText(date[1] + " / " + date[2]);
     $.dayName.setText(func.convertDayName(new Date(args["data"].day).getDay()));
@@ -251,8 +361,31 @@ function Controller() {
     $.edit_event.addEventListener("android:back", function() {
         openView("schedule");
     });
-    __defers["$.__views.__alloyId1!click!saveSchedule"] && $.__views.__alloyId1.addEventListener("click", saveSchedule);
-    __defers["$.__views.__alloyId2!click!saveSchedule"] && $.__views.__alloyId2.addEventListener("click", saveSchedule);
+    $.cancel.addEventListener("click", function(e) {
+        if ("delete" == e.source.type) {
+            Alloy.createModel("schedule_detail", {
+                id: args["data"].id
+            }).destroy();
+            scheduleDetailModel.fetch({
+                query: "SELECT * from schedule_detail where id=" + args["data"].id
+            });
+            scheduleDetailModel.fetch({
+                query: "SELECT * from schedule_detail where schedule_id=" + get_data.get("schedule_id")
+            });
+            0 == scheduleDetailModel.models.length && Alloy.createModel("schedule", {
+                id: get_data.get("schedule_id")
+            }).destroy();
+            delete_view("schedule");
+            openView("schedule", {
+                date: args["data"].day
+            });
+        } else openView("schedule");
+    });
+    __defers["$.__views.__alloyId1!click!timeSet"] && $.__views.__alloyId1.addEventListener("click", timeSet);
+    __defers["$.__views.clearStartTime!click!clearTime"] && $.__views.clearStartTime.addEventListener("click", clearTime);
+    __defers["$.__views.__alloyId3!click!timeSet"] && $.__views.__alloyId3.addEventListener("click", timeSet);
+    __defers["$.__views.clearEndTime!click!clearTime"] && $.__views.clearEndTime.addEventListener("click", clearTime);
+    __defers["$.__views.__alloyId5!click!saveSchedule"] && $.__views.__alloyId5.addEventListener("click", saveSchedule);
     _.extend($, exports);
 }
 

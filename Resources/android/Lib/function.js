@@ -1,4 +1,4 @@
-var currentWindow;
+var currentWindow, deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
 
 exports.createCalendarBody = function(_month, _dateIsEvent, _shift, _dayOffset) {
     var calendar = Alloy.createWidget("jp.co.mountposition.calendar", "widget", {
@@ -173,35 +173,35 @@ exports.checkFriendRequest = function() {
 
 exports.createBoxIcon = function(button, viewIcon, selectedIcon) {
     var currentButton, buttonTabs = Ti.API.ICON;
-    for (var i = 0, l = buttonTabs.length; l > i; i++) {
-        var buttontab = Ti.UI.createButton({
-            title: buttonTabs[i].title,
+    var l = buttonTabs.length;
+    buttonTabs[0]["icons"] = func.readLogImg();
+    for (var i = 0; l > i; i++) {
+        var buttontab = Ti.UI.createImageView({
+            width: "25%",
+            height: "45dp",
+            image: buttonTabs[i].folder + "deactive.png",
             data: buttonTabs[i].icons,
             folder: buttonTabs[i].folder,
-            backgroundColor: "#f9dce3",
-            color: "#ed829c",
-            height: Ti.UI.FILL,
-            width: "20%",
-            textAlign: "center",
+            left: 25 * i + "%",
+            top: 0,
             className: "buttonTabs"
         });
         buttontab.addEventListener("click", function(e) {
             if (this !== currentButton) {
-                currentButton && currentButton.setBackgroundColor("#f9dce3");
+                currentButton && currentButton.setImage(currentButton.folder + "deactive.png");
                 currentButton = this;
-                currentButton.setBackgroundColor("#fff");
+                currentButton.setImage(e.source.folder + "active.png");
                 viewIcon.removeAllChildren();
                 viewIcon.add(exports.createScrollViewIcon(e.source.data, e.source.folder, viewIcon, selectedIcon));
             }
         });
         if (0 == i && "" == selectedIcon) {
             currentButton = buttontab;
-            currentButton.setBackgroundColor("#fff");
+            currentButton.setImage(buttonTabs[i].folder + "active.png");
             viewIcon.add(exports.createScrollViewIcon(buttonTabs[i].icons, buttonTabs[i].folder, viewIcon, selectedIcon));
         } else "" != selectedIcon && "-1" != selectedIcon.indexOf(buttonTabs[i].folder) && buttontab.fireEvent("click");
         button.add(buttontab);
     }
-    button.setContentWidth(Ti.Platform.displayCaps.platformWidth + Ti.Platform.displayCaps.platformWidth / 4);
 };
 
 exports.createScrollViewIcon = function(icon, folder, viewIcon, selectedIcon) {
@@ -217,33 +217,38 @@ exports.createScrollViewIcon = function(icon, folder, viewIcon, selectedIcon) {
         for (var r = 0; row > r; ++r) for (var c = 0; column > c; ++c) {
             var left = 0;
             c > 0 && (left = imgSize * c - 12);
-            var iconView = Ti.UI.createImageView({
-                image: folder + icon[icon_index],
-                left: left + "dp",
-                top: imgSize * r + 5 + "dp",
-                bottom: "10dp",
-                opacity: "0.1",
-                width: imgSize - 15 + "dp",
-                height: imgSize - 15 + "dp",
-                right: "3dp"
-            });
-            if (selectedIcon == folder + icon[icon_index]) {
-                iconView.setOpacity(1);
-                iconCurrent = iconView;
-            }
-            iconView.addEventListener("click", function(e) {
-                if ("1" == this.getOpacity()) {
-                    this.setOpacity(.1);
-                    Ti.API.selectedIcon = selectedIcon = "";
-                } else {
-                    iconCurrent && iconCurrent.setOpacity(.1);
-                    this.setOpacity(1);
-                    Ti.API.selectedIcon = selectedIcon = e.source.image;
+            var img = "";
+            img = folder == Ti.API.ICON[0]["folder"] ? icon[icon_index] : folder + icon[icon_index];
+            if (img) {
+                var iconView = Ti.UI.createImageView({
+                    image: img,
+                    left: left + "dp",
+                    top: imgSize * r + 5 + "dp",
+                    bottom: "10dp",
+                    width: imgSize - 20 + "dp",
+                    height: imgSize - 20 + "dp",
+                    right: "3dp",
+                    borderColor: "#fff",
+                    borderWidth: 5
+                });
+                if (selectedIcon == folder + icon[icon_index]) {
+                    iconView.setBorderColor("#ed829c");
+                    iconCurrent = iconView;
                 }
-                iconCurrent = this;
-            });
-            icon_index++;
-            view.add(iconView);
+                iconView.addEventListener("click", function(e) {
+                    if ("#ed829c" == this.getBorderColor()) {
+                        this.setBorderColor("#fff");
+                        Ti.API.selectedIcon = selectedIcon = "";
+                    } else {
+                        iconCurrent && iconCurrent.setBorderColor("#fff");
+                        this.setBorderColor("#ed829c");
+                        Ti.API.selectedIcon = selectedIcon = e.source.image;
+                    }
+                    iconCurrent = this;
+                });
+                icon_index++;
+                view.add(iconView);
+            }
         }
         views.push(view);
     }
@@ -265,4 +270,20 @@ exports.getScheduleId = function(date) {
     scheduleModel.add(schedule);
     schedule.save();
     return schedule.get("id");
+};
+
+exports.writeLogImg = function(img) {
+    var list_img = [ img ];
+    var myFile = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "log_selected_img.txt");
+    if (myFile.exists()) {
+        var get_img = JSON.parse(myFile.read().toString()), temp = [];
+        for (var i = 0; 10 > i; i++) get_img[i] && get_img[i] != img && temp.push(get_img[i]);
+        temp.unshift(img);
+        myFile.write(JSON.stringify(temp));
+    } else myFile.write(JSON.stringify(list_img));
+};
+
+exports.readLogImg = function() {
+    var myFile = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "log_selected_img.txt");
+    return myFile.exists() ? JSON.parse(myFile.read().toString()) : [];
 };

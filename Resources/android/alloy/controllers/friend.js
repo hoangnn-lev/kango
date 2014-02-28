@@ -104,7 +104,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId14 = Ti.UI.createLabel({
+    $.__views.__alloyId17 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -113,9 +113,9 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "勤務メンバー設定",
-        id: "__alloyId14"
+        id: "__alloyId17"
     });
-    $.__views.title.add($.__views.__alloyId14);
+    $.__views.title.add($.__views.__alloyId17);
     $.__views.friendList = Ti.UI.createTableView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,

@@ -121,7 +121,7 @@ function Controller() {
         id: "content"
     });
     $.__views.main.add($.__views.content);
-    $.__views.__alloyId57 = Ti.UI.createLabel({
+    $.__views.__alloyId60 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "20dp",
         color: "#000",
@@ -133,10 +133,10 @@ function Controller() {
         zIndex: 0,
         bottom: "0",
         text: "シフトや勤務メンバーを変更できます",
-        id: "__alloyId57"
+        id: "__alloyId60"
     });
-    $.__views.content.add($.__views.__alloyId57);
-    $.__views.__alloyId58 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId60);
+    $.__views.__alloyId61 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -155,11 +155,11 @@ function Controller() {
         left: 0,
         top: "10dp",
         title: "勤務メンバーの名前を変える",
-        id: "__alloyId58"
+        id: "__alloyId61"
     });
-    $.__views.content.add($.__views.__alloyId58);
-    edit_members ? $.__views.__alloyId58.addEventListener("click", edit_members) : __defers["$.__views.__alloyId58!click!edit_members"] = true;
-    $.__views.__alloyId59 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId61);
+    edit_members ? $.__views.__alloyId61.addEventListener("click", edit_members) : __defers["$.__views.__alloyId61!click!edit_members"] = true;
+    $.__views.__alloyId62 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -178,11 +178,11 @@ function Controller() {
         left: 0,
         top: "10dp",
         title: "シフトの時間や名前を変える",
-        id: "__alloyId59"
+        id: "__alloyId62"
     });
-    $.__views.content.add($.__views.__alloyId59);
-    shift_setting ? $.__views.__alloyId59.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId59!click!shift_setting"] = true;
-    $.__views.__alloyId60 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId62);
+    shift_setting ? $.__views.__alloyId62.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId62!click!shift_setting"] = true;
+    $.__views.__alloyId63 = Ti.UI.createView({
         height: "35dp",
         width: Ti.UI.FILL,
         backgroundColor: "#f19c99",
@@ -195,10 +195,10 @@ function Controller() {
         font: {
             fontSize: "14dp"
         },
-        id: "__alloyId60"
+        id: "__alloyId63"
     });
-    $.__views.content.add($.__views.__alloyId60);
-    $.__views.__alloyId61 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId63);
+    $.__views.__alloyId64 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -209,9 +209,9 @@ function Controller() {
         top: "5dp",
         zIndex: 0,
         text: "勤務メンバーを表示しない",
-        id: "__alloyId61"
+        id: "__alloyId64"
     });
-    $.__views.__alloyId60.add($.__views.__alloyId61);
+    $.__views.__alloyId63.add($.__views.__alloyId64);
     $.__views.showMember = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "60dp",
@@ -230,9 +230,9 @@ function Controller() {
         id: "showMember",
         title: "OFF"
     });
-    $.__views.__alloyId60.add($.__views.showMember);
+    $.__views.__alloyId63.add($.__views.showMember);
     showMember ? $.__views.showMember.addEventListener("click", showMember) : __defers["$.__views.showMember!click!showMember"] = true;
-    $.__views.__alloyId62 = Ti.UI.createView({
+    $.__views.__alloyId65 = Ti.UI.createView({
         height: "35dp",
         width: Ti.UI.FILL,
         backgroundColor: "#f19c99",
@@ -245,10 +245,10 @@ function Controller() {
         font: {
             fontSize: "14dp"
         },
-        id: "__alloyId62"
+        id: "__alloyId65"
     });
-    $.__views.content.add($.__views.__alloyId62);
-    $.__views.__alloyId63 = Ti.UI.createLabel({
+    $.__views.content.add($.__views.__alloyId65);
+    $.__views.__alloyId66 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#000",
@@ -259,9 +259,9 @@ function Controller() {
         top: "5dp",
         zIndex: 0,
         text: "カレンダーを月曜始まりにする",
-        id: "__alloyId63"
+        id: "__alloyId66"
     });
-    $.__views.__alloyId62.add($.__views.__alloyId63);
+    $.__views.__alloyId65.add($.__views.__alloyId66);
     $.__views.monday_set = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "60dp",
@@ -280,9 +280,9 @@ function Controller() {
         id: "monday_set",
         title: "OFF"
     });
-    $.__views.__alloyId62.add($.__views.monday_set);
+    $.__views.__alloyId65.add($.__views.monday_set);
     changeDayOffset ? $.__views.monday_set.addEventListener("click", changeDayOffset) : __defers["$.__views.monday_set!click!changeDayOffset"] = true;
-    $.__views.__alloyId64 = Ti.UI.createLabel({
+    $.__views.__alloyId67 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "20dp",
         color: "#000",
@@ -294,9 +294,9 @@ function Controller() {
         zIndex: 0,
         bottom: "0",
         text: "病院情報",
-        id: "__alloyId64"
+        id: "__alloyId67"
     });
-    $.__views.content.add($.__views.__alloyId64);
+    $.__views.content.add($.__views.__alloyId67);
     $.__views.allHospital = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -319,7 +319,7 @@ function Controller() {
         title: "全国の病院情報を見る"
     });
     $.__views.content.add($.__views.allHospital);
-    $.__views.__alloyId65 = Ti.UI.createLabel({
+    $.__views.__alloyId68 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "20dp",
         color: "#000",
@@ -331,10 +331,10 @@ function Controller() {
         zIndex: 0,
         bottom: "0",
         text: "つかいかた　　ご意見",
-        id: "__alloyId65"
+        id: "__alloyId68"
     });
-    $.__views.content.add($.__views.__alloyId65);
-    $.__views.__alloyId66 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId68);
+    $.__views.__alloyId69 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -353,11 +353,11 @@ function Controller() {
         left: 0,
         top: "10dp",
         title: "カレンダーの使い方を見る",
-        id: "__alloyId66"
+        id: "__alloyId69"
     });
-    $.__views.content.add($.__views.__alloyId66);
-    guideUseCalendar ? $.__views.__alloyId66.addEventListener("click", guideUseCalendar) : __defers["$.__views.__alloyId66!click!guideUseCalendar"] = true;
-    $.__views.__alloyId67 = Ti.UI.createButton({
+    $.__views.content.add($.__views.__alloyId69);
+    guideUseCalendar ? $.__views.__alloyId69.addEventListener("click", guideUseCalendar) : __defers["$.__views.__alloyId69!click!guideUseCalendar"] = true;
+    $.__views.__alloyId70 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -376,9 +376,9 @@ function Controller() {
         left: 0,
         top: "10dp",
         title: "アプリの感想・要望を書く",
-        id: "__alloyId67"
+        id: "__alloyId70"
     });
-    $.__views.content.add($.__views.__alloyId67);
+    $.__views.content.add($.__views.__alloyId70);
     $.__views.report = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -440,11 +440,11 @@ function Controller() {
         });
         emailDialog.open();
     });
-    __defers["$.__views.__alloyId58!click!edit_members"] && $.__views.__alloyId58.addEventListener("click", edit_members);
-    __defers["$.__views.__alloyId59!click!shift_setting"] && $.__views.__alloyId59.addEventListener("click", shift_setting);
+    __defers["$.__views.__alloyId61!click!edit_members"] && $.__views.__alloyId61.addEventListener("click", edit_members);
+    __defers["$.__views.__alloyId62!click!shift_setting"] && $.__views.__alloyId62.addEventListener("click", shift_setting);
     __defers["$.__views.showMember!click!showMember"] && $.__views.showMember.addEventListener("click", showMember);
     __defers["$.__views.monday_set!click!changeDayOffset"] && $.__views.monday_set.addEventListener("click", changeDayOffset);
-    __defers["$.__views.__alloyId66!click!guideUseCalendar"] && $.__views.__alloyId66.addEventListener("click", guideUseCalendar);
+    __defers["$.__views.__alloyId69!click!guideUseCalendar"] && $.__views.__alloyId69.addEventListener("click", guideUseCalendar);
     _.extend($, exports);
 }
 

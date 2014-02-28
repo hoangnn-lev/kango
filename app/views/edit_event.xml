@@ -2,34 +2,40 @@
 	<Window>
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
-			<ScrollView id="content" layout="vertical">
+			<View id="content" layout="vertical">
 				<View height="60dp" width="120dp">
 					<Label id="date"/>
 					<Label id="dayName"/>
 				</View>
 				<TextField maxLength="30" id="title" hintText="タイトル"/>
-				<TextField maxLength="5" id="startTime" hintText="開始時間"/>
-				<TextField maxLength="5" id="endTime" hintText="終了時間"/>
-				<TextArea maxLength="120" height="80dp" id="memo" hintText="メモ"/>
+				<View class="timeSet" onClick="timeSet">
+					<Label left="10dp" color="#8d8d8d" text="開始時間"/>
+					<Label left="90dp" id="startTime"/>
+					<Label class="delete" type="delete" id="clearStartTime" onClick="clearTime" text="削除" />
+				</View>
+				<View class="timeSet" onClick="timeSet">
+					<Label left="10dp" color="#8d8d8d" text="終了時間"/>
+					<Label left="90dp" id="endTime"/>
+					<Label class="delete" type="delete"  id="clearEndTime" onClick="clearTime" text="削除" />
+				</View>
+				<TextArea maxLength="300" height="80dp" id="memo" hintText="メモ"/>
 				<View id="wicon">
 					<View id="listIcon"/>
-					<ScrollView scrollType="horizontal" id="buttonTabs"/>
+					<View id="buttonTabs"/>
 				</View>
 				<View id="groupButton">
-					<Button onClick="saveSchedule" class="button" width="Ti.UI.FILL"
-					backgroundColor = '#f3acbd'
-					backgroundFocusedColor = '#e6a3b3'
-					backgroundSelectedColor = '#e6a3b3'
-					title="保存してカレンダーに戻る"/>
-					
-					<Button onClick="saveSchedule" type="next" width="Ti.UI.FILL" class="button"
+					<Button id="cancel" class="button" left="0"
 					backgroundColor = '#cfba9c'
 					backgroundFocusedColor = '#c0ad91'
 					backgroundSelectedColor = '#c0ad91'
-					title="保存して別の予定を入力"/>
-
+					title="キャンセル"/>
+					<Button onClick="saveSchedule" right="0" class="button"
+					backgroundColor = '#f3acbd'
+					backgroundFocusedColor = '#e6a3b3'
+					backgroundSelectedColor = '#e6a3b3'
+					title="保存"/>
 				</View>
-			</ScrollView>
+			</View>
 		</View>
 	</Window>
 </Alloy>

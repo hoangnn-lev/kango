@@ -19,18 +19,17 @@
 				<Label class="smallText" text="スタンプ"/>
 				<View id="groupShiftColor"/>
 				<View id="groupButton">
-					<Button id="saveShift" class="button" width="Ti.UI.FILL"
-					backgroundColor = '#f3acbd'
+					<Button id="saveShift" class="button"
+					backgroundColor = '#f3acbd' left="0"
 					backgroundFocusedColor = '#e6a3b3'
 					backgroundSelectedColor = '#e6a3b3'
 					title="キャンセル"/>
-					<Button onClick="shift_setting"  width="Ti.UI.FILL" class="button"
+					<Button onClick="shift_setting" right="0"   class="button"
 					backgroundColor = '#cfba9c'
 					backgroundFocusedColor = '#c0ad91'
 					backgroundSelectedColor = '#c0ad91'
 					title="保存する"/>
 				</View>
-
 			</View>
 		</View>
 	</Window>

@@ -115,7 +115,6 @@ function customeRowFriend(id, name, friend_status) {
 		e.source.friend_status = !checkStatus;
 
 		var friendModel = Alloy.Collections.friend;
-
 		var data = {
 			id : id,
 			name : name,

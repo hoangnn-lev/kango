@@ -137,12 +137,12 @@ function getEvent(day) {
 					fontSize : '16sp'
 				},
 				touchEnabled : false,
-				left : '35dp',
+				left : '50dp',
 				className : 'title-event'
 			});
 
 			row.add(Ti.UI.createImageView({
-				height : '20dp',
+				width : '40dp',
 				image : data[i].get('img'),
 				left : '10dp',
 				touchEnabled : false,

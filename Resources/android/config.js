@@ -19,21 +19,21 @@ Ti.API.TABMENU = [ {
 } ];
 
 Ti.API.ICON = [ {
-    title: "履歴",
+    title: "披瀝",
     folder: "/memo/history/",
-    icons: [ "3.png", "1.png" ]
+    icons: [ "/memo/private/1.png", "/memo/simple/2.png", "/memo/job/3.png", "/memo/private/4.png" ]
 }, {
-    title: "記号",
-    folder: "/memo/symbol/",
-    icons: [ "001.png", "002.png", "003.png", "004.png", "005.png", "006.png", "007.png", "008.png", "009.png", "010.png", "011.png", "012.png", "013.png", "014.png", "015.png", "016.png", "017.png", "018.png", "019.png", "020.png" ]
+    title: "シンプル",
+    folder: "/memo/simple/",
+    icons: [ "1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png" ]
 }, {
-    title: "性別/ママ",
-    folder: "/memo/sex_mom/",
-    icons: [ "6.png" ]
+    title: "プライベート",
+    folder: "/memo/private/",
+    icons: [ "1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png" ]
 }, {
-    title: "仕事/学校",
-    folder: "/memo/work_school/",
-    icons: [ "7.png" ]
+    title: "仕事",
+    folder: "/memo/job/",
+    icons: [ "1.png", "2.png", "3.png", "4.png", "5.png", "6.png", "7.png", "8.png", "9.png", "10.png" ]
 } ];
 
 Ti.API.KANGO = "http://kango.dev.leverages.vn/";
