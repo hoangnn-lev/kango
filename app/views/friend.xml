@@ -4,8 +4,11 @@
 			<View id="title">
 				<Label width="Ti.UI.SIZE" color="#fff" text="勤務メンバー設定"/>
 			</View>
-			<TableView separatorColor="#ccc" editable="true" id="friendList"/>
+			<ScrollView layout="vertical" top="0" height="Ti.UI.FILL">
+				<View separatorColor="#ccc" id="friendList"/>
+				<Button id="addFriend" title="＋メンバーを追加"/>
+			</ScrollView>
 		</View>
-		<Button id="addFriend" title="＋メンバーを追加"/>
+
 	</Window>
 </Alloy>

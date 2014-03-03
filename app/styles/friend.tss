@@ -13,7 +13,8 @@
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL,
 	top:0,
-	bottom:'120dp'
+	bottom:'20dp',
+	layout:'vertical'
 },
 "#blockFriend":{
 	height:Ti.UI.FILL,

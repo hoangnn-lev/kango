@@ -201,7 +201,6 @@ function getEvent(day) {
  * output : void
  * */
 function addEvent(e) {
-
 	openView('edit_event', {
 		data : {
 			day : choiceDay.format('YYYY-MM-DD')

@@ -1,0 +1,12 @@
+<Alloy>
+	<Window>
+		<View id="main">
+			<View id="title">
+				<Label width="Ti.UI.SIZE" color="#fff" text="Kango について"/>
+			</View>
+			<View id="content">
+				<Label width="Ti.UI.SIZE" text="について"/>
+			</View>
+		</View>
+	</Window>
+</Alloy>

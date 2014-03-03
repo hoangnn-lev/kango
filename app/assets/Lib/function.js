@@ -147,6 +147,7 @@ exports.loadShiftsList = function(view, selectedShift) {
 					className : 'button-status'
 				});
 				button.addEventListener('click', function(e) {
+					Ti.API.activeTab = 4;
 					openView('shift_setting');
 				});
 
@@ -402,7 +403,7 @@ exports.writeLogImg = function(img) {
 	} else {
 		var get_img = JSON.parse(myFile.read().toString()), temp = [];
 
-		for (var i = 0; i < 10; i++) {
+		for (var i = 0; i < 9; i++) {
 			if (get_img[i] && get_img[i] != img) {
 				temp.push(get_img[i]);
 			}

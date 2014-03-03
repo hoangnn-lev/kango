@@ -108,6 +108,7 @@ exports.loadShiftsList = function(view, selectedShift) {
                 className: "button-status"
             });
             button.addEventListener("click", function() {
+                Ti.API.activeTab = 4;
                 openView("shift_setting");
             });
             var nt = 0;
@@ -277,7 +278,7 @@ exports.writeLogImg = function(img) {
     var myFile = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "log_selected_img.txt");
     if (myFile.exists()) {
         var get_img = JSON.parse(myFile.read().toString()), temp = [];
-        for (var i = 0; 10 > i; i++) get_img[i] && get_img[i] != img && temp.push(get_img[i]);
+        for (var i = 0; 9 > i; i++) get_img[i] && get_img[i] != img && temp.push(get_img[i]);
         temp.unshift(img);
         myFile.write(JSON.stringify(temp));
     } else myFile.write(JSON.stringify(list_img));

@@ -2,11 +2,19 @@
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL
 },
+"#main":{
+	top:0,
+	layout:'vertical'
+},
 "Label":{
 	width:Ti.UI.SIZE,
-	top:0,
 	height:Ti.UI.SIZE,
 	zIndex:0
+},
+"#title":{
+	height:'40dp',
+	backgroundColor:'#ed829c',
+	top:0
 },
 "Button":{
 	zIndex:0

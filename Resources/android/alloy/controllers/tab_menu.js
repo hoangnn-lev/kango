@@ -10,6 +10,7 @@ function Controller() {
         backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp",
+        layout: "horizontal",
         top: "0",
         id: "tabMenu"
     });
@@ -17,48 +18,27 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.dpi / 160);
-    var deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
+    Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
     var activeTab;
-    var menu = Ti.API.TABMENU, activeColor = "#ed829c";
+    var menu = Ti.API.TABMENU;
     for (var i = 0, n = menu.length; n > i; i++) {
-        var menuItemWidth = deviceWidth / n;
         activeTab = i + 1;
-        var view = Ti.UI.createView({
-            width: menuItemWidth + "dp",
+        var button = Ti.UI.createImageView({
+            width: "25%",
             height: "50dp",
-            left: i * menuItemWidth + "dp",
+            image: menu[i].img,
             action: menu[i].action,
             tab: activeTab
         });
-        if (Ti.API.activeTab || 1 != i) Ti.API.activeTab && i + 1 == Ti.API.activeTab && view.setBackgroundColor(activeColor); else {
+        if (Ti.API.activeTab || 1 != i) Ti.API.activeTab && i + 1 == Ti.API.activeTab && button.setImage(menu[i].img_active); else {
             Ti.API.activeTab = activeTab;
-            view.setBackgroundColor(activeColor);
+            button.setImage(menu[i].img_active);
         }
-        view.add(Ti.UI.createImageView({
-            image: menu[i].img,
-            height: "22dp",
-            width: "22dp",
-            zIndex: 0,
-            top: "3dp",
-            touchEnabled: false,
-            className: "menu"
-        }));
-        view.add(Ti.UI.createLabel({
-            text: menu[i].text,
-            font: {
-                fontSize: "11dp"
-            },
-            color: "#fff",
-            zIndex: 0,
-            top: "28dp",
-            touchEnabled: false,
-            className: "menu-text"
-        }));
-        view.addEventListener("click", function(e) {
+        button.addEventListener("click", function(e) {
             Ti.API.activeTab = e.source.tab;
             openView(e.source.action);
         });
-        $.tabMenu.add(view);
+        $.tabMenu.add(button);
     }
     _.extend($, exports);
 }

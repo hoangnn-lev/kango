@@ -10,34 +10,44 @@ function Controller() {
         row.push(Ti.UI.createTableView());
         for (var i = 0; n > i; i++) {
             var createRow = customeRowFriend(friendList[i].get("id"), friendList[i].get("name"), friendList[i].get("status"));
-            row.push(createRow);
+            $.friendList.add(createRow);
         }
-        $.friendList.setData(row);
     }
     function customeRowFriend(id, name, friend_status) {
         friend_status = 0 == friend_status ? false : true;
-        var row = Ti.UI.createTableViewRow({
-            selectionStyle: "none",
-            selectedBackgroundColor: "transparent",
-            className: "row-friend"
+        var row = Ti.UI.createView({
+            height: Ti.UI.SIZE
         });
-        row.setBackgroundColor(friend_status ? "#fff" : "#f0f0f0");
+        row.setBackgroundColor(friend_status ? "#fff" : "#e6e3d9");
         row.label = Ti.UI.createTextField({
             left: "10dp",
             height: "40dp",
-            width: Ti.UI.FILL,
-            hintText: "Enter name",
+            width: "200dp",
+            hintText: "名前",
             value: name,
             id: id,
+            status: friend_status,
             font: {
                 fontSize: "15dp"
             },
             backgroundColor: "transparent",
             color: "#676767",
             maxLength: 8,
+            zIndex: 9,
             className: "friend-name"
         });
-        row.label.addEventListener("change", function() {});
+        row.label.addEventListener("change", function(e) {
+            var data = {
+                id: id,
+                name: e.source.value,
+                status: 1
+            };
+            var friendModel = Alloy.Collections.friend;
+            var friend = Alloy.createModel("friend", data);
+            friendModel.add(friend);
+            friend.save();
+            delete_view("schedule");
+        });
         row.status = Ti.UI.createButton({
             height: "25dp",
             width: "70dp",
@@ -51,14 +61,14 @@ function Controller() {
             color: "#fff",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
-            zIndex: "10",
+            zIndex: 10,
+            textAlign: "center",
             className: "button-status"
         });
         row.status.addEventListener("click", function(e) {
             var checkStatus = e.source.friend_status;
-            row.setBackgroundColor(checkStatus ? "#f0f0f0" : "#fff");
-            this.setTitle(checkStatus ? "OFF" : "ON");
-            this.setBackgroundColor(checkStatus ? "#ccc" : "#f3acbd");
+            row.status.setBackgroundColor(checkStatus ? "#ccc" : "#f3acbd");
+            row.status.setTitle(checkStatus ? "OFF" : "ON");
             e.source.friend_status = !checkStatus;
             var friendModel = Alloy.Collections.friend;
             var data = {
@@ -69,10 +79,16 @@ function Controller() {
             var friend = Alloy.createModel("friend", data);
             friendModel.add(friend);
             friend.save();
-            delete_view("schedule");
+            this.getParent().setBackgroundColor(checkStatus ? "#e6e3d9" : "#fff");
         });
         row.add(row.label);
         row.add(row.status);
+        row.add(Ti.UI.createLabel({
+            backgroundColor: "#eeeeee",
+            height: "1sp",
+            width: Ti.UI.FILL,
+            bottom: 0
+        }));
         return row;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
@@ -104,7 +120,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId17 = Ti.UI.createLabel({
+    $.__views.__alloyId19 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -113,19 +129,27 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "勤務メンバー設定",
-        id: "__alloyId17"
+        id: "__alloyId19"
     });
-    $.__views.title.add($.__views.__alloyId17);
-    $.__views.friendList = Ti.UI.createTableView({
+    $.__views.title.add($.__views.__alloyId19);
+    $.__views.__alloyId20 = Ti.UI.createScrollView({
+        top: "0",
+        bottom: 20,
+        layout: "vertical",
+        height: Ti.UI.FILL,
+        id: "__alloyId20"
+    });
+    $.__views.main.add($.__views.__alloyId20);
+    $.__views.friendList = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: 0,
-        bottom: "120dp",
+        bottom: "20dp",
+        layout: "vertical",
         separatorColor: "#ccc",
-        editable: "true",
         id: "friendList"
     });
-    $.__views.main.add($.__views.friendList);
+    $.__views.__alloyId20.add($.__views.friendList);
     $.__views.addFriend = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -145,17 +169,18 @@ function Controller() {
         id: "addFriend",
         title: "＋メンバーを追加"
     });
-    $.__views.friend.add($.__views.addFriend);
+    $.__views.__alloyId20.add($.__views.addFriend);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var friendList;
     loadFriend();
     $.friend.addEventListener("android:back", function() {
+        Ti.API.activeTab = 2;
         openView("schedule");
     });
     $.addFriend.addEventListener("click", function() {
-        if ($.friendList.data[0] && $.friendList.data[0].rows.length > 50) {
-            alert("You can add max 50 friend");
+        if ($.friendList.getChildren().length > 50) {
+            alert("人数制限は50人");
             return;
         }
         var friendModel = Alloy.Collections.friend;
@@ -165,7 +190,7 @@ function Controller() {
         });
         friendModel.add(friend);
         friend.save();
-        $.friendList.appendRow(customeRowFriend(friend.get("id"), ""), 1);
+        $.friendList.add(customeRowFriend(friend.get("id"), ""), 1);
         delete_view("schedule");
     });
     _.extend($, exports);

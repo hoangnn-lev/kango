@@ -15,6 +15,7 @@ function Controller() {
         backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp",
+        layout: "horizontal",
         id: "tabMenu",
         __parentSymbol: $.__views.shift_setting
     });
@@ -163,6 +164,7 @@ function Controller() {
     }
     $.shift.setData(row);
     $.shift_setting.addEventListener("android:back", function() {
+        Ti.API.activeTab = 1;
         openView("shift");
     });
     _.extend($, exports);

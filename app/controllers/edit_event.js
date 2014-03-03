@@ -1,7 +1,7 @@
 var args = arguments[0] || {}, date = (args['data'].day).split('-'), get_data;
 var scheduleDetailModel = Alloy.Collections.schedule_detail;
 Ti.API.selectedIcon = '';
-
+Ti.API.activeTab = 2;
 if (args['data'].id) {
 
 	scheduleDetailModel.fetch({

@@ -4,19 +4,19 @@ Ti.include('activityScreen.js');
 Ti.API.TABMENU = [{
 	img : '/tabmenu/shift.png',
 	action : 'shift',
-	text : 'シフト入力'
+	img_active : '/tabmenu/shift_active.png'
 }, {
 	img : '/tabmenu/schedule.png',
 	action : 'schedule',
-	text : '月カレンダー'
+	img_active : '/tabmenu/schedule_active.png'
 }, {
 	img : '/tabmenu/share.png',
 	action : 'share',
-	text : 'シフト共有'
+	img_active : '/tabmenu/share_active.png'
 }, {
 	img : '/tabmenu/setting.png',
 	action : 'setting',
-	text : 'その他'
+	img_active : '/tabmenu/setting_active.png'
 }];
 
 Ti.API.ICON = [{

@@ -1,0 +1,20 @@
+"#main":{
+	height:Ti.UI.FILL,
+	layout:'vertical',
+	top:0
+},
+"View":{
+	height:Ti.UI.SIZE,
+	width:Ti.UI.FILL
+},
+"#title":{
+	height:'40dp',
+	backgroundColor:'#ed829c',
+	top:0
+},
+"#content":{
+	left:'10dp',
+	right:'10dp',
+	width:Ti.UI.FILL,
+	height:Ti.UI.FILL
+}

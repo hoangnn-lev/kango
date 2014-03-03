@@ -112,6 +112,7 @@ function Controller() {
         backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp",
+        layout: "horizontal",
         id: "tabMenu",
         __parentSymbol: $.__views.shift
     });

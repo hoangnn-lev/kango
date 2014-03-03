@@ -8,7 +8,7 @@ var button = {
 		text : 'OFF',
 		bg : '#ccc'
 	}
-}, dayOffset = 0, showMember = 0, configs = Alloy.Collections.configs;
+}, dayOffset = 0, showMember = 0, configs = Alloy.Collections.configs, guide_flag = false;
 
 configs.fetch({
 	query : 'select id,cg_value from configs where cg_name="dayOffset" or cg_name="showMember"'
@@ -46,6 +46,7 @@ function changeDayOffset(e) {
 
 	//reload schedule
 	delete_view('schedule');
+	delete_view('shift');
 }
 
 function showMember() {
@@ -68,7 +69,9 @@ function showMember() {
 
 //add back button
 $.setting.addEventListener('android:back', function(e) {
-	openView('schedule');
+	Ti.API.activeTab = guide_flag !== false ? 4 : 2;
+	guide_flag !== false ? $.setting.remove(guide_flag) : openView('schedule');
+	guide_flag = false;
 });
 
 function edit_members() {
@@ -81,27 +84,53 @@ function shift_setting() {
 
 function guideUseCalendar() {
 
-	var win = Ti.UI.createView();
-
-	var view = [];
+	var win = Ti.UI.createView(), view = [];
 
 	view.push(Ti.UI.createView({
-		backgroundColor : '#ccc',
+		backgroundImage : '/tutorial/step01.png',
 		height : Ti.UI.FILL,
 		width : Ti.UI.FILL,
 	}));
 
 	view.push(Ti.UI.createView({
-		backgroundColor : '#ffb373',
+		backgroundImage : '/tutorial/step02.png',
 		height : Ti.UI.FILL,
 		width : Ti.UI.FILL,
 	}));
 
 	view.push(Ti.UI.createView({
-		backgroundColor : '#075149',
+		backgroundImage : '/tutorial/step03.png',
 		height : Ti.UI.FILL,
 		width : Ti.UI.FILL,
 	}));
+
+	var step_final = Ti.UI.createView({
+		backgroundImage : '/tutorial/step04.png',
+		height : Ti.UI.FILL,
+		width : Ti.UI.FILL,
+	});
+
+	var close = Ti.UI.createButton({
+		bottom : '80dp',
+		zIndex : 3,
+		font : {
+			fontSize : '14dp'
+		},
+		backgroundImage : '/tutorial/btnUse.png',
+		backgroundSelectedImage : '/tutorial/btnUse_action.png',
+		backgroundFocusedImage : '/tutorial/btnUse_action.png',
+		width : '250dp',
+		height : '39dp'
+	});
+	close.addEventListener('click', function(e) {
+		guide_flag = false;
+		openView('schedule');
+		$.setting.remove(win);
+	});
+	step_final.add(close);
+
+	view.push(step_final);
+
 	var scrollView = Ti.UI.createScrollableView({
 		showPagingControl : false,
 		id : 'intro',
@@ -110,35 +139,20 @@ function guideUseCalendar() {
 		views : view,
 		currentPage : 0,
 		pagingControlColor : 'transparent',
-		zIndex : 2
-
+		zIndex : 2,
+		showPagingControl : true
 	});
-	var close = Ti.UI.createButton({
-		opacity : .8,
-		bottom : '10dp',
-		title : 'クローズ',
-		zIndex : 3,
-		textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER,
-		width : '100dp',
-		font : {
-			fontSize : '14dp'
-		},
-		height : '40dp',
-		backgroundColor : '#fff',
-		color : '#000',
-		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-		borderRadius : 10,
-	});
-	close.addEventListener('click', function(e) {
-		$.setting.remove(win);
-	});
-	win.add(close);
+	guide_flag = win;
 	win.add(scrollView);
 	$.setting.add(win);
 }
 
 $.allHospital.addEventListener('click', function(e) {
 	openView('hospital');
+});
+
+$.about.addEventListener('click', function(e) {
+	openView('about');
 });
 
 $.report.addEventListener('click', function(e) {

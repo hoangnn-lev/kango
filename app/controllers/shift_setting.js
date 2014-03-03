@@ -125,6 +125,7 @@ $.shift.setData(row);
 
 //add back button
 $.shift_setting.addEventListener('android:back', function(e) {
+	Ti.API.activeTab = 1;
 	openView('shift');
 });
 

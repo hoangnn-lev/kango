@@ -2,7 +2,7 @@
 	<Window>
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
-			<View id="content" layout="vertical">
+			<ScrollView id="content" layout="vertical">
 				<View height="60dp" width="120dp">
 					<Label id="date"/>
 					<Label id="dayName"/>
@@ -35,7 +35,7 @@
 					backgroundSelectedColor = '#e6a3b3'
 					title="保存"/>
 				</View>
-			</View>
+			</ScrollView>
 		</View>
 	</Window>
 </Alloy>

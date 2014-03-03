@@ -19,6 +19,7 @@ function Controller() {
         backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
         height: "50dp",
+        layout: "horizontal",
         id: "tabMenu",
         __parentSymbol: $.__views.edit_member
     });
@@ -30,13 +31,13 @@ function Controller() {
         id: "main"
     });
     $.__views.edit_member.add($.__views.main);
-    $.__views.__alloyId6 = Ti.UI.createView({
+    $.__views.__alloyId8 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
-        id: "__alloyId6"
+        id: "__alloyId8"
     });
-    $.__views.__alloyId7 = Ti.UI.createView({
+    $.__views.__alloyId9 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         left: "10dp",
@@ -44,10 +45,10 @@ function Controller() {
         layout: "vertical",
         bottom: "10dp",
         top: "10dp",
-        id: "__alloyId7"
+        id: "__alloyId9"
     });
-    $.__views.__alloyId6.add($.__views.__alloyId7);
-    $.__views.__alloyId8 = Ti.UI.createLabel({
+    $.__views.__alloyId8.add($.__views.__alloyId9);
+    $.__views.__alloyId10 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -57,10 +58,10 @@ function Controller() {
         },
         zIndex: "0",
         text: "メンバー名(最大8文字) ",
-        id: "__alloyId8"
+        id: "__alloyId10"
     });
-    $.__views.__alloyId7.add($.__views.__alloyId8);
-    $.__views.__alloyId9 = Ti.UI.createTextField({
+    $.__views.__alloyId9.add($.__views.__alloyId10);
+    $.__views.__alloyId11 = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
         width: Ti.UI.FILL,
@@ -69,10 +70,10 @@ function Controller() {
         borderRadius: 0,
         borderColor: "#fff",
         hintText: "アサコ先輩",
-        id: "__alloyId9"
+        id: "__alloyId11"
     });
-    $.__views.__alloyId7.add($.__views.__alloyId9);
-    $.__views.__alloyId10 = Ti.UI.createLabel({
+    $.__views.__alloyId9.add($.__views.__alloyId11);
+    $.__views.__alloyId12 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "red",
@@ -82,27 +83,27 @@ function Controller() {
         },
         zIndex: "0",
         text: "※文字数が多すぎます",
-        id: "__alloyId10"
+        id: "__alloyId12"
     });
-    $.__views.__alloyId7.add($.__views.__alloyId10);
-    var __alloyId12 = [];
-    __alloyId12.push("キャンセル");
-    __alloyId12.push("保存する");
+    $.__views.__alloyId9.add($.__views.__alloyId12);
+    var __alloyId14 = [];
+    __alloyId14.push("キャンセル");
+    __alloyId14.push("保存する");
     $.__views.dialog = Ti.UI.createAlertDialog({
-        androidView: $.__views.__alloyId6,
-        buttonNames: __alloyId12,
+        androidView: $.__views.__alloyId8,
+        buttonNames: __alloyId14,
         id: "dialog",
         title: "お知らせ",
         cancel: "1"
     });
-    $.__views.__alloyId6 = Ti.UI.createView({
+    $.__views.__alloyId8 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
-        id: "__alloyId6"
+        id: "__alloyId8"
     });
-    $.__views.dialog.add($.__views.__alloyId6);
-    $.__views.__alloyId7 = Ti.UI.createView({
+    $.__views.dialog.add($.__views.__alloyId8);
+    $.__views.__alloyId9 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         left: "10dp",
@@ -110,10 +111,10 @@ function Controller() {
         layout: "vertical",
         bottom: "10dp",
         top: "10dp",
-        id: "__alloyId7"
+        id: "__alloyId9"
     });
-    $.__views.__alloyId6.add($.__views.__alloyId7);
-    $.__views.__alloyId8 = Ti.UI.createLabel({
+    $.__views.__alloyId8.add($.__views.__alloyId9);
+    $.__views.__alloyId10 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -123,10 +124,10 @@ function Controller() {
         },
         zIndex: "0",
         text: "メンバー名(最大8文字) ",
-        id: "__alloyId8"
+        id: "__alloyId10"
     });
-    $.__views.__alloyId7.add($.__views.__alloyId8);
-    $.__views.__alloyId9 = Ti.UI.createTextField({
+    $.__views.__alloyId9.add($.__views.__alloyId10);
+    $.__views.__alloyId11 = Ti.UI.createTextField({
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         bottom: "10",
         width: Ti.UI.FILL,
@@ -135,10 +136,10 @@ function Controller() {
         borderRadius: 0,
         borderColor: "#fff",
         hintText: "アサコ先輩",
-        id: "__alloyId9"
+        id: "__alloyId11"
     });
-    $.__views.__alloyId7.add($.__views.__alloyId9);
-    $.__views.__alloyId10 = Ti.UI.createLabel({
+    $.__views.__alloyId9.add($.__views.__alloyId11);
+    $.__views.__alloyId12 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "red",
@@ -148,18 +149,18 @@ function Controller() {
         },
         zIndex: "0",
         text: "※文字数が多すぎます",
-        id: "__alloyId10"
+        id: "__alloyId12"
     });
-    $.__views.__alloyId7.add($.__views.__alloyId10);
-    $.__views.__alloyId15 = Ti.UI.createView({
+    $.__views.__alloyId9.add($.__views.__alloyId12);
+    $.__views.__alloyId17 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ff3974",
         top: "0",
-        id: "__alloyId15"
+        id: "__alloyId17"
     });
-    $.__views.main.add($.__views.__alloyId15);
-    $.__views.__alloyId16 = Ti.UI.createLabel({
+    $.__views.main.add($.__views.__alloyId17);
+    $.__views.__alloyId18 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -169,9 +170,9 @@ function Controller() {
         },
         text: "タップで名前を変更できます",
         left: "10dp",
-        id: "__alloyId16"
+        id: "__alloyId18"
     });
-    $.__views.__alloyId15.add($.__views.__alloyId16);
+    $.__views.__alloyId17.add($.__views.__alloyId18);
     $.__views.members = Ti.UI.createTableView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,

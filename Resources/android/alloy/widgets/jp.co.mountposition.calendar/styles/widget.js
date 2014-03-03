@@ -173,6 +173,7 @@ module.exports = [ {
     style: {
         backgroundColor: "#f3acbd",
         width: Ti.UI.FILL,
-        height: "50dp"
+        height: "50dp",
+        layout: "horizontal"
     }
 } ];
