@@ -35,16 +35,20 @@ $.share_by_image.addEventListener('android:back', function(e) {
 
 function share(e) {
 	var day = lastValue['month'];
-
-	var f = Alloy.createController('shift', {
+	var f = Alloy.createController('schedule', {
 		date : day.getFullYear() + '-' + (day.getMonth() + 1) + '-' + day.getDate()
-	}).getView('calendar').toImage();
+	}).getView('days').toImage().media;
 
-	$.save.setImage(f);
-	//Ti.Platform.openURL('line://msg/image/' + f);
-
-	var emailDialog = Titanium.UI.createEmailDialog();
-	emailDialog.addAttachment(f);
-	emailDialog.open();
+	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.externalStorageDirectory, 'shift.png');
+	file.write(f);
+	
+	if (e.source.type == 'line')
+		Ti.Platform.openURL('line://msg/image/' + file) ? '' : alert('Lineがインストールされていませんでした。。。');
+	else {
+		var emailDialog = Titanium.UI.createEmailDialog();
+		emailDialog.addAttachment(file);
+		emailDialog.setSubject('シフト共有');
+		emailDialog.open();
+	}
 }
 

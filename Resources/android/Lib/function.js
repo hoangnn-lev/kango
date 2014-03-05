@@ -108,8 +108,9 @@ exports.loadShiftsList = function(view, selectedShift) {
                 className: "button-status"
             });
             button.addEventListener("click", function() {
-                Ti.API.activeTab = 4;
-                openView("shift_setting");
+                openView("shift_setting", {
+                    tab: 1
+                });
             });
             var nt = 0;
             2 == n || 6 == n ? nt = 0 : 1 == n || 5 == n || 9 == n ? nt = 1 : 4 == n || 8 == n || 0 == n ? nt = 2 : (3 == n || 7 == n) && (nt = 3);

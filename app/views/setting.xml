@@ -8,11 +8,11 @@
 				<Button class="item" onClick="shift_setting"  title="シフトの設定" />
 				<Button class="item"  onClick="edit_members" title="勤務メンバーの設定"/>
 				<View class="item">
-					<Label color="#000" top="5dp" text="勤務メンバーを表示する"/>
-					<Button  class="off" onClick="showMember" id="showMember"  title="OFF" />
+					<Label class="sTitle" text="勤務メンバーを表示する"/>
+					<Button class="off" onClick="showMember" id="showMember"  title="OFF" />
 				</View>
 				<View class="item">
-					<Label color="#000" top="5dp" text="カレンダーを月曜始まりにする"/>
+					<Label class="sTitle"  text="カレンダーを月曜始まりにする"/>
 					<Button id="monday_set" onClick="changeDayOffset" class="off" title="OFF" />
 				</View>
 				<Button class="item" id="allHospital" title="全国の病院情報をみる"/>

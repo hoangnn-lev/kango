@@ -69,7 +69,8 @@ function saveSchedule(e) {
 }
 
 function timeSet(e) {
-
+	$.title.blur();
+	$.memo.blur();
 	if (e.source.type == 'delete')
 		return;
 
@@ -146,5 +147,4 @@ $.cancel.addEventListener('click', function(e) {
 	}
 
 });
-
 

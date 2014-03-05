@@ -27,10 +27,14 @@ function Controller() {
         delete_view("schedule");
     }
     function edit_members() {
-        openView("friend");
+        openView("friend", {
+            tab: 4
+        });
     }
     function shift_setting() {
-        openView("shift_setting");
+        openView("shift_setting", {
+            tab: 4
+        });
     }
     function guideUseCalendar() {
         var win = Ti.UI.createView({
@@ -226,7 +230,7 @@ function Controller() {
         color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "16sp"
+            fontSize: "14dp"
         },
         zIndex: 0,
         top: "5dp",
@@ -276,7 +280,7 @@ function Controller() {
         color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "16sp"
+            fontSize: "14dp"
         },
         zIndex: 0,
         top: "5dp",
@@ -461,7 +465,6 @@ function Controller() {
         var emailDialog = Titanium.UI.createEmailDialog();
         emailDialog.setSubject("不具合やエラーのお問い合わせ");
         emailDialog.setToRecipients([ "hoangnn@leverages.jp" ]);
-        emailDialog.addEventListener("complete", function() {});
         emailDialog.open();
     });
     __defers["$.__views.__alloyId64!click!shift_setting"] && $.__views.__alloyId64.addEventListener("click", shift_setting);

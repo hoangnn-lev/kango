@@ -174,10 +174,11 @@ function Controller() {
     exports.destroy = function() {};
     _.extend($, $.__views);
     var friendList;
+    var args = arguments[0] || {};
     loadFriend();
     $.friend.addEventListener("android:back", function() {
-        Ti.API.activeTab = 2;
-        openView("schedule");
+        Ti.API.activeTab = args["tab"];
+        openView(2 == args["tab"] ? "schedule" : "setting");
     });
     $.addFriend.addEventListener("click", function() {
         if ($.friendList.getChildren().length > 50) {

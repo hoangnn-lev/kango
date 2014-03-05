@@ -7,7 +7,7 @@
 			<View id="content">
 				<View top="10dp" bottom="10dp">
 					<Label id="shiftName"/>
-					<TextField maxLength="2" hintText="日勤" id="shiftAlias"/>
+					<TextField  hintText="日勤" id="shiftAlias"/>
 					<Label left="230dp" class="smallText" text="2文字以内"/>
 				</View>
 				<View class="timeSet">
@@ -19,12 +19,12 @@
 				<Label class="smallText" text="スタンプ"/>
 				<View id="groupShiftColor"/>
 				<View id="groupButton">
-					<Button id="saveShift" class="button"
+					<Button onClick="shift_setting" class="button"
 					backgroundColor = '#f3acbd' left="0"
 					backgroundFocusedColor = '#e6a3b3'
 					backgroundSelectedColor = '#e6a3b3'
 					title="キャンセル"/>
-					<Button onClick="shift_setting" right="0"   class="button"
+					<Button id="saveShift" right="0"   class="button"
 					backgroundColor = '#cfba9c'
 					backgroundFocusedColor = '#c0ad91'
 					backgroundSelectedColor = '#c0ad91'

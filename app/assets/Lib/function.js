@@ -147,8 +147,9 @@ exports.loadShiftsList = function(view, selectedShift) {
 					className : 'button-status'
 				});
 				button.addEventListener('click', function(e) {
-					Ti.API.activeTab = 4;
-					openView('shift_setting');
+					openView('shift_setting', {
+						tab : 1
+					});
 				});
 
 				var nt = 0;
@@ -418,7 +419,6 @@ exports.readLogImg = function() {
 	return myFile.exists() ? JSON.parse(myFile.read().toString()) : [];
 };
 
-
 exports.pagingControl = function(scrollableView) {
 	var container = Titanium.UI.createView({
 		height : Ti.UI.FILL,
@@ -541,8 +541,7 @@ exports.pagingControl = function(scrollableView) {
 				imageRightArrow.image = '/tutorial/empty.png';
 				viewLeftArrow.selected = true;
 				viewRightArrow.selected = false;
-				
-				
+
 			}
 		}
 	};

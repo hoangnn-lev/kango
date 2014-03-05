@@ -22,6 +22,8 @@ function Controller() {
         });
     }
     function timeSet(e) {
+        $.title.blur();
+        $.memo.blur();
         if ("delete" == e.source.type) return;
         var get_time = new Date(), child = this.getChildren();
         var time = child[1].text ? child[1].text.split(":") : [ 0, 0 ];

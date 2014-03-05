@@ -42,29 +42,30 @@ function Controller() {
         text: "タップで名前を変更できます"
     });
     $.__views.main.add($.__views.title);
-    $.__views.shift = Ti.UI.createTableView({
+    $.__views.shift = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: "20dp",
-        separatorColor: "#eeeeee",
+        layout: "vertical",
         id: "shift"
     });
     $.__views.main.add($.__views.shift);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var shiftsCols = Alloy.Collections.shifts;
+    var args = arguments[0] || {};
     var btnActiveBg = "#f3acbd", textActive = "使う", btnDeativeBg = "#e6e6e6", textDeactive = "要らない";
     shiftsCols.fetch({
         query: "SELECT * from shifts"
     });
     var n = shiftsCols.models.length;
     var shift = shiftsCols.models;
-    var row = [];
     for (var i = 0; n > i; i++) {
-        var item = Ti.UI.createTableViewRow({
+        var item = Ti.UI.createView({
             touchEnabled: false,
-            selectionStyle: "none",
-            selectedBackgroundColor: "transparent"
+            selectedBackgroundColor: "transparent",
+            width: Ti.UI.FILL,
+            height: Ti.UI.SIZE
         });
         var button = Ti.UI.createButton({
             backgroundColor: shift[i].get("color"),
@@ -88,17 +89,6 @@ function Controller() {
         });
         item.add(button);
         item.add(Ti.UI.createLabel({
-            left: "100dp",
-            text: shift[i].get("label"),
-            font: {
-                fontSize: "15dp"
-            },
-            color: "#676767",
-            touchEnabled: false,
-            className: "row-left-alias"
-        }));
-        item.add(Ti.UI.createLabel({
-            left: "160dp",
             text: shift[i].get("time"),
             font: {
                 fontSize: "15dp"
@@ -160,12 +150,17 @@ function Controller() {
             delete_view("shift");
         });
         item.add(button);
-        row.push(item);
+        item.add(Ti.UI.createLabel({
+            backgroundColor: "#eeeeee",
+            height: "1sp",
+            width: Ti.UI.FILL,
+            bottom: 0
+        }));
+        $.shift.add(item);
     }
-    $.shift.setData(row);
     $.shift_setting.addEventListener("android:back", function() {
-        Ti.API.activeTab = 1;
-        openView("shift");
+        Ti.API.activeTab = args["tab"];
+        openView(1 == args["tab"] ? "shift" : "setting");
     });
     _.extend($, exports);
 }

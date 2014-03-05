@@ -1,6 +1,6 @@
 function Controller() {
     function loadColorBox(selected) {
-        var color = [ "#e68200", "#f19c98", "#ffe498", "#25b4a5", "#51b11d ", "#b9e0a5", "#d7e682", "#286bcc", "#f3acbd", "#d3e1f5", "#ccc", "#fff" ];
+        var color = [ "#e68200", "#f19c98", "#ffe498", "#25b4a5", "#51b11d ", "#b9e0a5", "#d7e682", "#286bcc", "#f3acbd", "#d3e1f5", "#cccccc", "#fff" ];
         var column = 4, record = color.length, row = Math.ceil(record / column), count = 0;
         for (var i = 0; row > i; i++) for (var j = 0; column > j; j++) {
             if (count >= record) return;
@@ -30,6 +30,7 @@ function Controller() {
         }
     }
     function timeSet(e1) {
+        $.shiftAlias.blur();
         var get_time = new Date();
         var picker = Titanium.UI.createPicker({
             type: Titanium.UI.PICKER_TYPE_TIME,
@@ -37,7 +38,7 @@ function Controller() {
             useSpinner: true,
             selectionIndicator: true
         });
-        if (e1.source.text) {
+        if ("開始時間" != e1.source.text || "終了時間" != e1.source.text) {
             getTime = e1.source.text.split(":");
             get_time.setHours(getTime[0]);
             get_time.setMinutes(getTime[1]);
@@ -47,7 +48,6 @@ function Controller() {
             format24: true,
             callback: function(e) {
                 if (!e.cancel) {
-                    time[e1.source.type] = e.value;
                     var end, start, result = e.value;
                     var hours = pad_2(result.getHours()), min = ":" + pad_2(result.getMinutes());
                     end = result.getHours() + 8 > 23 ? result.getHours() - 16 : result.getHours() + 8;
@@ -155,7 +155,6 @@ function Controller() {
         },
         height: "35dp",
         left: "120dp",
-        maxLength: "2",
         hintText: "日勤",
         id: "shiftAlias"
     });
@@ -257,7 +256,7 @@ function Controller() {
         id: "groupButton"
     });
     $.__views.content.add($.__views.groupButton);
-    $.__views.saveShift = Ti.UI.createButton({
+    $.__views.__alloyId88 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "45%",
         font: {
@@ -272,12 +271,13 @@ function Controller() {
         borderRadius: "15",
         zIndex: 0,
         top: "15dp",
-        id: "saveShift",
         left: "0",
-        title: "キャンセル"
+        title: "キャンセル",
+        id: "__alloyId88"
     });
-    $.__views.groupButton.add($.__views.saveShift);
-    $.__views.__alloyId88 = Ti.UI.createButton({
+    $.__views.groupButton.add($.__views.__alloyId88);
+    shift_setting ? $.__views.__alloyId88.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId88!click!shift_setting"] = true;
+    $.__views.saveShift = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "45%",
         font: {
@@ -292,12 +292,11 @@ function Controller() {
         borderRadius: "15",
         zIndex: 0,
         top: "15dp",
+        id: "saveShift",
         right: "0",
-        title: "保存する",
-        id: "__alloyId88"
+        title: "保存する"
     });
-    $.__views.groupButton.add($.__views.__alloyId88);
-    shift_setting ? $.__views.__alloyId88.addEventListener("click", shift_setting) : __defers["$.__views.__alloyId88!click!shift_setting"] = true;
+    $.__views.groupButton.add($.__views.saveShift);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var shift, status, alias, label, args = arguments[0] || {}, selectedColor = "", shiftsCols = Alloy.Collections.shifts;
@@ -319,13 +318,16 @@ function Controller() {
     loadColorBox(shift.get("color"));
     $.saveShift.addEventListener("click", function() {
         var color, time, alias = $.shiftAlias.getValue(), timeStart = $.timeStart.getText(), timeEnd = $.timeEnd.getText();
-        if (!alias || !timeStart || !timeEnd) {
-            alias ? "" : alert("シフト名を入力してください");
-            timeStart ? "" : alert("開始時間を入力してください。");
-            timeEnd ? "" : alert("終了時間を入力してください。");
+        if (!alias) {
+            alert("シフト名を入力してください");
             return;
         }
-        time = timeStart + "-" + timeEnd;
+        if (alias.length > 2) {
+            alert("2文字を超えましたが、再入力してください。");
+            return;
+        }
+        time = ("開始時間" != timeStart ? timeStart : "") + "-" + ("終了時間" != timeEnd ? timeEnd : "");
+        time = "-" != time ? time : "";
         color = selectedColor.getBackgroundColor();
         var _shift_data = {
             id: args["id"],
@@ -339,8 +341,8 @@ function Controller() {
         Alloy.Collections.shifts.add(shift);
         shift.save();
         Alloy.Collections.shifts.fetch();
-        delete_view("shift");
         delete_view("shift_setting");
+        delete_view("shift");
         delete_view("share_by_text");
         shift_setting();
     });

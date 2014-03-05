@@ -164,7 +164,7 @@ function getEvent(day) {
 			});
 		}
 
-		if (data[i].get('start_time')) {
+		if (data[i].get('start_time') || data[i].get('end_time')) {
 			row.add(Ti.UI.createLabel({
 				text : data[i].get('start_time') + '~' + data[i].get('end_time'),
 				font : {
@@ -389,21 +389,15 @@ function openAllFriend() {
 		curve : Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
 	});
 
-	// var t = Ti.UI.create2DMatrix();
-	// var spin = Titanium.UI.createAnimation();
-	// t = t.rotate( on_flag ? 180 : 0);
-	// spin.transform = t;
-	// spin.duration = 200;
-	// $.openAllFriend.animate(spin);
-
 	$.openAllFriend.setImage( on_flag ? '/icons/btn_Close.png' : '/icons/btn_Open.png');
-
 	on_flag = !on_flag;
 
 }
 
 $.editFriend.addEventListener('click', function() {
-	openView('friend');
+	openView('friend', {
+		tab : 2
+	});
 });
 
 function getAllFriend() {

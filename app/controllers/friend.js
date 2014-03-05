@@ -1,12 +1,13 @@
 var on_flag = true;
 var friendList;
-
+var args = arguments[0] || {};
 loadFriend();
 
 //add back button
 $.friend.addEventListener('android:back', function(e) {
-	Ti.API.activeTab = 2;
-	openView('schedule');
+
+	Ti.API.activeTab = args['tab'];
+	openView(args['tab'] == 2 ? 'schedule' : 'setting');
 });
 
 //add new friend

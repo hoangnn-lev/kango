@@ -8,7 +8,8 @@
 "#shift":{
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL,
-	top:'20dp'
+	top:'20dp',
+	layout:'vertical'
 },
 "#title":{
 	left:'10dp',

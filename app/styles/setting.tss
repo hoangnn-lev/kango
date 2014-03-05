@@ -78,4 +78,11 @@
 	},
 	borderRadius:0,
 	right:0
+},
+".sTitle":{
+	color:"#000",
+	top:"5dp",
+	font:{
+		fontSize:'14dp'
+	},
 }

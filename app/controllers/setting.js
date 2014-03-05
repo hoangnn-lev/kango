@@ -86,11 +86,15 @@ $.setting.addEventListener('android:back', function(e) {
 });
 
 function edit_members() {
-	openView('friend');
+	openView('friend', {
+		tab : 4
+	});
 }
 
 function shift_setting() {
-	openView('shift_setting');
+	openView('shift_setting', {
+		tab : 4
+	});
 }
 
 function guideUseCalendar() {
@@ -189,11 +193,6 @@ $.report.addEventListener('click', function(e) {
 
 	emailDialog.setSubject('不具合やエラーのお問い合わせ');
 	emailDialog.setToRecipients(['hoangnn@leverages.jp']);
-	emailDialog.addEventListener('complete', function(e) {
-		// if (e.result == emailDialog.SENT) {
-		// alert("送信を完了しました。");
-		// }
-	});
 	emailDialog.open();
 });
 

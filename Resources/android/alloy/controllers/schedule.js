@@ -93,7 +93,7 @@ function Controller() {
                 touchEnabled: false,
                 className: "title-event-no-img"
             });
-            data[i].get("start_time") && row.add(Ti.UI.createLabel({
+            (data[i].get("start_time") || data[i].get("end_time")) && row.add(Ti.UI.createLabel({
                 text: data[i].get("start_time") + "~" + data[i].get("end_time"),
                 font: {
                     fontSize: "16dp"
@@ -622,7 +622,9 @@ function Controller() {
         confirm.show();
     });
     $.editFriend.addEventListener("click", function() {
-        openView("friend");
+        openView("friend", {
+            tab: 2
+        });
     });
     __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
     __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);

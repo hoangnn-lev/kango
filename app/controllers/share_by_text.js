@@ -1,7 +1,7 @@
 var now = new Date(), allShifts = {};
 var lastValue = {
 	dayStart : now,
-	dayEnd : new Date(now.getFullYear(), now.getMonth() + 1, now.getDate())
+	dayEnd : new Date(now.getFullYear(), now.getMonth(), now.getDate() + 30)
 };
 
 $.dayStart.setText(formatDate(lastValue['dayStart']));
@@ -20,7 +20,7 @@ function showPicker(e1) {
 			if (!e.cancel) {
 
 				var result = lastValue['dayStart'] = e.value;
-				var to = new Date(result.getFullYear(), result.getMonth() + 1, result.getDate());
+				var to = new Date(result.getFullYear(), result.getMonth(), result.getDate() + 30);
 				lastValue['dayEnd'] = to;
 
 				$.dayStart.setText(formatDate(e.value));
@@ -56,7 +56,7 @@ function getAllShift() {
 	var data = shifts.models;
 
 	for (var i = 0; i < n; ++i) {
-		allShifts[data[i].get('id')] = data[i].get('alias') + (data[i].get('time') == null ? '' : ':' + data[i].get('time'));
+		allShifts[data[i].get('id')] = data[i].get('alias') + (data[i].get('time') != '' || null ? ':' + data[i].get('time') : '');
 	}
 
 }
@@ -81,7 +81,7 @@ function share(e) {
 				if ((i == 0 && _date >= day) || (i == 1 && _date <= day)) {
 
 					var month = result[i].get('month_year').split('-');
-					
+
 					month = month[0] != 10 ? month[0].replace('0', '') : 10;
 					text += month + '/' + _date + ':' + allShifts[date_shift[_date]] + "\n";
 
@@ -93,6 +93,7 @@ function share(e) {
 		else {
 
 			var emailDialog = Titanium.UI.createEmailDialog();
+			emailDialog.setSubject('シフト共有');
 			emailDialog.setMessageBody(text);
 			emailDialog.open();
 		}
