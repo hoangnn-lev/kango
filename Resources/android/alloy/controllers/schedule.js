@@ -215,12 +215,7 @@ function Controller() {
             duration: 300,
             curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
         });
-        var t = Ti.UI.create2DMatrix();
-        var spin = Titanium.UI.createAnimation();
-        t = t.rotate(on_flag ? 180 : 0);
-        spin.transform = t;
-        spin.duration = 200;
-        $.openAllFriend.animate(spin);
+        $.openAllFriend.setImage(on_flag ? "/icons/btn_Close.png" : "/icons/btn_Open.png");
         on_flag = !on_flag;
     }
     function getAllFriend() {

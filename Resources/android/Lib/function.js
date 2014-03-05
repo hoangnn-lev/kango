@@ -288,3 +288,102 @@ exports.readLogImg = function() {
     var myFile = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "log_selected_img.txt");
     return myFile.exists() ? JSON.parse(myFile.read().toString()) : [];
 };
+
+exports.pagingControl = function(scrollableView) {
+    var container = Titanium.UI.createView({
+        height: Ti.UI.FILL,
+        backgroundColor: "tranparent"
+    });
+    var viewLeftArrow = Ti.UI.createView({
+        height: "40dp",
+        width: "40dp",
+        left: "16dp",
+        selected: false
+    });
+    var imageLeftArrow = Ti.UI.createImageView({
+        image: "/tutorial/btnPrev.png",
+        height: "40dp",
+        width: "40dp"
+    });
+    viewLeftArrow.add(imageLeftArrow);
+    container.add(viewLeftArrow);
+    var bulletContainer = Ti.UI.createView({
+        height: "13dp",
+        width: Ti.UI.SIZE,
+        bottom: "20dp"
+    });
+    container.add(bulletContainer);
+    var viewRightArrow = Ti.UI.createView({
+        height: "40dp",
+        width: "40dp",
+        right: "16dp",
+        selected: true
+    });
+    var imageRightArrow = Ti.UI.createImageView({
+        image: "/rightBlueArrow.png",
+        height: "40dp",
+        width: "40dp"
+    });
+    viewRightArrow.add(imageRightArrow);
+    container.add(viewRightArrow);
+    var numberOfPages = scrollableView.getViews().length;
+    var pages = [];
+    for (var i = 0; numberOfPages > i; i++) {
+        var page = Titanium.UI.createView({
+            borderRadius: 13,
+            width: "13dp",
+            height: "13dp",
+            left: 25 * i + "dp",
+            backgroundColor: "#fff"
+        });
+        pages.push(page);
+        bulletContainer.add(page);
+    }
+    pages[scrollableView.getCurrentPage()].setBackgroundColor("#ed829c");
+    if (1 == pages.length) {
+        imageLeftArrow.image = "/tutorial/empty.png";
+        imageRightArrow.image = "/tutorial/empty.png";
+        viewLeftArrow.selected = false;
+        viewRightArrow.selected = false;
+    } else {
+        imageLeftArrow.image = "/tutorial/empty.png";
+        imageRightArrow.image = "/tutorial/btnNxt.png";
+        viewLeftArrow.selected = false;
+        viewRightArrow.selected = true;
+    }
+    viewLeftArrow.addEventListener("click", function() {
+        this.selected && (scrollableView.currentPage -= 1);
+    });
+    viewRightArrow.addEventListener("click", function() {
+        this.selected && (scrollableView.currentPage += 1);
+    });
+    onScroll = function(event) {
+        if (event.currentPage || 0 == event.currentPage) {
+            for (var i = 0; numberOfPages > i; i++) pages[i].setBackgroundColor("#fff");
+            pages[event.currentPage].setBackgroundColor("#ed829c");
+            if (0 == event.currentPage) if (event.currentPage < pages.length - 1) {
+                imageLeftArrow.image = "/tutorial/empty.png";
+                imageRightArrow.image = "/tutorial/btnNxt.png";
+                viewLeftArrow.selected = false;
+                viewRightArrow.selected = true;
+            } else {
+                imageLeftArrow.image = "/tutorial/empty.png";
+                imageRightArrow.image = "/tutorial/empty.png";
+                viewLeftArrow.selected = false;
+                viewRightArrow.selected = false;
+            } else if (event.currentPage < pages.length - 1) {
+                imageLeftArrow.image = "/tutorial/btnPrev.png";
+                imageRightArrow.image = "/tutorial/btnNxt.png";
+                viewLeftArrow.selected = true;
+                viewRightArrow.selected = true;
+            } else {
+                imageLeftArrow.image = "/tutorial/btnPrev.png";
+                imageRightArrow.image = "/tutorial/empty.png";
+                viewLeftArrow.selected = true;
+                viewRightArrow.selected = false;
+            }
+        }
+    };
+    scrollableView.addEventListener("scroll", onScroll);
+    return container;
+};

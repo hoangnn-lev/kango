@@ -2,23 +2,11 @@
 	<Window>
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
-			<View id="content">
-				<Label class="title" text="どの方法で予定を共有しますか"/>
-				<View class="blockSelectedTime">
-					<Label left="0" text="カレンダー画像"/>
-					<Label id="month" onClick="showPicker"/>
-				</View>
-				<Button class="item"  title="メールで送る"/>
-				<Button class="item" title="LINEで送る" />
-				<View class="blockSelectedTime">
-					<Label left="0" text="テキスト"/>
-					<Label id="dayStart" onClick="showPicker" />
-					<Label id="to" text="～"/>
-					<Label id="dayEnd" onClick="showPicker"/>
-				</View>
-				<Button class="item" onClick="shareByText" type="mail" title="メールで送る"/>
-				<Button class="item" onClick="shareByText" type="line"  title="LINEで送る" />
-
+			<View id="shareByImage" class="shareBlock">
+				<ImageView image="/share/shareByImage.jpg" id="shareImage" width="Ti.UI.FILL"></ImageView>
+			</View>
+			<View id="shareByText" class="shareBlock">
+				<ImageView image="/share/shareByText.jpg" id="shareText" width="Ti.UI.FILL"></ImageView>
 			</View>
 		</View>
 	</Window>

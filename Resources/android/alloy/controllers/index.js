@@ -46,7 +46,7 @@ function Controller() {
                                     buttonNames: [ "OK" ]
                                 });
                                 confirm.addEventListener("click", function() {
-                                    openView("schedule");
+                                    openView("setting");
                                     $.index.close();
                                 });
                                 progressIndicator.hide();

@@ -116,7 +116,9 @@ $.saveShift.addEventListener('click', function(e) {
 	var alias = $.shiftAlias.getValue(), timeStart = $.timeStart.getText(), timeEnd = $.timeEnd.getText(), color, time;
 
 	if (!alias || !timeStart || !timeEnd) {
-		alert('Please input');
+		!alias ? alert('シフト名を入力してください') : '';
+		!timeStart ? alert('開始時間を入力してください。') : '';
+		!timeEnd ? alert('終了時間を入力してください。') : '';
 		return;
 	}
 
@@ -140,6 +142,7 @@ $.saveShift.addEventListener('click', function(e) {
 
 	delete_view('shift');
 	delete_view('shift_setting');
+	delete_view('share_by_text');
 	shift_setting();
 
 });

@@ -1,6 +1,5 @@
 function Controller() {
     function changeDayOffset() {
-        alert(dayOffset);
         $.monday_set.setBackgroundColor(1 == dayOffset ? button["OFF"]["bg"] : button["ON"]["bg"]);
         $.monday_set.setTitle(1 == dayOffset ? button["OFF"]["text"] : button["ON"]["text"]);
         dayOffset = 1 == dayOffset ? 0 : 1;
@@ -34,7 +33,10 @@ function Controller() {
         openView("shift_setting");
     }
     function guideUseCalendar() {
-        var win = Ti.UI.createView(), view = [];
+        var win = Ti.UI.createView({
+            height: Ti.UI.FILL,
+            width: Ti.UI.FILL
+        }), view = [];
         view.push(Ti.UI.createView({
             backgroundImage: "/tutorial/step01.png",
             height: Ti.UI.FILL,
@@ -55,24 +57,6 @@ function Controller() {
             height: Ti.UI.FILL,
             width: Ti.UI.FILL
         });
-        var close = Ti.UI.createButton({
-            bottom: "80dp",
-            zIndex: 3,
-            font: {
-                fontSize: "14dp"
-            },
-            backgroundImage: "/tutorial/btnUse.png",
-            backgroundSelectedImage: "/tutorial/btnUse_action.png",
-            backgroundFocusedImage: "/tutorial/btnUse_action.png",
-            width: "250dp",
-            height: "39dp"
-        });
-        close.addEventListener("click", function() {
-            guide_flag = false;
-            openView("schedule");
-            $.setting.remove(win);
-        });
-        step_final.add(close);
         view.push(step_final);
         var scrollView = Ti.UI.createScrollableView({
             showPagingControl: false,
@@ -82,12 +66,45 @@ function Controller() {
             views: view,
             currentPage: 0,
             pagingControlColor: "transparent",
-            zIndex: 2,
-            showPagingControl: true
+            zIndex: 2
         });
-        guide_flag = win;
         win.add(scrollView);
+        var pageController = func.pagingControl(scrollView);
+        var close = Ti.UI.createButton({
+            bottom: "120dp",
+            zIndex: 999,
+            font: {
+                fontSize: "14dp"
+            },
+            backgroundImage: "/tutorial/btnUse.png",
+            backgroundSelectedImage: "/tutorial/btnUse_action.png",
+            backgroundFocusedImage: "/tutorial/btnUse_action.png",
+            width: "250dp",
+            height: "39dp",
+            visible: false
+        });
+        close.addEventListener("click", function() {
+            Ti.API.activeTab = 2;
+            openView("schedule");
+            $.setting.remove(guide_flag["win"]);
+            $.setting.remove(guide_flag["page"]);
+            guide_flag["win"] = guide_flag["page"] = false;
+        });
+        pageController.add(close);
+        scrollView.addEventListener("scroll", function(e) {
+            3 == e.currentPage ? close.setVisible(true) : close.setVisible(false);
+        });
+        guide_flag["page"] = pageController;
+        guide_flag["win"] = win;
         $.setting.add(win);
+        $.setting.add(pageController);
+    }
+    function checkFirstUsing() {
+        var myFile = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, "using.txt");
+        if (!myFile.exists()) {
+            myFile.write("using");
+            guideUseCalendar();
+        }
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "setting";
@@ -410,7 +427,11 @@ function Controller() {
             text: "OFF",
             bg: "#ccc"
         }
-    }, dayOffset = 0, showMember = 0, configs = Alloy.Collections.configs, guide_flag = false;
+    }, dayOffset = 0, showMember = 0, configs = Alloy.Collections.configs, guide_flag = {
+        win: false,
+        page: false
+    };
+    checkFirstUsing();
     configs.fetch({
         query: 'select id,cg_value from configs where cg_name="dayOffset" or cg_name="showMember"'
     });
@@ -423,9 +444,12 @@ function Controller() {
         $.showMember.setTitle(button["ON"]["text"]);
     }
     $.setting.addEventListener("android:back", function() {
-        Ti.API.activeTab = false !== guide_flag ? 4 : 2;
-        false !== guide_flag ? $.setting.remove(guide_flag) : openView("schedule");
-        guide_flag = false;
+        Ti.API.activeTab = false !== guide_flag["win"] ? 4 : 2;
+        if (false !== guide_flag["win"]) {
+            $.setting.remove(guide_flag["win"]);
+            $.setting.remove(guide_flag["page"]);
+            guide_flag["win"] = guide_flag["page"] = false;
+        } else openView("schedule");
     });
     $.allHospital.addEventListener("click", function() {
         openView("hospital");
@@ -435,11 +459,9 @@ function Controller() {
     });
     $.report.addEventListener("click", function() {
         var emailDialog = Titanium.UI.createEmailDialog();
-        emailDialog.setSubject("Report app error");
+        emailDialog.setSubject("不具合やエラーのお問い合わせ");
         emailDialog.setToRecipients([ "hoangnn@leverages.jp" ]);
-        emailDialog.addEventListener("complete", function(e) {
-            e.result == emailDialog.SENT;
-        });
+        emailDialog.addEventListener("complete", function() {});
         emailDialog.open();
     });
     __defers["$.__views.__alloyId64!click!shift_setting"] && $.__views.__alloyId64.addEventListener("click", shift_setting);

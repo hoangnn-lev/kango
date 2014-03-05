@@ -18,7 +18,7 @@
 					<Label left="90dp" id="endTime"/>
 					<Label class="delete" type="delete"  id="clearEndTime" onClick="clearTime" text="削除" />
 				</View>
-				<TextArea maxLength="300" height="80dp" id="memo" hintText="メモ"/>
+				<TextArea maxLength="300" height="Ti.UI.SIZE" id="memo" hintText="メモ"/>
 				<View id="wicon">
 					<View id="listIcon"/>
 					<View id="buttonTabs"/>

@@ -2,87 +2,11 @@
 	height:Ti.UI.SIZE,
 	width:Ti.UI.FILL
 },
-"Label":{
-	width:Ti.UI.SIZE,
-	top:0,
-	height:Ti.UI.SIZE,
-	zIndex:0
+"#main":{
+	layout:'vertical'
 },
-"Button":{
-	zIndex:0
-},
-".line":{
-	top:'10dp',
-	bottom:'10dp',
-	zIndex:"0",
-	backgroundColor:"#ccc",
+".shareBlock":{
+	height:'50%',
 	width:Ti.UI.FILL,
-	height:"1"
-},
-".item":{
-	backgroundColor:'#f19c99',
-	borderRadius:0,
-	borderColor:'#ed4580',
-	borderWidth:1,
-	color:'#000',
-	left:0,
-	width:Ti.UI.FILL,
-	font:{
-		fontSize:'14dp'
-	},
-	height:'35dp'
-},
-"#content":{
-	 left:"10dp",
-	 right:"10dp",
-	 top:"10dp",
-	 width:Ti.UI.FILL,
-	 height:Ti.UI.FILL,
-	 layout:"vertical"
-},
-'.title':{
-	 color:"#000",
-	 top:'10dp',
-	 bottom:"0",
-	 height:"20dp",
-	 width:Ti.UI.FILL,
-	 textAlign:'left'
-},
-".blockSelectedTime":{
-	height:Ti.UI.SIZE,
-	width:Ti.UI.FILL,
-	top:'20dp',
-	bottom:'20dp'
-},
-"#month":{
-	left:'140dp',
-	height:'30dp',
-	width:'120dp',
-	borderColor:'#ccc',
-	borderWidth:1,
-	textAlign:'center'
-},
-"#dayStart":{
-	left:'70dp',
-	width:'110dp',
-	height:'30dp',
-	borderColor:'#ccc',
-	borderWidth:1,
-	textAlign:'center',
-	font:{
-		fontSize:'14dp'
-	}
-},
-"#to":{
-	left:'190dp',
-	width:'20dp',
-	height:'30dp',
-},
-"#dayEnd":{
-	left:'215dp',
-	height:'30dp',
-	width:'110dp',
-	borderColor:'#ccc',
-	borderWidth:1,
-	textAlign:'center'
+	top:0
 }

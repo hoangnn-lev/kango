@@ -253,7 +253,7 @@ function Controller() {
     clearTime ? $.__views.clearEndTime.addEventListener("click", clearTime) : __defers["$.__views.clearEndTime!click!clearTime"] = true;
     $.__views.memo = Ti.UI.createTextArea({
         width: Ti.UI.FILL,
-        height: "80dp",
+        height: Ti.UI.SIZE,
         backgroundColor: "#fff",
         backgroundFocusedColor: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,

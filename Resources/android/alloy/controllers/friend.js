@@ -80,6 +80,7 @@ function Controller() {
             friendModel.add(friend);
             friend.save();
             this.getParent().setBackgroundColor(checkStatus ? "#e6e3d9" : "#fff");
+            delete_view("schedule");
         });
         row.add(row.label);
         row.add(row.status);

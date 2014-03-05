@@ -1,0 +1,20 @@
+<Alloy>
+	<Window>
+		<View id="main">
+			<View id="title">
+				<Label width="Ti.UI.SIZE" color="#fff" text="テキストで共有"/>
+			</View>
+			<View id="content">
+				<Label left="0" text="期間を選ぶ"/>
+				<View class="blockSelectedTime" onClick="showPicker" >
+					<Label id="dayStart"/>
+					<Label id="to" text="～"/>
+					<Label id="dayEnd"/>
+				</View>
+				<Button class="item" type="mail" onClick="share" title="メールで送る"/>
+				<Button class="item" type="line" onClick="share"   title="LINEで送る" />
+
+			</View>
+		</View>
+	</Window>
+</Alloy>

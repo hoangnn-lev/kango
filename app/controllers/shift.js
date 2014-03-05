@@ -1,5 +1,10 @@
 //create collection users
-var selectedDate, _calendar, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), month = moment(), dayOffset, selectedShift = [], dateShiftDB = {}, shiftMonthId, allShifts = {};
+var selectedDate, _calendar, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), month = moment(), dayOffset, selectedShift = [], dateShiftDB = {}, shiftMonthId, allShifts = {}, args = arguments[0] || {};
+
+if (args['date']) {
+	var _date = (args['date']).split('-');
+	month = moment(args['date']);
+}
 
 createCalendar();
 
@@ -53,7 +58,6 @@ function loadCalendarBody() {
 		for (var key in data) {
 
 			dateShiftDB[key] = data[key];
-
 			shiftOfMonth[key] = allShifts[data[key]];
 			shiftOfMonth[key]['id'] = data[key];
 		}
@@ -61,7 +65,6 @@ function loadCalendarBody() {
 	}
 
 	_calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset);
-
 	var gdate = _calendar.calendarMonth().format('YYYY-MM-MMM').split('-');
 
 	$.year.setText(gdate[0]);

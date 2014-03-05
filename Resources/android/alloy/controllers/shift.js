@@ -271,7 +271,11 @@ function Controller() {
     $.__views.scheduleInfo.add($.__views.shiftList);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var selectedDate, _calendar, dateIsEvent, dayOffset, shiftMonthId, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), selectedShift = [], dateShiftDB = {}, allShifts = {};
+    var selectedDate, _calendar, dateIsEvent, dayOffset, shiftMonthId, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), selectedShift = [], dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};
+    if (args["date"]) {
+        args["date"].split("-");
+        month = moment(args["date"]);
+    }
     createCalendar();
     $.shift.addEventListener("android:back", function() {
         var confirm = Ti.UI.createAlertDialog({

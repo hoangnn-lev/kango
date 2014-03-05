@@ -8,7 +8,12 @@ var button = {
 		text : 'OFF',
 		bg : '#ccc'
 	}
-}, dayOffset = 0, showMember = 0, configs = Alloy.Collections.configs, guide_flag = false;
+}, dayOffset = 0, showMember = 0, configs = Alloy.Collections.configs, guide_flag = {
+	win : false,
+	page : false
+};
+
+checkFirstUsing();
 
 configs.fetch({
 	query : 'select id,cg_value from configs where cg_name="dayOffset" or cg_name="showMember"'
@@ -30,7 +35,7 @@ if (( showMember = configs.models[1].get('cg_value')) == 1) {
  * output : void
  * */
 function changeDayOffset(e) {
-	alert(dayOffset);
+
 	$.monday_set.setBackgroundColor((dayOffset == 1) ? button['OFF']['bg'] : button['ON']['bg']);
 	$.monday_set.setTitle((dayOffset == 1) ? button['OFF']['text'] : button['ON']['text']);
 
@@ -69,9 +74,15 @@ function showMember() {
 
 //add back button
 $.setting.addEventListener('android:back', function(e) {
-	Ti.API.activeTab = guide_flag !== false ? 4 : 2;
-	guide_flag !== false ? $.setting.remove(guide_flag) : openView('schedule');
-	guide_flag = false;
+	Ti.API.activeTab = guide_flag['win'] !== false ? 4 : 2;
+	if (guide_flag['win'] !== false) {
+		$.setting.remove(guide_flag['win']);
+		$.setting.remove(guide_flag['page']);
+		guide_flag['win'] = guide_flag['page'] = false;
+	} else {
+		openView('schedule');
+	}
+
 });
 
 function edit_members() {
@@ -84,7 +95,10 @@ function shift_setting() {
 
 function guideUseCalendar() {
 
-	var win = Ti.UI.createView(), view = [];
+	var win = Ti.UI.createView({
+		height : Ti.UI.FILL,
+		width : Ti.UI.FILL
+	}), view = [];
 
 	view.push(Ti.UI.createView({
 		backgroundImage : '/tutorial/step01.png',
@@ -110,25 +124,6 @@ function guideUseCalendar() {
 		width : Ti.UI.FILL,
 	});
 
-	var close = Ti.UI.createButton({
-		bottom : '80dp',
-		zIndex : 3,
-		font : {
-			fontSize : '14dp'
-		},
-		backgroundImage : '/tutorial/btnUse.png',
-		backgroundSelectedImage : '/tutorial/btnUse_action.png',
-		backgroundFocusedImage : '/tutorial/btnUse_action.png',
-		width : '250dp',
-		height : '39dp'
-	});
-	close.addEventListener('click', function(e) {
-		guide_flag = false;
-		openView('schedule');
-		$.setting.remove(win);
-	});
-	step_final.add(close);
-
 	view.push(step_final);
 
 	var scrollView = Ti.UI.createScrollableView({
@@ -139,12 +134,45 @@ function guideUseCalendar() {
 		views : view,
 		currentPage : 0,
 		pagingControlColor : 'transparent',
-		zIndex : 2,
-		showPagingControl : true
+		zIndex : 2
 	});
-	guide_flag = win;
 	win.add(scrollView);
+
+	var pageController = func.pagingControl(scrollView);
+
+	var close = Ti.UI.createButton({
+		bottom : '120dp',
+		zIndex : 999,
+		font : {
+			fontSize : '14dp'
+		},
+		backgroundImage : '/tutorial/btnUse.png',
+		backgroundSelectedImage : '/tutorial/btnUse_action.png',
+		backgroundFocusedImage : '/tutorial/btnUse_action.png',
+		width : '250dp',
+		height : '39dp',
+		visible : false
+	});
+	close.addEventListener('click', function(e) {
+
+		Ti.API.activeTab = 2;
+		openView('schedule');
+
+		$.setting.remove(guide_flag['win']);
+		$.setting.remove(guide_flag['page']);
+		guide_flag['win'] = guide_flag['page'] = false;
+	});
+	pageController.add(close);
+
+	scrollView.addEventListener("scroll", function(e) {
+		e.currentPage == 3 ? close.setVisible(true) : close.setVisible(false);
+	});
+
+	guide_flag['page'] = pageController;
+	guide_flag['win'] = win;
 	$.setting.add(win);
+	$.setting.add(pageController);
+
 }
 
 $.allHospital.addEventListener('click', function(e) {
@@ -158,17 +186,23 @@ $.about.addEventListener('click', function(e) {
 $.report.addEventListener('click', function(e) {
 
 	var emailDialog = Titanium.UI.createEmailDialog();
-	emailDialog.setSubject('Report app error');
-	emailDialog.setToRecipients(['hoangnn@leverages.jp']);
 
+	emailDialog.setSubject('不具合やエラーのお問い合わせ');
+	emailDialog.setToRecipients(['hoangnn@leverages.jp']);
 	emailDialog.addEventListener('complete', function(e) {
-		if (e.result == emailDialog.SENT) {
-			if (Ti.Platform.osname != 'android') {
-				alert("Report successfull");
-			}
-		}
+		// if (e.result == emailDialog.SENT) {
+		// alert("送信を完了しました。");
+		// }
 	});
 	emailDialog.open();
-
 });
+
+function checkFirstUsing() {
+	var myFile = Titanium.Filesystem.getFile(Titanium.Filesystem.applicationDataDirectory, 'using.txt');
+
+	if (!myFile.exists()) {
+		myFile.write('using');
+		guideUseCalendar();
+	}
+}
 
