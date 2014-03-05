@@ -456,7 +456,9 @@ function Controller() {
         } else openView("schedule");
     });
     $.allHospital.addEventListener("click", function() {
-        openView("hospital");
+        openView("hospital", {
+            reload: 1
+        });
     });
     $.about.addEventListener("click", function() {
         openView("about");

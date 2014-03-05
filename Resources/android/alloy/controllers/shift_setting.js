@@ -88,15 +88,21 @@ function Controller() {
             });
         });
         item.add(button);
-        item.add(Ti.UI.createLabel({
+        var time = Ti.UI.createLabel({
             text: shift[i].get("time"),
+            id: shift[i].get("id"),
             font: {
                 fontSize: "15dp"
             },
             color: "#676767",
-            className: "time",
-            touchEnabled: false
-        }));
+            className: "time"
+        });
+        time.addEventListener("click", function(e) {
+            openView("shift_detail", {
+                id: e.source.id
+            });
+        });
+        item.add(time);
         var background = btnDeativeBg, text = textDeactive;
         if (1 == shift[i].get("status")) {
             background = btnActiveBg;

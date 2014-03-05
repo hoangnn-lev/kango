@@ -33,17 +33,18 @@ $.share_by_image.addEventListener('android:back', function(e) {
 	openView('share');
 });
 
+/* share shift by image */
 function share(e) {
 	var day = lastValue['month'];
 	var f = Alloy.createController('schedule', {
 		date : day.getFullYear() + '-' + (day.getMonth() + 1) + '-' + day.getDate()
-	}).getView('days').toImage().media;
+	}).getView('calendar').toImage().media;
 
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.externalStorageDirectory, 'shift.png');
 	file.write(f);
-	
+
 	if (e.source.type == 'line')
-		Ti.Platform.openURL('line://msg/image/' + file) ? '' : alert('Lineがインストールされていませんでした。。。');
+		Ti.Platform.openURL('line://msg/image/' + file.nativePath) ? '' : alert('Lineがインストールされていませんでした。。。');
 	else {
 		var emailDialog = Titanium.UI.createEmailDialog();
 		emailDialog.addAttachment(file);

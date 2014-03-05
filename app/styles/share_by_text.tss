@@ -71,5 +71,8 @@
 	width:'40%',
 	borderColor:'#ccc',
 	borderWidth:1,
-	textAlign:'center'
+	textAlign:'center',
+	font:{
+		fontSize:'14dp'
+	}
 }

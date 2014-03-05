@@ -56,7 +56,15 @@ function getAllShift() {
 	var data = shifts.models;
 
 	for (var i = 0; i < n; ++i) {
-		allShifts[data[i].get('id')] = data[i].get('alias') + (data[i].get('time') != '' || null ? ':' + data[i].get('time') : '');
+
+		var time = data[i].get('time');
+		if (time != '' && time != null) {
+			time = ':' + time;
+		} else {
+			time = '';
+		}
+
+		allShifts[data[i].get('id')] = data[i].get('alias') + time;
 	}
 
 }

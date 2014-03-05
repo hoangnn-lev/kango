@@ -143,7 +143,6 @@ function guideUseCalendar() {
 	win.add(scrollView);
 
 	var pageController = func.pagingControl(scrollView);
-
 	var close = Ti.UI.createButton({
 		bottom : '120dp',
 		zIndex : 999,
@@ -180,7 +179,9 @@ function guideUseCalendar() {
 }
 
 $.allHospital.addEventListener('click', function(e) {
-	openView('hospital');
+	openView('hospital', {
+		reload : 1
+	});
 });
 
 $.about.addEventListener('click', function(e) {

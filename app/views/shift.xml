@@ -5,9 +5,9 @@
 			<View id="calendarTitle">
 				<ImageView image="/icons/prev.png" class="calendarButton" onClick="doPrevMonth" id="prevMonth" left="0"/>
 				<View id="dateInfo">
-					<Label id="year"/>
-					<Label id="month"/>
-					<Label id="monthName"/>
+					<Label  id="year"/>
+					<Label  id="month"/>
+					<Label  id="monthName"/>
 				</View>
 				<ImageView  image="/icons/next.png"  class="calendarButton" onClick="doNextMonth" id="nextMonth" right="0"/>
 			</View>

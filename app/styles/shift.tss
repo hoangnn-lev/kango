@@ -57,10 +57,9 @@
 	left:'5dp'
 },
 '#days': {
-    layout: 'horizontal',
     top: 0,
     height: '22dp',
-    
+    width:Ti.UI.FILL
 },
 "#dayName":{
 	backgroundImage:'/icons/bg-circle.png',

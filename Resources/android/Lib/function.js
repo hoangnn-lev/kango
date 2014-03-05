@@ -24,6 +24,7 @@ exports.createCalendarDay = function(_dayOffset, _view) {
             },
             text: _ref[i],
             width: TILE_WIDTH,
+            left: TILE_WIDTH * i,
             touchEnabled: false
         }));
     }

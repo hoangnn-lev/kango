@@ -32,7 +32,11 @@ function Controller() {
         });
         var n = shifts.models.length;
         var data = shifts.models;
-        for (var i = 0; n > i; ++i) allShifts[data[i].get("id")] = data[i].get("alias") + ("" != data[i].get("time") || null ? ":" + data[i].get("time") : "");
+        for (var i = 0; n > i; ++i) {
+            var time = data[i].get("time");
+            time = "" != time && null != time ? ":" + time : "";
+            allShifts[data[i].get("id")] = data[i].get("alias") + time;
+        }
     }
     function share(e) {
         var calendar_shift = Alloy.Collections.calendar_shift;
@@ -163,7 +167,7 @@ function Controller() {
         color: "#676767",
         textAlign: "center",
         font: {
-            fontSize: "16sp"
+            fontSize: "14dp"
         },
         right: "0",
         borderColor: "#ccc",

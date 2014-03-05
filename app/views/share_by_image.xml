@@ -4,7 +4,8 @@
 			<View id="title">
 				<Label width="Ti.UI.SIZE" color="#fff" text="画像で共有"/>
 			</View>
-			<ImageView width="120dp" id="save"></ImageView>
+			<ImageView width="120dp" id="save">
+			</ImageView>
 			<View id="content">
 				<Label left="0" text="期間を選ぶ"/>
 				<View class="blockSelectedTime">
@@ -14,6 +15,6 @@
 				<Button class="item" type="line" onClick="share"  title="LINEで送る" />
 			</View>
 		</View>
-
 	</Window>
+	
 </Alloy>

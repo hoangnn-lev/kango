@@ -204,9 +204,9 @@ function Controller() {
     $.__views.calendarTitle.add($.__views.nextMonth);
     doNextMonth ? $.__views.nextMonth.addEventListener("click", doNextMonth) : __defers["$.__views.nextMonth!click!doNextMonth"] = true;
     $.__views.days = Ti.UI.createView({
-        layout: "horizontal",
         top: 0,
         height: "22dp",
+        width: Ti.UI.FILL,
         id: "days"
     });
     $.__views.main.add($.__views.days);

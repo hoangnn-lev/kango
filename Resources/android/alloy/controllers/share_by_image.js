@@ -21,10 +21,10 @@ function Controller() {
         var day = lastValue["month"];
         var f = Alloy.createController("schedule", {
             date: day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate()
-        }).getView("days").toImage().media;
+        }).getView("calendar").toImage().media;
         var file = Titanium.Filesystem.getFile(Titanium.Filesystem.externalStorageDirectory, "shift.png");
         file.write(f);
-        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/image/" + file) ? "" : alert("Lineがインストールされていませんでした。。。"); else {
+        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/image/" + file.nativePath) ? "" : alert("Lineがインストールされていませんでした。。。"); else {
             var emailDialog = Titanium.UI.createEmailDialog();
             emailDialog.addAttachment(file);
             emailDialog.setSubject("シフト共有");
