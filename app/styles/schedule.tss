@@ -104,7 +104,7 @@
 "#friend":{
 	height:Ti.UI.SIZE,
 	left:'10dp',
-	top:'10dp',
+	top:'0',
 	bottom:'10dp',
 	layout:"horizontal"
 },
@@ -128,7 +128,8 @@
 	top:0
 },
 "#scheduleList":{
-	top:'1dp'
+	top:'1dp',
+	backgroundColor:'#fff'
 },
 "#openAllFriend":{
 	width:"40dp",

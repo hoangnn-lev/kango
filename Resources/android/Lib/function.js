@@ -359,6 +359,9 @@ exports.pagingControl = function(scrollableView) {
     viewRightArrow.addEventListener("click", function() {
         this.selected && (scrollableView.currentPage += 1);
     });
+    container.addEventListener("swipe", function(e) {
+        "right" == e.direction && viewLeftArrow.selected ? scrollableView.currentPage -= 1 : "left" == e.direction && viewRightArrow.selected && (scrollableView.currentPage += 1);
+    });
     onScroll = function(event) {
         if (event.currentPage || 0 == event.currentPage) {
             for (var i = 0; numberOfPages > i; i++) pages[i].setBackgroundColor("#fff");

@@ -99,6 +99,17 @@ function getEvent(day) {
 
 	var id = dateIsEvent[day];
 	if (!id) {
+		$.scheduleList.add(Ti.UI.createLabel({
+			text : '予定なし',
+			font : {
+				fontSize : '14dp',
+			},
+			color : '#676767',
+			height : '40dp',
+			backgroundColor : '#fff',
+			width : Ti.UI.SIZE,
+			left:'10dp'
+		}));
 		return;
 	}
 
@@ -108,7 +119,6 @@ function getEvent(day) {
 	});
 
 	var data = calendar_shift.models;
-
 	var tableView = Ti.UI.createTableView({
 		top : 0,
 		height : 'auto',

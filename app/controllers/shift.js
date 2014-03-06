@@ -5,6 +5,8 @@ if (args['date']) {
 	var _date = (args['date']).split('-');
 	month = moment(args['date']);
 	$.scheduleInfo.setVisible(false);
+	$.prevMonth.setVisible(false);
+	$.nextMonth.setVisible(false);
 	$.scheduleInfo.removeAllChildren();
 }
 

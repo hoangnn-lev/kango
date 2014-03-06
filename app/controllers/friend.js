@@ -46,10 +46,16 @@ function loadFriend() {
 	row.push(Ti.UI.createTableView());
 
 	for (var i = 0; i < n; i++) {
-		var createRow = customeRowFriend(friendList[i].get('id'), friendList[i].get('name'), friendList[i].get('status'));
-		$.friendList.add(createRow);
-	}
 
+		if (friendList[i].get('name') == '') {
+			Alloy.createModel('friend', {
+				id : friendList[i].get('id')
+			}).destroy();
+		} else {
+			var createRow = customeRowFriend(friendList[i].get('id'), friendList[i].get('name'), friendList[i].get('status'));
+			$.friendList.add(createRow);
+		}
+	}
 }
 
 //create row friend
@@ -74,13 +80,14 @@ function customeRowFriend(id, name, friend_status) {
 			fontSize : '15dp'
 		},
 		backgroundColor : 'transparent',
-		color : '#676767',
+		color : name == '' ? '#e2e2e2' : '#676767',
 		maxLength : 8,
 		zIndex : 9,
 		className : 'friend-name'
 	});
 
 	row.label.addEventListener('change', function(e) {
+		this.setColor(e.source.value == '' ? '#e2e2e2' : '#676767');
 		var data = {
 			id : id,
 			name : e.source.value,

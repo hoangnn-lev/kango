@@ -510,6 +510,15 @@ exports.pagingControl = function(scrollableView) {
 		}
 	});
 
+	container.addEventListener('swipe', function(e) {
+
+		if (e.direction == 'right' && viewLeftArrow.selected) {
+			scrollableView.currentPage -= 1;
+		} else if (e.direction == 'left' && viewRightArrow.selected) {
+			scrollableView.currentPage += 1;
+		}
+	});
+
 	// Callbacks
 	onScroll = function(event) {
 		if (event.currentPage || event.currentPage == 0) {
@@ -553,4 +562,3 @@ exports.pagingControl = function(scrollableView) {
 	return container;
 
 };
-

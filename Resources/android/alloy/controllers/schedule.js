@@ -38,7 +38,20 @@ function Controller() {
         loadFriendByDay(day);
         $.scheduleList.removeAllChildren();
         var id = dateIsEvent[day];
-        if (!id) return;
+        if (!id) {
+            $.scheduleList.add(Ti.UI.createLabel({
+                text: "予定なし",
+                font: {
+                    fontSize: "14dp"
+                },
+                color: "#676767",
+                height: "40dp",
+                backgroundColor: "#fff",
+                width: Ti.UI.SIZE,
+                left: "10dp"
+            }));
+            return;
+        }
         var calendar_shift = Alloy.Collections.schedule_detail;
         calendar_shift.fetch({
             query: "select * from schedule_detail  where schedule_id = " + id
@@ -532,7 +545,7 @@ function Controller() {
     $.__views.friend = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "10dp",
-        top: "10dp",
+        top: "0",
         bottom: "10dp",
         layout: "horizontal",
         id: "friend"
@@ -586,6 +599,7 @@ function Controller() {
     $.__views.groupAllFriend.add($.__views.editFriend);
     $.__views.scheduleList = Ti.UI.createView({
         top: "1dp",
+        backgroundColor: "#fff",
         id: "scheduleList",
         height: Ti.UI.SIZE
     });
