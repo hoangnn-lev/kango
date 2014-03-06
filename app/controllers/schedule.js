@@ -40,11 +40,12 @@ function clickCalendar(e) {
 
 		//create shift label
 		$.shiftLabel.removeAllChildren();
-		if (shiftOfMonth[day]) {
+		var _sDate = wday.format('D');
+		if (shiftOfMonth[_sDate]) {
 			$.shiftLabel.add(Ti.UI.createLabel({
-				text : shiftOfMonth[day]['text'],
+				text : shiftOfMonth[_sDate]['text'],
 				left : '120dp',
-				backgroundColor : shiftOfMonth[day]['color'],
+				backgroundColor : shiftOfMonth[_sDate]['color'],
 				color : '#fff',
 				width : '60dp',
 				font : {

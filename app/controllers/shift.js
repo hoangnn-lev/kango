@@ -4,6 +4,8 @@ var selectedDate, _calendar, dateIsEvent, shiftOfMonth = [], moment = require('a
 if (args['date']) {
 	var _date = (args['date']).split('-');
 	month = moment(args['date']);
+	$.scheduleInfo.setVisible(false);
+	$.scheduleInfo.removeAllChildren();
 }
 
 createCalendar();

@@ -1,5 +1,6 @@
 "#main":{
-	backgroundColor:'#f5f1e9'
+	backgroundColor:'#f5f1e9',
+	height:Ti.UI.SIZE
 },
 "#calendar":{
 	height:Ti.UI.SIZE,
@@ -107,3 +108,4 @@
 	},
 	backgroundColor:'#f3acbd'
 }
+

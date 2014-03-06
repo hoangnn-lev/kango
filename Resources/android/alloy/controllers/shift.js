@@ -119,7 +119,7 @@ function Controller() {
     $.__views.tabMenu.setParent($.__views.shift);
     $.__views.main = Ti.UI.createView({
         top: "50dp",
-        height: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         backgroundColor: "#f5f1e9",
         id: "main",
@@ -275,6 +275,8 @@ function Controller() {
     if (args["date"]) {
         args["date"].split("-");
         month = moment(args["date"]);
+        $.scheduleInfo.setVisible(false);
+        $.scheduleInfo.removeAllChildren();
     }
     createCalendar();
     $.shift.addEventListener("android:back", function() {

@@ -8,10 +8,11 @@ function Controller() {
             $.scheduleDateInfo.setText(gdate);
             $.dayName.setText(func.convertDayName(wday.format("dddd")));
             $.shiftLabel.removeAllChildren();
-            shiftOfMonth[day] && $.shiftLabel.add(Ti.UI.createLabel({
-                text: shiftOfMonth[day]["text"],
+            var _sDate = wday.format("D");
+            shiftOfMonth[_sDate] && $.shiftLabel.add(Ti.UI.createLabel({
+                text: shiftOfMonth[_sDate]["text"],
                 left: "120dp",
-                backgroundColor: shiftOfMonth[day]["color"],
+                backgroundColor: shiftOfMonth[_sDate]["color"],
                 color: "#fff",
                 width: "60dp",
                 font: {

@@ -35,10 +35,11 @@ $.share_by_image.addEventListener('android:back', function(e) {
 
 /* share shift by image */
 function share(e) {
+	
 	var day = lastValue['month'];
-	var f = Alloy.createController('schedule', {
+	var f = Alloy.createController('shift', {
 		date : day.getFullYear() + '-' + (day.getMonth() + 1) + '-' + day.getDate()
-	}).getView('calendar').toImage().media;
+	}).getView('main').toImage().media;
 
 	var file = Titanium.Filesystem.getFile(Titanium.Filesystem.externalStorageDirectory, 'shift.png');
 	file.write(f);
