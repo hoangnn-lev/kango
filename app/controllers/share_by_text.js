@@ -64,7 +64,7 @@ function getAllShift() {
 			time = '';
 		}
 
-		allShifts[data[i].get('id')] = data[i].get('alias') + time;
+		allShifts[data[i].get('id')] = data[i].get('name') + time;
 	}
 
 }

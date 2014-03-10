@@ -24,7 +24,7 @@ for (var i = 0; i < n; i++) {
 		left : '10dp',
 		top : '10dp',
 		bottom : '10dp',
-		title : shift[i].get('alias'),
+		title : shift[i].get('name'),
 		touchEnabled : true,
 		id : shift[i].get('id'),
 		borderColor : '#f0f0f0',
@@ -40,7 +40,7 @@ for (var i = 0; i < n; i++) {
 	item.add(button);
 
 	var time = Ti.UI.createLabel({
-		text : shift[i].get('time'),
+		text : shift[i].get('time_shift'),
 		id : shift[i].get('id'),
 		font : {
 			fontSize : '15dp'
@@ -57,18 +57,17 @@ for (var i = 0; i < n; i++) {
 
 	var background = btnDeativeBg, text = textDeactive;
 
-	if (shift[i].get('status') == 1) {
+	if (shift[i].get('flag') == 1) {
 		background = btnActiveBg;
 		text = textActive;
 	}
 	var button = Ti.UI.createButton({
 		id : shift[i].get('id'),
 		title : text,
-		label : shift[i].get('label'),
-		alias : shift[i].get('alias'),
-		time : shift[i].get('time'),
+		name : shift[i].get('name'),
+		time_shift : shift[i].get('time_shift'),
 		shiftcolor : shift[i].get('color'),
-		status : shift[i].get('status'),
+		flag : shift[i].get('flag'),
 
 		height : '35dp',
 		width : '75dp',
@@ -87,22 +86,21 @@ for (var i = 0; i < n; i++) {
 		className : 'button-right'
 	});
 	button.addEventListener('click', function(e) {
-		if (e.source.status == 1) {
+		if (e.source.flag == 1) {
 			this.setBackgroundColor(btnDeativeBg);
 			this.setTitle(textDeactive);
-			e.source.status = 0;
+			e.source.flag = 0;
 		} else {
 			this.setBackgroundColor(btnActiveBg);
 			this.setTitle(textActive);
-			e.source.status = 1;
+			e.source.flag = 1;
 		}
 
 		var shift = Alloy.createModel('shifts', {
 			id : e.source.id,
-			status : e.source.status,
-			label : e.source.label,
-			alias : e.source.alias,
-			time : e.source.time,
+			flag : e.source.flag,
+			name : e.source.name,
+			time_shift : e.source.time_shift,
 			color : e.source.shiftcolor
 		});
 

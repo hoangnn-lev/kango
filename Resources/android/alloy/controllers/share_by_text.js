@@ -35,7 +35,7 @@ function Controller() {
         for (var i = 0; n > i; ++i) {
             var time = data[i].get("time");
             time = "" != time && null != time ? ":" + time : "";
-            allShifts[data[i].get("id")] = data[i].get("alias") + time;
+            allShifts[data[i].get("id")] = data[i].get("name") + time;
         }
     }
     function share(e) {
@@ -91,7 +91,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId77 = Ti.UI.createLabel({
+    $.__views.__alloyId75 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -100,9 +100,9 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "テキストで共有",
-        id: "__alloyId77"
+        id: "__alloyId75"
     });
-    $.__views.title.add($.__views.__alloyId77);
+    $.__views.title.add($.__views.__alloyId75);
     $.__views.content = Ti.UI.createView({
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
@@ -113,7 +113,7 @@ function Controller() {
         id: "content"
     });
     $.__views.main.add($.__views.content);
-    $.__views.__alloyId78 = Ti.UI.createLabel({
+    $.__views.__alloyId76 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -123,26 +123,26 @@ function Controller() {
         },
         left: "0",
         text: "共有する期間を選ぶ",
-        id: "__alloyId78"
+        id: "__alloyId76"
     });
-    $.__views.content.add($.__views.__alloyId78);
-    $.__views.__alloyId79 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId76);
+    $.__views.__alloyId77 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: "20dp",
         bottom: "20dp",
         layout: "vertical",
-        id: "__alloyId79"
+        id: "__alloyId77"
     });
-    $.__views.content.add($.__views.__alloyId79);
-    showPicker ? $.__views.__alloyId79.addEventListener("click", showPicker) : __defers["$.__views.__alloyId79!click!showPicker"] = true;
-    $.__views.__alloyId80 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId77);
+    showPicker ? $.__views.__alloyId77.addEventListener("click", showPicker) : __defers["$.__views.__alloyId77!click!showPicker"] = true;
+    $.__views.__alloyId78 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        id: "__alloyId80"
+        id: "__alloyId78"
     });
-    $.__views.__alloyId79.add($.__views.__alloyId80);
-    $.__views.__alloyId81 = Ti.UI.createLabel({
+    $.__views.__alloyId77.add($.__views.__alloyId78);
+    $.__views.__alloyId79 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#888",
@@ -152,9 +152,9 @@ function Controller() {
         },
         left: "20dp",
         text: "開始日",
-        id: "__alloyId81"
+        id: "__alloyId79"
     });
-    $.__views.__alloyId80.add($.__views.__alloyId81);
+    $.__views.__alloyId78.add($.__views.__alloyId79);
     $.__views.dayStart = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -166,15 +166,15 @@ function Controller() {
         left: "90dp",
         id: "dayStart"
     });
-    $.__views.__alloyId80.add($.__views.dayStart);
-    $.__views.__alloyId82 = Ti.UI.createView({
+    $.__views.__alloyId78.add($.__views.dayStart);
+    $.__views.__alloyId80 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: "10dp",
-        id: "__alloyId82"
+        id: "__alloyId80"
     });
-    $.__views.__alloyId79.add($.__views.__alloyId82);
-    $.__views.__alloyId83 = Ti.UI.createLabel({
+    $.__views.__alloyId77.add($.__views.__alloyId80);
+    $.__views.__alloyId81 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#888",
@@ -184,9 +184,9 @@ function Controller() {
         },
         left: "20dp",
         text: "終了日",
-        id: "__alloyId83"
+        id: "__alloyId81"
     });
-    $.__views.__alloyId82.add($.__views.__alloyId83);
+    $.__views.__alloyId80.add($.__views.__alloyId81);
     $.__views.dayEnd = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -198,7 +198,7 @@ function Controller() {
         left: "90dp",
         id: "dayEnd"
     });
-    $.__views.__alloyId82.add($.__views.dayEnd);
+    $.__views.__alloyId80.add($.__views.dayEnd);
     $.__views.groupButton = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -206,7 +206,7 @@ function Controller() {
         id: "groupButton"
     });
     $.__views.content.add($.__views.groupButton);
-    $.__views.__alloyId84 = Ti.UI.createButton({
+    $.__views.__alloyId82 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "100%",
         font: {
@@ -223,11 +223,11 @@ function Controller() {
         left: "0",
         type: "mail",
         title: "メールで送る",
-        id: "__alloyId84"
+        id: "__alloyId82"
     });
-    $.__views.groupButton.add($.__views.__alloyId84);
-    share ? $.__views.__alloyId84.addEventListener("click", share) : __defers["$.__views.__alloyId84!click!share"] = true;
-    $.__views.__alloyId85 = Ti.UI.createButton({
+    $.__views.groupButton.add($.__views.__alloyId82);
+    share ? $.__views.__alloyId82.addEventListener("click", share) : __defers["$.__views.__alloyId82!click!share"] = true;
+    $.__views.__alloyId83 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "100%",
         font: {
@@ -244,10 +244,10 @@ function Controller() {
         right: "0",
         type: "line",
         title: "LINEで送る",
-        id: "__alloyId85"
+        id: "__alloyId83"
     });
-    $.__views.groupButton.add($.__views.__alloyId85);
-    share ? $.__views.__alloyId85.addEventListener("click", share) : __defers["$.__views.__alloyId85!click!share"] = true;
+    $.__views.groupButton.add($.__views.__alloyId83);
+    share ? $.__views.__alloyId83.addEventListener("click", share) : __defers["$.__views.__alloyId83!click!share"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var now = new Date(), allShifts = {};
@@ -261,9 +261,9 @@ function Controller() {
     $.share_by_text.addEventListener("android:back", function() {
         openView("share");
     });
-    __defers["$.__views.__alloyId79!click!showPicker"] && $.__views.__alloyId79.addEventListener("click", showPicker);
-    __defers["$.__views.__alloyId84!click!share"] && $.__views.__alloyId84.addEventListener("click", share);
-    __defers["$.__views.__alloyId85!click!share"] && $.__views.__alloyId85.addEventListener("click", share);
+    __defers["$.__views.__alloyId77!click!showPicker"] && $.__views.__alloyId77.addEventListener("click", showPicker);
+    __defers["$.__views.__alloyId82!click!share"] && $.__views.__alloyId82.addEventListener("click", share);
+    __defers["$.__views.__alloyId83!click!share"] && $.__views.__alloyId83.addEventListener("click", share);
     _.extend($, exports);
 }
 

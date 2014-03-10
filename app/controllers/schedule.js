@@ -17,7 +17,6 @@ if (args['date']) {
 }
 getAllFriend();
 createCalendar();
-func.checkFriendRequest();
 
 /*
  * function clickCalendar
@@ -416,7 +415,7 @@ function getAllFriend() {
 
 	var friendCols = Alloy.Collections.friend;
 	friendCols.fetch({
-		query : 'SELECT * from friend where status=1 and name!=""'
+		query : 'SELECT * from friend where flag=1 and name!=""'
 	});
 	var getAllFriend = friendCols.models;
 

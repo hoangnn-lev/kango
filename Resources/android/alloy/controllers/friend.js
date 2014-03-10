@@ -11,16 +11,16 @@ function Controller() {
         for (var i = 0; n > i; i++) if ("" == friendList[i].get("name")) Alloy.createModel("friend", {
             id: friendList[i].get("id")
         }).destroy(); else {
-            var createRow = customeRowFriend(friendList[i].get("id"), friendList[i].get("name"), friendList[i].get("status"));
+            var createRow = customeRowFriend(friendList[i].get("id"), friendList[i].get("name"), friendList[i].get("flag"));
             $.friendList.add(createRow);
         }
     }
-    function customeRowFriend(id, name, friend_status) {
-        friend_status = 0 == friend_status ? false : true;
+    function customeRowFriend(id, name, friend_flag) {
+        friend_flag = 0 == friend_flag ? false : true;
         var row = Ti.UI.createView({
             height: Ti.UI.SIZE
         });
-        row.setBackgroundColor(friend_status ? "#fff" : "#e6e3d9");
+        row.setBackgroundColor(friend_flag ? "#fff" : "#e6e3d9");
         row.label = Ti.UI.createTextField({
             left: "10dp",
             height: "40dp",
@@ -28,7 +28,7 @@ function Controller() {
             hintText: "名前",
             value: name,
             id: id,
-            status: friend_status,
+            flag: friend_flag,
             font: {
                 fontSize: "15dp"
             },
@@ -43,7 +43,7 @@ function Controller() {
             var data = {
                 id: id,
                 name: e.source.value,
-                status: 1
+                flag: 1
             };
             var friendModel = Alloy.Collections.friend;
             var friend = Alloy.createModel("friend", data);
@@ -51,42 +51,42 @@ function Controller() {
             friend.save();
             delete_view("schedule");
         });
-        row.status = Ti.UI.createButton({
+        row.flag = Ti.UI.createButton({
             height: "25dp",
             width: "70dp",
             right: "10dp",
             font: {
                 fontSize: "14dp"
             },
-            title: friend_status ? "ON" : "OFF",
-            friend_status: friend_status,
-            backgroundColor: friend_status ? "#f3acbd" : "#ccc",
+            title: friend_flag ? "ON" : "OFF",
+            friend_flag: friend_flag,
+            backgroundColor: friend_flag ? "#f3acbd" : "#ccc",
             color: "#fff",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
             zIndex: 10,
             textAlign: "center",
-            className: "button-status"
+            className: "button-flag"
         });
-        row.status.addEventListener("click", function(e) {
-            var checkStatus = e.source.friend_status;
-            row.status.setBackgroundColor(checkStatus ? "#ccc" : "#f3acbd");
-            row.status.setTitle(checkStatus ? "OFF" : "ON");
-            e.source.friend_status = !checkStatus;
+        row.flag.addEventListener("click", function(e) {
+            var checkflag = e.source.friend_flag;
+            row.flag.setBackgroundColor(checkflag ? "#ccc" : "#f3acbd");
+            row.flag.setTitle(checkflag ? "OFF" : "ON");
+            e.source.friend_flag = !checkflag;
             var friendModel = Alloy.Collections.friend;
             var data = {
                 id: id,
                 name: name,
-                status: checkStatus ? 0 : 1
+                flag: checkflag ? 0 : 1
             };
             var friend = Alloy.createModel("friend", data);
             friendModel.add(friend);
             friend.save();
-            this.getParent().setBackgroundColor(checkStatus ? "#e6e3d9" : "#fff");
+            this.getParent().setBackgroundColor(checkflag ? "#e6e3d9" : "#fff");
             delete_view("schedule");
         });
         row.add(row.label);
-        row.add(row.status);
+        row.add(row.flag);
         row.add(Ti.UI.createLabel({
             backgroundColor: "#eeeeee",
             height: "1sp",
@@ -191,7 +191,7 @@ function Controller() {
         var friendModel = Alloy.Collections.friend;
         var friend = Alloy.createModel("friend", {
             name: "",
-            status: 1
+            flag: 1
         });
         friendModel.add(friend);
         friend.save();

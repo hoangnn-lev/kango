@@ -24,12 +24,14 @@ Alloy.Collections.schedule_detail = Alloy.createCollection("schedule_detail");
 
 Alloy.Collections.friend = Alloy.createCollection("friend");
 
-var frd = require("Lib/friend");
-
-var gcm = require("com.activate.gcm");
-
-var func = require("Lib/function");
+var func = require("Lib/function"), kango = require("Lib/kango");
 
 var customView = {};
+
+var activity = Ti.Android.currentActivity;
+
+activity.addEventListener("resume", function() {
+    kango.synsDatabase();
+});
 
 Alloy.createController("index");

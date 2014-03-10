@@ -10,38 +10,13 @@ if (configs.models.length > 0) {
 	Ti.API.UID = configs.models[0].get('cg_value');
 	openView('schedule');
 } else {
-	$.index.open();
+	doRegister();
 }
 
 //add back button
 $.index.addEventListener('android:back', function(e) {
 	Titanium.Android.currentActivity.finish();
 });
-
-/*
- * function register
- * action register
- * input : null
- * output : void
- * */
-function register(e) {
-
-	var error = null;
-	var pass = $.password.getValue().trim();
-	var email = $.email.getValue();
-
-	if ($.fullname.getValue().trim() == '') {
-		alert('Please enter name');
-	} else if (!func.validateEmail(email)) {
-		alert('Email is not valid');
-	} else if (pass == '') {
-		alert('Please enter password');
-	} else if (pass.length < 6) {
-		alert('Password is too short');
-	} else {
-		doRegister();
-	}
-}
 
 /*
  * function doRegister
@@ -51,11 +26,6 @@ function register(e) {
  * */
 function doRegister() {
 
-	//hidden keyboard
-	$.fullname.blur();
-	$.email.blur();
-	$.password.blur();
-
 	var progressIndicator = Ti.UI.Android.createProgressIndicator({
 		message : '処理中。。。',
 		location : Ti.UI.Android.PROGRESS_INDICATOR_DIALOG,
@@ -63,64 +33,35 @@ function doRegister() {
 	});
 	progressIndicator.show();
 
-	gcm.registerC2dm({
-		success : function(e) {
+	var client = Ti.Network.createHTTPClient({
+		onload : function(e) {
+			var data = JSON.parse(this.responseText);
 
-			var reg_id = gcm.getRegistrationId();
-
-			//check register c2dm
-			if (!reg_id) {
+			if (!data.result) {
 				progressIndicator.hide();
-				errorRegister();
+				errorRegister(data.msg);
 			} else {
-				var client = Ti.Network.createHTTPClient({
-					onload : function(e) {
-						var data = JSON.parse(this.responseText);
 
-						if (!data.result) {
-							progressIndicator.hide();
-							errorRegister(data.msg);
-						} else {
-
-							var userData = Alloy.createModel('configs', {
-								cg_name : 'uid',
-								cg_value : data['data'].id
-							});
-							configs.add(userData);
-							userData.save();
-
-							var confirm = Ti.UI.createAlertDialog({
-								title : 'お知らせ',
-								message : 'アカウントの登録に成功しました！',
-								buttonNames : ['OK']
-							});
-							confirm.addEventListener('click', function(e) {
-								openView('setting');
-								$.index.close();
-							});
-
-							progressIndicator.hide();
-							confirm.show();
-						}
-					},
-					onerror : function(e) {
-						progressIndicator.hide();
-						errorRegister();
-					}
+				var userData = Alloy.createModel('configs', {
+					cg_name : 'uid',
+					cg_value : data['data'].id
 				});
-				client.open('POST', Ti.API.KANGO_API_REGISTER);
-				client.send({
-					name : $.fullname.getValue(),
-					email : $.email.getValue(),
-					password : Titanium.Utils.md5HexDigest($.password.getValue()),
-					reg_id : reg_id
-				});
+				configs.add(userData);
+				userData.save();
+
+				openView('setting');
+				progressIndicator.hide();
+
 			}
 		},
-		error : function(e) {
-			errorRegister();
+		onerror : function(e) {
 			progressIndicator.hide();
+			errorRegister();
 		}
+	});
+	client.open('POST', Ti.API.KANGO_API_REGISTER);
+	client.send({
+		device_uid : Titanium.Platform.id
 	});
 }
 

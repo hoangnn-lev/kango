@@ -21,7 +21,7 @@ Ti.API.TABMENU = [ {
 Ti.API.ICON = [ {
     title: "披瀝",
     folder: "/memo/history/",
-    icons: [ "/memo/private/1.png", "/memo/simple/2.png", "/memo/job/3.png", "/memo/private/4.png" ]
+    icons: ""
 }, {
     title: "シンプル",
     folder: "/memo/simple/",
@@ -40,18 +40,4 @@ Ti.API.KANGO = "http://192.168.1.224/kango/";
 
 Ti.API.KANGO_API_REGISTER = Ti.API.KANGO + "users/register.json";
 
-Ti.API.KANGO_API_SEARCH = Ti.API.KANGO + "users/search.json";
-
-Ti.API.KANGO_API_FRIEND_LIST = Ti.API.KANGO + "users/friendList.json";
-
-Ti.API.KANGO_API_REMOVE_FRIEND = Ti.API.KANGO + "users/removeFriend.json";
-
-Ti.API.KANGO_API_ADD_FRIEND = Ti.API.KANGO + "users/addFriend.json";
-
-Ti.API.KANGO_API_REQUEST_FRIEND = Ti.API.KANGO + "users/sendRequestFriend.json";
-
-Ti.API.KANGO_API_UPDATE_REQUEST_FRIEND = Ti.API.KANGO + "users/updateRequestFriend.json";
-
-Ti.API.KANGO_API_CHECK_REQUEST_FRIEND = Ti.API.KANGO + "users/checkRequestFriend.json";
-
-Ti.API.KANGO_API_CHANGE_NAME = Ti.API.KANGO + "users/changeName.json";
+Ti.API.KANGO_API_SYNS_DATA = Ti.API.KANGO + "kango/sysnDatabase.json";

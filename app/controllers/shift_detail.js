@@ -1,16 +1,16 @@
-var args = arguments[0] || {}, selectedColor = '', shift, shiftsCols = Alloy.Collections.shifts, status, alias, label;
+var args = arguments[0] || {}, selectedColor = '', shift, shiftsCols = Alloy.Collections.shifts, flag, name;
 
 shiftsCols.fetch({
 	query : 'SELECT * from shifts where id=' + args['id']
 });
 
-shift = shiftsCols.models[0], status = shift.get('status'), alias = shift.get('alias'), label = shift.get('label');
+shift = shiftsCols.models[0], flag = shift.get('flag'), name = shift.get('name');
 
-$.shiftName.setText(alias);
-$.shiftAlias.setValue(alias);
+$.shiftName.setText(name);
+$.shiftAlias.setValue(name);
 
-if (shift.get('time')) {
-	var time = (shift.get('time')).split('-');
+if (shift.get('time_shift')) {
+	var time = (shift.get('time_shift')).split('-');
 	$.timeStart.setText(time[0]);
 	$.timeEnd.setText(time[1]);
 } else {
@@ -70,9 +70,9 @@ function loadColorBox(selected) {
 }
 
 function timeSet(e1) {
-	
+
 	$.shiftAlias.blur();
-	
+
 	var get_time = new Date();
 
 	var picker = Titanium.UI.createPicker({
@@ -113,12 +113,12 @@ function pad_2(number) {
 
 $.saveShift.addEventListener('click', function(e) {
 
-	var alias = $.shiftAlias.getValue(), timeStart = $.timeStart.getText(), timeEnd = $.timeEnd.getText(), color, time;
+	var name = $.shiftAlias.getValue(), timeStart = $.timeStart.getText(), timeEnd = $.timeEnd.getText(), color, time;
 
-	if (!alias) {
+	if (!name) {
 		alert('シフト名を入力してください');
 		return;
-	} else if (alias.length > 2) {
+	} else if (name.length > 2) {
 		alert('2文字を超えましたが、再入力してください。');
 		return;
 	}
@@ -130,10 +130,9 @@ $.saveShift.addEventListener('click', function(e) {
 
 	var _shift_data = {
 		id : args['id'],
-		label : label,
-		status : status,
-		alias : alias,
-		time : time,
+		name : name,
+		flag : flag,
+		time_shift : time,
 		color : color
 	};
 

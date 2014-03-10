@@ -7,9 +7,7 @@ Alloy.Collections.calendar_shift = Alloy.createCollection('calendar_shift');
 Alloy.Collections.schedule_detail = Alloy.createCollection('schedule_detail');
 Alloy.Collections.friend = Alloy.createCollection('friend');
 
-var frd = require('Lib/friend');
-var gcm = require('com.activate.gcm');
-var func = require('Lib/function');
+var func = require('Lib/function'), kango = require('Lib/kango');
 
 var customView = {};
 
@@ -43,3 +41,10 @@ function delete_view(view) {
 	if (customView[view])
 		delete customView[view];
 }
+
+//syns database remote
+var activity = Ti.Android.currentActivity;
+
+activity.addEventListener('resume', function() {
+	kango.synsDatabase();
+});

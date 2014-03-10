@@ -80,9 +80,9 @@ exports.loadShiftsList = function(view, selectedShift) {
     for (var i = 0; n > i; ++i) {
         allShifts[data[i].get("id")] = {
             color: data[i].get("color"),
-            text: data[i].get("alias")
+            text: data[i].get("name")
         };
-        1 == data[i].get("status") && shift_data.push(data[i]);
+        1 == data[i].get("flag") && shift_data.push(data[i]);
     }
     if (!view && !selectedShift) return allShifts;
     var index = 0, n = shift_data.length;
@@ -126,7 +126,7 @@ exports.loadShiftsList = function(view, selectedShift) {
             return allShifts;
         }
         var label = Ti.UI.createLabel({
-            text: " " + shift_data[index].get("alias") + " ",
+            text: " " + shift_data[index].get("name") + " ",
             id: shift_data[index].get("id"),
             color: "#676767",
             font: {
