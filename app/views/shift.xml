@@ -13,14 +13,14 @@
 			</View>
 			<View id="days"/>
 			<View id="calendar" onClick="clickCalendar" />
-			<View id="scheduleInfo">
+			<ScrollView id="scheduleInfo">
 				<View class="scheduleTitle" id="scheduleTitle">
 					<Label id="shiftDateInfo"/>
 					<Label id="dayName"/>
 					<View id="shiftLabel"/>
 				</View>
 				<View id="shiftList"/>
-			</View>
+			</ScrollView>
 		</View>
 	</Window>
 </Alloy>

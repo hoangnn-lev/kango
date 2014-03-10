@@ -28,32 +28,44 @@ function Controller() {
         id: "main"
     });
     $.__views.share.add($.__views.main);
-    $.__views.shareByImage = Ti.UI.createView({
-        height: "50%",
+    $.__views.shareImage = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
+        font: {
+            fontSize: "14dp"
+        },
+        height: "40%",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
         top: 0,
-        id: "shareByImage"
+        backgroundImage: "/share/btnShareImage.png",
+        backgroundSelectedImage: "/share/btnShareImage_action.png",
+        id: "shareImage"
     });
-    $.__views.main.add($.__views.shareByImage);
-    $.__views.shareImage = Ti.UI.createImageView({
-        image: "/share/shareByImage.jpg",
-        id: "shareImage",
-        width: Ti.UI.FILL
-    });
-    $.__views.shareByImage.add($.__views.shareImage);
-    $.__views.shareByText = Ti.UI.createView({
-        height: "50%",
+    $.__views.main.add($.__views.shareImage);
+    $.__views.shareText = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
+        font: {
+            fontSize: "14dp"
+        },
+        height: "40%",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
         top: 0,
-        id: "shareByText"
+        backgroundImage: "/share/btnShareTxt.png",
+        backgroundSelectedImage: "/share/btnShareTxt_action.png",
+        id: "shareText"
     });
-    $.__views.main.add($.__views.shareByText);
-    $.__views.shareText = Ti.UI.createImageView({
-        image: "/share/shareByText.jpg",
-        id: "shareText",
-        width: Ti.UI.FILL
-    });
-    $.__views.shareByText.add($.__views.shareText);
+    $.__views.main.add($.__views.shareText);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.shareImage.addEventListener("click", function() {

@@ -217,7 +217,9 @@ function Controller() {
     });
     $.__views.main.add($.__views.calendar);
     clickCalendar ? $.__views.calendar.addEventListener("click", clickCalendar) : __defers["$.__views.calendar!click!clickCalendar"] = true;
-    $.__views.scheduleInfo = Ti.UI.createView({
+    $.__views.scheduleInfo = Ti.UI.createScrollView({
+        top: 20,
+        bottom: 20,
         height: Ti.UI.SIZE,
         layout: "vertical",
         id: "scheduleInfo"

@@ -2,12 +2,8 @@
 	<Window>
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
-			<View id="shareByImage" class="shareBlock">
-				<ImageView image="/share/shareByImage.jpg" id="shareImage" width="Ti.UI.FILL"></ImageView>
-			</View>
-			<View id="shareByText" class="shareBlock">
-				<ImageView image="/share/shareByText.jpg" id="shareText" width="Ti.UI.FILL"></ImageView>
-			</View>
+			<Button  class="shareBlock" backgroundImage="/share/btnShareImage.png" backgroundSelectedImage="/share/btnShareImage_action.png" id="shareImage"/>
+			<Button  class="shareBlock" backgroundImage="/share/btnShareTxt.png" backgroundSelectedImage="/share/btnShareTxt_action.png" id="shareText"/>
 		</View>
 	</Window>
 </Alloy>

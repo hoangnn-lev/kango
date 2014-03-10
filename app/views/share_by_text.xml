@@ -5,15 +5,30 @@
 				<Label width="Ti.UI.SIZE" color="#fff" text="テキストで共有"/>
 			</View>
 			<View id="content">
-				<Label left="0" text="期間を選ぶ"/>
+				<Label left="0" text="共有する期間を選ぶ"/>
 				<View class="blockSelectedTime" onClick="showPicker" >
-					<Label id="dayStart"/>
-					<Label id="to" text="～"/>
-					<Label id="dayEnd"/>
+					<View>
+						<Label class="timeTitle"  text="開始日"/>
+						<Label id="dayStart"/>
+					</View>
+					<View top="10dp">
+						<Label class="timeTitle" text="終了日"/>
+						<Label id="dayEnd"/>
+					</View>
 				</View>
-				<Button class="item" type="mail" onClick="share" title="メールで送る"/>
-				<Button class="item" type="line" onClick="share"   title="LINEで送る" />
-
+				<View id="groupButton">
+					<Button class="button" left="0"
+					backgroundColor = '#f3acbd'
+					backgroundFocusedColor = '#e6a3b3'
+					backgroundSelectedColor = '#e6a3b3'
+					type="mail" onClick="share" title="メールで送る"/>
+					
+					<Button onClick="saveSchedule" right="0" class="button"
+					backgroundColor = '#cfba9c'
+					backgroundFocusedColor = '#c0ad91'
+					backgroundSelectedColor = '#c0ad91'
+					type="line" onClick="share"   title="LINEで送る" />
+				</View>
 			</View>
 		</View>
 	</Window>

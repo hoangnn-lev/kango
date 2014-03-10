@@ -22,13 +22,11 @@ exports.friendRequestC2dm = function(data) {
                         buttonNames: [ "OK" ]
                     }).show();
                 },
-                onerror: function() {
-                    errorCreateHTTP();
-                }
+                onerror: function() {}
             });
             client.open("POST", Ti.API.KANGO_API_ADD_FRIEND);
             client.send({
-                uid: Ti.API.UID.id,
+                uid: Ti.API.UID,
                 fid: fid
             });
             progressIndicator.hide();
@@ -38,7 +36,7 @@ exports.friendRequestC2dm = function(data) {
     var client = Ti.Network.createHTTPClient();
     client.open("POST", Ti.API.KANGO_API_UPDATE_REQUEST_FRIEND);
     client.send({
-        uid: Ti.API.UID.id,
+        uid: Ti.API.UID,
         fid: fid
     });
 };
@@ -74,13 +72,11 @@ exports.checkFriendRequest = function() {
                                         buttonNames: [ "OK" ]
                                     }).show();
                                 },
-                                onerror: function() {
-                                    errorCreateHTTP();
-                                }
+                                onerror: function() {}
                             });
                             client.open("POST", Ti.API.KANGO_API_ADD_FRIEND);
                             client.send({
-                                uid: Ti.API.UID.id,
+                                uid: Ti.API.UID,
                                 fid: fid
                             });
                             progressIndicator.hide();
@@ -102,7 +98,7 @@ exports.checkFriendRequest = function() {
     });
     client.open("POST", Ti.API.KANGO_API_CHECK_REQUEST_FRIEND);
     client.send({
-        uid: Ti.API.UID.id
+        uid: Ti.API.UID
     });
 };
 
@@ -128,7 +124,7 @@ exports.addNewFriend = function(data) {
             });
             client.open("POST", Ti.API.KANGO_API_ADD_FRIEND);
             client.send({
-                uid: Ti.API.UID.id,
+                uid: Ti.API.UID,
                 fid: fid
             });
             progressIndicator.hide();

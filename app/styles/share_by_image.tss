@@ -33,7 +33,7 @@
 	 right:"10dp",
 	 top:"10dp",
 	 width:Ti.UI.FILL,
-	 height:Ti.UI.FILL,
+	 height:Ti.UI.SIZE,
 	 layout:"vertical"
 },
 ".blockSelectedTime":{
@@ -44,8 +44,22 @@
 },
 "#month":{
 	height:'30dp',
-	width:'120dp',
-	borderColor:'#ccc',
-	borderWidth:1,
-	textAlign:'center'
+	width:Ti.UI.SIZE,
+	left:'20dp'
+},
+"#groupButton":{
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
+	layout:'vertical'
+},
+".button":{
+	color:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:'15',
+	font:{
+		fontSize:'16dp'
+	},
+	height:'40dp',
+	top:'15dp',
+	width:'100%'
 }

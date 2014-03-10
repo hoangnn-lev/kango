@@ -37,7 +37,7 @@ Ti.API.ICON = [{
 	icons : ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png', '10.png']
 }];
 
-Ti.API.KANGO = 'http://kango.dev.leverages.vn/';
+Ti.API.KANGO = 'http://192.168.1.224/kango/';
 Ti.API.KANGO_API_REGISTER = Ti.API.KANGO + 'users/register.json';
 Ti.API.KANGO_API_SEARCH = Ti.API.KANGO + 'users/search.json';
 Ti.API.KANGO_API_FRIEND_LIST = Ti.API.KANGO + 'users/friendList.json';

@@ -100,6 +100,7 @@ function getEvent(day) {
 	var id = dateIsEvent[day];
 	if (!id) {
 		$.scheduleList.add(Ti.UI.createLabel({
+			id : 'empty',
 			text : '予定なし',
 			font : {
 				fontSize : '14dp',
@@ -108,7 +109,7 @@ function getEvent(day) {
 			height : '40dp',
 			backgroundColor : '#fff',
 			width : Ti.UI.SIZE,
-			left:'10dp'
+			left : '10dp'
 		}));
 		return;
 	}
@@ -442,8 +443,7 @@ function getAllFriend() {
 			className : 'friend-item'
 		});
 		label.addEventListener('click', function(e) {
-
-			if ($.scheduleList.getChildren().length == 0)
+			if (($.scheduleList.getChildren())[0].id == 'empty')
 				return;
 
 			var type = e.source.type == 'deactive' ? 'active' : 'deactive';

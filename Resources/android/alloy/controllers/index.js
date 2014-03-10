@@ -1,15 +1,13 @@
 function Controller() {
     function register() {
-        $.fullname.getValue() ? doRegister() : Ti.UI.createAlertDialog({
-            buttonNames: [ "OK" ],
-            message: "名前を入力してください。",
-            title: "お知らせ"
-        }).show();
+        var pass = $.password.getValue().trim();
+        var email = $.email.getValue();
+        "" == $.fullname.getValue().trim() ? alert("Please enter name") : func.validateEmail(email) ? "" == pass ? alert("Please enter password") : 6 > pass.length ? alert("Password is too short") : doRegister() : alert("Email is not valid");
     }
     function doRegister() {
-        $.register.removeEventListener("click", register);
         $.fullname.blur();
         $.email.blur();
+        $.password.blur();
         var progressIndicator = Ti.UI.Android.createProgressIndicator({
             message: "処理中。。。",
             location: Ti.UI.Android.PROGRESS_INDICATOR_DIALOG,
@@ -23,23 +21,13 @@ function Controller() {
                     var client = Ti.Network.createHTTPClient({
                         onload: function() {
                             var data = JSON.parse(this.responseText);
-                            if (data.id) {
+                            if (data.result) {
                                 var userData = Alloy.createModel("configs", {
                                     cg_name: "uid",
-                                    cg_value: data.id
+                                    cg_value: data["data"].id
                                 });
-                                Alloy.Collections.configs.add(userData);
+                                configs.add(userData);
                                 userData.save();
-                                userData = Alloy.createModel("configs", {
-                                    cg_name: "usrname",
-                                    cg_value: data.name
-                                });
-                                Alloy.Collections.configs.add(userData);
-                                userData.save();
-                                Ti.API.UID = {
-                                    id: data.id,
-                                    name: data.name
-                                };
                                 var confirm = Ti.UI.createAlertDialog({
                                     title: "お知らせ",
                                     message: "アカウントの登録に成功しました！",
@@ -53,7 +41,7 @@ function Controller() {
                                 confirm.show();
                             } else {
                                 progressIndicator.hide();
-                                errorRegister();
+                                errorRegister(data.msg);
                             }
                         },
                         onerror: function() {
@@ -64,6 +52,8 @@ function Controller() {
                     client.open("POST", Ti.API.KANGO_API_REGISTER);
                     client.send({
                         name: $.fullname.getValue(),
+                        email: $.email.getValue(),
+                        password: Titanium.Utils.md5HexDigest($.password.getValue()),
                         reg_id: reg_id
                     });
                 } else {
@@ -74,14 +64,13 @@ function Controller() {
             error: function() {
                 errorRegister();
                 progressIndicator.hide();
-            },
-            callback: function() {}
+            }
         });
     }
-    function errorRegister() {
+    function errorRegister(msg) {
         Ti.UI.createAlertDialog({
             buttonNames: [ "OK" ],
-            message: "登録の処理中にエラーが発生しました。",
+            message: msg ? msg : "登録の処理中にエラーが発生しました。",
             title: "お知らせ"
         }).show();
     }
@@ -99,9 +88,7 @@ function Controller() {
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
-    $.__views.loginForm = Ti.UI.createScrollView({
-        top: 20,
-        bottom: 20,
+    $.__views.loginForm = Ti.UI.createView({
         layout: "vertical",
         left: 50,
         right: 50,
@@ -161,6 +148,20 @@ function Controller() {
         hintText: "メール"
     });
     $.__views.loginForm.add($.__views.email);
+    $.__views.password = Ti.UI.createTextField({
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        bottom: "10",
+        width: Ti.UI.FILL,
+        backgroundColor: "#f8ecee",
+        backgroundFocusedColor: "#f0f0f0",
+        borderRadius: 10,
+        borderColor: "#fff",
+        passwordMask: "true",
+        maxLength: "32",
+        id: "password",
+        hintText: "パスワード"
+    });
+    $.__views.loginForm.add($.__views.password);
     $.__views.register = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -185,13 +186,10 @@ function Controller() {
     Alloy.Collections.configs = Alloy.createCollection("configs");
     var configs = Alloy.Collections.configs;
     configs.fetch({
-        query: 'select cg_value from configs where cg_name="uid" or cg_name="usrname"'
+        query: 'select cg_value from configs where cg_name="uid"'
     });
     if (configs.models.length > 0) {
-        Ti.API.UID = {
-            id: configs.models[0].get("cg_value"),
-            name: configs.models[1].get("cg_value")
-        };
+        Ti.API.UID = configs.models[0].get("cg_value");
         openView("schedule");
     } else $.index.open();
     $.index.addEventListener("android:back", function() {

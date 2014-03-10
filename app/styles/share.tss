@@ -6,7 +6,6 @@
 	layout:'vertical'
 },
 ".shareBlock":{
-	height:'50%',
-	width:Ti.UI.FILL,
+	height:'40%',
 	top:0
 }

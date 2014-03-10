@@ -40,6 +40,7 @@ function Controller() {
         var id = dateIsEvent[day];
         if (!id) {
             $.scheduleList.add(Ti.UI.createLabel({
+                id: "empty",
                 text: "予定なし",
                 font: {
                     fontSize: "14dp"
@@ -259,7 +260,7 @@ function Controller() {
                 className: "friend-item"
             });
             label.addEventListener("click", function(e) {
-                if (0 == $.scheduleList.getChildren().length) return;
+                if ("empty" == $.scheduleList.getChildren()[0].id) return;
                 var type = "deactive" == e.source.type ? "active" : "deactive";
                 e.source.type = type;
                 this.setColor(friendStyle[type]["text"]);

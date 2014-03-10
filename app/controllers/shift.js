@@ -165,6 +165,7 @@ function updateShift(date) {
 
 		Alloy.Collections.calendar_shift.add(shift);
 		shift.save();
+		
 		if (!shiftMonthId)
 			shiftMonthId = shift.get('id');
 

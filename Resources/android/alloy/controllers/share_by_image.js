@@ -71,13 +71,8 @@ function Controller() {
         id: "__alloyId72"
     });
     $.__views.title.add($.__views.__alloyId72);
-    $.__views.save = Ti.UI.createImageView({
-        width: "120dp",
-        id: "save"
-    });
-    $.__views.main.add($.__views.save);
     $.__views.content = Ti.UI.createView({
-        height: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         left: "10dp",
         right: "10dp",
@@ -95,7 +90,7 @@ function Controller() {
             fontSize: "16sp"
         },
         left: "0",
-        text: "期間を選ぶ",
+        text: "共有する月カレンダーを選ぶ",
         id: "__alloyId73"
     });
     $.__views.content.add($.__views.__alloyId73);
@@ -108,64 +103,66 @@ function Controller() {
     });
     $.__views.content.add($.__views.__alloyId74);
     $.__views.month = Ti.UI.createLabel({
-        width: "120dp",
+        width: Ti.UI.SIZE,
         height: "30dp",
         color: "#676767",
-        textAlign: "center",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
-        borderColor: "#ccc",
-        borderWidth: 1,
+        left: "20dp",
         id: "month"
     });
     $.__views.__alloyId74.add($.__views.month);
     showPicker ? $.__views.month.addEventListener("click", showPicker) : __defers["$.__views.month!click!showPicker"] = true;
+    $.__views.groupButton = Ti.UI.createView({
+        height: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
+        layout: "vertical",
+        id: "groupButton"
+    });
+    $.__views.content.add($.__views.groupButton);
     $.__views.__alloyId75 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: Ti.UI.FILL,
+        width: "100%",
         font: {
-            fontSize: "14dp"
+            fontSize: "16dp"
         },
-        height: "35dp",
-        backgroundColor: "#f19c99",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#000",
+        height: "40dp",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#e6a3b3",
+        backgroundSelectedColor: "#e6a3b3",
+        color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 0,
-        borderColor: "#ed4580",
-        borderWidth: 1,
-        left: 0,
-        bottom: "20dp",
+        borderRadius: "15",
+        top: "15dp",
+        left: "0",
         type: "mail",
         title: "メールで送る",
         id: "__alloyId75"
     });
-    $.__views.content.add($.__views.__alloyId75);
+    $.__views.groupButton.add($.__views.__alloyId75);
     share ? $.__views.__alloyId75.addEventListener("click", share) : __defers["$.__views.__alloyId75!click!share"] = true;
     $.__views.__alloyId76 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: Ti.UI.FILL,
+        width: "100%",
         font: {
-            fontSize: "14dp"
+            fontSize: "16dp"
         },
-        height: "35dp",
-        backgroundColor: "#f19c99",
-        backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ef8fa6",
-        color: "#000",
+        height: "40dp",
+        backgroundColor: "#cfba9c",
+        backgroundFocusedColor: "#c0ad91",
+        backgroundSelectedColor: "#c0ad91",
+        color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-        borderRadius: 0,
-        borderColor: "#ed4580",
-        borderWidth: 1,
-        left: 0,
-        bottom: "20dp",
+        borderRadius: "15",
+        top: "15dp",
+        right: "0",
         type: "line",
         title: "LINEで送る",
         id: "__alloyId76"
     });
-    $.__views.content.add($.__views.__alloyId76);
+    $.__views.groupButton.add($.__views.__alloyId76);
     share ? $.__views.__alloyId76.addEventListener("click", share) : __defers["$.__views.__alloyId76!click!share"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);

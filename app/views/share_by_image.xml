@@ -4,17 +4,26 @@
 			<View id="title">
 				<Label width="Ti.UI.SIZE" color="#fff" text="画像で共有"/>
 			</View>
-			<ImageView width="120dp" id="save">
-			</ImageView>
 			<View id="content">
-				<Label left="0" text="期間を選ぶ"/>
+				<Label left="0" text="共有する月カレンダーを選ぶ"/>
 				<View class="blockSelectedTime">
 					<Label id="month" onClick="showPicker" />
 				</View>
-				<Button class="item" type="mail" onClick="share" title="メールで送る"/>
-				<Button class="item" type="line" onClick="share"  title="LINEで送る" />
+				<View id="groupButton">
+					<Button class="button" left="0"
+					backgroundColor = '#f3acbd'
+					backgroundFocusedColor = '#e6a3b3'
+					backgroundSelectedColor = '#e6a3b3'
+					type="mail" onClick="share" title="メールで送る"/>
+					<Button onClick="saveSchedule" right="0" class="button"
+					backgroundColor = '#cfba9c'
+					backgroundFocusedColor = '#c0ad91'
+					backgroundSelectedColor = '#c0ad91'
+					type="line" onClick="share"   title="LINEで送る" />
+				</View>
 			</View>
+
 		</View>
 	</Window>
-	
+
 </Alloy>
