@@ -42,9 +42,12 @@ function delete_view(view) {
 		delete customView[view];
 }
 
-//syns database remote
-var activity = Ti.Android.currentActivity;
+var uid = func.getUID();
+uid != '' ? kango.synsDatabase(uid) : '';
 
+var activity = Ti.Android.currentActivity;
 activity.addEventListener('resume', function() {
-	kango.synsDatabase();
+	var uid = func.getUID();
+	kango.synsDatabase(uid);
 });
+

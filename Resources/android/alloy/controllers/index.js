@@ -16,6 +16,7 @@ function Controller() {
                     });
                     configs.add(userData);
                     userData.save();
+                    Ti.API.UID = data["data"].id;
                     openView("setting");
                     progressIndicator.hide();
                 } else {
@@ -63,7 +64,6 @@ function Controller() {
     $.__views.index.add($.__views.loginForm);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    Alloy.Collections.configs = Alloy.createCollection("configs");
     var configs = Alloy.Collections.configs;
     configs.fetch({
         query: 'select cg_value from configs where cg_name="uid"'

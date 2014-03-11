@@ -393,6 +393,15 @@ exports.pagingControl = function(scrollableView) {
     return container;
 };
 
+exports.getUID = function() {
+    var configs = Alloy.Collections.configs;
+    configs.fetch({
+        query: 'select cg_value from configs where cg_name="uid"'
+    });
+    if (configs.models.length > 0) return configs.models[0].get("cg_value");
+    return;
+};
+
 exports.validateEmail = function(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);

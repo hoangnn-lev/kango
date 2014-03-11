@@ -1,11 +1,7 @@
-//create collection configs
-Alloy.Collections.configs = Alloy.createCollection('configs');
 var configs = Alloy.Collections.configs;
-
 configs.fetch({
 	query : 'select cg_value from configs where cg_name="uid"'
 });
-
 if (configs.models.length > 0) {
 	Ti.API.UID = configs.models[0].get('cg_value');
 	openView('schedule');
@@ -46,12 +42,12 @@ function doRegister() {
 					cg_name : 'uid',
 					cg_value : data['data'].id
 				});
+
 				configs.add(userData);
 				userData.save();
-
+				Ti.API.UID = data['data'].id;
 				openView('setting');
 				progressIndicator.hide();
-
 			}
 		},
 		onerror : function(e) {

@@ -1,23 +1,20 @@
-exports.synsDatabase = function() {
-    var tables = [ "configs", "shifts" ];
+exports.synsDatabase = function(uid) {
+    var tables = [ "Shifts", "Configs", "Friend", "Calendar_shift", "Schedule", "Schedule_detail" ];
+    var models = [ "Shifts", "Configs", "Friend", "CalendarShift", "Schedule", "ScheduleDetail" ];
     var data = {};
     for (var i in tables) {
         var table = tables[i];
-        var result = Alloy.Collections[table];
+        var model = models[i];
+        var result = Alloy.Collections[table.toLowerCase()];
         result.fetch({
             query: "select * from " + table
         });
-        data[table] = result;
+        data[model] = result;
     }
-    var client = Ti.Network.createHTTPClient({
-        onload: function() {
-            progressIndicator.hide();
-        },
-        onerror: function() {}
-    });
+    var client = Ti.Network.createHTTPClient();
     client.open("POST", Ti.API.KANGO_API_SYNS_DATA);
     client.send({
-        uid: Ti.API.UID,
+        uid: uid,
         udata: JSON.stringify(data)
     });
 };

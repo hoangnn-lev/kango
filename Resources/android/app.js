@@ -28,10 +28,15 @@ var func = require("Lib/function"), kango = require("Lib/kango");
 
 var customView = {};
 
+var uid = func.getUID();
+
+"" != uid ? kango.synsDatabase(uid) : "";
+
 var activity = Ti.Android.currentActivity;
 
 activity.addEventListener("resume", function() {
-    kango.synsDatabase();
+    var uid = func.getUID();
+    kango.synsDatabase(uid);
 });
 
 Alloy.createController("index");
