@@ -5,7 +5,7 @@
 				<Label width="Ti.UI.SIZE" color="#fff" text="Kango について"/>
 			</View>
 			<View id="content">
-				<Label width="Ti.UI.SIZE" text="について"/>
+				<WebView url="/about.html">
 			</View>
 		</View>
 	</Window>

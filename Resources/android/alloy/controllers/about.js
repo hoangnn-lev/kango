@@ -42,20 +42,11 @@ function Controller() {
     $.__views.content = Ti.UI.createView({
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
-        left: "10dp",
-        right: "10dp",
         id: "content"
     });
     $.__views.main.add($.__views.content);
-    $.__views.__alloyId1 = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
-        height: Ti.UI.SIZE,
-        color: "#676767",
-        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-        font: {
-            fontSize: "16sp"
-        },
-        text: "について",
+    $.__views.__alloyId1 = Ti.UI.createWebView({
+        url: "/about.html",
         id: "__alloyId1"
     });
     $.__views.content.add($.__views.__alloyId1);
