@@ -7,9 +7,8 @@
 },
 ".scheduleTitle":{
 	width:Ti.UI.FILL,
-	height:'40dp',
-	backgroundColor:'#fff',
-	top:'10dp'
+	height:'45dp',
+	backgroundColor:'#fff'
 },
 "#calendar":{
 	height:Ti.UI.SIZE,
@@ -69,13 +68,14 @@
 	font:{
 		fontSize:'24sp'
 	},
-	left:'5dp'
+	left:'25dp'
 },
 ".editScheduleButton":{
 	font:{
 		fontSize:'16sp'
 	},
-	backgroundColor:'#f3acbd'
+	backgroundColor:'#f3acbd',
+	height:'30dp'
 },
 '#days': {
     top: 0,
@@ -92,7 +92,7 @@
 		fontSize:'14dp'
 	},
 	textAlign:'center',
-	left:'85dp'
+	left:'105dp'
 },
 "#blockFriend":{
 	top:'2dp',
@@ -114,7 +114,7 @@
 		fontSize:'14dp',
 		fontWeight:'bold'
 	},
-	color:'#757575',
+	color:'#666',
 	left:'35dp'
 },
 ".imgTitleFriend":{
@@ -125,11 +125,11 @@
 "#scheduleInfo":{
 	height:Ti.UI.FILL,
 	layout:'vertical',
-	top:0
+	top:'10dp'
 },
 "#scheduleList":{
-	top:'1dp',
-	backgroundColor:'#fff'
+	backgroundColor:'#fff',
+	top:'2dp'
 },
 "#openAllFriend":{
 	width:"40dp",
@@ -140,7 +140,7 @@
 },
 "#editFriend":{
 	width:'120dp',
-	right:'5dp',
+	right:'10dp',
 	bottom:'10dp',
 	top:'10dp',
 	height:'30dp'
@@ -153,7 +153,8 @@
 "#groupAllFriend":{
 	width:Ti.UI.FILL,
 	height:0,
-	layout:"vertical"
+	layout:"vertical",
+	left:'5dp'
 },
 "#allFriend":{
 	width:Ti.UI.FILL,

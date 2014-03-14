@@ -11,14 +11,14 @@ function showPicker(e1) {
 	var picker = Titanium.UI.createPicker({
 		type : Titanium.UI.PICKER_TYPE_DATE,
 		selectionIndicator : true
-	}), label = this;
+	});
 
 	picker.showDatePickerDialog({
-		value : lastValue[e1.source.id],
+		value : lastValue['month'],
 		callback : function(e) {
 			if (!e.cancel) {
-				var result = lastValue[e1.source.id] = e.value;
-				label.setText(formatDate(result));
+				var result = lastValue['month'] = e.value;
+				$.month.setText(formatDate(result));
 			}
 		}
 	});
@@ -35,7 +35,7 @@ $.share_by_image.addEventListener('android:back', function(e) {
 
 /* share shift by image */
 function share(e) {
-	
+
 	var day = lastValue['month'];
 	var f = Alloy.createController('shift', {
 		date : day.getFullYear() + '-' + (day.getMonth() + 1) + '-' + day.getDate()

@@ -18,7 +18,7 @@
 					<Label id="scheduleDateInfo"/>
 					<Label id="dayName"/>
 					<View id="shiftLabel"/>
-					<Button right="5dp" width="Ti.UI.SIZE" title="＋予定を追加" class="editScheduleButton" onClick="addEvent"/>
+					<Button right="10dp" width="Ti.UI.SIZE" title="＋予定を追加" class="editScheduleButton" onClick="addEvent"/>
 				</View>
 				<View id="blockFriend">
 					<View height="Ti.UI.SIZE" top="10dp">
@@ -27,8 +27,8 @@
 						<Label id="serviceMember" text="勤務メンバー"/>
 					</View>
 					<View id="friend"/>
-					<Label class="line"/>
 					<View id="groupAllFriend">
+						<Label left="5dp" right="10dp" class="line"/>
 						<View id="allFriend"/>
 						<Button title="メンバー編集" id="editFriend" />
 					</View>

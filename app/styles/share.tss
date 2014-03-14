@@ -8,4 +8,11 @@
 ".shareBlock":{
 	height:'40%',
 	top:0
+},
+'.line':{
+	height:'1sp',
+	width:Ti.UI.FILL,
+	backgroundColor:'#ccc',
+	top:'10dp',
+	bottom:'10dp'
 }

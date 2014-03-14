@@ -86,69 +86,62 @@ exports.loadShiftsList = function(view, selectedShift) {
     }
     if (!view && !selectedShift) return allShifts;
     var index = 0, n = shift_data.length;
-    for (var i = 0; 3 > i; ++i) for (var j = 0; 4 > j; ++j) {
+    var buttonWidth = (deviceWidth - 100) / 4;
+    for (var i = 0; 4 > i; ++i) for (var j = 0; 4 > j; ++j) {
         if (index >= n) {
-            var button = Ti.UI.createButton({
-                textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-                width: Ti.UI.FILL,
+            var label = Ti.UI.createLabel({
+                text: " なし ",
+                id: 13,
+                color: "#666",
                 font: {
                     fontSize: "14dp"
                 },
-                height: Ti.UI.SIZE,
-                title: "シフト名を変える",
-                backgroundColor: "#f3acbd",
-                backgroundFocusedColor: "#ef8fa6",
-                backgroundSelectedColor: "#ef8fa6",
-                color: "#fff",
+                backgroundColor: "#c6c6c6",
+                height: buttonWidth - 20 + "dp",
+                width: buttonWidth + "dp",
+                top: "10dp",
+                bottom: "10dp",
+                left: "20dp",
                 border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
                 borderRadius: 10,
-                width: "46%",
-                left: "5dp",
-                height: "30dp",
-                bottom: "5dp",
-                className: "button-status"
+                borderWidth: 3,
+                borderColor: "#fff",
+                textAlign: "center",
+                className: "shift-item"
             });
-            button.addEventListener("click", function() {
-                openView("shift_setting", {
-                    tab: 1
-                });
+            label.addEventListener("click", function(e) {
+                selectedShift[0] && selectedShift[0].setBorderColor("#fff");
+                this.setBorderColor("#ccc");
+                selectedShift[0] = this;
+                selectedShift[1] = e.source;
             });
-            var nt = 0;
-            2 == n || 6 == n ? nt = 0 : 1 == n || 5 == n || 9 == n ? nt = 1 : 4 == n || 8 == n || 0 == n ? nt = 2 : (3 == n || 7 == n) && (nt = 3);
-            for (var t = 0; nt > t; ++t) view.add(Ti.UI.createLabel({
-                height: "30dp",
-                width: "23%",
-                top: "5dp",
-                bottom: "5dp",
-                left: "5dp"
-            }));
-            view.add(button);
+            view.add(label);
             return allShifts;
         }
         var label = Ti.UI.createLabel({
             text: " " + shift_data[index].get("name") + " ",
             id: shift_data[index].get("id"),
-            color: "#676767",
+            color: "#fff",
             font: {
                 fontSize: "14dp"
             },
             backgroundColor: shift_data[index].get("color"),
-            height: "30dp",
-            width: "23%",
-            top: "5dp",
-            bottom: "5dp",
-            left: "5dp",
+            height: buttonWidth - 20 + "dp",
+            width: buttonWidth + "dp",
+            top: "10dp",
+            bottom: "10dp",
+            left: "20dp",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
-            borderWidth: 1,
-            borderColor: "#f0f0f0",
             textAlign: "center",
+            borderWidth: 3,
+            borderColor: "#fff",
             className: "shift-item"
         });
         index++;
         label.addEventListener("click", function(e) {
-            selectedShift[0] && selectedShift[0].setBorderColor("#f0f0f0");
-            this.setBorderColor("#676767");
+            selectedShift[0] && selectedShift[0].setBorderColor("#fff");
+            this.setBorderColor("#ccc");
             selectedShift[0] = this;
             selectedShift[1] = e.source;
         });

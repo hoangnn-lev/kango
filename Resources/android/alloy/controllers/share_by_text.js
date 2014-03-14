@@ -81,6 +81,7 @@ function Controller() {
         width: Ti.UI.FILL,
         top: 0,
         layout: "vertical",
+        backgroundColor: "#f5f1e9",
         id: "main"
     });
     $.__views.share_by_text.add($.__views.main);
@@ -91,7 +92,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId75 = Ti.UI.createLabel({
+    $.__views.__alloyId99 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -100,9 +101,9 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "テキストで共有",
-        id: "__alloyId75"
+        id: "__alloyId99"
     });
-    $.__views.title.add($.__views.__alloyId75);
+    $.__views.title.add($.__views.__alloyId99);
     $.__views.content = Ti.UI.createView({
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
@@ -113,7 +114,7 @@ function Controller() {
         id: "content"
     });
     $.__views.main.add($.__views.content);
-    $.__views.__alloyId76 = Ti.UI.createLabel({
+    $.__views.__alloyId100 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -123,26 +124,30 @@ function Controller() {
         },
         left: "0",
         text: "共有する期間を選ぶ",
-        id: "__alloyId76"
+        id: "__alloyId100"
     });
-    $.__views.content.add($.__views.__alloyId76);
-    $.__views.__alloyId77 = Ti.UI.createView({
+    $.__views.content.add($.__views.__alloyId100);
+    $.__views.__alloyId101 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         top: "20dp",
         bottom: "20dp",
         layout: "vertical",
-        id: "__alloyId77"
+        id: "__alloyId101"
     });
-    $.__views.content.add($.__views.__alloyId77);
-    showPicker ? $.__views.__alloyId77.addEventListener("click", showPicker) : __defers["$.__views.__alloyId77!click!showPicker"] = true;
-    $.__views.__alloyId78 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
+    $.__views.content.add($.__views.__alloyId101);
+    showPicker ? $.__views.__alloyId101.addEventListener("click", showPicker) : __defers["$.__views.__alloyId101!click!showPicker"] = true;
+    $.__views.__alloyId102 = Ti.UI.createView({
+        height: "40dp",
         width: Ti.UI.FILL,
-        id: "__alloyId78"
+        top: "10dp",
+        backgroundColor: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        id: "__alloyId102"
     });
-    $.__views.__alloyId77.add($.__views.__alloyId78);
-    $.__views.__alloyId79 = Ti.UI.createLabel({
+    $.__views.__alloyId101.add($.__views.__alloyId102);
+    $.__views.__alloyId103 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#888",
@@ -150,11 +155,11 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        left: "20dp",
+        left: "10dp",
         text: "開始日",
-        id: "__alloyId79"
+        id: "__alloyId103"
     });
-    $.__views.__alloyId78.add($.__views.__alloyId79);
+    $.__views.__alloyId102.add($.__views.__alloyId103);
     $.__views.dayStart = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -163,18 +168,21 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        left: "90dp",
+        left: "70dp",
         id: "dayStart"
     });
-    $.__views.__alloyId78.add($.__views.dayStart);
-    $.__views.__alloyId80 = Ti.UI.createView({
-        height: Ti.UI.SIZE,
+    $.__views.__alloyId102.add($.__views.dayStart);
+    $.__views.__alloyId104 = Ti.UI.createView({
+        height: "40dp",
         width: Ti.UI.FILL,
         top: "10dp",
-        id: "__alloyId80"
+        backgroundColor: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        id: "__alloyId104"
     });
-    $.__views.__alloyId77.add($.__views.__alloyId80);
-    $.__views.__alloyId81 = Ti.UI.createLabel({
+    $.__views.__alloyId101.add($.__views.__alloyId104);
+    $.__views.__alloyId105 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#888",
@@ -182,11 +190,11 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        left: "20dp",
+        left: "10dp",
         text: "終了日",
-        id: "__alloyId81"
+        id: "__alloyId105"
     });
-    $.__views.__alloyId80.add($.__views.__alloyId81);
+    $.__views.__alloyId104.add($.__views.__alloyId105);
     $.__views.dayEnd = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
@@ -195,10 +203,10 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        left: "90dp",
+        left: "75dp",
         id: "dayEnd"
     });
-    $.__views.__alloyId80.add($.__views.dayEnd);
+    $.__views.__alloyId104.add($.__views.dayEnd);
     $.__views.groupButton = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -206,7 +214,7 @@ function Controller() {
         id: "groupButton"
     });
     $.__views.content.add($.__views.groupButton);
-    $.__views.__alloyId82 = Ti.UI.createButton({
+    $.__views.__alloyId106 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "100%",
         font: {
@@ -222,12 +230,12 @@ function Controller() {
         top: "15dp",
         left: "0",
         type: "mail",
-        title: "メールで送る",
-        id: "__alloyId82"
+        title: "メールで送信",
+        id: "__alloyId106"
     });
-    $.__views.groupButton.add($.__views.__alloyId82);
-    share ? $.__views.__alloyId82.addEventListener("click", share) : __defers["$.__views.__alloyId82!click!share"] = true;
-    $.__views.__alloyId83 = Ti.UI.createButton({
+    $.__views.groupButton.add($.__views.__alloyId106);
+    share ? $.__views.__alloyId106.addEventListener("click", share) : __defers["$.__views.__alloyId106!click!share"] = true;
+    $.__views.__alloyId107 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "100%",
         font: {
@@ -243,11 +251,11 @@ function Controller() {
         top: "15dp",
         right: "0",
         type: "line",
-        title: "LINEで送る",
-        id: "__alloyId83"
+        title: "LINEで送信",
+        id: "__alloyId107"
     });
-    $.__views.groupButton.add($.__views.__alloyId83);
-    share ? $.__views.__alloyId83.addEventListener("click", share) : __defers["$.__views.__alloyId83!click!share"] = true;
+    $.__views.groupButton.add($.__views.__alloyId107);
+    share ? $.__views.__alloyId107.addEventListener("click", share) : __defers["$.__views.__alloyId107!click!share"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
     var now = new Date(), allShifts = {};
@@ -261,9 +269,9 @@ function Controller() {
     $.share_by_text.addEventListener("android:back", function() {
         openView("share");
     });
-    __defers["$.__views.__alloyId77!click!showPicker"] && $.__views.__alloyId77.addEventListener("click", showPicker);
-    __defers["$.__views.__alloyId82!click!share"] && $.__views.__alloyId82.addEventListener("click", share);
-    __defers["$.__views.__alloyId83!click!share"] && $.__views.__alloyId83.addEventListener("click", share);
+    __defers["$.__views.__alloyId101!click!showPicker"] && $.__views.__alloyId101.addEventListener("click", showPicker);
+    __defers["$.__views.__alloyId106!click!share"] && $.__views.__alloyId106.addEventListener("click", share);
+    __defers["$.__views.__alloyId107!click!share"] && $.__views.__alloyId107.addEventListener("click", share);
     _.extend($, exports);
 }
 

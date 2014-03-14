@@ -67,6 +67,7 @@ function loadCalendarBody() {
 		}
 
 	}
+	getScheduleMonth(month.format('MM'), month.format('YYYY'));
 
 	_calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset);
 	var gdate = _calendar.calendarMonth().format('YYYY-MM-MMM').split('-');
@@ -89,15 +90,35 @@ function loadCalendarBody() {
 
 }
 
+/*
+ * function getScheduleMonth
+ * Get schedule by month
+ * input : month
+ * output : void
+ * */
+function getScheduleMonth(month, year) {
+
+	var scheduleModel = Alloy.Collections.schedule;
+	dateIsEvent = {};
+	scheduleModel.fetch({
+		query : 'SELECT * from schedule where date BETWEEN  "' + year + '-' + month + '-01" and "' + year + '-' + month + '-31"'
+	});
+
+	var data = scheduleModel.models, n = data.length;
+
+	for (var i = 0; i < n; ++i) {
+		var date = (data[i].get('date')).split('-');
+		dateIsEvent[date[2]] = data[i].get('id');
+	}
+}
+
 function clickCalendar(e) {
 
 	selectedDate = _calendar.selectedDate();
-
 	updateShift(selectedDate.format('D'));
 
 	$.shiftDateInfo.setText(selectedDate.format('MM / DD'));
 	$.dayName.setText(func.convertDayName(selectedDate.format('dddd')));
-
 	$.shiftLabel.removeAllChildren();
 
 	var date = selectedDate.format('D');
@@ -105,7 +126,7 @@ function clickCalendar(e) {
 
 		$.shiftLabel.add(Ti.UI.createLabel({
 			text : shiftOfMonth[date]['text'],
-			left : '120dp',
+			left : '140dp',
 			backgroundColor : shiftOfMonth[date]['color'],
 			color : '#fff',
 			width : '60dp',
@@ -147,7 +168,8 @@ function updateShift(date) {
 
 		//update shift to database
 		dateShiftDB[date] = selectedShift[1].id;
-		if (selectedShift[1].id == 9) {
+		if (selectedShift[1].id == 13) {
+			delete shiftOfMonth[date];
 			delete dateShiftDB[date];
 		}
 
@@ -165,7 +187,7 @@ function updateShift(date) {
 
 		Alloy.Collections.calendar_shift.add(shift);
 		shift.save();
-		
+
 		if (!shiftMonthId)
 			shiftMonthId = shift.get('id');
 
@@ -189,3 +211,15 @@ $.shift.addEventListener('android:back', function(e) {
 	confirm.show();
 });
 
+//add swipe left right for calendar
+$.calendar.addEventListener('swipe', function(e) {
+	if (e.direction == 'left')
+		doNextMonth();
+	else if (e.direction == 'right')
+		doPrevMonth();
+});
+$.shiftSetting.addEventListener('click', function(e) {
+	openView('shift_setting', {
+		tab : 1
+	});
+});

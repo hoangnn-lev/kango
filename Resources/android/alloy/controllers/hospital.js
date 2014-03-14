@@ -18,11 +18,11 @@ function Controller() {
         id: "main"
     });
     $.__views.hospital.add($.__views.main);
-    $.__views.__alloyId34 = Ti.UI.createWebView({
+    $.__views.__alloyId36 = Ti.UI.createWebView({
         url: "http://kango-oshigoto.jp/hospital/",
-        id: "__alloyId34"
+        id: "__alloyId36"
     });
-    $.__views.main.add($.__views.__alloyId34);
+    $.__views.main.add($.__views.__alloyId36);
     exports.destroy = function() {};
     _.extend($, $.__views);
     $.hospital.addEventListener("android:back", function() {

@@ -23,7 +23,7 @@ function Controller() {
         row.setBackgroundColor(friend_flag ? "#fff" : "#e6e3d9");
         row.label = Ti.UI.createTextField({
             left: "10dp",
-            height: "40dp",
+            height: "50dp",
             width: "200dp",
             hintText: "名前",
             value: name,
@@ -52,8 +52,8 @@ function Controller() {
             delete_view("schedule");
         });
         row.flag = Ti.UI.createButton({
-            height: "25dp",
-            width: "70dp",
+            height: "30dp",
+            width: "60dp",
             right: "10dp",
             font: {
                 fontSize: "14dp"
@@ -112,7 +112,7 @@ function Controller() {
         width: Ti.UI.FILL,
         top: 0,
         layout: "vertical",
-        backgroundColor: "#fff9e6",
+        backgroundColor: "#f5f1e9",
         bottom: 0,
         id: "main"
     });
@@ -124,7 +124,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId19 = Ti.UI.createLabel({
+    $.__views.__alloyId21 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -132,18 +132,18 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        text: "勤務メンバー設定",
-        id: "__alloyId19"
+        text: "勤務メンバー編集",
+        id: "__alloyId21"
     });
-    $.__views.title.add($.__views.__alloyId19);
-    $.__views.__alloyId20 = Ti.UI.createScrollView({
+    $.__views.title.add($.__views.__alloyId21);
+    $.__views.__alloyId22 = Ti.UI.createScrollView({
         top: "0",
         bottom: 20,
         layout: "vertical",
         height: Ti.UI.FILL,
-        id: "__alloyId20"
+        id: "__alloyId22"
     });
-    $.__views.main.add($.__views.__alloyId20);
+    $.__views.main.add($.__views.__alloyId22);
     $.__views.friendList = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -153,7 +153,7 @@ function Controller() {
         separatorColor: "#ccc",
         id: "friendList"
     });
-    $.__views.__alloyId20.add($.__views.friendList);
+    $.__views.__alloyId22.add($.__views.friendList);
     $.__views.addFriend = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -173,7 +173,7 @@ function Controller() {
         id: "addFriend",
         title: "＋メンバーを追加"
     });
-    $.__views.__alloyId20.add($.__views.addFriend);
+    $.__views.__alloyId22.add($.__views.addFriend);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var friendList;

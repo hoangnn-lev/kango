@@ -20,6 +20,9 @@
 					<View id="shiftLabel"/>
 				</View>
 				<View id="shiftList"/>
+				<View class="buttonShiftSetting">
+					<Button title="シフト編集" id="shiftSetting"/>
+				</View>
 			</ScrollView>
 		</View>
 	</Window>

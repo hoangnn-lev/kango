@@ -2,7 +2,7 @@ Alloy.Collections.configs = Alloy.createCollection('configs');
 var button = {
 	'ON' : {
 		text : 'ON',
-		bg : '#fff2cc'
+		bg : '#f3acbd'
 	},
 	'OFF' : {
 		text : 'OFF',
@@ -19,12 +19,12 @@ configs.fetch({
 	query : 'select id,cg_value from configs where cg_name="dayOffset" or cg_name="showMember"'
 });
 
-if (( dayOffset = configs.models[0].get('cg_value')) == 1) {
+if (configs.models[0] != '' && ( dayOffset = configs.models[0].get('cg_value')) == 1) {
 	$.monday_set.setBackgroundColor(button['ON']['bg']);
 	$.monday_set.setTitle(button['ON']['text']);
 }
 
-if (( showMember = configs.models[1].get('cg_value')) == 1) {
+if (configs.models[1] != '' && ( showMember = configs.models[1].get('cg_value')) == 1) {
 	$.showMember.setBackgroundColor(button['ON']['bg']);
 	$.showMember.setTitle(button['ON']['text']);
 }
@@ -42,7 +42,7 @@ function changeDayOffset(e) {
 	dayOffset = (dayOffset == 1) ? 0 : 1;
 
 	var model = Alloy.createModel('configs', {
-		id : configs.models[0].get('id'),
+		id : 1,
 		cg_name : 'dayOffset',
 		cg_value : dayOffset
 	});
@@ -61,7 +61,7 @@ function showMember() {
 	showMember = (showMember == 1) ? 0 : 1;
 
 	var model = Alloy.createModel('configs', {
-		id : configs.models[1].get('id'),
+		id : 2,
 		cg_name : 'showMember',
 		cg_value : showMember
 	});
@@ -193,7 +193,7 @@ $.report.addEventListener('click', function(e) {
 	var emailDialog = Titanium.UI.createEmailDialog();
 
 	emailDialog.setSubject('不具合やエラーのお問い合わせ');
-	emailDialog.setToRecipients(['hoangnn@leverages.jp']);
+	emailDialog.setToRecipients(['kango-support@kango.co.jp']);
 	emailDialog.open();
 });
 
@@ -202,6 +202,7 @@ function checkFirstUsing() {
 
 	if (!myFile.exists()) {
 		myFile.write('using');
+		
 		guideUseCalendar();
 	}
 }

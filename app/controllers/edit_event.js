@@ -93,7 +93,7 @@ function timeSet(e) {
 		callback : function(e) {
 			if (!e.cancel) {
 
-				var result = pad_2(e.value.getHours()) + ':' + pad_2(e.value.getMinutes());
+				var result = e.value.getHours() + ':' + pad_2(e.value.getMinutes());
 				child[1].setText(result);
 				child[2].setVisible(true);
 			}

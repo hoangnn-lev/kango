@@ -6,24 +6,22 @@
 			</View>
 			<View id="content">
 				<Label left="0" text="共有する月カレンダーを選ぶ"/>
-				<View class="blockSelectedTime">
-					<Label id="month" onClick="showPicker" />
+				<View class="blockSelectedTime"  onClick="showPicker">
+					<Label id="month" />
 				</View>
 				<View id="groupButton">
 					<Button class="button" left="0"
 					backgroundColor = '#f3acbd'
 					backgroundFocusedColor = '#e6a3b3'
 					backgroundSelectedColor = '#e6a3b3'
-					type="mail" onClick="share" title="メールで送る"/>
+					type="mail" onClick="share" title="メールで送信"/>
 					<Button onClick="saveSchedule" right="0" class="button"
 					backgroundColor = '#cfba9c'
 					backgroundFocusedColor = '#c0ad91'
 					backgroundSelectedColor = '#c0ad91'
-					type="line" onClick="share"   title="LINEで送る" />
+					type="line" onClick="share"   title="LINEで送信" />
 				</View>
 			</View>
-
 		</View>
 	</Window>
-
 </Alloy>

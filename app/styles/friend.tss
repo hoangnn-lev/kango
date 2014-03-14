@@ -6,7 +6,7 @@
 	layout:'vertical',
 	height:Ti.UI.FILL,
 	top:0,
-	backgroundColor:'#fff9e6',
+	backgroundColor:'#f5f1e9',
 	bottom:0
 },
 "#friendList":{

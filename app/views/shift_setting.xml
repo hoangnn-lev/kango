@@ -1,9 +1,12 @@
 <Alloy>
 	<Window>
-		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
-			<Label id="title" text="タップで名前を変更できます"/>
-			<View id="shift"/>
+			<View id="title">
+				<Label width="Ti.UI.SIZE" color="#fff" text="シフト設定"/>
+			</View>
+			<ScrollView top="0">
+				<View id="shift"/>
+			</ScrollView>
 		</View>
 	</Window>
 </Alloy>

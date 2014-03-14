@@ -42,7 +42,7 @@ function Controller() {
     doClick ? $.__views.dates.addEventListener("click", doClick) : __defers["$.__views.dates!click!doClick"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, startDay, calendarMonth, col, createWeekView, dayOfWeek, doClick, i, moment, nextMonth, period, dateIsEvent, prevMonth, row, tile, weekView, _j, _k, _ref1, _ref2, dayOffset, shiftOfDate;
+    var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, calendarMonth, col, createWeekView, day, dayOfWeek, doClick, i, moment, nextMonth, period, dateIsEvent, prevMonth, row, tile, weekView, _j, _k, _ref1, _ref2, dayOffset, shiftOfDate;
     moment = require("alloy/moment");
     var currentDate = moment().format("YYYY-MM-D");
     args = arguments[0] || {};
@@ -52,12 +52,13 @@ function Controller() {
     dayOffset = null != args.dayOffset ? args.dayOffset : 0;
     WEEK_COLOR = [ "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff" ];
     DAY_COLOR = [ "#f08791", "#676767", "#676767", "#676767", "#676767", "#676767", "#9bb9e1" ];
-    OUTDAY_COLOR = [ "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb " ];
+    OUTDAY_COLOR = [ "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb", "#d1d9e4", "#f0c7ca" ];
     EVENT_COLOR = [ "#f08791", "#f08791", "#f08791", "#f08791", "#f08791", "#f08791", "#f08791" ];
     exports.TILE_WIDTH = TILE_WIDTH = Math.floor(Ti.Platform.displayCaps.platformWidth / 7);
-    if (0 == startDay) {
-        DAY_COLOR[0] = "#676767";
-        DAY_COLOR[5] = "#9bb9e1";
+    if (0 == dayOffset) {
+        OUTDAY_COLOR[0] = "#f0c7ca";
+        OUTDAY_COLOR[5] = "#ebebeb";
+        OUTDAY_COLOR[6] = "#d1d9e4";
     }
     CALENDAR_WIDTH = 7 * TILE_WIDTH;
     $.dates.width = CALENDAR_WIDTH;
@@ -77,7 +78,17 @@ function Controller() {
     while (0 > dayOfWeek) dayOfWeek += 7;
     prevMonth = moment(period).subtract("months", 1);
     nextMonth = moment(period).add("months", 1);
-    _.defer(function() {});
+    _.defer(function() {
+        return require(WPATH("holiday")).fetch(calendarMonth, function(holidays) {
+            var name, ui, _ref1;
+            for (name in holidays) {
+                day = holidays[name];
+                day = moment(day, "YYYY-MM-DD").date();
+                ui = null != (_ref1 = $.calendar) ? _ref1["" + day] : void 0;
+                null != (null != ui ? ui.date : void 0) && (ui.children[0].color = DAY_COLOR[0]);
+            }
+        });
+    });
     col = 0;
     row = 0;
     createWeekView = function() {
@@ -131,7 +142,7 @@ function Controller() {
             borderWidth: "1",
             className: "row"
         });
-        currentDate == calendarMonth.format("YYYY-MM-") + i && tile.setBackgroundColor("#ffcde2");
+        currentDate == calendarMonth.format("YYYY-MM-") + i && tile.setBackgroundColor("#fffeb3");
         var _perodDay = period.date();
         tile.add(Ti.UI.createLabel({
             color: DAY_COLOR[period.day()],
@@ -167,13 +178,13 @@ function Controller() {
             className: "label-calendar"
         }));
         (dateIsEvent[_perodDay] || dateIsEvent["0" + _perodDay]) && tile.add(Ti.UI.createLabel({
-            text: "●",
+            text: "◆",
             font: {
-                fontSize: "20dp"
+                fontSize: "10dp"
             },
-            color: "#666",
+            color: "#ed829c",
             top: "3dp",
-            right: "12dp",
+            right: "5dp",
             touchEnabled: false,
             zIndex: 0,
             className: "label-event"
@@ -233,7 +244,7 @@ function Controller() {
         tile = null != (_ref3 = $.calendar) ? _ref3["" + day] : void 0;
         if (null != (null != tile ? tile.date : void 0)) {
             tile.children[1] && tile.children[1].id != options.id && tile.remove(tile.children[1]);
-            9 == options.id && (_isAdd = false);
+            13 == options.id && (_isAdd = false);
             if (_isAdd) return tile.add(Ti.UI.createLabel({
                 text: options.text,
                 font: {

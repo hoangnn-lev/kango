@@ -47,6 +47,20 @@ function Controller() {
         id: "shareImage"
     });
     $.__views.main.add($.__views.shareImage);
+    $.__views.__alloyId93 = Ti.UI.createLabel({
+        width: Ti.UI.FILL,
+        height: "1sp",
+        color: "#676767",
+        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
+        font: {
+            fontSize: "16sp"
+        },
+        backgroundColor: "#ccc",
+        top: "10dp",
+        bottom: "10dp",
+        id: "__alloyId93"
+    });
+    $.__views.main.add($.__views.__alloyId93);
     $.__views.shareText = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,

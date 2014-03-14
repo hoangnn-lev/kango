@@ -43,7 +43,7 @@ function clickCalendar(e) {
 		if (shiftOfMonth[_sDate]) {
 			$.shiftLabel.add(Ti.UI.createLabel({
 				text : shiftOfMonth[_sDate]['text'],
-				left : '120dp',
+				left : '160dp',
 				backgroundColor : shiftOfMonth[_sDate]['color'],
 				color : '#fff',
 				width : '60dp',
@@ -354,7 +354,7 @@ function loadFriendByDay(date) {
 						height : Ti.UI.SIZE,
 						right : '5dp',
 						top : '5dp',
-						color : "#676767",
+						color : "#735832",
 						textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
 						font : {
 							fontSize : '16sp'
@@ -436,8 +436,6 @@ function getAllFriend() {
 			width : Ti.UI.SIZE,
 			left : '5dp',
 			top : '5dp',
-			border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-			borderRadius : 10,
 			textAlign : 'center',
 			className : 'friend-item'
 		});
@@ -477,7 +475,7 @@ function updateFriend(name, id) {
 			height : Ti.UI.SIZE,
 			right : '5dp',
 			top : '5dp',
-			color : "#676767",
+			color : "#735832",
 			textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
 			font : {
 				fontSize : '16sp'
@@ -505,9 +503,9 @@ function updateFriend(name, id) {
 }
 
 //add swipe left right for calendar
-// $.calendar.addEventListener('swipe', function(e) {
-// if (e.direction == 'left')
-// doNextMonth();
-// else if (e.direction == 'right')
-// doPrevMonth();
-// });
+$.calendar.addEventListener('swipe', function(e) {
+	if (e.direction == 'left')
+		doNextMonth();
+	else if (e.direction == 'right')
+		doPrevMonth();
+});

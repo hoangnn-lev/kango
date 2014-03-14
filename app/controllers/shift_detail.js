@@ -11,11 +11,11 @@ $.shiftAlias.setValue(name);
 
 if (shift.get('time_shift')) {
 	var time = (shift.get('time_shift')).split('-');
-	$.timeStart.setText(time[0]);
-	$.timeEnd.setText(time[1]);
-} else {
-	$.timeStart.setText('開始時間');
-	$.timeEnd.setText('終了時間');
+	$.startTime.setText(time[0]);
+	$.endTime.setText(time[1]);
+
+	time[0] ? $.clearStartTime.setVisible(true) : '';
+	time[1] ? $.clearEndTime.setVisible(true) : '';
 }
 
 loadColorBox(shift.get('color'));
@@ -26,8 +26,7 @@ loadColorBox(shift.get('color'));
  * output : void
  * */
 function loadColorBox(selected) {
-
-	var color = ['#e68200', '#f19c98', '#ffe498', '#25b4a5', '#51b11d ', '#b9e0a5', '#d7e682', '#286bcc', '#f3acbd', '#d3e1f5', '#cccccc', '#fff'];
+	var color = ['#e68200', '#01adb3', '#69bc7b', '#e6b800', '#75a9e8', '#e86767', '#6c73cc', '#d23376', '#e0539c', '#a957a0', '#aa86c4', '#d8ba72'];
 	var column = 4, record = color.length, row = Math.ceil(record / column), count = 0, top = 0;
 
 	for (var i = 0; i < row; i++) {
@@ -39,13 +38,15 @@ function loadColorBox(selected) {
 
 			var view = Ti.UI.createButton({
 				backgroundColor : color[count],
-				height : '40dp',
-				width : '70dp',
-				left : '5dp',
-				top : '5dp',
-				borderColor : '#000',
+				height : '50dp',
+				width : '50dp',
+				left : '15dp',
+				top : '15dp',
+				right : '15dp',
+				bottom : '15dp',
+				borderColor : '#666',
 				color : '#676767',
-				borderWidth : 1
+				borderWidth : 0
 			});
 
 			if (selected == color[count]) {
@@ -57,7 +58,7 @@ function loadColorBox(selected) {
 
 			view.addEventListener('click', function(e) {
 				if (selectedColor)
-					selectedColor.setBorderWidth(1);
+					selectedColor.setBorderWidth(0);
 				this.setBorderWidth(3);
 				$.shiftName.setBackgroundColor(e.source.backgroundColor);
 				selectedColor = this;
@@ -70,10 +71,15 @@ function loadColorBox(selected) {
 }
 
 function timeSet(e1) {
-
 	$.shiftAlias.blur();
+	if (e1.source.type == 'delete')
+		return;
 
-	var get_time = new Date();
+	var get_time = new Date(), child = this.getChildren();
+
+	var time = child[1].text ? (child[1].text).split(':') : [0, 0];
+	get_time.setHours(time[0]);
+	get_time.setMinutes(time[1]);
 
 	var picker = Titanium.UI.createPicker({
 		type : Titanium.UI.PICKER_TYPE_TIME,
@@ -82,17 +88,16 @@ function timeSet(e1) {
 		selectionIndicator : true
 	});
 
-	if (e1.source.text != '開始時間' || e1.source.text != '終了時間') {
-		getTime = e1.source.text.split(':');
-		get_time.setHours(getTime[0]);
-		get_time.setMinutes(getTime[1]);
-	}
-
 	picker.showTimePickerDialog({
 		value : get_time,
 		format24 : true,
 		callback : function(e) {
 			if (!e.cancel) {
+
+				var result = e.value.getHours() + ':' + pad_2(e.value.getMinutes());
+				child[1].setText(result);
+				$.clearEndTime.setVisible(true);
+				$.clearStartTime.setVisible(true);
 
 				var result = e.value, end, start;
 				var hours = pad_2(result.getHours()), min = ":" + pad_2(result.getMinutes());
@@ -100,11 +105,16 @@ function timeSet(e1) {
 				end = (result.getHours() + 8) > 23 ? result.getHours() - 16 : result.getHours() + 8;
 				start = (result.getHours() - 9) >= 0 ? result.getHours() - 9 : result.getHours() + 15;
 
-				e1.source.text = hours + min;
-				e1.source.type == 'start' ? $.timeEnd.setText(pad_2(end) + min) : $.timeStart.setText(pad_2(start) + min);
+				e1.source.type == 'start' ? $.endTime.setText(end + min) : $.startTime.setText(start + min);
+
 			}
 		}
 	});
+}
+
+function clearTime(e) {
+	this.setVisible(false);
+	e.source.id == 'clearStartTime' ? $.startTime.setText('') : $.endTime.setText('');
 }
 
 function pad_2(number) {
@@ -113,7 +123,7 @@ function pad_2(number) {
 
 $.saveShift.addEventListener('click', function(e) {
 
-	var name = $.shiftAlias.getValue(), timeStart = $.timeStart.getText(), timeEnd = $.timeEnd.getText(), color, time;
+	var name = $.shiftAlias.getValue(), timeStart = $.startTime.getText(), timeEnd = $.endTime.getText(), color, time;
 
 	if (!name) {
 		alert('シフト名を入力してください');
@@ -123,7 +133,7 @@ $.saveShift.addEventListener('click', function(e) {
 		return;
 	}
 
-	time = (timeStart != '開始時間' ? timeStart : '') + '-' + (timeEnd != '終了時間' ? timeEnd : '');
+	time = (timeStart != '' ? timeStart : '') + '-' + (timeEnd != '' ? timeEnd : '');
 	time = time != '-' ? time : '';
 
 	color = selectedColor.getBackgroundColor();
@@ -158,5 +168,8 @@ $.shiftAlias.addEventListener('change', function(e) {
 });
 
 function shift_setting() {
-	openView('shift_setting');
+	Ti.API.activeTab = args['tab'];
+	openView('shift_setting', {
+		tab : args['tab']
+	});
 }

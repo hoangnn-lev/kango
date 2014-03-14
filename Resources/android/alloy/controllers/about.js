@@ -35,7 +35,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        text: "Kango について",
+        text: "ペリカレ！について",
         id: "__alloyId0"
     });
     $.__views.title.add($.__views.__alloyId0);

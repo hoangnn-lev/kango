@@ -1,7 +1,8 @@
 "#main":{
 	height:Ti.UI.FILL,
 	layout:'vertical',
-	top:0
+	top:0,
+	backgroundColor:'#f5f1e9'
 },
 "View":{
 	height:Ti.UI.SIZE,
@@ -21,30 +22,34 @@
 	right:'10dp',
 	width:Ti.UI.FILL,
 	height:Ti.UI.FILL,
+	bottom:'20dp',
 	layout:'vertical'
 },
 "#shiftName":{
 	top:0,
-	width:'80dp',
-	height:'35dp',
-	backgroundColor:'#f19c98',
-	borderColor:'#f0f0f0',
-	borderWidth:1,
+	width:'60dp',
+	height:'40dp',
+	color:'#fff',
 	left:0,
 	font:{
 		fontSize:'15dp'
 	},
-	textAlign:'center'
+	textAlign:'center',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10,
 },
 "#shiftAlias":{
 	top:0,
 	font:{
-		fontSize:'16dp'
+		fontSize:'15dp'
 	},
-	height:'35dp',
-	width:'100dp',
-	left:'120dp',
-	borderRadius:0
+	height:'40dp',
+	width:'80dp',
+	left:'70dp',
+	backgroundColor:'#fff',
+	backgroundFocusedColor:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10,
 },
 ".smallText":{
 	font:{
@@ -53,26 +58,7 @@
 	color:'#000',
 	top:'10dp'
 },
-".timeBlock":{
-	width:Ti.UI.FILL,
-	height:Ti.UI.SIZE
-},
-"#timeStart":{
-	width:Ti.UI.FILL,
-	height:Ti.UI.FILL,
-	font:{
-		fontSize:'16dp'
-	},
-	left:'10dp'
-},
-"#timeEnd":{
-	width:Ti.UI.FILL,
-	height:Ti.UI.FILL,
-	font:{
-		fontSize:'16dp'
-	},
-	left:'10dp'
-},
+
 "#groupButton":{
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE,
@@ -92,7 +78,10 @@
 "#groupShiftColor":{
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE,
-	layout:'horizontal'
+	layout:'horizontal',
+	backgroundColor:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10
 },
 ".error":{
 	visible:false
@@ -103,13 +92,24 @@
 	top:0
 },
 ".timeSet":{
-	height:'35dp',
+	width:Ti.UI.FILL,
+	height:Ti.UI.SIZE,
 	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
-	bottom:'10dp',
-	width: Ti.UI.FILL,
-	backgroundColor:'#f8ecee',
-	backgroundFocusedColor:'#f0f0f0',
+	bottom:'10',
+	backgroundColor:'#fff',
 	borderRadius:10,
 	borderColor:'#fff',
+	height:'40dp'
+},
+".delete":{
+	height:'25dp',
+	right:'5dp',
+	width:'55dp',
+	color:'#fff',
+	backgroundColor:'#aeaeae',
+	textAlign:'center',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10,
+	zIndex:5,
+	visible:false
 }
-

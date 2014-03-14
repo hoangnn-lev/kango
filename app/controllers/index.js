@@ -46,6 +46,7 @@ function doRegister() {
 				configs.add(userData);
 				userData.save();
 				Ti.API.UID = data['data'].id;
+				Ti.API.activeTab = 4;
 				openView('setting');
 				progressIndicator.hide();
 			}

@@ -70,7 +70,7 @@ function customeRowFriend(id, name, friend_flag) {
 
 	row.label = Ti.UI.createTextField({
 		left : '10dp',
-		height : '40dp',
+		height : '50dp',
 		width : '200dp',
 		hintText : '名前',
 		value : name,
@@ -100,8 +100,8 @@ function customeRowFriend(id, name, friend_flag) {
 		delete_view('schedule');
 	});
 	row.flag = Ti.UI.createButton({
-		height : '25dp',
-		width : '70dp',
+		height : '30dp',
+		width : '60dp',
 		right : '10dp',
 		font : {
 			fontSize : '14dp'

@@ -1,5 +1,6 @@
 "#main":{
-	backgroundColor:'#f5f1e9'
+	backgroundColor:'#f5f1e9',
+	top:0
 },
 "TextField":{
 	backgroundColor:'#fff',
@@ -16,7 +17,8 @@
 	top:0,
 	left:'10dp',
 	right:'10dp',
-	height:Ti.UI.FILL
+	height:Ti.UI.FILL,
+	bottom:'20dp'
 },
 ".pink":{
 	color:'#ff3974'
@@ -92,9 +94,9 @@
 "#date":{
 	color:'#8d8d8d',
 	font:{
-		fontSize:'20dp'
+		fontSize:'28dp'
 	},
-	left:'5dp'
+	left:'-15dp'
 },
 ".timeSet":{
 	width:Ti.UI.FILL,
@@ -107,9 +109,9 @@
 	height:'40dp'
 },
 ".delete":{
-	height:'30dp',
+	height:'25dp',
 	right:'5dp',
-	width:'50dp',
+	width:'55dp',
 	color:'#fff',
 	backgroundColor:'#aeaeae',
 	textAlign:'center',
@@ -117,4 +119,9 @@
 	borderRadius:10,
 	zIndex:5,
 	visible:false
+},
+"#titleEvent":{
+	height:'40dp',
+	backgroundColor:'#ed829c',
+	width:Ti.UI.FILL
 }

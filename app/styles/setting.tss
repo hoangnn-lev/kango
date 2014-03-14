@@ -3,13 +3,15 @@
 	width:Ti.UI.FILL
 },
 "#main":{
-	top:0,
 	layout:'vertical'
 },
 "Label":{
 	width:Ti.UI.SIZE,
 	height:Ti.UI.SIZE,
-	zIndex:0
+	zIndex:0,
+	font:{
+		fontSize:'14dp'
+	}
 },
 "#title":{
 	height:'40dp',
@@ -20,34 +22,27 @@
 	zIndex:0
 },
 ".line":{
-	top:'10dp',
-	bottom:'10dp',
-	zIndex:"0",
 	backgroundColor:"#ccc",
 	width:Ti.UI.FILL,
 	height:"1"
 },
 ".item":{
-	backgroundColor:'#f19c99',
 	borderRadius:0,
-	borderColor:'#ed4580',
-	borderWidth:1,
 	color:'#000',
-	left:0,
-	top:'10dp',
+	left:'10dp',
 	width:Ti.UI.FILL,
+	backgroundColor:'#fff',
 	font:{
 		fontSize:'14dp'
 	},
-	height:'35dp'
+	height:'35dp',
+	textAlign:'left'
 },
 "#content":{
-	 left:"10dp",
-	 right:"10dp",
-	 top:"10dp",
 	 width:Ti.UI.FILL,
 	 height:Ti.UI.FILL,
-	 layout:"vertical"
+	 layout:"vertical",
+	 backgroundColor:'#f5f1e9'
 },
 '.title':{
 	 color:"#000",
@@ -57,27 +52,15 @@
 	 width:Ti.UI.FILL,
 	 textAlign:'left'
 },
-".on":{
-	backgroundColor:'#fff2cc',
-	width:'60dp',
-	height:Ti.UI.FILL,
-	color:'#000',
-	font:{
-		fontSize:'14dp'
-	},
-	borderRadius:0,
-	right:0
-},
 ".off":{
-	backgroundColor:'#cccccc',
-	width:'60dp',
-	height:Ti.UI.FILL,
-	color:'#000',
+	width:'70dp',
+	height:'35dp',
 	font:{
 		fontSize:'14dp'
 	},
-	borderRadius:0,
-	right:0
+	right:'10dp',
+	backgroundColor:'#ccc',
+	backgroundSelectedColor:'#ccc'
 },
 ".sTitle":{
 	color:"#000",
@@ -85,4 +68,23 @@
 	font:{
 		fontSize:'14dp'
 	},
+},
+".customeTableViewRow":{
+	height:'55dp',
+	backgroundColor:'#fff',
+	selectionStyle : 'none',
+	selectedBackgroundColor : '#fff'
+},
+"TableView":{
+	height:Ti.UI.SIZE
+},
+".customeRowView":{
+	height:'55dp',
+	backgroundColor:'#fff',
+	width:Ti.UI.FILL
+},
+".rightIcon":{
+	right:'10dp',
+	width:'14dp',
+	height:'25dp'
 }

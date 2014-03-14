@@ -8,7 +8,8 @@
 },
 "#main":{
 	top:0,
-	layout:'vertical'
+	layout:'vertical',
+	backgroundColor:'#f5f1e9'
 },
 ".item":{
 	backgroundColor:'#f19c99',
@@ -52,11 +53,11 @@
 	textAlign:'center'
 },
 "#dayStart":{
-	left:'90dp',
+	left:'70dp',
 },
 
 "#dayEnd":{
-	left:'90dp',
+	left:'75dp',
 
 },
 "#groupButton":{
@@ -77,5 +78,13 @@
 },
 ".timeTitle":{
 	color:'#888',
-	left:'20dp'
+	left:'10dp'
+},
+".blockTime":{
+	height:'40dp',
+	width:Ti.UI.FILL,
+	top:'10dp',
+	backgroundColor:'#fff',
+	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+	borderRadius:10
 }

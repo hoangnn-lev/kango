@@ -27,6 +27,7 @@ function Controller() {
                 shiftOfMonth[key]["id"] = data[key];
             }
         }
+        getScheduleMonth(month.format("MM"), month.format("YYYY"));
         _calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset);
         var gdate = _calendar.calendarMonth().format("YYYY-MM-MMM").split("-");
         $.year.setText(gdate[0]);
@@ -40,6 +41,18 @@ function Controller() {
             $.calendar.fireEvent("click");
         }
     }
+    function getScheduleMonth(month, year) {
+        var scheduleModel = Alloy.Collections.schedule;
+        dateIsEvent = {};
+        scheduleModel.fetch({
+            query: 'SELECT * from schedule where date BETWEEN  "' + year + "-" + month + '-01" and "' + year + "-" + month + '-31"'
+        });
+        var data = scheduleModel.models, n = data.length;
+        for (var i = 0; n > i; ++i) {
+            var date = data[i].get("date").split("-");
+            dateIsEvent[date[2]] = data[i].get("id");
+        }
+    }
     function clickCalendar() {
         selectedDate = _calendar.selectedDate();
         updateShift(selectedDate.format("D"));
@@ -49,7 +62,7 @@ function Controller() {
         var date = selectedDate.format("D");
         shiftOfMonth[date] && $.shiftLabel.add(Ti.UI.createLabel({
             text: shiftOfMonth[date]["text"],
-            left: "120dp",
+            left: "140dp",
             backgroundColor: shiftOfMonth[date]["color"],
             color: "#fff",
             width: "60dp",
@@ -80,7 +93,10 @@ function Controller() {
             _get_shift_selected["id"] = selectedShift[1].id;
             _calendar.setShift(date, _get_shift_selected);
             dateShiftDB[date] = selectedShift[1].id;
-            9 == selectedShift[1].id && delete dateShiftDB[date];
+            if (13 == selectedShift[1].id) {
+                delete shiftOfMonth[date];
+                delete dateShiftDB[date];
+            }
             Alloy.Collections.calendar_shift.fetch();
             var _shift_data = {
                 month_year: month.format("MM-YYYY"),
@@ -229,7 +245,6 @@ function Controller() {
         width: Ti.UI.FILL,
         height: "40dp",
         backgroundColor: "#fff",
-        top: "10dp",
         id: "scheduleTitle"
     });
     $.__views.scheduleInfo.add($.__views.scheduleTitle);
@@ -241,7 +256,7 @@ function Controller() {
         font: {
             fontSize: "24sp"
         },
-        left: "5dp",
+        left: "20dp",
         id: "shiftDateInfo"
     });
     $.__views.scheduleTitle.add($.__views.shiftDateInfo);
@@ -254,7 +269,7 @@ function Controller() {
             fontSize: "14dp"
         },
         backgroundImage: "/icons/bg-circle.png",
-        left: "85dp",
+        left: "105dp",
         id: "dayName"
     });
     $.__views.scheduleTitle.add($.__views.dayName);
@@ -271,6 +286,32 @@ function Controller() {
         id: "shiftList"
     });
     $.__views.scheduleInfo.add($.__views.shiftList);
+    $.__views.__alloyId108 = Ti.UI.createView({
+        backgroundColor: "#fff",
+        height: Ti.UI.SIZE,
+        id: "__alloyId108"
+    });
+    $.__views.scheduleInfo.add($.__views.__alloyId108);
+    $.__views.shiftSetting = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
+        width: "120dp",
+        font: {
+            fontSize: "14dp"
+        },
+        height: "25dp",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        bottom: "20dp",
+        right: "20dp",
+        top: "20dp",
+        title: "シフト編集",
+        id: "shiftSetting"
+    });
+    $.__views.__alloyId108.add($.__views.shiftSetting);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var selectedDate, _calendar, dateIsEvent, dayOffset, shiftMonthId, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), selectedShift = [], dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};
@@ -293,6 +334,14 @@ function Controller() {
             0 == e.index && Titanium.Android.currentActivity.finish();
         });
         confirm.show();
+    });
+    $.calendar.addEventListener("swipe", function(e) {
+        "left" == e.direction ? doNextMonth() : "right" == e.direction && doPrevMonth();
+    });
+    $.shiftSetting.addEventListener("click", function() {
+        openView("shift_setting", {
+            tab: 1
+        });
     });
     __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
     __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);

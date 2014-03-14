@@ -11,50 +11,52 @@ function Controller() {
         id: "shift_setting"
     });
     $.__views.shift_setting && $.addTopLevelView($.__views.shift_setting);
-    $.__views.tabMenu = Alloy.createController("tab_menu", {
-        backgroundColor: "#f3acbd",
-        width: Ti.UI.FILL,
-        height: "50dp",
-        layout: "horizontal",
-        id: "tabMenu",
-        __parentSymbol: $.__views.shift_setting
-    });
-    $.__views.tabMenu.setParent($.__views.shift_setting);
     $.__views.main = Ti.UI.createView({
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
-        top: "50dp",
+        top: 0,
         layout: "vertical",
         id: "main"
     });
     $.__views.shift_setting.add($.__views.main);
-    $.__views.title = Ti.UI.createLabel({
+    $.__views.title = Ti.UI.createView({
+        height: "40dp",
         width: Ti.UI.FILL,
+        backgroundColor: "#ed829c",
+        top: 0,
+        id: "title"
+    });
+    $.__views.main.add($.__views.title);
+    $.__views.__alloyId118 = Ti.UI.createLabel({
+        width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#fff",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
         },
-        left: "10dp",
-        top: "10dp",
-        id: "title",
-        text: "タップで名前を変更できます"
+        text: "シフト設定",
+        id: "__alloyId118"
     });
-    $.__views.main.add($.__views.title);
+    $.__views.title.add($.__views.__alloyId118);
+    $.__views.__alloyId119 = Ti.UI.createScrollView({
+        top: "0",
+        bottom: 20,
+        id: "__alloyId119"
+    });
+    $.__views.main.add($.__views.__alloyId119);
     $.__views.shift = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        top: "20dp",
         layout: "vertical",
         id: "shift"
     });
-    $.__views.main.add($.__views.shift);
+    $.__views.__alloyId119.add($.__views.shift);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var shiftsCols = Alloy.Collections.shifts;
     var args = arguments[0] || {};
-    var btnActiveBg = "#f3acbd", textActive = "使う", btnDeativeBg = "#e6e6e6", textDeactive = "要らない";
+    var btnActiveBg = "#f3acbd", textActive = "ON", btnDeativeBg = "#e6e6e6", textDeactive = "OFF";
     shiftsCols.fetch({
         query: "SELECT * from shifts"
     });
@@ -62,47 +64,49 @@ function Controller() {
     var shift = shiftsCols.models;
     for (var i = 0; n > i; i++) {
         var item = Ti.UI.createView({
-            touchEnabled: false,
+            touchEnabled: true,
             selectedBackgroundColor: "transparent",
             width: Ti.UI.FILL,
-            height: Ti.UI.SIZE
+            height: "50dp",
+            id: shift[i].get("id"),
+            zIndex: 1
+        });
+        item.addEventListener("click", function(e) {
+            if ("button-right" == e.source.className) return;
+            openView("shift_detail", {
+                id: e.source.id,
+                tab: args["tab"]
+            });
         });
         var button = Ti.UI.createButton({
             backgroundColor: shift[i].get("color"),
-            width: "80dp",
-            height: "30dp",
+            width: "20dp",
+            height: "20dp",
+            touchEnabled: false,
             left: "10dp",
-            top: "10dp",
-            bottom: "10dp",
-            title: shift[i].get("name"),
-            touchEnabled: true,
-            id: shift[i].get("id"),
-            borderColor: "#f0f0f0",
-            color: "#676767",
-            borderWidth: 1,
             className: "row-left-name"
         });
-        button.addEventListener("click", function(e) {
-            openView("shift_detail", {
-                id: e.source.id
-            });
-        });
         item.add(button);
-        var time = Ti.UI.createLabel({
+        item.add(Ti.UI.createLabel({
+            left: "40dp",
+            text: shift[i].get("name"),
+            font: {
+                fontSize: "15dp"
+            },
+            touchEnabled: false,
+            color: "#676767",
+            className: "label-shift"
+        }));
+        item.add(Ti.UI.createLabel({
             text: shift[i].get("time_shift"),
             id: shift[i].get("id"),
             font: {
                 fontSize: "15dp"
             },
             color: "#676767",
+            touchEnabled: false,
             className: "time"
-        });
-        time.addEventListener("click", function(e) {
-            openView("shift_detail", {
-                id: e.source.id
-            });
-        });
-        item.add(time);
+        }));
         var background = btnDeativeBg, text = textDeactive;
         if (1 == shift[i].get("flag")) {
             background = btnActiveBg;
@@ -115,8 +119,8 @@ function Controller() {
             time_shift: shift[i].get("time_shift"),
             shiftcolor: shift[i].get("color"),
             flag: shift[i].get("flag"),
-            height: "35dp",
-            width: "75dp",
+            height: "30dp",
+            width: "50dp",
             backgroundColor: background,
             backgroundSelectedColor: background,
             right: "10dp",
@@ -126,7 +130,7 @@ function Controller() {
             font: {
                 fontSize: "15dp"
             },
-            zIndex: 1,
+            zIndex: 2,
             color: "#fff",
             className: "button-right"
         });

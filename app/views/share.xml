@@ -3,6 +3,7 @@
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main">
 			<Button  class="shareBlock" backgroundImage="/share/btnShareImage.png" backgroundSelectedImage="/share/btnShareImage_action.png" id="shareImage"/>
+			<Label class="line"/>
 			<Button  class="shareBlock" backgroundImage="/share/btnShareTxt.png" backgroundSelectedImage="/share/btnShareTxt_action.png" id="shareText"/>
 		</View>
 	</Window>

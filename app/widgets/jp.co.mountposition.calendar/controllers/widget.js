@@ -15,13 +15,14 @@ dayOffset = args.dayOffset != null ? args.dayOffset : 0;
 WEEK_COLOR = ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff'];
 DAY_COLOR = ['#f08791', '#676767', '#676767', '#676767', '#676767', '#676767', '#9bb9e1'];
 
-OUTDAY_COLOR = ['#ebebeb', '#ebebeb', '#ebebeb', '#ebebeb', '#ebebeb', '#ebebeb', '#ebebeb '];
+OUTDAY_COLOR = ['#ebebeb', '#ebebeb', '#ebebeb', '#ebebeb', '#ebebeb', '#d1d9e4', '#f0c7ca'];
 EVENT_COLOR = ['#f08791', '#f08791', '#f08791', '#f08791', '#f08791', '#f08791', '#f08791'];
 exports.TILE_WIDTH = TILE_WIDTH = Math.floor(Ti.Platform.displayCaps.platformWidth / 7);
 
-if (startDay == 0) {
-	DAY_COLOR[0] = '#676767';
-	DAY_COLOR[5] = '#9bb9e1';
+if (dayOffset == 0) {
+	OUTDAY_COLOR[0] = '#f0c7ca';
+	OUTDAY_COLOR[5] = '#ebebeb';
+	OUTDAY_COLOR[6] = '#d1d9e4';
 }
 
 CALENDAR_WIDTH = TILE_WIDTH * 7;
@@ -65,32 +66,19 @@ prevMonth = moment(period).subtract('months', 1);
 nextMonth = moment(period).add('months', 1);
 
 _.defer(function() {
-	var name, ui, _ref1;
-
-	//for day event
-	// for (var i = 0, n = dateIsEvent.length; i < n; ++i) {
-	//
-	// day = dateIsEvent[i].date;
-	// day = moment(day, 'YYYY-MM-DD').date();
-	// ui = ( _ref1 = $.calendar) != null ? _ref1["" + day] :
-	// void 0;
-	// if ((ui != null ? ui.date :
-	// void 0) != null) {
-	//
-	// ui.add(Ti.UI.createLabel({
-	// text : '●',
-	// font : {
-	// fontSize : '20dp'
-	// },
-	// color : '#666',
-	// top : '3dp',
-	// right : '12dp',
-	// touchEnabled : false,
-	// zIndex : 0
-	// }));
-	// }
-	// }
-
+	return require(WPATH('holiday')).fetch(calendarMonth, function(holidays) {
+		var name, ui, _ref1;
+		for (name in holidays) {
+			day = holidays[name];
+			day = moment(day, 'YYYY-MM-DD').date();
+			ui = ( _ref1 = $.calendar) != null ? _ref1["" + day] :
+			void 0;
+			if ((ui != null ? ui.date :
+			void 0) != null) {
+				ui.children[0].color = DAY_COLOR[0];
+			}
+		}
+	});
 });
 
 col = 0;
@@ -157,7 +145,7 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 	});
 
 	if (currentDate == (calendarMonth.format('YYYY-MM-') + i)) {
-		tile.setBackgroundColor('#ffcde2');
+		tile.setBackgroundColor('#fffeb3');
 	}
 	var _perodDay = period.date();
 	tile.add(Ti.UI.createLabel({
@@ -204,13 +192,13 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 	if (dateIsEvent[_perodDay] || dateIsEvent['0' + _perodDay]) {
 
 		tile.add(Ti.UI.createLabel({
-			text : '●',
+			text : '◆',
 			font : {
-				fontSize : '20dp'
+				fontSize : '10dp'
 			},
-			color : '#666',
+			color : '#ed829c',
 			top : '3dp',
-			right : '12dp',
+			right : '5dp',
 			touchEnabled : false,
 			zIndex : 0,
 			className : 'label-event'
@@ -288,7 +276,7 @@ exports.setShift = function(day, options) {
 		if (tile.children[1] && tile.children[1].id != options.id) {
 			tile.remove(tile.children[1]);
 		}
-		if (options.id == 9)
+		if (options.id == 13)
 			_isAdd = false;
 
 		//check label empty/null

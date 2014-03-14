@@ -4,33 +4,41 @@
 			<View id="title">
 				<Label width="Ti.UI.SIZE" color="#fff" text="シフト設定詳細"/>
 			</View>
-			<View id="content">
-				<View top="10dp" bottom="10dp">
-					<Label id="shiftName"/>
-					<TextField  hintText="日勤" id="shiftAlias"/>
-					<Label left="230dp" class="smallText" text="2文字以内"/>
+			<ScrollView top="0">
+				<View id="content">
+					<View top="10dp" bottom="10dp">
+						<Label id="shiftName"/>
+						<TextField  id="shiftAlias"/>
+						<Label left="160dp" class="smallText" text="※2文字以内"/>
+					</View>
+					<View class="timeSet" onClick="timeSet" type="start">
+						<Label left="10dp" touchEnabled="false"  color="#8d8d8d" text="開始時間"/>
+						<Label left="90dp" touchEnabled="false" id="startTime"/>
+						<Label class="delete" type="delete" id="clearStartTime" onClick="clearTime" text="削除" />
+					</View>
+					<View class="timeSet" onClick="timeSet" type="end">
+						<Label left="10dp" touchEnabled="false"  color="#8d8d8d" text="終了時間"/>
+						<Label left="90dp"  touchEnabled="false" id="endTime"/>
+						<Label class="delete" type="delete"  id="clearEndTime" onClick="clearTime" text="削除" />
+					</View>
+					<View id="blockColor">
+						<View id="groupShiftColor"/>
+					</View>
+					<View id="groupButton">
+						<Button onClick="shift_setting" class="button"
+						left="0"
+						backgroundColor = '#cfba9c'
+						backgroundFocusedColor = '#c0ad91'
+						backgroundSelectedColor = '#c0ad91'
+						title="キャンセル"/>
+						<Button id="saveShift" right="0"   class="button"
+						backgroundColor = '#f3acbd'
+						backgroundFocusedColor = '#e6a3b3'
+						backgroundSelectedColor = '#e6a3b3'
+						title="保存"/>
+					</View>
 				</View>
-				<View class="timeSet">
-					<Label type="start" onClick="timeSet" id="timeStart"/>
-				</View>
-				<View class="timeSet">
-					<Label type="end"  onClick="timeSet"  id="timeEnd"/>
-				</View>
-				<Label class="smallText" text="スタンプ"/>
-				<View id="groupShiftColor"/>
-				<View id="groupButton">
-					<Button onClick="shift_setting" class="button"
-					backgroundColor = '#f3acbd' left="0"
-					backgroundFocusedColor = '#e6a3b3'
-					backgroundSelectedColor = '#e6a3b3'
-					title="キャンセル"/>
-					<Button id="saveShift" right="0"   class="button"
-					backgroundColor = '#cfba9c'
-					backgroundFocusedColor = '#c0ad91'
-					backgroundSelectedColor = '#c0ad91'
-					title="保存する"/>
-				</View>
-			</View>
+			</ScrollView>
 		</View>
 	</Window>
 </Alloy>

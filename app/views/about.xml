@@ -2,7 +2,7 @@
 	<Window>
 		<View id="main">
 			<View id="title">
-				<Label width="Ti.UI.SIZE" color="#fff" text="Kango について"/>
+				<Label width="Ti.UI.SIZE" color="#fff" text="ペリカレ！について"/>
 			</View>
 			<View id="content">
 				<WebView url="/about.html">

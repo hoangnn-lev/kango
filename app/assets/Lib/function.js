@@ -118,63 +118,49 @@ exports.loadShiftsList = function(view, selectedShift) {
 		}
 	}
 
-	if (!view && !selectedShift)
+	if (!view && !selectedShift) {
 		return allShifts;
+	}
 
 	var index = 0, n = shift_data.length;
-	for (var i = 0; i < 3; ++i) {
+	var buttonWidth = (deviceWidth - 100) / 4;
+	for (var i = 0; i < 4; ++i) {
 
 		for (var j = 0; j < 4; ++j) {
 
 			if (index >= n) {
-				var button = Ti.UI.createButton({
-					textAlign : Ti.UI.TEXT_ALIGNMENT_CENTER,
-					width : Ti.UI.FILL,
+
+				var label = Ti.UI.createLabel({
+					text : ' なし ',
+					id : 13,
+					color : '#666',
 					font : {
 						fontSize : '14dp'
 					},
-					height : Ti.UI.SIZE,
-					title : 'シフト名を変える',
-					backgroundColor : '#f3acbd',
-					backgroundFocusedColor : '#ef8fa6',
-					backgroundSelectedColor : '#ef8fa6',
-					color : '#fff',
+					backgroundColor : '#c6c6c6',
+					height : (buttonWidth - 20) + 'dp',
+					width : buttonWidth + 'dp',
+					top : '10dp',
+					bottom : '10dp',
+					left : '20dp',
 					border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 					borderRadius : 10,
-					width : '46%',
-					left : '5dp',
-					height : '30dp',
-					bottom : '5dp',
-					className : 'button-status'
-				});
-				button.addEventListener('click', function(e) {
-					openView('shift_setting', {
-						tab : 1
-					});
+					borderWidth : 3,
+					borderColor : '#fff',
+					textAlign : 'center',
+					className : 'shift-item'
 				});
 
-				var nt = 0;
+				label.addEventListener('click', function(e) {
 
-				if (n == 2 || n == 6)
-					nt = 0;
-				else if (n == 1 || n == 5 || n == 9)
-					nt = 1;
-				else if (n == 4 || n == 8 || n == 0)
-					nt = 2;
-				else if (n == 3 || n == 7)
-					nt = 3;
-
-				for (var t = 0; t < nt; ++t) {
-					view.add(Ti.UI.createLabel({
-						height : '30dp',
-						width : '23%',
-						top : '5dp',
-						bottom : '5dp',
-						left : '5dp',
-					}));
-				}
-
-				view.add(button);
+					if (selectedShift[0]) {
+						selectedShift[0].setBorderColor('#fff');
+					}
+					this.setBorderColor('#ccc');
+					selectedShift[0] = this;
+					selectedShift[1] = e.source;
+				});
+				view.add(label);
 
 				return allShifts;
 			}
@@ -182,31 +168,30 @@ exports.loadShiftsList = function(view, selectedShift) {
 			var label = Ti.UI.createLabel({
 				text : ' ' + shift_data[index].get('name') + ' ',
 				id : shift_data[index].get('id'),
-				color : '#676767',
+				color : '#fff',
 				font : {
 					fontSize : '14dp'
 				},
 				backgroundColor : shift_data[index].get('color'),
-				height : '30dp',
-				width : '23%',
-				top : '5dp',
-				bottom : '5dp',
-				left : '5dp',
+				height : (buttonWidth - 20) + 'dp',
+				width : buttonWidth + 'dp',
+				top : '10dp',
+				bottom : '10dp',
+				left : '20dp',
 				border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 				borderRadius : 10,
-				borderWidth : 1,
-				borderColor : '#f0f0f0',
 				textAlign : 'center',
+				borderWidth : 3,
+				borderColor : '#fff',
 				className : 'shift-item'
 			});
-
 			index++;
 			label.addEventListener('click', function(e) {
 
 				if (selectedShift[0]) {
-					selectedShift[0].setBorderColor('#f0f0f0');
+					selectedShift[0].setBorderColor('#fff');
 				}
-				this.setBorderColor('#676767');
+				this.setBorderColor('#ccc');
 				selectedShift[0] = this;
 				selectedShift[1] = e.source;
 			});
@@ -214,6 +199,7 @@ exports.loadShiftsList = function(view, selectedShift) {
 		}
 
 	}
+
 };
 
 exports.checkFriendRequest = function() {

@@ -1,6 +1,6 @@
 var shiftsCols = Alloy.Collections.shifts;
 var args = arguments[0] || {};
-var btnActiveBg = '#f3acbd', textActive = '使う', btnDeativeBg = '#e6e6e6', textDeactive = '要らない';
+var btnActiveBg = '#f3acbd', textActive = 'ON', btnDeativeBg = '#e6e6e6', textDeactive = 'OFF';
 
 shiftsCols.fetch({
 	query : 'SELECT * from shifts'
@@ -12,48 +12,52 @@ var shift = shiftsCols.models;
 var row = [];
 for (var i = 0; i < n; i++) {
 	var item = Ti.UI.createView({
-		touchEnabled : false,
+		touchEnabled : true,
 		selectedBackgroundColor : 'transparent',
 		width : Ti.UI.FILL,
-		height : Ti.UI.SIZE
+		height : '50dp',
+		id : shift[i].get('id'),
+		zIndex : 1
+	});
+	item.addEventListener('click', function(e) {
+		if (e.source.className == 'button-right')
+			return;
+		openView('shift_detail', {
+			id : e.source.id,
+			tab : args['tab']
+		});
 	});
 	var button = Ti.UI.createButton({
 		backgroundColor : shift[i].get('color'),
-		width : '80dp',
-		height : '30dp',
+		width : '20dp',
+		height : '20dp',
+		touchEnabled : false,
 		left : '10dp',
-		top : '10dp',
-		bottom : '10dp',
-		title : shift[i].get('name'),
-		touchEnabled : true,
-		id : shift[i].get('id'),
-		borderColor : '#f0f0f0',
-		color : '#676767',
-		borderWidth : 1,
 		className : 'row-left-name',
-	});
-	button.addEventListener('click', function(e) {
-		openView('shift_detail', {
-			id : e.source.id
-		});
 	});
 	item.add(button);
 
-	var time = Ti.UI.createLabel({
+	item.add(Ti.UI.createLabel({
+		left : '40dp',
+		text : shift[i].get('name'),
+		font : {
+			fontSize : '15dp'
+		},
+		touchEnabled : false,
+		color : '#676767',
+		className : 'label-shift'
+	}));
+
+	item.add(Ti.UI.createLabel({
 		text : shift[i].get('time_shift'),
 		id : shift[i].get('id'),
 		font : {
 			fontSize : '15dp'
 		},
 		color : '#676767',
+		touchEnabled : false,
 		className : 'time'
-	});
-	time.addEventListener('click', function(e) {
-		openView('shift_detail', {
-			id : e.source.id
-		});
-	});
-	item.add(time);
+	}));
 
 	var background = btnDeativeBg, text = textDeactive;
 
@@ -69,8 +73,8 @@ for (var i = 0; i < n; i++) {
 		shiftcolor : shift[i].get('color'),
 		flag : shift[i].get('flag'),
 
-		height : '35dp',
-		width : '75dp',
+		height : '30dp',
+		width : '50dp',
 		backgroundColor : background,
 		backgroundSelectedColor : background,
 		right : '10dp',
@@ -81,7 +85,7 @@ for (var i = 0; i < n; i++) {
 		font : {
 			fontSize : '15dp'
 		},
-		zIndex : 1,
+		zIndex : 2,
 		color : '#fff',
 		className : 'button-right'
 	});
