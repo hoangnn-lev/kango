@@ -51,8 +51,9 @@ function Controller() {
         var fDayStart = formatDate2(lastValue["dayStart"]);
         var fDayEnd = formatDate2(lastValue["dayEnd"]);
         var text = "";
+        var conditions = func.rangeDate(fDayStart, fDayEnd);
         calendar_shift.fetch({
-            query: 'select * from calendar_shift  where month_year >= "' + fDayStart + '" and month_year <= "' + fDayEnd + '"'
+            query: "select * from calendar_shift  where month_year in(" + conditions + ")"
         });
         if (calendar_shift.models[0]) {
             var result = calendar_shift.models;

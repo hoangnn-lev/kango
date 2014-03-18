@@ -1,6 +1,6 @@
 function Controller() {
     function createCalendar() {
-        allShifts = func.loadShiftsList($.shiftList, selectedShift);
+        allShifts = func.loadShiftsList($.shiftList);
         var configs = Alloy.Collections.configs;
         configs.fetch({
             query: 'select id,cg_value from configs where cg_name="dayOffset"'
@@ -36,10 +36,10 @@ function Controller() {
         var oldCalendar = $.calendar.children[0];
         $.calendar.add(_calendar.getView());
         oldCalendar && $.calendar.remove(oldCalendar);
-        if (!selectedShift[1]) {
-            _calendar.select(month.format("DD"));
-            $.calendar.fireEvent("click");
-        }
+        selectedDay || (selectedDay = month.format("D"));
+        _calendar.select(selectedDay);
+        $.calendar.fireEvent("click");
+        lastDayOfMonth = month.add("months", 1).date(1).subtract("days", 1).format("DD");
     }
     function getScheduleMonth(month, year) {
         var scheduleModel = Alloy.Collections.schedule;
@@ -55,7 +55,7 @@ function Controller() {
     }
     function clickCalendar() {
         selectedDate = _calendar.selectedDate();
-        updateShift(selectedDate.format("D"));
+        selectedDay = selectedDate.format("D");
         $.shiftDateInfo.setText(selectedDate.format("MM / DD"));
         $.dayName.setText(func.convertDayName(selectedDate.format("dddd")));
         $.shiftLabel.removeAllChildren();
@@ -83,32 +83,30 @@ function Controller() {
         month = month.add("months", 1);
         loadCalendarBody();
     }
-    function updateShift(date) {
-        if (selectedShift[1]) {
-            var _get_shift_selected = {
-                text: selectedShift[1].text,
-                color: selectedShift[1].backgroundColor
-            };
-            shiftOfMonth[date] = _get_shift_selected;
-            _get_shift_selected["id"] = selectedShift[1].id;
-            _calendar.setShift(date, _get_shift_selected);
-            dateShiftDB[date] = selectedShift[1].id;
-            if (13 == selectedShift[1].id) {
-                delete shiftOfMonth[date];
-                delete dateShiftDB[date];
-            }
-            Alloy.Collections.calendar_shift.fetch();
-            var _shift_data = {
-                month_year: month.format("MM-YYYY"),
-                date_shift: JSON.stringify(dateShiftDB)
-            };
-            shiftMonthId && (_shift_data["id"] = shiftMonthId);
-            var shift = Alloy.createModel("calendar_shift", _shift_data);
-            Alloy.Collections.calendar_shift.add(shift);
-            shift.save();
-            shiftMonthId || (shiftMonthId = shift.get("id"));
-            delete_view("schedule");
+    function updateShift(date, shift_source) {
+        var _get_shift_selected = {
+            text: shift_source.text,
+            color: shift_source.backgroundColor
+        };
+        shiftOfMonth[date] = _get_shift_selected;
+        _get_shift_selected["id"] = shift_source.id;
+        _calendar.setShift(date, _get_shift_selected);
+        dateShiftDB[date] = shift_source.id;
+        if (13 == shift_source.id) {
+            delete shiftOfMonth[date];
+            delete dateShiftDB[date];
         }
+        Alloy.Collections.calendar_shift.fetch();
+        var _shift_data = {
+            month_year: month.format("MM-YYYY"),
+            date_shift: JSON.stringify(dateShiftDB)
+        };
+        shiftMonthId && (_shift_data["id"] = shiftMonthId);
+        var shift = Alloy.createModel("calendar_shift", _shift_data);
+        Alloy.Collections.calendar_shift.add(shift);
+        shift.save();
+        shiftMonthId || (shiftMonthId = shift.get("id"));
+        delete_view("schedule");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "shift";
@@ -314,7 +312,7 @@ function Controller() {
     $.__views.__alloyId108.add($.__views.shiftSetting);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var selectedDate, _calendar, dateIsEvent, dayOffset, shiftMonthId, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), selectedShift = [], dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};
+    var selectedDate, selectedDay, _calendar, dateIsEvent, dayOffset, shiftMonthId, lastDayOfMonth = 0, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};
     if (args["date"]) {
         args["date"].split("-");
         month = moment(args["date"]);
@@ -324,6 +322,19 @@ function Controller() {
         $.scheduleInfo.removeAllChildren();
     }
     createCalendar();
+    $.shiftList.addEventListener("click", function(e) {
+        if ("shiftList" != e.source.id) {
+            updateShift(selectedDay, e.source);
+            if (13 == e.source.id) return;
+            selectedDay = parseInt(selectedDay, 10) + 1;
+            if (selectedDay > lastDayOfMonth) {
+                doNextMonth();
+                selectedDay = selectedDay = 1;
+            }
+            _calendar.select(selectedDay);
+            $.calendar.fireEvent("click");
+        }
+    });
     $.shift.addEventListener("android:back", function() {
         var confirm = Ti.UI.createAlertDialog({
             title: "ペリカレ！",

@@ -69,7 +69,7 @@ exports.nextView = function(nextWindow) {
     currentWindow = nextWindow;
 };
 
-exports.loadShiftsList = function(view, selectedShift) {
+exports.loadShiftsList = function(view) {
     var shifts = Alloy.Collections.shifts;
     var allShifts = {};
     shifts.fetch({
@@ -84,7 +84,7 @@ exports.loadShiftsList = function(view, selectedShift) {
         };
         1 == data[i].get("flag") && shift_data.push(data[i]);
     }
-    if (!view && !selectedShift) return allShifts;
+    if (!view) return allShifts;
     var index = 0, n = shift_data.length;
     var buttonWidth = (deviceWidth - 100) / 4;
     for (var i = 0; 4 > i; ++i) for (var j = 0; 4 > j; ++j) {
@@ -108,12 +108,6 @@ exports.loadShiftsList = function(view, selectedShift) {
                 borderColor: "#fff",
                 textAlign: "center",
                 className: "shift-item"
-            });
-            label.addEventListener("click", function(e) {
-                selectedShift[0] && selectedShift[0].setBorderColor("#fff");
-                this.setBorderColor("#ccc");
-                selectedShift[0] = this;
-                selectedShift[1] = e.source;
             });
             view.add(label);
             return allShifts;
@@ -139,12 +133,6 @@ exports.loadShiftsList = function(view, selectedShift) {
             className: "shift-item"
         });
         index++;
-        label.addEventListener("click", function(e) {
-            selectedShift[0] && selectedShift[0].setBorderColor("#fff");
-            this.setBorderColor("#ccc");
-            selectedShift[0] = this;
-            selectedShift[1] = e.source;
-        });
         view.add(label);
     }
 };
@@ -398,4 +386,17 @@ exports.getUID = function() {
 exports.validateEmail = function(email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
+};
+
+exports.rangeDate = function(date_start, date_end) {
+    var output = [];
+    var start = date_start.split("-");
+    var end = date_end.split("-");
+    for (var y = start[1]; end[1] >= y; y++) for (var m = 1; 12 >= m; m++) {
+        if (y == start[1] && start[0] > m) continue;
+        if (y == end[1] && m > end[0]) continue;
+        m = 10 > m ? "0" + m : m;
+        output.push("'" + m + "-" + y + "'");
+    }
+    return output.join(",");
 };

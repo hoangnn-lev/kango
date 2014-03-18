@@ -20,7 +20,7 @@ for (var i = 0; i < n; i++) {
 		zIndex : 1
 	});
 	item.addEventListener('click', function(e) {
-		if (e.source.className == 'button-right')
+		if (e.source.className == 'button-right' || e.source.id == undefined)
 			return;
 		openView('shift_detail', {
 			id : e.source.id,

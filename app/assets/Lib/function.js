@@ -94,7 +94,7 @@ exports.nextView = function(nextWindow) {
 	currentWindow = nextWindow;
 };
 
-exports.loadShiftsList = function(view, selectedShift) {
+exports.loadShiftsList = function(view) {
 
 	var shifts = Alloy.Collections.shifts;
 	var allShifts = {};
@@ -118,7 +118,7 @@ exports.loadShiftsList = function(view, selectedShift) {
 		}
 	}
 
-	if (!view && !selectedShift) {
+	if (!view) {
 		return allShifts;
 	}
 
@@ -150,18 +150,7 @@ exports.loadShiftsList = function(view, selectedShift) {
 					textAlign : 'center',
 					className : 'shift-item'
 				});
-
-				label.addEventListener('click', function(e) {
-
-					if (selectedShift[0]) {
-						selectedShift[0].setBorderColor('#fff');
-					}
-					this.setBorderColor('#ccc');
-					selectedShift[0] = this;
-					selectedShift[1] = e.source;
-				});
 				view.add(label);
-
 				return allShifts;
 			}
 
@@ -186,15 +175,6 @@ exports.loadShiftsList = function(view, selectedShift) {
 				className : 'shift-item'
 			});
 			index++;
-			label.addEventListener('click', function(e) {
-
-				if (selectedShift[0]) {
-					selectedShift[0].setBorderColor('#fff');
-				}
-				this.setBorderColor('#ccc');
-				selectedShift[0] = this;
-				selectedShift[1] = e.source;
-			});
 			view.add(label);
 		}
 
@@ -564,5 +544,24 @@ exports.getUID = function() {
 exports.validateEmail = function(email) {
 	var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 	return re.test(email);
+};
+
+exports.rangeDate = function(date_start, date_end) {
+	var output = [];
+
+	var start = date_start.split('-');
+	var end = date_end.split('-');
+
+	for (var y = start[1]; y <= end[1]; y++) {
+		for (var m = 1; m <= 12; m++) {
+			if (y == start[1] && m < start[0])
+				continue;
+			if (y == end[1] && m > end[0])
+				continue;
+			m = m < 10 ? '0' + m : m;
+			output.push('\'' + m + '-' + y + '\'');
+		}
+	}
+	return output.join(',');
 };
 

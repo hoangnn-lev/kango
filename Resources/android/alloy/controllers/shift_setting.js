@@ -72,7 +72,7 @@ function Controller() {
             zIndex: 1
         });
         item.addEventListener("click", function(e) {
-            if ("button-right" == e.source.className) return;
+            if ("button-right" == e.source.className || void 0 == e.source.id) return;
             openView("shift_detail", {
                 id: e.source.id,
                 tab: args["tab"]

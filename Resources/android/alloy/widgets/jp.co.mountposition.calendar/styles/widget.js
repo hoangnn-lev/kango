@@ -13,6 +13,14 @@ module.exports = [ {
     }
 }, {
     isApi: true,
+    priority: 1000.0002,
+    key: "View",
+    style: {
+        width: Ti.UI.FILL,
+        height: Ti.UI.FILL
+    }
+}, {
+    isApi: true,
     priority: 1000.0004,
     key: "Button",
     style: {
@@ -90,14 +98,6 @@ module.exports = [ {
         bottom: 20
     }
 }, {
-    isApi: true,
-    priority: 1000.0013,
-    key: "View",
-    style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.FILL
-    }
-}, {
     isClass: true,
     priority: 10000.0003,
     key: "container",
@@ -105,6 +105,19 @@ module.exports = [ {
         layout: "vertical",
         left: 50,
         right: 50
+    }
+}, {
+    isClass: true,
+    priority: 10000.0006,
+    key: "week",
+    style: {
+        color: "#fff",
+        top: -10,
+        textAlign: "center",
+        font: {
+            fontSize: "18sp"
+        },
+        width: "14%"
     }
 }, {
     isClass: true,
@@ -117,19 +130,6 @@ module.exports = [ {
         color: "red"
     }
 }, {
-    isClass: true,
-    priority: 10000.0017,
-    key: "week",
-    style: {
-        color: "#fff",
-        top: -10,
-        textAlign: "center",
-        font: {
-            fontSize: "18sp"
-        },
-        width: "14%"
-    }
-}, {
     isId: true,
     priority: 100000.0002,
     key: "main",
@@ -140,17 +140,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0008,
-    key: "tabMenu",
-    style: {
-        backgroundColor: "#f3acbd",
-        width: Ti.UI.FILL,
-        height: "50dp",
-        layout: "horizontal"
-    }
-}, {
-    isId: true,
-    priority: 100000.0014,
+    priority: 100000.0003,
     key: "container",
     style: {
         top: 0,
@@ -160,7 +150,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0015,
+    priority: 100000.0004,
     key: "days",
     style: {
         layout: "horizontal",
@@ -169,11 +159,21 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0016,
+    priority: 100000.0005,
     key: "dates",
     style: {
         layout: "vertical",
         font: {},
         height: Ti.UI.FILL
+    }
+}, {
+    isId: true,
+    priority: 100000.0008,
+    key: "tabMenu",
+    style: {
+        backgroundColor: "#f3acbd",
+        width: Ti.UI.FILL,
+        height: "50dp",
+        layout: "horizontal"
     }
 } ];

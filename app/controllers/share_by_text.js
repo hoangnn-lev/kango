@@ -80,14 +80,19 @@ function share(e) {
 	}
 
 	var calendar_shift = Alloy.Collections.calendar_shift;
+
 	var day = lastValue['dayStart'].getDate();
 	var day_end = lastValue['dayEnd'].getDate();
+
 	var fDayStart = formatDate2(lastValue['dayStart']);
 	var fDayEnd = formatDate2(lastValue['dayEnd']);
 	var text = '';
+
+	var conditions = func.rangeDate(fDayStart, fDayEnd);
+
 	//load shift by month
 	calendar_shift.fetch({
-		query : 'select * from calendar_shift  where month_year >= "' + fDayStart + '" and month_year <= "' + fDayEnd + '"'
+		query : "select * from calendar_shift  where month_year in(" + conditions + ")"
 	});
 
 	if (calendar_shift.models[0]) {
@@ -103,7 +108,7 @@ function share(e) {
 
 				var newDate = new Date(month[1], month[0] - 1, _date);
 
-				if ((newDate.getTime()>= lastValue['dayStart'].getTime()) && (newDate.getTime() <= lastValue['dayEnd'].getTime())) {
+				if ((newDate.getTime() >= lastValue['dayStart'].getTime()) && (newDate.getTime() <= lastValue['dayEnd'].getTime())) {
 
 					var cMonth = month[0] != 10 ? month[0].replace('0', '') : 10;
 					text += cMonth + '/' + _date + ':' + allShifts[date_shift[_date]] + "\n";
