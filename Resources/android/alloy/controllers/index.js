@@ -22,7 +22,7 @@ function Controller() {
                     progressIndicator.hide();
                 } else {
                     progressIndicator.hide();
-                    errorRegister(data.msg);
+                    errorRegister();
                 }
             },
             onerror: function() {
@@ -35,10 +35,10 @@ function Controller() {
             device_uid: Titanium.Platform.id
         });
     }
-    function errorRegister(msg) {
+    function errorRegister() {
         Ti.UI.createAlertDialog({
             buttonNames: [ "OK" ],
-            message: msg ? msg : "登録の処理中にエラーが発生しました。",
+            message: "初回起動時はインターネットに接続してから起動してください",
             title: "お知らせ"
         }).show();
     }

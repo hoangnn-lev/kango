@@ -179,9 +179,7 @@ function guideUseCalendar() {
 }
 
 $.allHospital.addEventListener('click', function(e) {
-	openView('hospital', {
-		reload : 1
-	});
+	Titanium.Platform.openURL('http://ac.ebis.ne.jp/tr_set.php?argument=MemwrhsW&ai=a5322c6cdd990e');
 });
 
 $.about.addEventListener('click', function(e) {
@@ -193,7 +191,7 @@ $.report.addEventListener('click', function(e) {
 	var emailDialog = Titanium.UI.createEmailDialog();
 
 	emailDialog.setSubject('不具合やエラーのお問い合わせ');
-	emailDialog.setToRecipients(['kango-support@kango.co.jp']);
+	emailDialog.setToRecipients(['info_perikare@kango-oshigoto.jp']);
 	emailDialog.open();
 });
 
@@ -202,7 +200,7 @@ function checkFirstUsing() {
 
 	if (!myFile.exists()) {
 		myFile.write('using');
-		
+
 		guideUseCalendar();
 	}
 }

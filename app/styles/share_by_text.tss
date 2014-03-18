@@ -54,11 +54,12 @@
 },
 "#dayStart":{
 	left:'70dp',
+	width:Ti.UI.FILL
 },
 
 "#dayEnd":{
 	left:'75dp',
-
+	width:Ti.UI.FILL
 },
 "#groupButton":{
 	width:Ti.UI.FILL,

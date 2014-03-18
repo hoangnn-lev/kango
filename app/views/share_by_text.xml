@@ -6,14 +6,14 @@
 			</View>
 			<View id="content">
 				<Label left="0" text="共有する期間を選ぶ"/>
-				<View class="blockSelectedTime" onClick="showPicker" >
+				<View class="blockSelectedTime">
 					<View class="blockTime">
 						<Label class="timeTitle"  text="開始日"/>
-						<Label id="dayStart"/>
+						<Label id="dayStart"  onClick="showPicker"/>
 					</View>
 					<View class="blockTime">
 						<Label class="timeTitle" text="終了日"/>
-						<Label id="dayEnd"/>
+						<Label id="dayEnd" onClick="showPicker"/>
 					</View>
 				</View>
 				<View id="groupButton">
@@ -22,7 +22,6 @@
 					backgroundFocusedColor = '#e6a3b3'
 					backgroundSelectedColor = '#e6a3b3'
 					type="mail" onClick="share" title="メールで送信"/>
-					
 					<Button onClick="saveSchedule" right="0" class="button"
 					backgroundColor = '#cfba9c'
 					backgroundFocusedColor = '#c0ad91'

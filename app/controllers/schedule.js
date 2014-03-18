@@ -380,7 +380,7 @@ function loadFriendByDay(date) {
 //add back button
 $.schedule.addEventListener('android:back', function(e) {
 	var confirm = Ti.UI.createAlertDialog({
-		title : '看護アプル',
+		title : 'ペリカレ！',
 		message : '終了しますか？',
 		buttonNames : ['はい', 'いいえ']
 	});

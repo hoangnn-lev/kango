@@ -35,7 +35,7 @@ function doRegister() {
 
 			if (!data.result) {
 				progressIndicator.hide();
-				errorRegister(data.msg);
+				errorRegister();
 			} else {
 
 				var userData = Alloy.createModel('configs', {
@@ -68,10 +68,10 @@ function doRegister() {
  * input : null
  * output : void
  * */
-function errorRegister(msg) {
+function errorRegister() {
 	Ti.UI.createAlertDialog({
 		buttonNames : ['OK'],
-		message : msg ? msg : '登録の処理中にエラーが発生しました。',
+		message : '初回起動時はインターネットに接続してから起動してください',
 		title : 'お知らせ'
 	}).show();
 }

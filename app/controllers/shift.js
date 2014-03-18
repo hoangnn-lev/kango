@@ -199,7 +199,7 @@ function updateShift(date) {
 //add back button
 $.shift.addEventListener('android:back', function(e) {
 	var confirm = Ti.UI.createAlertDialog({
-		title : '看護アプル',
+		title : 'ペリカレ！',
 		message : '終了しますか？',
 		buttonNames : ['はい', 'いいえ']
 	});

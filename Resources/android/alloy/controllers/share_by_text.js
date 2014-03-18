@@ -1,17 +1,19 @@
 function Controller() {
-    function showPicker() {
+    function showPicker(e1) {
         var picker = Titanium.UI.createPicker({
             type: Titanium.UI.PICKER_TYPE_DATE
         });
         picker.showDatePickerDialog({
-            value: lastValue["dayStart"],
+            value: lastValue[e1.source.id],
             callback: function(e) {
                 if (!e.cancel) {
-                    var result = lastValue["dayStart"] = e.value;
-                    var to = new Date(result.getFullYear(), result.getMonth(), result.getDate() + 30);
-                    lastValue["dayEnd"] = to;
-                    $.dayStart.setText(formatDate(e.value));
-                    $.dayEnd.setText(formatDate(to));
+                    var result = lastValue[e1.source.id] = e.value;
+                    if ("dayStart" == e1.source.id) {
+                        var to = new Date(result.getFullYear(), result.getMonth(), result.getDate() + 30);
+                        lastValue["dayEnd"] = to;
+                        $.dayStart.setText(formatDate(e.value));
+                        $.dayEnd.setText(formatDate(to));
+                    } else $.dayEnd.setText(formatDate(result));
                 }
             }
         });
@@ -39,20 +41,31 @@ function Controller() {
         }
     }
     function share(e) {
+        if (+lastValue["dayStart"] > +lastValue["dayEnd"]) {
+            alert("終了日は開始日以降の日付を指定して下さい。");
+            return;
+        }
         var calendar_shift = Alloy.Collections.calendar_shift;
-        var day = lastValue["dayStart"].getDate();
+        lastValue["dayStart"].getDate();
+        lastValue["dayEnd"].getDate();
+        var fDayStart = formatDate2(lastValue["dayStart"]);
+        var fDayEnd = formatDate2(lastValue["dayEnd"]);
         var text = "";
         calendar_shift.fetch({
-            query: 'select * from calendar_shift  where month_year="' + formatDate2(lastValue["dayStart"]) + '" or month_year="' + formatDate2(lastValue["dayEnd"]) + '"'
+            query: 'select * from calendar_shift  where month_year >= "' + fDayStart + '" and month_year <= "' + fDayEnd + '"'
         });
         if (calendar_shift.models[0]) {
             var result = calendar_shift.models;
             for (var i = 0, n = result.length; n > i; ++i) {
                 var date_shift = JSON.parse(result[i].get("date_shift"));
-                for (var _date in date_shift) if (0 == i && _date >= day || 1 == i && day >= _date) {
-                    var month = result[i].get("month_year").split("-");
-                    month = 10 != month[0] ? month[0].replace("0", "") : 10;
-                    text += month + "/" + _date + ":" + allShifts[date_shift[_date]] + "\n";
+                var mon_year = result[i].get("month_year");
+                var month = mon_year.split("-");
+                for (var _date in date_shift) {
+                    var newDate = new Date(month[1], month[0] - 1, _date);
+                    if (newDate.getTime() >= lastValue["dayStart"].getTime() && newDate.getTime() <= lastValue["dayEnd"].getTime()) {
+                        var cMonth = 10 != month[0] ? month[0].replace("0", "") : 10;
+                        text += cMonth + "/" + _date + ":" + allShifts[date_shift[_date]] + "\n";
+                    }
                 }
             }
             if ("line" == e.source.type) Ti.Platform.openURL("line://msg/text/" + text) ? "" : alert("Lineがインストールされていませんでした。。。"); else {
@@ -61,7 +74,7 @@ function Controller() {
                 emailDialog.setMessageBody(text);
                 emailDialog.open();
             }
-        } else alert("シフトデータがありません。");
+        } else alert("予定なし");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "share_by_text";
@@ -136,7 +149,6 @@ function Controller() {
         id: "__alloyId101"
     });
     $.__views.content.add($.__views.__alloyId101);
-    showPicker ? $.__views.__alloyId101.addEventListener("click", showPicker) : __defers["$.__views.__alloyId101!click!showPicker"] = true;
     $.__views.__alloyId102 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
@@ -161,7 +173,7 @@ function Controller() {
     });
     $.__views.__alloyId102.add($.__views.__alloyId103);
     $.__views.dayStart = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -172,6 +184,7 @@ function Controller() {
         id: "dayStart"
     });
     $.__views.__alloyId102.add($.__views.dayStart);
+    showPicker ? $.__views.dayStart.addEventListener("click", showPicker) : __defers["$.__views.dayStart!click!showPicker"] = true;
     $.__views.__alloyId104 = Ti.UI.createView({
         height: "40dp",
         width: Ti.UI.FILL,
@@ -196,7 +209,7 @@ function Controller() {
     });
     $.__views.__alloyId104.add($.__views.__alloyId105);
     $.__views.dayEnd = Ti.UI.createLabel({
-        width: Ti.UI.SIZE,
+        width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
@@ -207,6 +220,7 @@ function Controller() {
         id: "dayEnd"
     });
     $.__views.__alloyId104.add($.__views.dayEnd);
+    showPicker ? $.__views.dayEnd.addEventListener("click", showPicker) : __defers["$.__views.dayEnd!click!showPicker"] = true;
     $.__views.groupButton = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -269,7 +283,8 @@ function Controller() {
     $.share_by_text.addEventListener("android:back", function() {
         openView("share");
     });
-    __defers["$.__views.__alloyId101!click!showPicker"] && $.__views.__alloyId101.addEventListener("click", showPicker);
+    __defers["$.__views.dayStart!click!showPicker"] && $.__views.dayStart.addEventListener("click", showPicker);
+    __defers["$.__views.dayEnd!click!showPicker"] && $.__views.dayEnd.addEventListener("click", showPicker);
     __defers["$.__views.__alloyId106!click!share"] && $.__views.__alloyId106.addEventListener("click", share);
     __defers["$.__views.__alloyId107!click!share"] && $.__views.__alloyId107.addEventListener("click", share);
     _.extend($, exports);

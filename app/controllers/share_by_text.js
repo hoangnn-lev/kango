@@ -15,17 +15,19 @@ function showPicker(e1) {
 	});
 
 	picker.showDatePickerDialog({
-		value : lastValue['dayStart'],
+		value : lastValue[e1.source.id],
 		callback : function(e) {
 			if (!e.cancel) {
 
-				var result = lastValue['dayStart'] = e.value;
-				var to = new Date(result.getFullYear(), result.getMonth(), result.getDate() + 30);
-				lastValue['dayEnd'] = to;
-
-				$.dayStart.setText(formatDate(e.value));
-				$.dayEnd.setText(formatDate(to));
-
+				var result = lastValue[e1.source.id] = e.value;
+				if (e1.source.id == 'dayStart') {
+					var to = new Date(result.getFullYear(), result.getMonth(), result.getDate() + 30);
+					lastValue['dayEnd'] = to;
+					$.dayStart.setText(formatDate(e.value));
+					$.dayEnd.setText(formatDate(to));
+				} else {
+					$.dayEnd.setText(formatDate(result));
+				}
 			}
 		}
 	});
@@ -71,12 +73,21 @@ function getAllShift() {
 
 function share(e) {
 
+	//compare date
+	if (+lastValue['dayStart'] > +lastValue['dayEnd']) {
+		alert('終了日は開始日以降の日付を指定して下さい。');
+		return;
+	}
+
 	var calendar_shift = Alloy.Collections.calendar_shift;
 	var day = lastValue['dayStart'].getDate();
+	var day_end = lastValue['dayEnd'].getDate();
+	var fDayStart = formatDate2(lastValue['dayStart']);
+	var fDayEnd = formatDate2(lastValue['dayEnd']);
 	var text = '';
 	//load shift by month
 	calendar_shift.fetch({
-		query : 'select * from calendar_shift  where month_year="' + formatDate2(lastValue['dayStart']) + '" or month_year="' + formatDate2(lastValue['dayEnd']) + '"'
+		query : 'select * from calendar_shift  where month_year >= "' + fDayStart + '" and month_year <= "' + fDayEnd + '"'
 	});
 
 	if (calendar_shift.models[0]) {
@@ -85,17 +96,22 @@ function share(e) {
 		for (var i = 0, n = result.length; i < n; ++i) {
 
 			var date_shift = JSON.parse(result[i].get('date_shift'));
+			var mon_year = result[i].get('month_year');
+			var month = mon_year.split('-');
+
 			for (var _date in date_shift) {
-				if ((i == 0 && _date >= day) || (i == 1 && _date <= day)) {
 
-					var month = result[i].get('month_year').split('-');
+				var newDate = new Date(month[1], month[0] - 1, _date);
 
-					month = month[0] != 10 ? month[0].replace('0', '') : 10;
-					text += month + '/' + _date + ':' + allShifts[date_shift[_date]] + "\n";
+				if ((newDate.getTime()>= lastValue['dayStart'].getTime()) && (newDate.getTime() <= lastValue['dayEnd'].getTime())) {
 
+					var cMonth = month[0] != 10 ? month[0].replace('0', '') : 10;
+					text += cMonth + '/' + _date + ':' + allShifts[date_shift[_date]] + "\n";
 				}
 			}
+
 		}
+
 		if (e.source.type == 'line')
 			Ti.Platform.openURL('line://msg/text/' + text) ? '' : alert('Lineがインストールされていませんでした。。。');
 		else {
@@ -106,7 +122,7 @@ function share(e) {
 			emailDialog.open();
 		}
 	} else {
-		alert('シフトデータがありません。');
+		alert('予定なし');
 	}
 }
 

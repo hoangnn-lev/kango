@@ -585,9 +585,7 @@ function Controller() {
         } else openView("schedule");
     });
     $.allHospital.addEventListener("click", function() {
-        openView("hospital", {
-            reload: 1
-        });
+        Titanium.Platform.openURL("http://ac.ebis.ne.jp/tr_set.php?argument=MemwrhsW&ai=a5322c6cdd990e");
     });
     $.about.addEventListener("click", function() {
         openView("about");
@@ -595,7 +593,7 @@ function Controller() {
     $.report.addEventListener("click", function() {
         var emailDialog = Titanium.UI.createEmailDialog();
         emailDialog.setSubject("不具合やエラーのお問い合わせ");
-        emailDialog.setToRecipients([ "kango-support@kango.co.jp" ]);
+        emailDialog.setToRecipients([ "info_perikare@kango-oshigoto.jp" ]);
         emailDialog.open();
     });
     __defers["$.__views.__alloyId64!click!shift_setting"] && $.__views.__alloyId64.addEventListener("click", shift_setting);

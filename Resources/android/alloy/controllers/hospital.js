@@ -19,7 +19,7 @@ function Controller() {
     });
     $.__views.hospital.add($.__views.main);
     $.__views.__alloyId36 = Ti.UI.createWebView({
-        url: "http://kango-oshigoto.jp/hospital/",
+        url: "http://ac.ebis.ne.jp/tr_set.php?argument=MemwrhsW&ai=a5322c6cdd990e",
         id: "__alloyId36"
     });
     $.__views.main.add($.__views.__alloyId36);

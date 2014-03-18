@@ -326,7 +326,7 @@ function Controller() {
     createCalendar();
     $.shift.addEventListener("android:back", function() {
         var confirm = Ti.UI.createAlertDialog({
-            title: "看護アプル",
+            title: "ペリカレ！",
             message: "終了しますか？",
             buttonNames: [ "はい", "いいえ" ]
         });
