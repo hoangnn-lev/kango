@@ -280,6 +280,9 @@ function Controller() {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
         borderColor: "#fff",
+        font: {
+            fontSize: "16sp"
+        },
         maxLength: "120",
         id: "memo",
         hintText: "メモ"

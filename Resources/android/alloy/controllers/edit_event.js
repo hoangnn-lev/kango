@@ -150,6 +150,9 @@ function Controller() {
         backgroundFocusedColor: "#fff",
         borderRadius: 10,
         borderColor: "#fff",
+        font: {
+            fontSize: "16sp"
+        },
         color: "#999999",
         maxLength: "30",
         id: "title",
@@ -278,6 +281,9 @@ function Controller() {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
         borderColor: "#fff",
+        font: {
+            fontSize: "16sp"
+        },
         color: "#999999",
         maxLength: "300",
         id: "memo",

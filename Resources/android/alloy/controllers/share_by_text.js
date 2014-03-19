@@ -9,11 +9,16 @@ function Controller() {
                 if (!e.cancel) {
                     var result = lastValue[e1.source.id] = e.value;
                     if ("dayStart" == e1.source.id) {
+                        var from = new Date(result.getFullYear(), result.getMonth(), result.getDate());
                         var to = new Date(result.getFullYear(), result.getMonth(), result.getDate() + 30);
+                        lastValue["dayStart"] = from;
                         lastValue["dayEnd"] = to;
-                        $.dayStart.setText(formatDate(e.value));
+                        $.dayStart.setText(formatDate(from));
                         $.dayEnd.setText(formatDate(to));
-                    } else $.dayEnd.setText(formatDate(result));
+                    } else {
+                        lastValue["dayEnd"] = new Date(result.getFullYear(), result.getMonth(), result.getDate());
+                        $.dayEnd.setText(formatDate(result));
+                    }
                 }
             }
         });
@@ -45,12 +50,31 @@ function Controller() {
             alert("終了日は開始日以降の日付を指定して下さい。");
             return;
         }
+        var currentDate = lastValue["dayStart"];
+        var endDate = lastValue["dayEnd"];
+        var text = [];
+        var results = getShiftByDate();
+        while (endDate >= currentDate) {
+            var date = currentDate.getMonth() + 1 + "/" + currentDate.getDate() + "(" + func.convertDayName(currentDate.getDay()) + ")";
+            var format = currentDate.getFullYear() + "/" + (currentDate.getMonth() + 1) + "/" + currentDate.getDate();
+            results[format] ? text.push(date + results[format]) : text.push(date + "予定なし");
+            currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+        }
+        text = text.join("\n");
+        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/text/" + text) ? "" : alert("LINEがインストールされていません"); else {
+            var emailDialog = Titanium.UI.createEmailDialog();
+            emailDialog.setSubject("シフト共有");
+            emailDialog.setMessageBody(text);
+            emailDialog.open();
+        }
+    }
+    function getShiftByDate() {
         var calendar_shift = Alloy.Collections.calendar_shift;
         lastValue["dayStart"].getDate();
         lastValue["dayEnd"].getDate();
         var fDayStart = formatDate2(lastValue["dayStart"]);
         var fDayEnd = formatDate2(lastValue["dayEnd"]);
-        var text = "";
+        var results = {};
         var conditions = func.rangeDate(fDayStart, fDayEnd);
         calendar_shift.fetch({
             query: "select * from calendar_shift  where month_year in(" + conditions + ")"
@@ -62,20 +86,14 @@ function Controller() {
                 var mon_year = result[i].get("month_year");
                 var month = mon_year.split("-");
                 for (var _date in date_shift) {
-                    var newDate = new Date(month[1], month[0] - 1, _date);
-                    if (newDate.getTime() >= lastValue["dayStart"].getTime() && newDate.getTime() <= lastValue["dayEnd"].getTime()) {
-                        var cMonth = 10 != month[0] ? month[0].replace("0", "") : 10;
-                        text += cMonth + "/" + _date + ":" + allShifts[date_shift[_date]] + "\n";
-                    }
+                    var newDate = new Date(month[1], month[0] - 1, parseInt(_date));
+                    if (lastValue["dayStart"] > newDate) continue;
+                    if (newDate > lastValue["dayEnd"]) break;
+                    results[month[1] + "/" + parseInt(month[0]) + "/" + _date] = allShifts[date_shift[_date]];
                 }
             }
-            if ("line" == e.source.type) Ti.Platform.openURL("line://msg/text/" + text) ? "" : alert("Lineがインストールされていませんでした。。。"); else {
-                var emailDialog = Titanium.UI.createEmailDialog();
-                emailDialog.setSubject("シフト共有");
-                emailDialog.setMessageBody(text);
-                emailDialog.open();
-            }
-        } else alert("予定なし");
+        }
+        return results;
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "share_by_text";
@@ -217,7 +235,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        left: "75dp",
+        left: "70dp",
         id: "dayEnd"
     });
     $.__views.__alloyId104.add($.__views.dayEnd);
@@ -275,7 +293,7 @@ function Controller() {
     _.extend($, $.__views);
     var now = new Date(), allShifts = {};
     var lastValue = {
-        dayStart: now,
+        dayStart: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
         dayEnd: new Date(now.getFullYear(), now.getMonth(), now.getDate() + 30)
     };
     $.dayStart.setText(formatDate(lastValue["dayStart"]));

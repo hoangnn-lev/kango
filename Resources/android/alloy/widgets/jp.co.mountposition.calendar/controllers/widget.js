@@ -243,7 +243,8 @@ function Controller() {
         moment.isMoment(day) && (day = day.date());
         tile = null != (_ref3 = $.calendar) ? _ref3["" + day] : void 0;
         if (null != (null != tile ? tile.date : void 0)) {
-            tile.children[1] && tile.children[1].id != options.id && tile.remove(tile.children[1]);
+            tile.children[1] && tile.children[1].id != options.id && "label-event" != tile.children[1].className && tile.remove(tile.children[1]);
+            tile.children[2] && tile.children[2].id != options.id && tile.remove(tile.children[2]);
             13 == options.id && (_isAdd = false);
             if (_isAdd) return tile.add(Ti.UI.createLabel({
                 text: options.text,

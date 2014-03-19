@@ -18,9 +18,9 @@ function Controller() {
     function customeRowFriend(id, name, friend_flag) {
         friend_flag = 0 == friend_flag ? false : true;
         var row = Ti.UI.createView({
-            height: Ti.UI.SIZE
+            height: Ti.UI.SIZE,
+            backgroundColor: "#fff"
         });
-        row.setBackgroundColor(friend_flag ? "#fff" : "#e6e3d9");
         row.label = Ti.UI.createTextField({
             left: "10dp",
             height: "50dp",
@@ -82,7 +82,6 @@ function Controller() {
             var friend = Alloy.createModel("friend", data);
             friendModel.add(friend);
             friend.save();
-            this.getParent().setBackgroundColor(checkflag ? "#e6e3d9" : "#fff");
             delete_view("schedule");
         });
         row.add(row.label);

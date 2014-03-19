@@ -69,6 +69,9 @@ function Controller() {
         backgroundFocusedColor: "#f0f0f0",
         borderRadius: 0,
         borderColor: "#fff",
+        font: {
+            fontSize: "16sp"
+        },
         hintText: "アサコ先輩",
         id: "__alloyId13"
     });
@@ -135,6 +138,9 @@ function Controller() {
         backgroundFocusedColor: "#f0f0f0",
         borderRadius: 0,
         borderColor: "#fff",
+        font: {
+            fontSize: "16sp"
+        },
         hintText: "アサコ先輩",
         id: "__alloyId13"
     });

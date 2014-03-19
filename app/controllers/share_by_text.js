@@ -1,12 +1,13 @@
 var now = new Date(), allShifts = {};
 var lastValue = {
-	dayStart : now,
+	dayStart : new Date(now.getFullYear(), now.getMonth(), now.getDate()),
 	dayEnd : new Date(now.getFullYear(), now.getMonth(), now.getDate() + 30)
 };
 
 $.dayStart.setText(formatDate(lastValue['dayStart']));
 $.dayEnd.setText(formatDate(lastValue['dayEnd']));
 getAllShift();
+
 /* create picker select date */
 function showPicker(e1) {
 
@@ -21,11 +22,15 @@ function showPicker(e1) {
 
 				var result = lastValue[e1.source.id] = e.value;
 				if (e1.source.id == 'dayStart') {
+					var from = new Date(result.getFullYear(), result.getMonth(), result.getDate());
 					var to = new Date(result.getFullYear(), result.getMonth(), result.getDate() + 30);
+
+					lastValue['dayStart'] = from;
 					lastValue['dayEnd'] = to;
-					$.dayStart.setText(formatDate(e.value));
+					$.dayStart.setText(formatDate(from));
 					$.dayEnd.setText(formatDate(to));
 				} else {
+					lastValue['dayEnd'] = new Date(result.getFullYear(), result.getMonth(), result.getDate());
 					$.dayEnd.setText(formatDate(result));
 				}
 			}
@@ -68,7 +73,6 @@ function getAllShift() {
 
 		allShifts[data[i].get('id')] = data[i].get('name') + time;
 	}
-
 }
 
 function share(e) {
@@ -79,6 +83,41 @@ function share(e) {
 		return;
 	}
 
+	var currentDate = lastValue['dayStart'];
+	var endDate = lastValue['dayEnd'];
+	var text = [];
+	var results = getShiftByDate();
+
+	// create a loop between the interval
+	while (currentDate <= endDate) {
+
+		var date = (currentDate.getMonth() + 1) + '/' + currentDate.getDate() + '(' + func.convertDayName(currentDate.getDay()) + ')';
+		var format = currentDate.getFullYear() + '/' + (currentDate.getMonth() + 1) + '/' + currentDate.getDate();
+		if (results[format]) {
+			text.push(date + results[format]);
+		} else {
+			text.push(date + '予定なし');
+		}
+
+		currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
+
+	}
+	text = text.join("\n");
+	if (e.source.type == 'line')
+		Ti.Platform.openURL('line://msg/text/' + text) ? '' : alert('LINEがインストールされていません');
+	else {
+
+		var emailDialog = Titanium.UI.createEmailDialog();
+		emailDialog.setSubject('シフト共有');
+		emailDialog.setMessageBody(text);
+		emailDialog.open();
+	}
+
+}
+
+/* get shift */
+function getShiftByDate() {
+
 	var calendar_shift = Alloy.Collections.calendar_shift;
 
 	var day = lastValue['dayStart'].getDate();
@@ -86,7 +125,7 @@ function share(e) {
 
 	var fDayStart = formatDate2(lastValue['dayStart']);
 	var fDayEnd = formatDate2(lastValue['dayEnd']);
-	var text = '';
+	var results = {};
 
 	var conditions = func.rangeDate(fDayStart, fDayEnd);
 
@@ -97,7 +136,7 @@ function share(e) {
 
 	if (calendar_shift.models[0]) {
 
-		var result = calendar_shift.models, data = {};
+		var result = calendar_shift.models;
 		for (var i = 0, n = result.length; i < n; ++i) {
 
 			var date_shift = JSON.parse(result[i].get('date_shift'));
@@ -106,29 +145,19 @@ function share(e) {
 
 			for (var _date in date_shift) {
 
-				var newDate = new Date(month[1], month[0] - 1, _date);
+				var newDate = new Date(month[1], month[0] - 1, parseInt(_date));
 
-				if ((newDate.getTime() >= lastValue['dayStart'].getTime()) && (newDate.getTime() <= lastValue['dayEnd'].getTime())) {
+				if (newDate < lastValue['dayStart'])
+					continue;
 
-					var cMonth = month[0] != 10 ? month[0].replace('0', '') : 10;
-					text += cMonth + '/' + _date + ':' + allShifts[date_shift[_date]] + "\n";
-				}
+				if (newDate > lastValue['dayEnd'])
+					break;
+
+				results[month[1] + '/' + parseInt(month[0]) + '/' + _date] = allShifts[date_shift[_date]];
 			}
-
 		}
-
-		if (e.source.type == 'line')
-			Ti.Platform.openURL('line://msg/text/' + text) ? '' : alert('Lineがインストールされていませんでした。。。');
-		else {
-
-			var emailDialog = Titanium.UI.createEmailDialog();
-			emailDialog.setSubject('シフト共有');
-			emailDialog.setMessageBody(text);
-			emailDialog.open();
-		}
-	} else {
-		alert('予定なし');
 	}
+	return results;
 }
 
 $.share_by_text.addEventListener('android:back', function(e) {

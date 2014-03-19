@@ -41,7 +41,7 @@ function Controller() {
         if (!id) {
             $.scheduleList.add(Ti.UI.createLabel({
                 id: "empty",
-                text: "予定なし",
+                text: "予定はありません",
                 font: {
                     fontSize: "14dp"
                 },
@@ -242,7 +242,7 @@ function Controller() {
         for (var i = 0, n = getAllFriend.length; n > i; ++i) {
             _allFriend[getAllFriend[i].get("id")] = getAllFriend[i].get("name");
             var label = Ti.UI.createLabel({
-                text: " " + getAllFriend[i].get("name") + " ",
+                text: "   " + getAllFriend[i].get("name") + "   ",
                 id: getAllFriend[i].get("id"),
                 color: friendStyle["deactive"]["text"],
                 font: {
@@ -254,6 +254,8 @@ function Controller() {
                 width: Ti.UI.SIZE,
                 left: "5dp",
                 top: "5dp",
+                border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+                borderRadius: 10,
                 textAlign: "center",
                 className: "friend-item"
             });
@@ -269,6 +271,7 @@ function Controller() {
         }
     }
     function updateFriend(name, id) {
+        name = name.replace(/(^\s+|\s+$)/g, "");
         if (friendInSchedule[id]) {
             delete friendInSchedule[id];
             var getFriend = $.friend.children;

@@ -58,7 +58,7 @@
 },
 
 "#dayEnd":{
-	left:'75dp',
+	left:'70dp',
 	width:Ti.UI.FILL
 },
 "#groupButton":{

@@ -24,7 +24,7 @@ function Controller() {
         }).getView("main").toImage().media;
         var file = Titanium.Filesystem.getFile(Titanium.Filesystem.externalStorageDirectory, "shift.png");
         file.write(f);
-        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/image/" + file.nativePath) ? "" : alert("Lineがインストールされていませんでした。。。"); else {
+        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/image/" + file.nativePath) ? "" : alert("LINEがインストールされていません"); else {
             var emailDialog = Titanium.UI.createEmailDialog();
             emailDialog.addAttachment(file);
             emailDialog.setSubject("シフト共有");

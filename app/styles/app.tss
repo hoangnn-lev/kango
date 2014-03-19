@@ -43,6 +43,9 @@
 	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	borderRadius:10,
 	borderColor:'#fff',
+		font:{
+		fontSize:'16sp'
+	}
 },
 "TextField":{
 	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -52,6 +55,9 @@
 	backgroundFocusedColor:'#f0f0f0',
 	borderRadius:10,
 	borderColor:'#fff',
+	font:{
+		fontSize:'16sp'
+	}
 },
 "#tabMenu":{
 	backgroundColor:'#f3acbd',

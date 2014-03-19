@@ -78,11 +78,12 @@
 "#groupShiftColor":{
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE,
-	layout:'horizontal',
+	layout:'vertical',
 	backgroundColor:'#fff',
 	border:Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 	borderRadius:10
 },
+
 ".error":{
 	visible:false
 },

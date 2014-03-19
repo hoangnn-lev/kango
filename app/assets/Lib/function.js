@@ -220,10 +220,20 @@ exports.createBoxIcon = function(button, viewIcon, selectedIcon) {
 
 	for (var i = 0; i < l; i++) {
 
+		var active_button = 'active.png';
+		var deactive_button = 'deactive.png';
+
+		if (i == 0 && buttonTabs[0]['icons'] == '') {
+			active_button = 'active-0.png';
+			deactive_button = 'deactive-0.png';
+		}
+
 		var buttontab = Ti.UI.createImageView({
 			width : '25%',
 			height : '45dp',
-			image : buttonTabs[i].folder + 'deactive.png',
+			image : buttonTabs[i].folder + deactive_button,
+			active : active_button,
+			de_active : deactive_button,
 			'data' : buttonTabs[i].icons,
 			'folder' : buttonTabs[i].folder,
 			left : i * 25 + '%',
@@ -235,16 +245,16 @@ exports.createBoxIcon = function(button, viewIcon, selectedIcon) {
 		buttontab.addEventListener('click', function(e) {
 			if (this !== currentButton) {
 				if (currentButton)
-					currentButton.setImage(currentButton.folder + 'deactive.png');
+					currentButton.setImage(currentButton.folder + currentButton.de_active);
 				currentButton = this;
-				currentButton.setImage(e.source.folder + 'active.png');
+				currentButton.setImage(e.source.folder + e.source.active);
 				viewIcon.removeAllChildren();
 				viewIcon.add(exports.createScrollViewIcon(e.source.data, e.source.folder, viewIcon, selectedIcon));
 			}
 		});
 		if (i == 0 && selectedIcon == '') {
 			currentButton = buttontab;
-			currentButton.setImage(buttonTabs[i].folder + 'active.png');
+			currentButton.setImage(buttonTabs[i].folder + active_button);
 			viewIcon.add(exports.createScrollViewIcon(buttonTabs[i].icons, buttonTabs[i].folder, viewIcon, selectedIcon));
 		} else if (selectedIcon != '') {
 

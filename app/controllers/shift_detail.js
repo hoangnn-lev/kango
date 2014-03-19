@@ -26,47 +26,58 @@ loadColorBox(shift.get('color'));
  * output : void
  * */
 function loadColorBox(selected) {
-	var color = ['#e68200', '#01adb3', '#69bc7b', '#e6b800', '#75a9e8', '#e86767', '#6c73cc', '#d23376', '#e0539c', '#a957a0', '#aa86c4', '#d8ba72'];
-	var column = 4, record = color.length, row = Math.ceil(record / column), count = 0, top = 0;
 
-	for (var i = 0; i < row; i++) {
+	var count = 0, color = ['#e68200', '#01adb3', '#69bc7b', '#e6b800', '#75a9e8', '#e86767', '#6c73cc', '#d23376', '#e0539c', '#a957a0', '#aa86c4', '#d8ba72'];
 
-		for (var j = 0; j < column; j++) {
+	for (var c = 0; c < 4; c++) {
 
-			if (count >= record)
-				return;
+		var group = Ti.UI.createView({
+			height : '80dp',
+			width : Ti.UI.FILL
+		});
 
-			var view = Ti.UI.createButton({
+		if (c == 0)
+			group.setTop('10dp');
+			
+		if (c == 3)
+			group.setBottom('10dp');
+
+		for (var r = 0; r < 3; ++r) {
+
+			var button = Ti.UI.createButton({
 				backgroundColor : color[count],
-				height : '50dp',
-				width : '50dp',
-				left : '15dp',
-				top : '15dp',
-				right : '15dp',
-				bottom : '15dp',
-				borderColor : '#666',
+				height : '60dp',
+				width : '60dp',
+				borderColor : '#ccc',
 				color : '#676767',
 				borderWidth : 0
 			});
 
+			if (r == 0)
+				button.setLeft('20dp');
+
+			if (r == 2)
+				button.setRight('20dp');
+
 			if (selected == color[count]) {
-				selectedColor = view;
-				view.setBorderWidth(3);
-				//set background review
+				selectedColor = button;
+				button.setBorderWidth(6);
 				$.shiftName.setBackgroundColor(selected);
 			}
 
-			view.addEventListener('click', function(e) {
+			button.addEventListener('click', function(e) {
 				if (selectedColor)
 					selectedColor.setBorderWidth(0);
-				this.setBorderWidth(3);
+				this.setBorderWidth(6);
 				$.shiftName.setBackgroundColor(e.source.backgroundColor);
 				selectedColor = this;
 
 			});
-			$.groupShiftColor.add(view);
+			group.add(button);
 			count++;
 		}
+
+		$.groupShiftColor.add(group);
 	}
 }
 
@@ -96,17 +107,7 @@ function timeSet(e1) {
 
 				var result = e.value.getHours() + ':' + pad_2(e.value.getMinutes());
 				child[1].setText(result);
-				$.clearEndTime.setVisible(true);
-				$.clearStartTime.setVisible(true);
-
-				var result = e.value, end, start;
-				var hours = pad_2(result.getHours()), min = ":" + pad_2(result.getMinutes());
-
-				end = (result.getHours() + 8) > 23 ? result.getHours() - 16 : result.getHours() + 8;
-				start = (result.getHours() - 9) >= 0 ? result.getHours() - 9 : result.getHours() + 15;
-
-				e1.source.type == 'start' ? $.endTime.setText(end + min) : $.startTime.setText(start + min);
-
+				child[2].setVisible(true);
 			}
 		}
 	});

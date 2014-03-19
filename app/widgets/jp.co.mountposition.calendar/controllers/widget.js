@@ -274,7 +274,11 @@ exports.setShift = function(day, options) {
 	void 0) != null) {
 
 		if (tile.children[1] && tile.children[1].id != options.id) {
-			tile.remove(tile.children[1]);
+			if (tile.children[1].className != 'label-event')
+				tile.remove(tile.children[1]);
+		}
+		if (tile.children[2] && tile.children[2].id != options.id) {
+			tile.remove(tile.children[2]);
 		}
 		if (options.id == 13)
 			_isAdd = false;

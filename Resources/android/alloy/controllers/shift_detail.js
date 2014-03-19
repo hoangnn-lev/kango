@@ -1,34 +1,39 @@
 function Controller() {
     function loadColorBox(selected) {
-        var color = [ "#e68200", "#01adb3", "#69bc7b", "#e6b800", "#75a9e8", "#e86767", "#6c73cc", "#d23376", "#e0539c", "#a957a0", "#aa86c4", "#d8ba72" ];
-        var column = 4, record = color.length, row = Math.ceil(record / column), count = 0;
-        for (var i = 0; row > i; i++) for (var j = 0; column > j; j++) {
-            if (count >= record) return;
-            var view = Ti.UI.createButton({
-                backgroundColor: color[count],
-                height: "50dp",
-                width: "50dp",
-                left: "15dp",
-                top: "15dp",
-                right: "15dp",
-                bottom: "15dp",
-                borderColor: "#666",
-                color: "#676767",
-                borderWidth: 0
+        var count = 0, color = [ "#e68200", "#01adb3", "#69bc7b", "#e6b800", "#75a9e8", "#e86767", "#6c73cc", "#d23376", "#e0539c", "#a957a0", "#aa86c4", "#d8ba72" ];
+        for (var c = 0; 4 > c; c++) {
+            var group = Ti.UI.createView({
+                height: "80dp",
+                width: Ti.UI.FILL
             });
-            if (selected == color[count]) {
-                selectedColor = view;
-                view.setBorderWidth(3);
-                $.shiftName.setBackgroundColor(selected);
+            0 == c && group.setTop("10dp");
+            3 == c && group.setBottom("10dp");
+            for (var r = 0; 3 > r; ++r) {
+                var button = Ti.UI.createButton({
+                    backgroundColor: color[count],
+                    height: "60dp",
+                    width: "60dp",
+                    borderColor: "#ccc",
+                    color: "#676767",
+                    borderWidth: 0
+                });
+                0 == r && button.setLeft("20dp");
+                2 == r && button.setRight("20dp");
+                if (selected == color[count]) {
+                    selectedColor = button;
+                    button.setBorderWidth(6);
+                    $.shiftName.setBackgroundColor(selected);
+                }
+                button.addEventListener("click", function(e) {
+                    selectedColor && selectedColor.setBorderWidth(0);
+                    this.setBorderWidth(6);
+                    $.shiftName.setBackgroundColor(e.source.backgroundColor);
+                    selectedColor = this;
+                });
+                group.add(button);
+                count++;
             }
-            view.addEventListener("click", function(e) {
-                selectedColor && selectedColor.setBorderWidth(0);
-                this.setBorderWidth(3);
-                $.shiftName.setBackgroundColor(e.source.backgroundColor);
-                selectedColor = this;
-            });
-            $.groupShiftColor.add(view);
-            count++;
+            $.groupShiftColor.add(group);
         }
     }
     function timeSet(e1) {
@@ -51,13 +56,7 @@ function Controller() {
                 if (!e.cancel) {
                     var result = e.value.getHours() + ":" + pad_2(e.value.getMinutes());
                     child[1].setText(result);
-                    $.clearEndTime.setVisible(true);
-                    $.clearStartTime.setVisible(true);
-                    var end, start, result = e.value;
-                    var min = (pad_2(result.getHours()), ":" + pad_2(result.getMinutes()));
-                    end = result.getHours() + 8 > 23 ? result.getHours() - 16 : result.getHours() + 8;
-                    start = result.getHours() - 9 >= 0 ? result.getHours() - 9 : result.getHours() + 15;
-                    "start" == e1.source.type ? $.endTime.setText(end + min) : $.startTime.setText(start + min);
+                    child[2].setVisible(true);
                 }
             }
         });
@@ -166,11 +165,11 @@ function Controller() {
         backgroundFocusedColor: "#fff",
         borderRadius: 10,
         borderColor: "#fff",
-        zIndex: 0,
-        top: 0,
         font: {
             fontSize: "15dp"
         },
+        zIndex: 0,
+        top: 0,
         height: "40dp",
         left: "70dp",
         id: "shiftAlias"
@@ -324,7 +323,7 @@ function Controller() {
     $.__views.groupShiftColor = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
-        layout: "horizontal",
+        layout: "vertical",
         backgroundColor: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,

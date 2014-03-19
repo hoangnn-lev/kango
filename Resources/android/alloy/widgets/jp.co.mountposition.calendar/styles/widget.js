@@ -61,7 +61,10 @@ module.exports = [ {
         backgroundFocusedColor: "#f0f0f0",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
-        borderColor: "#fff"
+        borderColor: "#fff",
+        font: {
+            fontSize: "16sp"
+        }
     }
 }, {
     isApi: true,
@@ -74,7 +77,10 @@ module.exports = [ {
         backgroundColor: "#f8ecee",
         backgroundFocusedColor: "#f0f0f0",
         borderRadius: 10,
-        borderColor: "#fff"
+        borderColor: "#fff",
+        font: {
+            fontSize: "16sp"
+        }
     }
 }, {
     isApi: true,
