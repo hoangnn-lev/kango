@@ -60,11 +60,10 @@ function Controller() {
             results[format] ? text.push(date + results[format]) : text.push(date + "予定なし");
             currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
         }
-        text = text.join("\n");
-        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/text/" + text) ? "" : alert("LINEがインストールされていません"); else {
+        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/text/?" + text.join("%21%0d%0a")) ? "" : alert("LINEがインストールされていません"); else {
             var emailDialog = Titanium.UI.createEmailDialog();
             emailDialog.setSubject("シフト共有");
-            emailDialog.setMessageBody(text);
+            emailDialog.setMessageBody(text.join("\n"));
             emailDialog.open();
         }
     }
@@ -118,7 +117,7 @@ function Controller() {
     });
     $.__views.share_by_text.add($.__views.main);
     $.__views.title = Ti.UI.createView({
-        height: "40dp",
+        height: "50dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ed829c",
         id: "title"
@@ -194,7 +193,7 @@ function Controller() {
     $.__views.dayStart = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -230,7 +229,7 @@ function Controller() {
     $.__views.dayEnd = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"

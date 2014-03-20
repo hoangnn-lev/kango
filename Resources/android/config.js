@@ -1,5 +1,7 @@
 Ti.include("activityScreen.js");
 
+Ti.API.DW = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
+
 Ti.API.TABMENU = [ {
     img: "/tabmenu/shift.png",
     action: "shift",

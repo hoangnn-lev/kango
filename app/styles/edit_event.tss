@@ -4,13 +4,11 @@
 },
 "TextField":{
 	backgroundColor:'#fff',
-	backgroundFocusedColor:'#fff',
-	color:'#999999'
+	backgroundFocusedColor:'#fff'
 },
 "TextArea":{
 	backgroundColor:'#fff',
-	backgroundFocusedColor:'#fff',
-	color:'#999999'
+	backgroundFocusedColor:'#fff'
 },
 
 "#content":{
@@ -121,7 +119,13 @@
 	visible:false
 },
 "#titleEvent":{
-	height:'40dp',
+	height:'50dp',
 	backgroundColor:'#ed829c',
 	width:Ti.UI.FILL
+},
+"#startTime":{
+	color:'#000'
+},
+"#endTime":{
+	color:'#000'
 }

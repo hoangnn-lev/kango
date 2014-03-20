@@ -26,7 +26,7 @@
 	bottom:'20dp'
 },
 "#title":{
-	height:'40dp',
+	height:'50dp',
 	backgroundColor:'#ed829c'
 },
 "#content":{
@@ -54,11 +54,13 @@
 },
 "#dayStart":{
 	left:'70dp',
+	color:'#000',
 	width:Ti.UI.FILL
 },
 
 "#dayEnd":{
 	left:'70dp',
+	color:'#000',
 	width:Ti.UI.FILL
 },
 "#groupButton":{

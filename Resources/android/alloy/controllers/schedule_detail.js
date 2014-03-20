@@ -283,6 +283,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
+        color: "#000",
         maxLength: "120",
         id: "memo",
         hintText: "メモ"

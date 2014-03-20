@@ -17,10 +17,9 @@
 },
 '#dates': {
     layout: 'vertical',
-    font:{
-    	
-    },
-    height: Ti.UI.FILL
+    height: Ti.UI.FILL,
+    left:'1dp',
+    width:Ti.UI.FILL
 },
 ".week":{
 	color:'#fff',

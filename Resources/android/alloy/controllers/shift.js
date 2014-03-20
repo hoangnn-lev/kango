@@ -28,7 +28,7 @@ function Controller() {
             }
         }
         getScheduleMonth(month.format("MM"), month.format("YYYY"));
-        _calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset);
+        _calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset, dateIsFriendNoEvent);
         var gdate = _calendar.calendarMonth().format("YYYY-MM-MMM").split("-");
         $.year.setText(gdate[0]);
         $.month.setText(gdate[1]);
@@ -44,6 +44,7 @@ function Controller() {
     function getScheduleMonth(month, year) {
         var scheduleModel = Alloy.Collections.schedule;
         dateIsEvent = {};
+        dateIsFriendNoEvent = {};
         scheduleModel.fetch({
             query: 'SELECT * from schedule where date BETWEEN  "' + year + "-" + month + '-01" and "' + year + "-" + month + '-31"'
         });
@@ -51,7 +52,15 @@ function Controller() {
         for (var i = 0; n > i; ++i) {
             var date = data[i].get("date").split("-");
             dateIsEvent[date[2]] = data[i].get("id");
+            checkIsEvent(data[i].get("id")) || (dateIsFriendNoEvent[date[2]] = "1");
         }
+    }
+    function checkIsEvent(id) {
+        var calendar_shift = Alloy.Collections.schedule_detail;
+        calendar_shift.fetch({
+            query: "select id from schedule_detail  where schedule_id = " + id
+        });
+        return calendar_shift.models[0] ? 1 : 0;
     }
     function clickCalendar() {
         selectedDate = _calendar.selectedDate();
@@ -150,15 +159,14 @@ function Controller() {
     });
     $.__views.main.add($.__views.calendarTitle);
     $.__views.prevMonth = Ti.UI.createImageView({
-        zIndex: "5",
-        width: "30dp",
-        height: "30dp",
+        zIndex: 9999,
+        width: "20dp",
+        height: "20dp",
         image: "/icons/prev.png",
         id: "prevMonth",
         left: "0"
     });
     $.__views.calendarTitle.add($.__views.prevMonth);
-    doPrevMonth ? $.__views.prevMonth.addEventListener("click", doPrevMonth) : __defers["$.__views.prevMonth!click!doPrevMonth"] = true;
     $.__views.dateInfo = Ti.UI.createView({
         width: "110dp",
         top: 0,
@@ -208,15 +216,14 @@ function Controller() {
     });
     $.__views.dateInfo.add($.__views.monthName);
     $.__views.nextMonth = Ti.UI.createImageView({
-        zIndex: "5",
-        width: "30dp",
-        height: "30dp",
+        zIndex: 9999,
+        width: "20dp",
+        height: "20dp",
         image: "/icons/next.png",
         id: "nextMonth",
         right: "0"
     });
     $.__views.calendarTitle.add($.__views.nextMonth);
-    doNextMonth ? $.__views.nextMonth.addEventListener("click", doNextMonth) : __defers["$.__views.nextMonth!click!doNextMonth"] = true;
     $.__views.days = Ti.UI.createView({
         top: 0,
         height: "22dp",
@@ -306,13 +313,13 @@ function Controller() {
         bottom: "20dp",
         right: "20dp",
         top: "20dp",
-        title: "シフト編集",
+        title: "シフト設定",
         id: "shiftSetting"
     });
     $.__views.__alloyId108.add($.__views.shiftSetting);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var selectedDate, selectedDay, _calendar, dateIsEvent, dayOffset, shiftMonthId, lastDayOfMonth = 0, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};
+    var selectedDate, selectedDay, _calendar, dateIsEvent, dateIsFriendNoEvent, dayOffset, shiftMonthId, lastDayOfMonth = 0, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};
     if (args["date"]) {
         args["date"].split("-");
         month = moment(args["date"]);
@@ -354,8 +361,12 @@ function Controller() {
             tab: 1
         });
     });
-    __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
-    __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);
+    $.prevMonth.addEventListener("click", function() {
+        doPrevMonth();
+    });
+    $.nextMonth.addEventListener("click", function() {
+        doNextMonth();
+    });
     __defers["$.__views.calendar!click!clickCalendar"] && $.__views.calendar.addEventListener("click", clickCalendar);
     _.extend($, exports);
 }

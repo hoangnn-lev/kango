@@ -29,35 +29,31 @@ function loadColorBox(selected) {
 
 	var count = 0, color = ['#e68200', '#01adb3', '#69bc7b', '#e6b800', '#75a9e8', '#e86767', '#6c73cc', '#d23376', '#e0539c', '#a957a0', '#aa86c4', '#d8ba72'];
 
-	for (var c = 0; c < 4; c++) {
+	var colorWidth = Math.floor(Ti.API.DW / 4) - 18;
+
+	for (var c = 0; c < 3; c++) {
 
 		var group = Ti.UI.createView({
-			height : '80dp',
-			width : Ti.UI.FILL
+			height : colorWidth + 'dp',
+			width : Ti.UI.FILL,
+			top : '10dp'
 		});
 
-		if (c == 0)
-			group.setTop('10dp');
-			
-		if (c == 3)
+		if (c == 2)
 			group.setBottom('10dp');
 
-		for (var r = 0; r < 3; ++r) {
+		for (var r = 0; r < 4; ++r) {
 
 			var button = Ti.UI.createButton({
 				backgroundColor : color[count],
-				height : '60dp',
-				width : '60dp',
+				height : colorWidth + 'dp',
+				width : colorWidth + 'dp',
 				borderColor : '#ccc',
 				color : '#676767',
-				borderWidth : 0
+				borderWidth : 0,
+				left : (r == 0) ? '10dp' : (r * (colorWidth + 10) + 10) + 'dp',
+				className : 'button-color'
 			});
-
-			if (r == 0)
-				button.setLeft('20dp');
-
-			if (r == 2)
-				button.setRight('20dp');
 
 			if (selected == color[count]) {
 				selectedColor = button;

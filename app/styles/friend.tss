@@ -23,10 +23,9 @@
 	top:0
 },
 "#title":{
-	height:'40dp',
+	height:'50dp',
 	backgroundColor:'#ed829c'
 },
-
 "#addFriend":{
 	height:'45dp',
 	left:'30dp',

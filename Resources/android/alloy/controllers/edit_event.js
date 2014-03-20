@@ -77,7 +77,7 @@ function Controller() {
     });
     $.__views.edit_event.add($.__views.main);
     $.__views.titleEvent = Ti.UI.createView({
-        height: "40dp",
+        height: "50dp",
         backgroundColor: "#ed829c",
         width: Ti.UI.FILL,
         id: "titleEvent"
@@ -153,7 +153,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        color: "#999999",
+        color: "#000",
         maxLength: "30",
         id: "title",
         hintText: "タイトル"
@@ -187,7 +187,7 @@ function Controller() {
     $.__views.startTime = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -244,7 +244,7 @@ function Controller() {
     $.__views.endTime = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -284,7 +284,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        color: "#999999",
+        color: "#000",
         maxLength: "300",
         id: "memo",
         hintText: "メモが入力できます"

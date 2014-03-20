@@ -22,9 +22,9 @@
 	right:'10dp'
 },
 ".calendarButton":{
-	zIndex:"5",
-	width:"30dp",
-	height:"30dp" 
+	zIndex:9999,
+	width:"20dp",
+	height:"20dp" 
 },
 "#dateInfo":{
 	width:'110dp',
@@ -72,7 +72,7 @@
 },
 ".editScheduleButton":{
 	font:{
-		fontSize:'16sp'
+		fontSize:'14dp'
 	},
 	backgroundColor:'#f3acbd',
 	height:'30dp'

@@ -20,7 +20,7 @@ function Controller() {
     });
     $.__views.about.add($.__views.main);
     $.__views.title = Ti.UI.createView({
-        height: "40dp",
+        height: "50dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ed829c",
         top: 0,

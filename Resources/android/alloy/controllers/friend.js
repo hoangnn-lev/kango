@@ -33,13 +33,12 @@ function Controller() {
                 fontSize: "15dp"
             },
             backgroundColor: "transparent",
-            color: "" == name ? "#e2e2e2" : "#676767",
+            color: "#000",
             maxLength: 8,
             zIndex: 9,
             className: "friend-name"
         });
         row.label.addEventListener("change", function(e) {
-            this.setColor("" == e.source.value ? "#e2e2e2" : "#676767");
             var data = {
                 id: id,
                 name: e.source.value,
@@ -117,7 +116,7 @@ function Controller() {
     });
     $.__views.friend.add($.__views.main);
     $.__views.title = Ti.UI.createView({
-        height: "40dp",
+        height: "50dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ed829c",
         id: "title"
@@ -131,7 +130,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
-        text: "勤務メンバー編集",
+        text: "勤務メンバー設定",
         id: "__alloyId21"
     });
     $.__views.title.add($.__views.__alloyId21);

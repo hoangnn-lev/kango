@@ -3,13 +3,13 @@
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main" layout="vertical">
 			<View id="calendarTitle">
-				<ImageView image="/icons/prev.png" class="calendarButton" onClick="doPrevMonth" id="prevMonth" left="0"/>
+				<ImageView image="/icons/prev.png" class="calendarButton"  id="prevMonth" left="0"/>
 				<View id="dateInfo">
 					<Label id="year"/>
 					<Label id="month"/>
 					<Label id="monthName"/>
 				</View>
-				<ImageView image="/icons/next.png"  class="calendarButton" onClick="doNextMonth" id="nextMonth" right="0"/>
+				<ImageView image="/icons/next.png"  class="calendarButton"  id="nextMonth" right="0"/>
 			</View>
 			<View id="days"/>
 			<View id="calendar" onClick="clickCalendar" />
@@ -21,7 +21,7 @@
 				</View>
 				<View id="shiftList"/>
 				<View class="buttonShiftSetting">
-					<Button title="シフト編集" id="shiftSetting"/>
+					<Button title="シフト設定" id="shiftSetting"/>
 				</View>
 			</ScrollView>
 		</View>

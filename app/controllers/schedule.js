@@ -1,5 +1,5 @@
 //create collection users
-var on_flag = true, day, showMember = 1, choiceDay, activeWidget, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
+var on_flag = true, day, showMember = 1, choiceDay, activeWidget, dateIsEvent, dateIsFriendNoEvent, shiftOfMonth = [], moment = require('alloy/moment'), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = '', _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
 	active : {
 		bg : '#d7e682',
 		text : '#68790b'
@@ -43,7 +43,7 @@ function clickCalendar(e) {
 		if (shiftOfMonth[_sDate]) {
 			$.shiftLabel.add(Ti.UI.createLabel({
 				text : shiftOfMonth[_sDate]['text'],
-				left : '160dp',
+				left : '140dp',
 				backgroundColor : shiftOfMonth[_sDate]['color'],
 				color : '#fff',
 				width : '60dp',
@@ -112,13 +112,28 @@ function getEvent(day) {
 		}));
 		return;
 	}
-
 	var calendar_shift = Alloy.Collections.schedule_detail;
 	calendar_shift.fetch({
 		query : 'select * from schedule_detail  where schedule_id = ' + id
 	});
 
 	var data = calendar_shift.models;
+	if (!data[0]) {
+		$.scheduleList.add(Ti.UI.createLabel({
+			id : 'empty',
+			text : '予定はありません',
+			font : {
+				fontSize : '14dp',
+			},
+			color : '#676767',
+			height : '40dp',
+			backgroundColor : '#fff',
+			width : Ti.UI.SIZE,
+			left : '10dp'
+		}));
+		return;
+	}
+
 	var tableView = Ti.UI.createTableView({
 		top : 0,
 		height : 'auto',
@@ -127,6 +142,7 @@ function getEvent(day) {
 	var item = [];
 
 	for (var i = 0, n = data.length; i < n; ++i) {
+
 		var row = Ti.UI.createTableViewRow({
 			id : data[i].get('id'),
 			selectionStyle : 'none',
@@ -137,21 +153,27 @@ function getEvent(day) {
 			className : 'row-event'
 		});
 
-		if (data[i].get('img')) {
-			var scheduleTitle = Ti.UI.createLabel({
-				height : Ti.UI.SIZE,
-				top : '10dp',
-				text : data[i].get('title'),
-				bottom : '10dp',
-				color : '#676767',
-				font : {
-					fontSize : '16sp'
-				},
-				touchEnabled : false,
-				left : '50dp',
-				className : 'title-event'
-			});
+		var event_title = data[i].get('title');
+		if (event_title.length > 12 && event_title.length != 13) {
+			event_title = event_title.substr(0, 12) + '...';
+		}
 
+		var scheduleTitle = Ti.UI.createLabel({
+			height : Ti.UI.SIZE,
+			top : '10dp',
+			text : event_title,
+			bottom : '10dp',
+			color : '#676767',
+			font : {
+				fontSize : '16sp'
+			},
+			touchEnabled : false,
+			className : 'title-event'
+		});
+
+		if (data[i].get('img')) {
+
+			scheduleTitle.setLeft('50dp');
 			row.add(Ti.UI.createImageView({
 				width : '40dp',
 				image : data[i].get('img'),
@@ -159,20 +181,9 @@ function getEvent(day) {
 				touchEnabled : false,
 				className : 'img-event'
 			}));
+
 		} else {
-			var scheduleTitle = Ti.UI.createLabel({
-				height : Ti.UI.SIZE,
-				top : '10dp',
-				text : data[i].get('title'),
-				bottom : '10dp',
-				color : '#676767',
-				font : {
-					fontSize : '16sp'
-				},
-				left : '10dp',
-				touchEnabled : false,
-				className : 'title-event-no-img'
-			});
+			scheduleTitle.setLeft('10dp');
 		}
 
 		if (data[i].get('start_time') || data[i].get('end_time')) {
@@ -258,7 +269,7 @@ function loadCalendarBody() {
 	getScheduleMonth(currentMonth.format('MM'), currentMonth.format('YYYY'));
 
 	var current = $.calendar.children[0];
-	activeWidget = func.createCalendarBody(currentMonth, dateIsEvent, shiftOfMonth, dayOffset);
+	activeWidget = func.createCalendarBody(currentMonth, dateIsEvent, shiftOfMonth, dayOffset, dateIsFriendNoEvent);
 
 	var c = activeWidget.getView();
 	var gdate = activeWidget.calendarMonth().format('YYYY-MM-MMM').split('-');
@@ -285,6 +296,8 @@ function loadCalendarBody() {
 function getScheduleMonth(month, year) {
 
 	dateIsEvent = {};
+	dateIsFriendNoEvent = {};
+	dateIsFriendNoEvent = {};
 	friendOfDay = {};
 	scheduleModel.fetch({
 		query : 'SELECT * from schedule where date BETWEEN  "' + year + '-' + month + '-01" and "' + year + '-' + month + '-31"'
@@ -295,8 +308,19 @@ function getScheduleMonth(month, year) {
 	for (var i = 0; i < n; ++i) {
 		var date = (data[i].get('date')).split('-');
 		dateIsEvent[date[2]] = data[i].get('id');
+		if (!checkIsEvent(data[i].get('id'))) {
+			dateIsFriendNoEvent[date[2]] = '1';
+		}
 		friendOfDay[date[2]] = data[i].get('friend');
 	}
+}
+
+function checkIsEvent(id) {
+	var calendar_shift = Alloy.Collections.schedule_detail;
+	calendar_shift.fetch({
+		query : 'select id from schedule_detail  where schedule_id = ' + id
+	});
+	return (calendar_shift.models[0]) ? 1 : 0;
 }
 
 /*
@@ -442,11 +466,8 @@ function getAllFriend() {
 			className : 'friend-item'
 		});
 		label.addEventListener('click', function(e) {
-			if (($.scheduleList.getChildren())[0].id == 'empty')
-				return;
 
 			var type = e.source.type == 'deactive' ? 'active' : 'deactive';
-
 			e.source.type = type;
 			this.setColor(friendStyle[type]['text']);
 			this.setBackgroundColor(friendStyle[type]['bg']);
@@ -459,7 +480,7 @@ function getAllFriend() {
 }
 
 function updateFriend(name, id) {
-	
+
 	name = name.replace(/(^\s+|\s+$)/g, '');
 	if (friendInSchedule[id]) {
 		delete friendInSchedule[id];
@@ -496,14 +517,21 @@ function updateFriend(name, id) {
 	var scheduleModel = Alloy.Collections.schedule;
 
 	var data = {
-		id : dateIsEvent[day],
 		date : choiceDay.format('YYYY-MM-DD'),
 		friend : friendId
 	};
+	if (dateIsEvent[day]) {
+		data['id'] = dateIsEvent[day];
+	}
 
 	var schedule = Alloy.createModel('schedule', data);
 	scheduleModel.add(schedule);
 	schedule.save();
+
+	if (!dateIsEvent[day]) {
+		dateIsEvent[day] = schedule.id;
+	}
+
 }
 
 //add swipe left right for calendar
@@ -512,4 +540,15 @@ $.calendar.addEventListener('swipe', function(e) {
 		doNextMonth();
 	else if (e.direction == 'right')
 		doPrevMonth();
+});
+$.prevMonth.addEventListener('click',function(){
+	doPrevMonth();
+});
+$.nextMonth.addEventListener('click',function(){
+	doNextMonth();
+});
+
+
+$.serviceMember.setFont({
+	fontSize : (Ti.API.DW <= 320) ? '10dp' : '12dp'
 });

@@ -591,10 +591,15 @@ function Controller() {
         openView("about");
     });
     $.report.addEventListener("click", function() {
-        var emailDialog = Titanium.UI.createEmailDialog();
-        emailDialog.setSubject("不具合やエラーのお問い合わせ");
-        emailDialog.setToRecipients([ "info_perikare@kango-oshigoto.jp" ]);
-        emailDialog.open();
+        var myVer = L("app_name") + Ti.App.version;
+        var device = Titanium.Platform;
+        var info = "\n\n\n\n--------------\n" + myVer + "\n" + device.manufacturer + " " + device.model + " " + device.osname + " " + device.version;
+        var mail = Titanium.UI.createEmailDialog({
+            subject: "不具合やエラーのお問い合わせ",
+            toRecipients: [ "info_perikare@kango-oshigoto.jp" ],
+            messageBody: info
+        });
+        mail.open();
     });
     __defers["$.__views.__alloyId64!click!shift_setting"] && $.__views.__alloyId64.addEventListener("click", shift_setting);
     __defers["$.__views.__alloyId68!click!edit_members"] && $.__views.__alloyId68.addEventListener("click", edit_members);

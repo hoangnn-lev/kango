@@ -97,9 +97,9 @@
 	backgroundColor:'#fff'
 },
 ".calendarButton":{
-	zIndex:"5",
-	width:"30dp",
-	height:"30dp" 
+	zIndex:9999,
+	width:"20dp",
+	height:"20dp" 
 },
 ".editScheduleButton":{
 	font:{

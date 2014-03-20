@@ -2,7 +2,7 @@
 	<Window>
 		<View id="main">
 			<View id="title">
-				<Label width="Ti.UI.SIZE" color="#fff" text="勤務メンバー編集"/>
+				<Label width="Ti.UI.SIZE" color="#fff" text="勤務メンバー設定"/>
 			</View>
 			<ScrollView layout="vertical" top="0" height="Ti.UI.FILL">
 				<View separatorColor="#ccc" id="friendList"/>

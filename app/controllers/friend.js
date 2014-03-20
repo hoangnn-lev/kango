@@ -80,14 +80,13 @@ function customeRowFriend(id, name, friend_flag) {
 			fontSize : '15dp'
 		},
 		backgroundColor : 'transparent',
-		color : name == '' ? '#e2e2e2' : '#676767',
+		color : '#000',
 		maxLength : 8,
 		zIndex : 9,
 		className : 'friend-name'
 	});
 
 	row.label.addEventListener('change', function(e) {
-		this.setColor(e.source.value == '' ? '#e2e2e2' : '#676767');
 		var data = {
 			id : id,
 			name : e.source.value,
@@ -148,4 +147,5 @@ function customeRowFriend(id, name, friend_flag) {
 	}));
 	return row;
 }
+
 

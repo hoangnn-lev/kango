@@ -449,6 +449,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
+        color: "#000",
         keyboardType: Ti.UI.KEYBOARD_NUMBER_PAD,
         maxLength: "25",
         hintText: "IDを入力してください。",

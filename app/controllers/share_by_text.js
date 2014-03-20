@@ -98,18 +98,17 @@ function share(e) {
 		} else {
 			text.push(date + '予定なし');
 		}
-
 		currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
 
 	}
-	text = text.join("\n");
+
 	if (e.source.type == 'line')
-		Ti.Platform.openURL('line://msg/text/' + text) ? '' : alert('LINEがインストールされていません');
+		Ti.Platform.openURL('line://msg/text/?' + text.join('%21%0d%0a')) ? '' : alert('LINEがインストールされていません');
 	else {
 
 		var emailDialog = Titanium.UI.createEmailDialog();
 		emailDialog.setSubject('シフト共有');
-		emailDialog.setMessageBody(text);
+		emailDialog.setMessageBody(text.join("\n"));
 		emailDialog.open();
 	}
 

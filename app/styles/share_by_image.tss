@@ -26,7 +26,7 @@
 	bottom:'20dp'
 },
 "#title":{
-	height:'40dp',
+	height:'50dp',
 	backgroundColor:'#ed829c'
 },
 "#content":{
@@ -49,7 +49,8 @@
 "#month":{
 	height:'30dp',
 	width:Ti.UI.SIZE,
-	left:'10dp'
+	left:'10dp',
+	color:'#000'
 },
 "#groupButton":{
 	width:Ti.UI.FILL,

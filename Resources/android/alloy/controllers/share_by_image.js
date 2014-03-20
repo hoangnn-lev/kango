@@ -54,7 +54,7 @@ function Controller() {
     });
     $.__views.share_by_image.add($.__views.main);
     $.__views.title = Ti.UI.createView({
-        height: "40dp",
+        height: "50dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ed829c",
         id: "title"
@@ -110,7 +110,7 @@ function Controller() {
     $.__views.month = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: "30dp",
-        color: "#676767",
+        color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"

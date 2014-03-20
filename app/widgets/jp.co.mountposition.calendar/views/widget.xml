@@ -1,6 +1,6 @@
 <Alloy>
 	<View id="view" height="Ti.UI.SIZE" width="Ti.UI.FILL" backgroundColor="#f5f1e9">
-		<View id="container" height="Ti.UI.SIZE" top="0">
+		<View id="container" height="Ti.UI.SIZE" top="0" width="Ti.UI.FILL">
 			<View id="dates" onClick="doClick" height="Ti.UI.SIZE" right="2sp" />
 		</View>
 	</View>

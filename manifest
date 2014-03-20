@@ -1,9 +1,9 @@
-#appname: Kango app
-#appid: leverages.kango
-#type: mobile
-#guid: c17a8ab3-b2f6-4980-81fa-36d4d1c867b3
-#version: 1.0
-#publisher: not specified
-#url: not specified
-#image: appicon.png
-#desc: not specified
+#appname:Kango app
+#appid:kango.lev
+#type:mobile
+#guid:c17a8ab3-b2f6-4980-81fa-36d4d1c867b3
+#version:1.0
+#publisher:hoangnn@leverages.jp
+#url:http://
+#image:appicon.png
+#desc:not specified

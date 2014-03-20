@@ -72,6 +72,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
+        color: "#000",
         hintText: "アサコ先輩",
         id: "__alloyId13"
     });
@@ -141,6 +142,7 @@ function Controller() {
         font: {
             fontSize: "16sp"
         },
+        color: "#000",
         hintText: "アサコ先輩",
         id: "__alloyId13"
     });

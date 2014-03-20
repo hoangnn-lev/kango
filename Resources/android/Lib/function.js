@@ -1,11 +1,12 @@
 var currentWindow, deviceWidth = Ti.Platform.displayCaps.platformWidth / (Ti.Platform.displayCaps.dpi / 160);
 
-exports.createCalendarBody = function(_month, _dateIsEvent, _shift, _dayOffset) {
+exports.createCalendarBody = function(_month, _dateIsEvent, _shift, _dayOffset, _dateIsFriendNoEvent) {
     var calendar = Alloy.createWidget("jp.co.mountposition.calendar", "widget", {
         period: _month,
         dateIsEvent: _dateIsEvent,
         shiftOfDate: _shift,
-        dayOffset: _dayOffset
+        dayOffset: _dayOffset,
+        dateIsFriendNoEvent: _dateIsFriendNoEvent
     });
     return calendar;
 };
@@ -162,10 +163,6 @@ exports.createBoxIcon = function(button, viewIcon, selectedIcon) {
     for (var i = 0; l > i; i++) {
         var active_button = "active.png";
         var deactive_button = "deactive.png";
-        if (0 == i && "" == buttonTabs[0]["icons"]) {
-            active_button = "active-0.png";
-            deactive_button = "deactive-0.png";
-        }
         var buttontab = Ti.UI.createImageView({
             width: "25%",
             height: "45dp",
@@ -187,7 +184,7 @@ exports.createBoxIcon = function(button, viewIcon, selectedIcon) {
                 viewIcon.add(exports.createScrollViewIcon(e.source.data, e.source.folder, viewIcon, selectedIcon));
             }
         });
-        if (0 == i && "" == selectedIcon) {
+        if (1 == i && "" == selectedIcon) {
             currentButton = buttontab;
             currentButton.setImage(buttonTabs[i].folder + active_button);
             viewIcon.add(exports.createScrollViewIcon(buttonTabs[i].icons, buttonTabs[i].folder, viewIcon, selectedIcon));

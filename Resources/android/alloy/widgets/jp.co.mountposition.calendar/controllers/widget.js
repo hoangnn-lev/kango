@@ -23,7 +23,7 @@ function Controller() {
     });
     $.__views.view && $.addTopLevelView($.__views.view);
     $.__views.container = Ti.UI.createView({
-        width: Ti.Platform.displayCaps.platformWidth,
+        width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         top: "0",
         left: 0,
@@ -34,7 +34,7 @@ function Controller() {
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         layout: "vertical",
-        font: {},
+        left: "1dp",
         id: "dates",
         right: "2sp"
     });
@@ -42,27 +42,30 @@ function Controller() {
     doClick ? $.__views.dates.addEventListener("click", doClick) : __defers["$.__views.dates!click!doClick"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, calendarMonth, col, createWeekView, day, dayOfWeek, doClick, i, moment, nextMonth, period, dateIsEvent, prevMonth, row, tile, weekView, _j, _k, _ref1, _ref2, dayOffset, shiftOfDate;
+    var CALENDAR_WIDTH, DAY_COLOR, OUTDAY_COLOR, TILE_WIDTH, WEEK_COLOR, args, calendarMonth, col, createWeekView, day, dayOfWeek, doClick, i, moment, nextMonth, period, dateIsEvent, prevMonth, row, tile, weekView, _j, _k, _ref1, _ref2, dayOffset, shiftOfDate, dateIsFriendNoEvent;
     moment = require("alloy/moment");
     var currentDate = moment().format("YYYY-MM-D");
     args = arguments[0] || {};
     period = null != args.period ? moment(args.period) : moment();
     dateIsEvent = null != args.dateIsEvent ? args.dateIsEvent : {};
     shiftOfDate = null != args.shiftOfDate ? args.shiftOfDate : {};
+    dateIsFriendNoEvent = null != args.dateIsFriendNoEvent ? args.dateIsFriendNoEvent : {};
     dayOffset = null != args.dayOffset ? args.dayOffset : 0;
     WEEK_COLOR = [ "#fff", "#fff", "#fff", "#fff", "#fff", "#fff", "#fff" ];
     DAY_COLOR = [ "#f08791", "#676767", "#676767", "#676767", "#676767", "#676767", "#9bb9e1" ];
     OUTDAY_COLOR = [ "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb", "#ebebeb", "#d1d9e4", "#f0c7ca" ];
     EVENT_COLOR = [ "#f08791", "#f08791", "#f08791", "#f08791", "#f08791", "#f08791", "#f08791" ];
-    exports.TILE_WIDTH = TILE_WIDTH = Math.floor(Ti.Platform.displayCaps.platformWidth / 7);
+    exports.TILE_WIDTH = TILE_WIDTH = Math.floor(Ti.API.DW / 7);
     if (0 == dayOffset) {
         OUTDAY_COLOR[0] = "#f0c7ca";
         OUTDAY_COLOR[5] = "#ebebeb";
         OUTDAY_COLOR[6] = "#d1d9e4";
     }
-    CALENDAR_WIDTH = 7 * TILE_WIDTH;
-    $.dates.width = CALENDAR_WIDTH;
+    CALENDAR_WIDTH = Ti.API.DW;
+    $.dates.width = CALENDAR_WIDTH + "dp";
     $.selected = null;
+    var fontLabel = 320 >= Ti.API.DW ? "9dp" : "12dp";
+    var padding = 2;
     doClick = function(e) {
         var _ref, _ref1, _ref2;
         if (null != e.source.date) {
@@ -94,19 +97,19 @@ function Controller() {
     createWeekView = function() {
         return Ti.UI.createView({
             layout: "horizontal",
-            width: CALENDAR_WIDTH,
-            height: TILE_WIDTH
+            width: CALENDAR_WIDTH + "dp",
+            height: TILE_WIDTH + "dp"
         });
     };
     weekView = createWeekView();
     if (0 !== dayOfWeek) for (i = _j = _ref1 = dayOfWeek - 1; 0 >= _ref1 ? 0 >= _j : _j >= 0; i = 0 >= _ref1 ? ++_j : --_j) {
         tile = Ti.UI.createView({
             backgroundColor: "#fff",
-            width: TILE_WIDTH - 4,
-            height: TILE_WIDTH - 4,
+            width: TILE_WIDTH - padding + "dp",
+            height: TILE_WIDTH - padding + "dp",
             date: period.unix(),
-            left: "2sp",
-            top: "2sp",
+            left: "2dp",
+            top: "2dp",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
             borderWidth: 1,
@@ -131,11 +134,11 @@ function Controller() {
     for (i = _k = 1, _ref2 = period.daysInMonth(); _ref2 >= 1 ? _ref2 >= _k : _k >= _ref2; i = _ref2 >= 1 ? ++_k : --_k) {
         tile = Ti.UI.createView({
             backgroundColor: "#fff",
-            width: TILE_WIDTH - 4,
-            height: TILE_WIDTH - 4,
+            width: TILE_WIDTH - padding + "dp",
+            height: TILE_WIDTH - padding + "dp",
             date: period.unix(),
-            left: "2sp",
-            top: "2sp",
+            left: "2dp",
+            top: "2dp",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
             borderColor: "#fff",
@@ -161,7 +164,7 @@ function Controller() {
         shiftOfDate[_perodDay] && tile.add(Ti.UI.createLabel({
             text: shiftOfDate[_perodDay]["text"],
             font: {
-                fontSize: "12dp"
+                fontSize: fontLabel
             },
             backgroundColor: shiftOfDate[_perodDay]["color"],
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -177,7 +180,7 @@ function Controller() {
             textAlign: "center",
             className: "label-calendar"
         }));
-        (dateIsEvent[_perodDay] || dateIsEvent["0" + _perodDay]) && tile.add(Ti.UI.createLabel({
+        !dateIsEvent[_perodDay] && !dateIsEvent["0" + _perodDay] || dateIsFriendNoEvent[_perodDay] || dateIsFriendNoEvent["0" + _perodDay] || tile.add(Ti.UI.createLabel({
             text: "◆",
             font: {
                 fontSize: "10dp"
@@ -203,11 +206,11 @@ function Controller() {
     while (0 !== col) {
         tile = Ti.UI.createView({
             backgroundColor: "#fff",
-            width: TILE_WIDTH - 4,
-            height: TILE_WIDTH - 4,
+            width: TILE_WIDTH - padding + "dp",
+            height: TILE_WIDTH - padding + "dp",
             date: period.unix(),
-            left: "2sp",
-            top: "2sp",
+            left: "2dp",
+            top: "2dp",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
             borderColor: "#fff",
@@ -249,7 +252,7 @@ function Controller() {
             if (_isAdd) return tile.add(Ti.UI.createLabel({
                 text: options.text,
                 font: {
-                    fontSize: "12dp"
+                    fontSize: fontLabel
                 },
                 backgroundColor: options.color,
                 border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -279,8 +282,8 @@ function Controller() {
             }, options);
             return tile.add(Ti.UI.createImageView({
                 image: image,
-                width: TILE_WIDTH,
-                height: TILE_WIDTH,
+                width: TILE_WIDTH + "dp",
+                height: TILE_WIDTH + "dp",
                 touchEnabled: false
             }));
         }

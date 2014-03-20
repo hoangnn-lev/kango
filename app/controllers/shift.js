@@ -1,5 +1,5 @@
 //create collection users
-var selectedDate, selectedDay, lastDayOfMonth = 0, _calendar, dateIsEvent, shiftOfMonth = [], moment = require('alloy/moment'), month = moment(), dayOffset, dateShiftDB = {}, shiftMonthId, allShifts = {}, args = arguments[0] || {};
+var selectedDate, selectedDay, lastDayOfMonth = 0, _calendar, dateIsEvent, dateIsFriendNoEvent, shiftOfMonth = [], moment = require('alloy/moment'), month = moment(), dayOffset, dateShiftDB = {}, shiftMonthId, allShifts = {}, args = arguments[0] || {};
 
 if (args['date']) {
 	var _date = (args['date']).split('-');
@@ -69,7 +69,7 @@ function loadCalendarBody() {
 	}
 	getScheduleMonth(month.format('MM'), month.format('YYYY'));
 
-	_calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset);
+	_calendar = func.createCalendarBody(month, dateIsEvent, shiftOfMonth, dayOffset, dateIsFriendNoEvent);
 	var gdate = _calendar.calendarMonth().format('YYYY-MM-MMM').split('-');
 
 	$.year.setText(gdate[0]);
@@ -103,6 +103,7 @@ function getScheduleMonth(month, year) {
 
 	var scheduleModel = Alloy.Collections.schedule;
 	dateIsEvent = {};
+	dateIsFriendNoEvent = {};
 	scheduleModel.fetch({
 		query : 'SELECT * from schedule where date BETWEEN  "' + year + '-' + month + '-01" and "' + year + '-' + month + '-31"'
 	});
@@ -112,7 +113,18 @@ function getScheduleMonth(month, year) {
 	for (var i = 0; i < n; ++i) {
 		var date = (data[i].get('date')).split('-');
 		dateIsEvent[date[2]] = data[i].get('id');
+		if (!checkIsEvent(data[i].get('id'))) {
+			dateIsFriendNoEvent[date[2]] = '1';
+		}
 	}
+}
+
+function checkIsEvent(id) {
+	var calendar_shift = Alloy.Collections.schedule_detail;
+	calendar_shift.fetch({
+		query : 'select id from schedule_detail  where schedule_id = ' + id
+	});
+	return (calendar_shift.models[0]) ? 1 : 0;
 }
 
 function clickCalendar(e) {
@@ -198,7 +210,7 @@ function updateShift(date, shift_source) {
 }
 
 $.shiftList.addEventListener('click', function(e) {
-	if (e.source.id!='shiftList') {
+	if (e.source.id != 'shiftList') {
 		updateShift(selectedDay, e.source);
 		if (e.source.id == 13)
 			return;
@@ -240,3 +252,11 @@ $.shiftSetting.addEventListener('click', function(e) {
 		tab : 1
 	});
 });
+
+$.prevMonth.addEventListener('click',function(){
+	doPrevMonth();
+});
+$.nextMonth.addEventListener('click',function(){
+	doNextMonth();
+});
+

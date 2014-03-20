@@ -12,7 +12,7 @@
 	layout:'vertical'
 },
 "#title":{
-	height:'40dp',
+	height:'50dp',
 	backgroundColor:'#ed829c',
 	top:0
 }

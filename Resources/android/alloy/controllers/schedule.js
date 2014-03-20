@@ -11,7 +11,7 @@ function Controller() {
             var _sDate = wday.format("D");
             shiftOfMonth[_sDate] && $.shiftLabel.add(Ti.UI.createLabel({
                 text: shiftOfMonth[_sDate]["text"],
-                left: "160dp",
+                left: "140dp",
                 backgroundColor: shiftOfMonth[_sDate]["color"],
                 color: "#fff",
                 width: "60dp",
@@ -58,6 +58,21 @@ function Controller() {
             query: "select * from schedule_detail  where schedule_id = " + id
         });
         var data = calendar_shift.models;
+        if (!data[0]) {
+            $.scheduleList.add(Ti.UI.createLabel({
+                id: "empty",
+                text: "予定はありません",
+                font: {
+                    fontSize: "14dp"
+                },
+                color: "#676767",
+                height: "40dp",
+                backgroundColor: "#fff",
+                width: Ti.UI.SIZE,
+                left: "10dp"
+            }));
+            return;
+        }
         var tableView = Ti.UI.createTableView({
             top: 0,
             height: "auto",
@@ -74,20 +89,22 @@ function Controller() {
                 right: "7dp",
                 className: "row-event"
             });
+            var event_title = data[i].get("title");
+            event_title.length > 12 && 13 != event_title.length && (event_title = event_title.substr(0, 12) + "...");
+            var scheduleTitle = Ti.UI.createLabel({
+                height: Ti.UI.SIZE,
+                top: "10dp",
+                text: event_title,
+                bottom: "10dp",
+                color: "#676767",
+                font: {
+                    fontSize: "16sp"
+                },
+                touchEnabled: false,
+                className: "title-event"
+            });
             if (data[i].get("img")) {
-                var scheduleTitle = Ti.UI.createLabel({
-                    height: Ti.UI.SIZE,
-                    top: "10dp",
-                    text: data[i].get("title"),
-                    bottom: "10dp",
-                    color: "#676767",
-                    font: {
-                        fontSize: "16sp"
-                    },
-                    touchEnabled: false,
-                    left: "50dp",
-                    className: "title-event"
-                });
+                scheduleTitle.setLeft("50dp");
                 row.add(Ti.UI.createImageView({
                     width: "40dp",
                     image: data[i].get("img"),
@@ -95,19 +112,7 @@ function Controller() {
                     touchEnabled: false,
                     className: "img-event"
                 }));
-            } else var scheduleTitle = Ti.UI.createLabel({
-                height: Ti.UI.SIZE,
-                top: "10dp",
-                text: data[i].get("title"),
-                bottom: "10dp",
-                color: "#676767",
-                font: {
-                    fontSize: "16sp"
-                },
-                left: "10dp",
-                touchEnabled: false,
-                className: "title-event-no-img"
-            });
+            } else scheduleTitle.setLeft("10dp");
             (data[i].get("start_time") || data[i].get("end_time")) && row.add(Ti.UI.createLabel({
                 text: data[i].get("start_time") + "~" + data[i].get("end_time"),
                 font: {
@@ -155,7 +160,7 @@ function Controller() {
         activeWidget && (activeWidget = null);
         getScheduleMonth(currentMonth.format("MM"), currentMonth.format("YYYY"));
         var current = $.calendar.children[0];
-        activeWidget = func.createCalendarBody(currentMonth, dateIsEvent, shiftOfMonth, dayOffset);
+        activeWidget = func.createCalendarBody(currentMonth, dateIsEvent, shiftOfMonth, dayOffset, dateIsFriendNoEvent);
         var c = activeWidget.getView();
         var gdate = activeWidget.calendarMonth().format("YYYY-MM-MMM").split("-");
         $.year.setText(gdate[0]);
@@ -168,6 +173,8 @@ function Controller() {
     }
     function getScheduleMonth(month, year) {
         dateIsEvent = {};
+        dateIsFriendNoEvent = {};
+        dateIsFriendNoEvent = {};
         friendOfDay = {};
         scheduleModel.fetch({
             query: 'SELECT * from schedule where date BETWEEN  "' + year + "-" + month + '-01" and "' + year + "-" + month + '-31"'
@@ -176,8 +183,16 @@ function Controller() {
         for (var i = 0; n > i; ++i) {
             var date = data[i].get("date").split("-");
             dateIsEvent[date[2]] = data[i].get("id");
+            checkIsEvent(data[i].get("id")) || (dateIsFriendNoEvent[date[2]] = "1");
             friendOfDay[date[2]] = data[i].get("friend");
         }
+    }
+    function checkIsEvent(id) {
+        var calendar_shift = Alloy.Collections.schedule_detail;
+        calendar_shift.fetch({
+            query: "select id from schedule_detail  where schedule_id = " + id
+        });
+        return calendar_shift.models[0] ? 1 : 0;
     }
     function createCalendar() {
         allShifts = func.loadShiftsList();
@@ -260,7 +275,6 @@ function Controller() {
                 className: "friend-item"
             });
             label.addEventListener("click", function(e) {
-                if ("empty" == $.scheduleList.getChildren()[0].id) return;
                 var type = "deactive" == e.source.type ? "active" : "deactive";
                 e.source.type = type;
                 this.setColor(friendStyle[type]["text"]);
@@ -296,13 +310,14 @@ function Controller() {
         friendOfDay[day] = friendId;
         var scheduleModel = Alloy.Collections.schedule;
         var data = {
-            id: dateIsEvent[day],
             date: choiceDay.format("YYYY-MM-DD"),
             friend: friendId
         };
+        dateIsEvent[day] && (data["id"] = dateIsEvent[day]);
         var schedule = Alloy.createModel("schedule", data);
         scheduleModel.add(schedule);
         schedule.save();
+        dateIsEvent[day] || (dateIsEvent[day] = schedule.id);
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "schedule";
@@ -346,15 +361,14 @@ function Controller() {
     });
     $.__views.main.add($.__views.calendarTitle);
     $.__views.prevMonth = Ti.UI.createImageView({
-        zIndex: "5",
-        width: "30dp",
-        height: "30dp",
+        zIndex: 9999,
+        width: "20dp",
+        height: "20dp",
         image: "/icons/prev.png",
         id: "prevMonth",
         left: "0"
     });
     $.__views.calendarTitle.add($.__views.prevMonth);
-    doPrevMonth ? $.__views.prevMonth.addEventListener("click", doPrevMonth) : __defers["$.__views.prevMonth!click!doPrevMonth"] = true;
     $.__views.dateInfo = Ti.UI.createView({
         width: "110dp",
         top: 0,
@@ -374,7 +388,6 @@ function Controller() {
         left: 0,
         top: "10dp",
         touchEnabled: false,
-        text: "2013",
         id: "year"
     });
     $.__views.dateInfo.add($.__views.year);
@@ -388,7 +401,6 @@ function Controller() {
         },
         left: "42dp",
         touchEnabled: false,
-        text: "12",
         id: "month"
     });
     $.__views.dateInfo.add($.__views.month);
@@ -402,20 +414,18 @@ function Controller() {
         },
         right: 0,
         top: "10dp",
-        text: "DEC",
         id: "monthName"
     });
     $.__views.dateInfo.add($.__views.monthName);
     $.__views.nextMonth = Ti.UI.createImageView({
-        zIndex: "5",
-        width: "30dp",
-        height: "30dp",
+        zIndex: 9999,
+        width: "20dp",
+        height: "20dp",
         image: "/icons/next.png",
         id: "nextMonth",
         right: "0"
     });
     $.__views.calendarTitle.add($.__views.nextMonth);
-    doNextMonth ? $.__views.nextMonth.addEventListener("click", doNextMonth) : __defers["$.__views.nextMonth!click!doNextMonth"] = true;
     $.__views.days = Ti.UI.createView({
         top: 0,
         height: "22dp",
@@ -478,7 +488,7 @@ function Controller() {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.SIZE,
         font: {
-            fontSize: "16sp"
+            fontSize: "14dp"
         },
         height: "30dp",
         backgroundColor: "#f3acbd",
@@ -597,7 +607,7 @@ function Controller() {
         right: "10dp",
         bottom: "10dp",
         top: "10dp",
-        title: "メンバー編集",
+        title: "メンバー設定",
         id: "editFriend"
     });
     $.__views.groupAllFriend.add($.__views.editFriend);
@@ -610,7 +620,7 @@ function Controller() {
     $.__views.scheduleInfo.add($.__views.scheduleList);
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var day, choiceDay, activeWidget, dateIsEvent, on_flag = true, shiftOfMonth = [], moment = require("alloy/moment"), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = "", _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
+    var day, choiceDay, activeWidget, dateIsEvent, dateIsFriendNoEvent, on_flag = true, shiftOfMonth = [], moment = require("alloy/moment"), currentMonth = moment(), scheduleModel = Alloy.Collections.schedule, dayOffset = "", _allFriend = {}, allShifts = {}, friendOfDay = {}, args = arguments[0] || {}, friendStyle = {
         active: {
             bg: "#d7e682",
             text: "#68790b"
@@ -647,8 +657,15 @@ function Controller() {
     $.calendar.addEventListener("swipe", function(e) {
         "left" == e.direction ? doNextMonth() : "right" == e.direction && doPrevMonth();
     });
-    __defers["$.__views.prevMonth!click!doPrevMonth"] && $.__views.prevMonth.addEventListener("click", doPrevMonth);
-    __defers["$.__views.nextMonth!click!doNextMonth"] && $.__views.nextMonth.addEventListener("click", doNextMonth);
+    $.prevMonth.addEventListener("click", function() {
+        doPrevMonth();
+    });
+    $.nextMonth.addEventListener("click", function() {
+        doNextMonth();
+    });
+    $.serviceMember.setFont({
+        fontSize: 320 >= Ti.API.DW ? "10dp" : "12dp"
+    });
     __defers["$.__views.calendar!click!clickCalendar"] && $.__views.calendar.addEventListener("click", clickCalendar);
     __defers["$.__views.__alloyId42!click!addEvent"] && $.__views.__alloyId42.addEventListener("click", addEvent);
     __defers["$.__views.openAllFriend!click!openAllFriend"] && $.__views.openAllFriend.addEventListener("click", openAllFriend);

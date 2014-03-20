@@ -64,7 +64,8 @@ module.exports = [ {
         borderColor: "#fff",
         font: {
             fontSize: "16sp"
-        }
+        },
+        color: "#000"
     }
 }, {
     isApi: true,
@@ -80,7 +81,8 @@ module.exports = [ {
         borderColor: "#fff",
         font: {
             fontSize: "16sp"
-        }
+        },
+        color: "#000"
     }
 }, {
     isApi: true,
@@ -169,8 +171,9 @@ module.exports = [ {
     key: "dates",
     style: {
         layout: "vertical",
-        font: {},
-        height: Ti.UI.FILL
+        height: Ti.UI.FILL,
+        left: "1dp",
+        width: Ti.UI.FILL
     }
 }, {
     isId: true,

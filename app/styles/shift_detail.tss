@@ -88,7 +88,7 @@
 	visible:false
 },
 "#title":{
-	height:'40dp',
+	height:'50dp',
 	backgroundColor:'#ed829c',
 	top:0
 },
@@ -113,4 +113,11 @@
 	borderRadius:10,
 	zIndex:5,
 	visible:false
+},
+"#startTime":{
+	color:'#000'
+},
+"#endTime":{
+	color:'#000'
 }
+

@@ -59,6 +59,9 @@ function Controller() {
         layout: "vertical",
         left: 50,
         right: 50,
+        height: Ti.UI.FILL,
+        width: Ti.UI.FILL,
+        backgroundColor: "#fff",
         id: "loginForm",
         zIndex: "-1"
     });

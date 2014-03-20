@@ -1,24 +1,25 @@
 function Controller() {
     function loadColorBox(selected) {
         var count = 0, color = [ "#e68200", "#01adb3", "#69bc7b", "#e6b800", "#75a9e8", "#e86767", "#6c73cc", "#d23376", "#e0539c", "#a957a0", "#aa86c4", "#d8ba72" ];
-        for (var c = 0; 4 > c; c++) {
+        var colorWidth = Math.floor(Ti.API.DW / 4) - 18;
+        for (var c = 0; 3 > c; c++) {
             var group = Ti.UI.createView({
-                height: "80dp",
-                width: Ti.UI.FILL
+                height: colorWidth + "dp",
+                width: Ti.UI.FILL,
+                top: "10dp"
             });
-            0 == c && group.setTop("10dp");
-            3 == c && group.setBottom("10dp");
-            for (var r = 0; 3 > r; ++r) {
+            2 == c && group.setBottom("10dp");
+            for (var r = 0; 4 > r; ++r) {
                 var button = Ti.UI.createButton({
                     backgroundColor: color[count],
-                    height: "60dp",
-                    width: "60dp",
+                    height: colorWidth + "dp",
+                    width: colorWidth + "dp",
                     borderColor: "#ccc",
                     color: "#676767",
-                    borderWidth: 0
+                    borderWidth: 0,
+                    left: 0 == r ? "10dp" : r * (colorWidth + 10) + 10 + "dp",
+                    className: "button-color"
                 });
-                0 == r && button.setLeft("20dp");
-                2 == r && button.setRight("20dp");
                 if (selected == color[count]) {
                     selectedColor = button;
                     button.setBorderWidth(6);
@@ -97,7 +98,7 @@ function Controller() {
     });
     $.__views.shift_detail.add($.__views.main);
     $.__views.title = Ti.UI.createView({
-        height: "40dp",
+        height: "50dp",
         width: Ti.UI.FILL,
         backgroundColor: "#ed829c",
         top: 0,
@@ -168,6 +169,7 @@ function Controller() {
         font: {
             fontSize: "15dp"
         },
+        color: "#000",
         zIndex: 0,
         top: 0,
         height: "40dp",
@@ -221,7 +223,7 @@ function Controller() {
     $.__views.startTime = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
@@ -283,7 +285,7 @@ function Controller() {
     $.__views.endTime = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
-        color: "#676767",
+        color: "#000",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
             fontSize: "16sp"
