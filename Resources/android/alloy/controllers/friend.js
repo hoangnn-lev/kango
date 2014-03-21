@@ -25,7 +25,7 @@ function Controller() {
             left: "10dp",
             height: "50dp",
             width: "200dp",
-            hintText: "名前",
+            hintText: "タップで名前入力",
             value: name,
             id: id,
             flag: friend_flag,
@@ -37,6 +37,9 @@ function Controller() {
             maxLength: 8,
             zIndex: 9,
             className: "friend-name"
+        });
+        row.label.addEventListener("focus", function() {
+            onBlur = this;
         });
         row.label.addEventListener("change", function(e) {
             var data = {
@@ -176,6 +179,7 @@ function Controller() {
     _.extend($, $.__views);
     var friendList;
     var args = arguments[0] || {};
+    var onBlur;
     loadFriend();
     $.friend.addEventListener("android:back", function() {
         Ti.API.activeTab = args["tab"];
@@ -183,7 +187,7 @@ function Controller() {
     });
     $.addFriend.addEventListener("click", function() {
         if ($.friendList.getChildren().length > 50) {
-            alert("人数制限は50人");
+            func.alert("人数制限は50人");
             return;
         }
         var friendModel = Alloy.Collections.friend;
@@ -195,6 +199,9 @@ function Controller() {
         friend.save();
         $.friendList.add(customeRowFriend(friend.get("id"), ""), 1);
         delete_view("schedule");
+    });
+    $.main.addEventListener("click", function(e) {
+        onBlur && "friend-name" != e.source.className && onBlur.blur();
     });
     _.extend($, exports);
 }

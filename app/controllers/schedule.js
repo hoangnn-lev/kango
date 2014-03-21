@@ -548,7 +548,3 @@ $.nextMonth.addEventListener('click',function(){
 	doNextMonth();
 });
 
-
-$.serviceMember.setFont({
-	fontSize : (Ti.API.DW <= 320) ? '10dp' : '12dp'
-});

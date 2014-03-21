@@ -22,9 +22,8 @@
 				</View>
 				<View id="blockFriend">
 					<View height="Ti.UI.SIZE" top="10dp">
-						<ImageView image="/icons/friend.png" class="imgTitleFriend" left="10dp" />
+						<ImageView image="/icons/ttlMember.png" class="imgTitleFriend" left="10dp" />
 						<ImageView image="/icons/btn_Open.png" id="openAllFriend" onClick="openAllFriend" type="open" />
-						<Label id="serviceMember" text="勤務メンバー"/>
 					</View>
 					<View id="friend"/>
 					<View id="groupAllFriend">

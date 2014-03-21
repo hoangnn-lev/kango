@@ -118,7 +118,6 @@
 	left:'35dp'
 },
 ".imgTitleFriend":{
-	width:'20dp',
 	height:'20dp',
 	touchEnabled:false
 },
@@ -132,8 +131,8 @@
 	top:'2dp'
 },
 "#openAllFriend":{
-	width:"40dp",
-	height:"40dp",
+	width:"35dp",
+	height:"35dp",
 	right:"10dp",
 	touchEnabled:true,
 	zIndex:5

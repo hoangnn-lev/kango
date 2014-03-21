@@ -291,12 +291,12 @@ function Controller() {
         id: "shiftList"
     });
     $.__views.scheduleInfo.add($.__views.shiftList);
-    $.__views.__alloyId108 = Ti.UI.createView({
+    $.__views.__alloyId109 = Ti.UI.createView({
         backgroundColor: "#fff",
         height: Ti.UI.SIZE,
-        id: "__alloyId108"
+        id: "__alloyId109"
     });
-    $.__views.scheduleInfo.add($.__views.__alloyId108);
+    $.__views.scheduleInfo.add($.__views.__alloyId109);
     $.__views.shiftSetting = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "120dp",
@@ -316,7 +316,7 @@ function Controller() {
         title: "シフト設定",
         id: "shiftSetting"
     });
-    $.__views.__alloyId108.add($.__views.shiftSetting);
+    $.__views.__alloyId109.add($.__views.shiftSetting);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var selectedDate, selectedDay, _calendar, dateIsEvent, dateIsFriendNoEvent, dayOffset, shiftMonthId, lastDayOfMonth = 0, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};

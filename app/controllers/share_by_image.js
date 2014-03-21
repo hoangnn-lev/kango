@@ -45,7 +45,7 @@ function share(e) {
 	file.write(f);
 
 	if (e.source.type == 'line')
-		Ti.Platform.openURL('line://msg/image/' + file.nativePath) ? '' : alert('LINEがインストールされていません');
+		Ti.Platform.openURL('line://msg/image/' + file.nativePath) ? '' : func.alert('LINEがインストールされていません');
 	else {
 		var emailDialog = Titanium.UI.createEmailDialog();
 		emailDialog.addAttachment(file);

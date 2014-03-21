@@ -1,5 +1,5 @@
 <Alloy>
 	<Window exitOnClose="true">
-			<View class="container" id="loginForm" zIndex="-1"/>
+			<View class="container"/>
 	</Window>
 </Alloy>

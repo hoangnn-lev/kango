@@ -1,6 +1,7 @@
 var on_flag = true;
 var friendList;
 var args = arguments[0] || {};
+var onBlur;
 loadFriend();
 
 //add back button
@@ -14,7 +15,7 @@ $.friend.addEventListener('android:back', function(e) {
 $.addFriend.addEventListener('click', function(e) {
 
 	if ($.friendList.getChildren().length > 50) {
-		alert('人数制限は50人');
+		func.alert('人数制限は50人');
 		return;
 	}
 
@@ -72,7 +73,7 @@ function customeRowFriend(id, name, friend_flag) {
 		left : '10dp',
 		height : '50dp',
 		width : '200dp',
-		hintText : '名前',
+		hintText : 'タップで名前入力',
 		value : name,
 		id : id,
 		flag : friend_flag,
@@ -85,7 +86,9 @@ function customeRowFriend(id, name, friend_flag) {
 		zIndex : 9,
 		className : 'friend-name'
 	});
-
+	row.label.addEventListener('focus', function() {
+		onBlur = this;
+	});
 	row.label.addEventListener('change', function(e) {
 		var data = {
 			id : id,
@@ -148,4 +151,7 @@ function customeRowFriend(id, name, friend_flag) {
 	return row;
 }
 
-
+$.main.addEventListener('click', function(e) {
+	if (onBlur && e.source.className != 'friend-name')
+		onBlur.blur();
+});

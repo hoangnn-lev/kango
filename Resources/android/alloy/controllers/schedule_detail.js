@@ -139,14 +139,14 @@ function Controller() {
         layout: "vertical"
     });
     $.__views.main.add($.__views.top);
-    $.__views.__alloyId46 = Ti.UI.createView({
+    $.__views.__alloyId47 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         right: "10dp",
         left: "10dp",
-        id: "__alloyId46"
+        id: "__alloyId47"
     });
-    $.__views.top.add($.__views.__alloyId46);
-    $.__views.__alloyId47 = Ti.UI.createImageView({
+    $.__views.top.add($.__views.__alloyId47);
+    $.__views.__alloyId48 = Ti.UI.createImageView({
         height: "25dp",
         width: "14dp",
         zIndex: "5",
@@ -154,10 +154,10 @@ function Controller() {
         bottom: "10dp",
         left: "0",
         image: "/icons/prev.png",
-        id: "__alloyId47"
+        id: "__alloyId48"
     });
-    $.__views.__alloyId46.add($.__views.__alloyId47);
-    cancelEditSchulde ? $.__views.__alloyId47.addEventListener("click", cancelEditSchulde) : __defers["$.__views.__alloyId47!click!cancelEditSchulde"] = true;
+    $.__views.__alloyId47.add($.__views.__alloyId48);
+    cancelEditSchulde ? $.__views.__alloyId48.addEventListener("click", cancelEditSchulde) : __defers["$.__views.__alloyId48!click!cancelEditSchulde"] = true;
     $.__views.dateTitle = Ti.UI.createLabel({
         width: "70dp",
         height: "30dp",
@@ -171,18 +171,18 @@ function Controller() {
         touchEnabled: "false",
         id: "dateTitle"
     });
-    $.__views.__alloyId46.add($.__views.dateTitle);
-    $.__views.__alloyId48 = Ti.UI.createView({
+    $.__views.__alloyId47.add($.__views.dateTitle);
+    $.__views.__alloyId49 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: "60dp",
         left: "50%",
         zIndex: 0,
         backgroundColor: "#ffcc33",
         touchEnabled: "false",
-        id: "__alloyId48"
+        id: "__alloyId49"
     });
-    $.__views.__alloyId46.add($.__views.__alloyId48);
-    $.__views.__alloyId49 = Ti.UI.createLabel({
+    $.__views.__alloyId47.add($.__views.__alloyId49);
+    $.__views.__alloyId50 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -192,10 +192,10 @@ function Controller() {
         },
         touchEnabled: "false",
         text: "日勤",
-        id: "__alloyId49"
+        id: "__alloyId50"
     });
-    $.__views.__alloyId48.add($.__views.__alloyId49);
-    $.__views.__alloyId50 = Ti.UI.createImageView({
+    $.__views.__alloyId49.add($.__views.__alloyId50);
+    $.__views.__alloyId51 = Ti.UI.createImageView({
         height: "25dp",
         width: "14dp",
         zIndex: "5",
@@ -203,10 +203,10 @@ function Controller() {
         bottom: "10dp",
         right: "0",
         image: "/icons/next.png",
-        id: "__alloyId50"
+        id: "__alloyId51"
     });
-    $.__views.__alloyId46.add($.__views.__alloyId50);
-    saveSchedule ? $.__views.__alloyId50.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId50!click!saveSchedule"] = true;
+    $.__views.__alloyId47.add($.__views.__alloyId51);
+    saveSchedule ? $.__views.__alloyId51.addEventListener("click", saveSchedule) : __defers["$.__views.__alloyId51!click!saveSchedule"] = true;
     $.__views.content = Ti.UI.createScrollView({
         top: "45dp",
         bottom: 20,
@@ -223,7 +223,7 @@ function Controller() {
         id: "friendBlock"
     });
     $.__views.content.add($.__views.friendBlock);
-    $.__views.__alloyId51 = Ti.UI.createLabel({
+    $.__views.__alloyId52 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#666",
@@ -234,10 +234,10 @@ function Controller() {
         top: 0,
         left: "0",
         text: "勤務メンバー",
-        id: "__alloyId51"
+        id: "__alloyId52"
     });
-    $.__views.friendBlock.add($.__views.__alloyId51);
-    $.__views.__alloyId52 = Ti.UI.createLabel({
+    $.__views.friendBlock.add($.__views.__alloyId52);
+    $.__views.__alloyId53 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#666",
@@ -248,9 +248,9 @@ function Controller() {
         top: 0,
         right: "0",
         text: "メンバーを編集する",
-        id: "__alloyId52"
+        id: "__alloyId53"
     });
-    $.__views.friendBlock.add($.__views.__alloyId52);
+    $.__views.friendBlock.add($.__views.__alloyId53);
     $.__views.friendList = Ti.UI.createView({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -258,7 +258,7 @@ function Controller() {
         id: "friendList"
     });
     $.__views.friendBlock.add($.__views.friendList);
-    $.__views.__alloyId53 = Ti.UI.createLabel({
+    $.__views.__alloyId54 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "#676767",
@@ -269,9 +269,9 @@ function Controller() {
         zIndex: "0",
         text: "メモ",
         top: "10dp",
-        id: "__alloyId53"
+        id: "__alloyId54"
     });
-    $.__views.content.add($.__views.__alloyId53);
+    $.__views.content.add($.__views.__alloyId54);
     $.__views.memo = Ti.UI.createTextArea({
         width: Ti.UI.FILL,
         height: "80dp",
@@ -289,7 +289,7 @@ function Controller() {
         hintText: "メモ"
     });
     $.__views.content.add($.__views.memo);
-    $.__views.__alloyId54 = Ti.UI.createLabel({
+    $.__views.__alloyId55 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         color: "red",
@@ -299,17 +299,17 @@ function Controller() {
         },
         zIndex: "0",
         text: "文字量が多すぎます（最大●文字）",
-        id: "__alloyId54"
-    });
-    $.__views.content.add($.__views.__alloyId54);
-    $.__views.__alloyId55 = Ti.UI.createView({
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        top: "10dp",
         id: "__alloyId55"
     });
     $.__views.content.add($.__views.__alloyId55);
-    $.__views.__alloyId56 = Ti.UI.createLabel({
+    $.__views.__alloyId56 = Ti.UI.createView({
+        width: Ti.UI.FILL,
+        height: Ti.UI.SIZE,
+        top: "10dp",
+        id: "__alloyId56"
+    });
+    $.__views.content.add($.__views.__alloyId56);
+    $.__views.__alloyId57 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#666",
@@ -320,10 +320,10 @@ function Controller() {
         top: 0,
         text: "1/30(木)の予定",
         left: "0",
-        id: "__alloyId56"
+        id: "__alloyId57"
     });
-    $.__views.__alloyId55.add($.__views.__alloyId56);
-    $.__views.__alloyId57 = Ti.UI.createLabel({
+    $.__views.__alloyId56.add($.__views.__alloyId57);
+    $.__views.__alloyId58 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#666",
@@ -334,23 +334,23 @@ function Controller() {
         top: 0,
         text: "予定を追加する",
         right: "0",
-        id: "__alloyId57"
+        id: "__alloyId58"
     });
-    $.__views.__alloyId55.add($.__views.__alloyId57);
-    $.__views.__alloyId58 = Ti.UI.createView({
+    $.__views.__alloyId56.add($.__views.__alloyId58);
+    $.__views.__alloyId59 = Ti.UI.createView({
         backgroundColor: "#ffbf00",
         width: Ti.UI.FILL,
         top: "5dp",
         height: "1sp",
-        id: "__alloyId58"
+        id: "__alloyId59"
     });
-    $.__views.content.add($.__views.__alloyId58);
+    $.__views.content.add($.__views.__alloyId59);
     $.__views.scheduleList = Ti.UI.createView({
         id: "scheduleList",
         height: Ti.UI.SIZE
     });
     $.__views.content.add($.__views.scheduleList);
-    $.__views.__alloyId59 = Ti.UI.createLabel({
+    $.__views.__alloyId60 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#666",
@@ -362,9 +362,9 @@ function Controller() {
         zIndex: "0",
         text: "予定を追加する",
         right: "0",
-        id: "__alloyId59"
+        id: "__alloyId60"
     });
-    $.__views.content.add($.__views.__alloyId59);
+    $.__views.content.add($.__views.__alloyId60);
     $.__views.groupButton = Ti.UI.createView({
         top: "15dp",
         width: Ti.UI.FILL,
@@ -372,7 +372,7 @@ function Controller() {
         id: "groupButton"
     });
     $.__views.content.add($.__views.groupButton);
-    $.__views.__alloyId60 = Ti.UI.createButton({
+    $.__views.__alloyId61 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "45%",
         font: {
@@ -388,10 +388,10 @@ function Controller() {
         top: 0,
         left: "0",
         title: "キャンセル",
-        id: "__alloyId60"
+        id: "__alloyId61"
     });
-    $.__views.groupButton.add($.__views.__alloyId60);
-    $.__views.__alloyId61 = Ti.UI.createButton({
+    $.__views.groupButton.add($.__views.__alloyId61);
+    $.__views.__alloyId62 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "45%",
         font: {
@@ -407,10 +407,10 @@ function Controller() {
         top: 0,
         right: "0",
         title: "保存する",
-        id: "__alloyId61"
+        id: "__alloyId62"
     });
-    $.__views.groupButton.add($.__views.__alloyId61);
-    $.__views.__alloyId62 = Ti.UI.createButton({
+    $.__views.groupButton.add($.__views.__alloyId62);
+    $.__views.__alloyId63 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
         font: {
@@ -425,9 +425,9 @@ function Controller() {
         borderRadius: "15",
         top: "50dp",
         title: "保存して次の日の予定を入力",
-        id: "__alloyId62"
+        id: "__alloyId63"
     });
-    $.__views.groupButton.add($.__views.__alloyId62);
+    $.__views.groupButton.add($.__views.__alloyId63);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var scheduleModel = Alloy.Collections.schedule;
@@ -436,8 +436,8 @@ function Controller() {
     });
     getListScheduleByDate();
     loadFriend();
-    __defers["$.__views.__alloyId47!click!cancelEditSchulde"] && $.__views.__alloyId47.addEventListener("click", cancelEditSchulde);
-    __defers["$.__views.__alloyId50!click!saveSchedule"] && $.__views.__alloyId50.addEventListener("click", saveSchedule);
+    __defers["$.__views.__alloyId48!click!cancelEditSchulde"] && $.__views.__alloyId48.addEventListener("click", cancelEditSchulde);
+    __defers["$.__views.__alloyId51!click!saveSchedule"] && $.__views.__alloyId51.addEventListener("click", saveSchedule);
     _.extend($, exports);
 }
 

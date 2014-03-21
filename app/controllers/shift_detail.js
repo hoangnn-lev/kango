@@ -51,6 +51,8 @@ function loadColorBox(selected) {
 				borderColor : '#ccc',
 				color : '#676767',
 				borderWidth : 0,
+				borderRadius : 10,
+				border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 				left : (r == 0) ? '10dp' : (r * (colorWidth + 10) + 10) + 'dp',
 				className : 'button-color'
 			});
@@ -83,8 +85,8 @@ function timeSet(e1) {
 		return;
 
 	var get_time = new Date(), child = this.getChildren();
-
 	var time = child[1].text ? (child[1].text).split(':') : [0, 0];
+
 	get_time.setHours(time[0]);
 	get_time.setMinutes(time[1]);
 
@@ -123,10 +125,10 @@ $.saveShift.addEventListener('click', function(e) {
 	var name = $.shiftAlias.getValue(), timeStart = $.startTime.getText(), timeEnd = $.endTime.getText(), color, time;
 
 	if (!name) {
-		alert('シフト名を入力してください');
+		func.alert('シフト名を入力してください');
 		return;
 	} else if (name.length > 2) {
-		alert('2文字を超えましたが、再入力してください。');
+		func.alert('文字数を超えているので、2文字以内で再入力してください');
 		return;
 	}
 
@@ -170,3 +172,8 @@ function shift_setting() {
 		tab : args['tab']
 	});
 }
+
+$.main.addEventListener('click', function(e) {
+	if (e.source.id != 'shiftAlias')
+		$.shiftAlias.blur();
+});

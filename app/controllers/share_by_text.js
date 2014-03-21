@@ -79,7 +79,7 @@ function share(e) {
 
 	//compare date
 	if (+lastValue['dayStart'] > +lastValue['dayEnd']) {
-		alert('終了日は開始日以降の日付を指定して下さい。');
+		func.alert('終了日は開始日以降の日付を指定して下さい。');
 		return;
 	}
 
@@ -103,7 +103,7 @@ function share(e) {
 	}
 
 	if (e.source.type == 'line')
-		Ti.Platform.openURL('line://msg/text/?' + text.join('%21%0d%0a')) ? '' : alert('LINEがインストールされていません');
+		Ti.Platform.openURL('line://msg/text/?' + text.join('%21%0d%0a')) ? '' : func.alert('LINEがインストールされていません');
 	else {
 
 		var emailDialog = Titanium.UI.createEmailDialog();

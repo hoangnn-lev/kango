@@ -38,7 +38,7 @@ exports.createCalendarDay = function(_dayOffset, _view) {
 			color : color,
 			textAlign : 'center',
 			font : {
-				fontSize : '16sp',
+				fontSize : '12dp',
 			},
 			text : _ref[i],
 			width : TILE_WIDTH,
@@ -571,3 +571,10 @@ exports.rangeDate = function(date_start, date_end) {
 	return output.join(',');
 };
 
+exports.alert = function(msg) {
+	Titanium.UI.createAlertDialog({
+		title : 'お知らせ',
+		buttonNames : ['OK'],
+		message : msg
+	}).show();
+};

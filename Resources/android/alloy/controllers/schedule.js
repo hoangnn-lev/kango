@@ -484,7 +484,7 @@ function Controller() {
         id: "shiftLabel"
     });
     $.__views.scheduleTitle.add($.__views.shiftLabel);
-    $.__views.__alloyId42 = Ti.UI.createButton({
+    $.__views.__alloyId43 = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.SIZE,
         font: {
@@ -499,10 +499,10 @@ function Controller() {
         borderRadius: 10,
         right: "10dp",
         title: "＋予定を追加",
-        id: "__alloyId42"
+        id: "__alloyId43"
     });
-    $.__views.scheduleTitle.add($.__views.__alloyId42);
-    addEvent ? $.__views.__alloyId42.addEventListener("click", addEvent) : __defers["$.__views.__alloyId42!click!addEvent"] = true;
+    $.__views.scheduleTitle.add($.__views.__alloyId43);
+    addEvent ? $.__views.__alloyId43.addEventListener("click", addEvent) : __defers["$.__views.__alloyId43!click!addEvent"] = true;
     $.__views.blockFriend = Ti.UI.createView({
         top: "2dp",
         backgroundColor: "#fff",
@@ -512,24 +512,23 @@ function Controller() {
         id: "blockFriend"
     });
     $.__views.scheduleInfo.add($.__views.blockFriend);
-    $.__views.__alloyId43 = Ti.UI.createView({
+    $.__views.__alloyId44 = Ti.UI.createView({
         height: Ti.UI.SIZE,
         top: "10dp",
-        id: "__alloyId43"
-    });
-    $.__views.blockFriend.add($.__views.__alloyId43);
-    $.__views.__alloyId44 = Ti.UI.createImageView({
-        width: "20dp",
-        height: "20dp",
-        touchEnabled: false,
-        image: "/icons/friend.png",
-        left: "10dp",
         id: "__alloyId44"
     });
-    $.__views.__alloyId43.add($.__views.__alloyId44);
+    $.__views.blockFriend.add($.__views.__alloyId44);
+    $.__views.__alloyId45 = Ti.UI.createImageView({
+        height: "20dp",
+        touchEnabled: false,
+        image: "/icons/ttlMember.png",
+        left: "10dp",
+        id: "__alloyId45"
+    });
+    $.__views.__alloyId44.add($.__views.__alloyId45);
     $.__views.openAllFriend = Ti.UI.createImageView({
-        width: "40dp",
-        height: "40dp",
+        width: "35dp",
+        height: "35dp",
         right: "10dp",
         touchEnabled: true,
         zIndex: 5,
@@ -537,22 +536,8 @@ function Controller() {
         id: "openAllFriend",
         type: "open"
     });
-    $.__views.__alloyId43.add($.__views.openAllFriend);
+    $.__views.__alloyId44.add($.__views.openAllFriend);
     openAllFriend ? $.__views.openAllFriend.addEventListener("click", openAllFriend) : __defers["$.__views.openAllFriend!click!openAllFriend"] = true;
-    $.__views.serviceMember = Ti.UI.createLabel({
-        width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
-        color: "#666",
-        textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
-        font: {
-            fontSize: "14dp",
-            fontWeight: "bold"
-        },
-        left: "35dp",
-        id: "serviceMember",
-        text: "勤務メンバー"
-    });
-    $.__views.__alloyId43.add($.__views.serviceMember);
     $.__views.friend = Ti.UI.createView({
         height: Ti.UI.SIZE,
         left: "10dp",
@@ -570,7 +555,7 @@ function Controller() {
         id: "groupAllFriend"
     });
     $.__views.blockFriend.add($.__views.groupAllFriend);
-    $.__views.__alloyId45 = Ti.UI.createLabel({
+    $.__views.__alloyId46 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "1sp",
         color: "#676767",
@@ -581,9 +566,9 @@ function Controller() {
         backgroundColor: "#ccc",
         left: "5dp",
         right: "10dp",
-        id: "__alloyId45"
+        id: "__alloyId46"
     });
-    $.__views.groupAllFriend.add($.__views.__alloyId45);
+    $.__views.groupAllFriend.add($.__views.__alloyId46);
     $.__views.allFriend = Ti.UI.createView({
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
@@ -663,11 +648,8 @@ function Controller() {
     $.nextMonth.addEventListener("click", function() {
         doNextMonth();
     });
-    $.serviceMember.setFont({
-        fontSize: 320 >= Ti.API.DW ? "10dp" : "12dp"
-    });
     __defers["$.__views.calendar!click!clickCalendar"] && $.__views.calendar.addEventListener("click", clickCalendar);
-    __defers["$.__views.__alloyId42!click!addEvent"] && $.__views.__alloyId42.addEventListener("click", addEvent);
+    __defers["$.__views.__alloyId43!click!addEvent"] && $.__views.__alloyId43.addEventListener("click", addEvent);
     __defers["$.__views.openAllFriend!click!openAllFriend"] && $.__views.openAllFriend.addEventListener("click", openAllFriend);
     _.extend($, exports);
 }

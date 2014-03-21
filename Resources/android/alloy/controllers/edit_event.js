@@ -287,7 +287,7 @@ function Controller() {
         color: "#000",
         maxLength: "300",
         id: "memo",
-        hintText: "メモが入力できます"
+        hintText: "メモを入力できます"
     });
     $.__views.content.add($.__views.memo);
     $.__views.wicon = Ti.UI.createView({
@@ -408,6 +408,12 @@ function Controller() {
                 date: args["data"].day
             });
         } else openView("schedule");
+    });
+    $.main.addEventListener("click", function(e) {
+        if ("title" != e.source.id && "meno" != e.source.id) {
+            $.title.blur();
+            $.memo.blur();
+        }
     });
     __defers["$.__views.__alloyId5!click!timeSet"] && $.__views.__alloyId5.addEventListener("click", timeSet);
     __defers["$.__views.clearStartTime!click!clearTime"] && $.__views.clearStartTime.addEventListener("click", clearTime);

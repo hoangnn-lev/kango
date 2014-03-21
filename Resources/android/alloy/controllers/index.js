@@ -36,11 +36,7 @@ function Controller() {
         });
     }
     function errorRegister() {
-        Ti.UI.createAlertDialog({
-            buttonNames: [ "OK" ],
-            message: "初回起動時はインターネットに接続してから起動してください",
-            title: "お知らせ"
-        }).show();
+        func.alert("初回起動時はインターネットに接続してから起動してください");
     }
     require("alloy/controllers/BaseController").apply(this, Array.prototype.slice.call(arguments));
     this.__controllerPath = "index";
@@ -55,17 +51,16 @@ function Controller() {
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
-    $.__views.loginForm = Ti.UI.createView({
+    $.__views.__alloyId37 = Ti.UI.createView({
         layout: "vertical",
         left: 50,
         right: 50,
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
-        backgroundColor: "#fff",
-        id: "loginForm",
-        zIndex: "-1"
+        backgroundColor: "red",
+        id: "__alloyId37"
     });
-    $.__views.index.add($.__views.loginForm);
+    $.__views.index.add($.__views.__alloyId37);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var configs = Alloy.Collections.configs;

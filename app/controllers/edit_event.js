@@ -148,3 +148,10 @@ $.cancel.addEventListener('click', function(e) {
 
 });
 
+$.main.addEventListener('click', function(e) {
+	if (e.source.id != 'title' && e.source.id != 'meno') {
+		$.title.blur();
+		$.memo.blur();
+	}
+});
+

@@ -21,7 +21,7 @@
 						<Label left="90dp" id="endTime"/>
 						<Label class="delete" type="delete"  id="clearEndTime" onClick="clearTime" text="削除" />
 					</View>
-					<TextArea maxLength="300" height="130dp" id="memo" hintText="メモが入力できます"/>
+					<TextArea maxLength="300" height="130dp" id="memo" hintText="メモを入力できます"/>
 					<View id="wicon">
 						<View id="listIcon"/>
 						<View id="buttonTabs"/>

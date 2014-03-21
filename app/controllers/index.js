@@ -69,9 +69,5 @@ function doRegister() {
  * output : void
  * */
 function errorRegister() {
-	Ti.UI.createAlertDialog({
-		buttonNames : ['OK'],
-		message : '初回起動時はインターネットに接続してから起動してください',
-		title : 'お知らせ'
-	}).show();
+	func.alert('初回起動時はインターネットに接続してから起動してください');
 }
