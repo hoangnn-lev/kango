@@ -15,7 +15,8 @@ if (args['data'].id) {
 
 	$.endTime.setText(get_data.get('end_time'));
 	$.memo.setValue(get_data.get('content'));
-	Ti.API.selectedIcon = get_data.get('img');
+	if (get_data.get('img'))
+		Ti.API.selectedIcon = get_data.get('img');
 
 	get_data.get('start_time') ? $.clearStartTime.setVisible(true) : '';
 	get_data.get('end_time') ? $.clearEndTime.setVisible(true) : '';
@@ -52,12 +53,12 @@ function saveSchedule(e) {
 		content : content,
 		img : Ti.API.selectedIcon
 	};
-
-	func.writeLogImg(Ti.API.selectedIcon);
+	if (Ti.API.selectedIcon) {
+		func.writeLogImg(Ti.API.selectedIcon);
+	}
 	if (args['data'].id) {
 		data['id'] = args['data'].id;
 	}
-
 	var detail = Alloy.createModel('schedule_detail', data);
 	scheduleDetailModel.add(detail);
 	detail.save();

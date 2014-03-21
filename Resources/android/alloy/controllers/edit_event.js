@@ -12,7 +12,7 @@ function Controller() {
             content: content,
             img: Ti.API.selectedIcon
         };
-        func.writeLogImg(Ti.API.selectedIcon);
+        Ti.API.selectedIcon && func.writeLogImg(Ti.API.selectedIcon);
         args["data"].id && (data["id"] = args["data"].id);
         var detail = Alloy.createModel("schedule_detail", data);
         scheduleDetailModel.add(detail);
@@ -377,7 +377,7 @@ function Controller() {
         $.startTime.setText(get_data.get("start_time"));
         $.endTime.setText(get_data.get("end_time"));
         $.memo.setValue(get_data.get("content"));
-        Ti.API.selectedIcon = get_data.get("img");
+        get_data.get("img") && (Ti.API.selectedIcon = get_data.get("img"));
         get_data.get("start_time") ? $.clearStartTime.setVisible(true) : "";
         get_data.get("end_time") ? $.clearEndTime.setVisible(true) : "";
         $.cancel.setTitle("削除");

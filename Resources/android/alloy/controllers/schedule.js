@@ -73,20 +73,17 @@ function Controller() {
             }));
             return;
         }
-        var tableView = Ti.UI.createTableView({
+        var tableView = Ti.UI.createView({
             top: 0,
-            height: "auto",
-            separatorColor: "#f5f1e9"
+            height: Ti.UI.SIZE,
+            separatorColor: "#f5f1e9",
+            layout: "vertical"
         });
-        var item = [];
         for (var i = 0, n = data.length; n > i; ++i) {
-            var row = Ti.UI.createTableViewRow({
+            var row = Ti.UI.createView({
                 id: data[i].get("id"),
-                selectionStyle: "none",
-                selectedBackgroundColor: "transparent",
+                height: Ti.UI.SIZE,
                 backgroundColor: "#fff",
-                left: "7dp",
-                right: "7dp",
                 className: "row-event"
             });
             var event_title = data[i].get("title");
@@ -123,9 +120,14 @@ function Controller() {
                 right: "10dp"
             }));
             row.add(scheduleTitle);
-            item.push(row);
+            row.add(Ti.UI.createLabel({
+                backgroundColor: "#eeeeee",
+                height: "1sp",
+                width: Ti.UI.FILL,
+                bottom: 0
+            }));
+            tableView.add(row);
         }
-        tableView.setData(item);
         tableView.addEventListener("click", function(e) {
             var postdata = {
                 day: choiceDay.format("YYYY-MM-DD"),
