@@ -248,17 +248,12 @@ exports.createBoxIcon = function(button, viewIcon, selectedIcon) {
 				viewIcon.add(exports.createScrollViewIcon(e.source.data, e.source.folder, viewIcon, selectedIcon));
 			}
 		});
-		if (i == 1 && selectedIcon == '') {
+
+		if ((i == 0 && buttonTabs[0]['icons'] != '') || (i == 1 && buttonTabs[0]['icons'] == '')) {
 			currentButton = buttontab;
 			currentButton.setImage(buttonTabs[i].folder + active_button);
 			viewIcon.add(exports.createScrollViewIcon(buttonTabs[i].icons, buttonTabs[i].folder, viewIcon, selectedIcon));
-		} else if (selectedIcon != '') {
-
-			if (selectedIcon.indexOf(buttonTabs[i].folder) != '-1') {
-				buttontab.fireEvent('click');
-			}
 		}
-
 		button.add(buttontab);
 	}
 };
@@ -309,7 +304,7 @@ exports.createScrollViewIcon = function(icon, folder, viewIcon, selectedIcon) {
 					});
 
 					//active selected icon
-					if (selectedIcon == (folder + icon[icon_index])) {
+					if ((folder == Ti.API.ICON[0]['folder']) && (selectedIcon == img)) {
 						iconView.setBorderColor('#ed829c');
 						iconCurrent = iconView;
 					}
