@@ -1,11 +1,12 @@
-$.shareImage.addEventListener('click',function(){
+$.shareImage.addEventListener('click', function() {
 	openView('share_by_image');
 });
 
-$.shareText.addEventListener('click',function(){
+$.shareText.addEventListener('click', function() {
 	openView('share_by_text');
 });
 
 $.share.addEventListener('android:back', function(e) {
-	 openView('schedule');
-});
+	Ti.API.activeTab = 2;
+	openView('schedule');
+}); 

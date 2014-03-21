@@ -1,8 +1,6 @@
-
 ".container":{
 	height:Ti.UI.FILL,
-	width:Ti.UI.FILL,
-	backgroundColor:'red'
+	width:Ti.UI.FILL
 }
 
 

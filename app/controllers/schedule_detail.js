@@ -25,7 +25,6 @@ function saveSchedule() {
  * output : void
  * */
 function cancelEditSchulde(e) {
-
 	openView('schedule');
 }
 

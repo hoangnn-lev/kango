@@ -89,6 +89,7 @@ function Controller() {
         openView("share_by_text");
     });
     $.share.addEventListener("android:back", function() {
+        Ti.API.activeTab = 2;
         openView("schedule");
     });
     _.extend($, exports);

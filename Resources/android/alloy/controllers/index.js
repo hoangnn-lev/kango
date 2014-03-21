@@ -57,7 +57,6 @@ function Controller() {
         right: 50,
         height: Ti.UI.FILL,
         width: Ti.UI.FILL,
-        backgroundColor: "red",
         id: "__alloyId37"
     });
     $.__views.index.add($.__views.__alloyId37);
