@@ -1,18 +1,19 @@
 $.container.setBackgroundImage('/images/screen.png');
 $.index.open();
 
-var configs = Alloy.Collections.configs;
-configs.fetch({
-	query : 'select cg_value from configs where cg_name="uid"'
-});
-if (configs.models.length > 0) {
-	Ti.API.UID = configs.models[0].get('cg_value');
-	openView('schedule');
-	$.index.close();
-} else {
-	doRegister();
+function init() {
+	var configs = Alloy.Collections.configs;
+	configs.fetch({
+		query : 'select cg_value from configs where cg_name="uid"'
+	});
+	if (configs.models.length > 0) {
+		Ti.API.UID = configs.models[0].get('cg_value');
+		openView('schedule');
+		$.index.close();
+	} else {
+		doRegister();
+	}
 }
-
 
 /*
  * function doRegister
@@ -72,3 +73,7 @@ function doRegister() {
 function errorRegister() {
 	func.alert('初回起動時はインターネットに接続してから起動してください');
 }
+
+setTimeout(function(e) {
+	init();
+}, 2000);

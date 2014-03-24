@@ -1,4 +1,15 @@
 function Controller() {
+    function init() {
+        var configs = Alloy.Collections.configs;
+        configs.fetch({
+            query: 'select cg_value from configs where cg_name="uid"'
+        });
+        if (configs.models.length > 0) {
+            Ti.API.UID = configs.models[0].get("cg_value");
+            openView("schedule");
+            $.index.close();
+        } else doRegister();
+    }
     function doRegister() {
         var progressIndicator = Ti.UI.Android.createProgressIndicator({
             message: "処理中。。。",
@@ -60,15 +71,9 @@ function Controller() {
     _.extend($, $.__views);
     $.container.setBackgroundImage("/images/screen.png");
     $.index.open();
-    var configs = Alloy.Collections.configs;
-    configs.fetch({
-        query: 'select cg_value from configs where cg_name="uid"'
-    });
-    if (configs.models.length > 0) {
-        Ti.API.UID = configs.models[0].get("cg_value");
-        openView("schedule");
-        $.index.close();
-    } else doRegister();
+    setTimeout(function() {
+        init();
+    }, 2e3);
     _.extend($, exports);
 }
 
