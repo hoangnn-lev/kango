@@ -521,9 +521,9 @@ function Controller() {
     });
     $.__views.blockFriend.add($.__views.__alloyId43);
     $.__views.__alloyId44 = Ti.UI.createImageView({
-        height: "20dp",
-        touchEnabled: false,
         image: "/icons/ttlMember.png",
+        touchEnabled: "false",
+        height: "15dp",
         left: "10dp",
         id: "__alloyId44"
     });

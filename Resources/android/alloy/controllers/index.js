@@ -1,6 +1,5 @@
 function Controller() {
     function init() {
-        var configs = Alloy.Collections.configs;
         configs.fetch({
             query: 'select cg_value from configs where cg_name="uid"'
         });
@@ -69,6 +68,7 @@ function Controller() {
     $.__views.index.add($.__views.container);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    var configs = Alloy.Collections.configs;
     $.container.setBackgroundImage("/images/screen.png");
     $.index.open();
     setTimeout(function() {

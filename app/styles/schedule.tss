@@ -117,10 +117,6 @@
 	color:'#666',
 	left:'35dp'
 },
-".imgTitleFriend":{
-	height:'20dp',
-	touchEnabled:false
-},
 "#scheduleInfo":{
 	height:Ti.UI.FILL,
 	layout:'vertical',

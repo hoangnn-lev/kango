@@ -1,8 +1,10 @@
+var configs = Alloy.Collections.configs;
+
 $.container.setBackgroundImage('/images/screen.png');
 $.index.open();
 
 function init() {
-	var configs = Alloy.Collections.configs;
+
 	configs.fetch({
 		query : 'select cg_value from configs where cg_name="uid"'
 	});
@@ -46,11 +48,13 @@ function doRegister() {
 
 				configs.add(userData);
 				userData.save();
+
 				Ti.API.UID = data['data'].id;
 				Ti.API.activeTab = 4;
 				openView('setting');
 				progressIndicator.hide();
 				$.index.close();
+
 			}
 		},
 		onerror : function(e) {

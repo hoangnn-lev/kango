@@ -22,7 +22,7 @@
 				</View>
 				<View id="blockFriend">
 					<View height="Ti.UI.SIZE" top="10dp">
-						<ImageView image="/icons/ttlMember.png" class="imgTitleFriend" left="10dp" />
+						<ImageView image="/icons/ttlMember.png" touchEnabled="false" height="15dp" left="10dp" />
 						<ImageView image="/icons/btn_Open.png" id="openAllFriend" onClick="openAllFriend" type="open" />
 					</View>
 					<View id="friend"/>
