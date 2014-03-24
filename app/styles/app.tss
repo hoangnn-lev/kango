@@ -6,12 +6,6 @@
 	height:Ti.UI.FILL,
 	width:Ti.UI.FILL
 },
-".container": {
-	/*backgroundImage:'bg.png'*/
-	layout:'vertical',
-	left:50,
-	right:50
-},
 "Button":{
 	textAlign:Ti.UI.TEXT_ALIGNMENT_CENTER,
 	width:Ti.UI.FILL,

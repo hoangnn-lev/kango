@@ -1,3 +1,6 @@
+$.container.setBackgroundImage('/images/screen.png');
+$.index.open();
+
 var configs = Alloy.Collections.configs;
 configs.fetch({
 	query : 'select cg_value from configs where cg_name="uid"'
@@ -5,14 +8,11 @@ configs.fetch({
 if (configs.models.length > 0) {
 	Ti.API.UID = configs.models[0].get('cg_value');
 	openView('schedule');
+	$.index.close();
 } else {
 	doRegister();
 }
 
-//add back button
-$.index.addEventListener('android:back', function(e) {
-	Titanium.Android.currentActivity.finish();
-});
 
 /*
  * function doRegister
@@ -49,6 +49,7 @@ function doRegister() {
 				Ti.API.activeTab = 4;
 				openView('setting');
 				progressIndicator.hide();
+				$.index.close();
 			}
 		},
 		onerror : function(e) {

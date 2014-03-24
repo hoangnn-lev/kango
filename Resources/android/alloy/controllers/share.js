@@ -47,7 +47,7 @@ function Controller() {
         id: "shareImage"
     });
     $.__views.main.add($.__views.shareImage);
-    $.__views.__alloyId94 = Ti.UI.createLabel({
+    $.__views.__alloyId93 = Ti.UI.createLabel({
         width: Ti.UI.FILL,
         height: "1sp",
         color: "#676767",
@@ -58,9 +58,9 @@ function Controller() {
         backgroundColor: "#ccc",
         top: "10dp",
         bottom: "10dp",
-        id: "__alloyId94"
+        id: "__alloyId93"
     });
-    $.__views.main.add($.__views.__alloyId94);
+    $.__views.main.add($.__views.__alloyId93);
     $.__views.shareText = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,

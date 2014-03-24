@@ -21,7 +21,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0004,
+    priority: 1000.0003,
     key: "Button",
     style: {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
@@ -39,7 +39,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0005,
+    priority: 1000.0004,
     key: "Label",
     style: {
         width: Ti.UI.FILL,
@@ -52,7 +52,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0006,
+    priority: 1000.0005,
     key: "TextArea",
     style: {
         width: Ti.UI.FILL,
@@ -69,7 +69,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0007,
+    priority: 1000.0006,
     key: "TextField",
     style: {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -86,7 +86,7 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0009,
+    priority: 1000.0008,
     key: "TableViewRow",
     style: {
         height: Ti.UI.SIZE,
@@ -99,20 +99,11 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.001,
+    priority: 1000.0009,
     key: "ScrollView",
     style: {
         top: 20,
         bottom: 20
-    }
-}, {
-    isClass: true,
-    priority: 10000.0003,
-    key: "container",
-    style: {
-        layout: "vertical",
-        left: 50,
-        right: 50
     }
 }, {
     isClass: true,
@@ -129,7 +120,7 @@ module.exports = [ {
     }
 }, {
     isClass: true,
-    priority: 10000.0011,
+    priority: 10000.001,
     key: "error",
     style: {
         font: {
@@ -177,7 +168,7 @@ module.exports = [ {
     }
 }, {
     isId: true,
-    priority: 100000.0008,
+    priority: 100000.0007,
     key: "tabMenu",
     style: {
         backgroundColor: "#f3acbd",

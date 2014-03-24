@@ -150,7 +150,7 @@ $.cancel.addEventListener('click', function(e) {
 });
 
 $.main.addEventListener('click', function(e) {
-	if (e.source.id != 'title' && e.source.id != 'meno') {
+	if (e.source.id != 'title' && e.source.id != 'memo') {
 		$.title.blur();
 		$.memo.blur();
 	}

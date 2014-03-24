@@ -1,5 +1,5 @@
 <Alloy>
 	<Window exitOnClose="true">
-			<View class="container"/>
+		<View id="container"/>
 	</Window>
 </Alloy>

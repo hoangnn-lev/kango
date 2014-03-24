@@ -1,6 +1,5 @@
 ".container":{
 	height:Ti.UI.FILL,
-	width:Ti.UI.FILL
+	width:Ti.UI.FILL,
+	backgroundColor:'#ccc'
 }
-
-

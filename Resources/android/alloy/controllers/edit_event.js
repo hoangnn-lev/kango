@@ -410,7 +410,7 @@ function Controller() {
         } else openView("schedule");
     });
     $.main.addEventListener("click", function(e) {
-        if ("title" != e.source.id && "meno" != e.source.id) {
+        if ("title" != e.source.id && "memo" != e.source.id) {
             $.title.blur();
             $.memo.blur();
         }

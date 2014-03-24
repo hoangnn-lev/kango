@@ -20,6 +20,7 @@ function Controller() {
                     Ti.API.activeTab = 4;
                     openView("setting");
                     progressIndicator.hide();
+                    $.index.close();
                 } else {
                     progressIndicator.hide();
                     errorRegister();
@@ -51,17 +52,14 @@ function Controller() {
         id: "index"
     });
     $.__views.index && $.addTopLevelView($.__views.index);
-    $.__views.__alloyId37 = Ti.UI.createView({
-        layout: "vertical",
-        left: 50,
-        right: 50,
-        height: Ti.UI.FILL,
-        width: Ti.UI.FILL,
-        id: "__alloyId37"
+    $.__views.container = Ti.UI.createView({
+        id: "container"
     });
-    $.__views.index.add($.__views.__alloyId37);
+    $.__views.index.add($.__views.container);
     exports.destroy = function() {};
     _.extend($, $.__views);
+    $.container.setBackgroundImage("/images/screen.png");
+    $.index.open();
     var configs = Alloy.Collections.configs;
     configs.fetch({
         query: 'select cg_value from configs where cg_name="uid"'
@@ -69,10 +67,8 @@ function Controller() {
     if (configs.models.length > 0) {
         Ti.API.UID = configs.models[0].get("cg_value");
         openView("schedule");
+        $.index.close();
     } else doRegister();
-    $.index.addEventListener("android:back", function() {
-        Titanium.Android.currentActivity.finish();
-    });
     _.extend($, exports);
 }
 
