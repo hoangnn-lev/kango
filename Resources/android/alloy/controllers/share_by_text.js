@@ -60,7 +60,7 @@ function Controller() {
             results[format] ? text.push(date + results[format]) : text.push(date + "予定なし");
             currentDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 1);
         }
-        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/text/?" + text.join("%21%0d%0a")) ? "" : func.alert("LINEがインストールされていません"); else {
+        if ("line" == e.source.type) Ti.Platform.openURL("line://msg/text/?" + text.join("%0d%0a")) ? "" : func.alert("LINEがインストールされていません"); else {
             var emailDialog = Titanium.UI.createEmailDialog();
             emailDialog.setSubject("シフト共有");
             emailDialog.setMessageBody(text.join("\n"));

@@ -1,7 +1,6 @@
 function Controller() {
     function clickCalendar() {
-        var wday = activeWidget.selectedDate();
-        choiceDay = wday;
+        var wday = choiceDay = activeWidget.selectedDate();
         var gdate = wday.format("MM / DD");
         day = wday.format("DD");
         if (gdate != $.scheduleDateInfo.getText()) {
@@ -11,12 +10,12 @@ function Controller() {
             var _sDate = wday.format("D");
             shiftOfMonth[_sDate] && $.shiftLabel.add(Ti.UI.createLabel({
                 text: shiftOfMonth[_sDate]["text"],
-                left: "140dp",
+                left: "115dp",
                 backgroundColor: shiftOfMonth[_sDate]["color"],
                 color: "#fff",
-                width: "60dp",
+                width: "50dp",
                 font: {
-                    fontSize: "16sp"
+                    fontSize: "12sp"
                 },
                 textAlign: "center",
                 border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -25,6 +24,7 @@ function Controller() {
             }));
             getEvent(day);
         }
+        func.globalSelectedDate(wday, "shift");
     }
     function doPrevMonth() {
         currentMonth = currentMonth.subtract("months", 1);
@@ -43,7 +43,7 @@ function Controller() {
                 id: "empty",
                 text: "予定はありません",
                 font: {
-                    fontSize: "14dp"
+                    fontSize: "13dp"
                 },
                 color: "#676767",
                 height: "40dp",
@@ -63,10 +63,10 @@ function Controller() {
                 id: "empty",
                 text: "予定はありません",
                 font: {
-                    fontSize: "14dp"
+                    fontSize: "13dp"
                 },
                 color: "#676767",
-                height: "40dp",
+                height: "30dp",
                 backgroundColor: "#fff",
                 width: Ti.UI.SIZE,
                 left: "10dp"
@@ -95,7 +95,7 @@ function Controller() {
                 bottom: "10dp",
                 color: "#676767",
                 font: {
-                    fontSize: "16sp"
+                    fontSize: "13dp"
                 },
                 touchEnabled: false,
                 className: "title-event"
@@ -103,7 +103,7 @@ function Controller() {
             if (data[i].get("img")) {
                 scheduleTitle.setLeft("50dp");
                 row.add(Ti.UI.createImageView({
-                    width: "40dp",
+                    width: "25dp",
                     image: data[i].get("img"),
                     left: "10dp",
                     touchEnabled: false,
@@ -113,7 +113,7 @@ function Controller() {
             (data[i].get("start_time") || data[i].get("end_time")) && row.add(Ti.UI.createLabel({
                 text: data[i].get("start_time") + "~" + data[i].get("end_time"),
                 font: {
-                    fontSize: "16dp"
+                    fontSize: "13dp"
                 },
                 touchEnabled: false,
                 color: "#676767",
@@ -149,6 +149,7 @@ function Controller() {
     function loadCalendarBody() {
         var calendar_shift = Alloy.Collections.calendar_shift;
         day = currentMonth.format("DD");
+        var selectedDay = currentMonth.format("D");
         calendar_shift.fetch({
             query: 'select * from calendar_shift  where month_year="' + currentMonth.format("MM-YYYY") + '"'
         });
@@ -158,7 +159,10 @@ function Controller() {
             data = JSON.parse(calendar_shift.models[0].get("date_shift"));
             for (var key in data) shiftOfMonth[key] = allShifts[data[key]];
         }
-        choiceDay && (day = choiceDay.format("DD"));
+        if (choiceDay) {
+            selectedDay = choiceDay.format("D");
+            day = choiceDay.format("DD");
+        }
         activeWidget && (activeWidget = null);
         getScheduleMonth(currentMonth.format("MM"), currentMonth.format("YYYY"));
         var current = $.calendar.children[0];
@@ -169,7 +173,7 @@ function Controller() {
         $.month.setText(gdate[1]);
         $.monthName.setText(gdate[2].toUpperCase());
         $.calendar.add(c);
-        activeWidget.select(day);
+        activeWidget.select(selectedDay);
         $.calendar.fireEvent("click");
         current && $.calendar.remove(current);
     }
@@ -228,7 +232,7 @@ function Controller() {
                     color: "#735832",
                     textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
                     font: {
-                        fontSize: "16sp"
+                        fontSize: "13sp"
                     }
                 }));
             }
@@ -249,6 +253,11 @@ function Controller() {
         });
         $.openAllFriend.setImage(on_flag ? "/icons/btn_Close.png" : "/icons/btn_Open.png");
         on_flag = !on_flag;
+        $.friend.animate({
+            height: on_flag ? Ti.UI.SIZE : 0,
+            duration: 300,
+            curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+        });
     }
     function getAllFriend() {
         var friendCols = Alloy.Collections.friend;
@@ -263,11 +272,11 @@ function Controller() {
                 id: getAllFriend[i].get("id"),
                 color: friendStyle["deactive"]["text"],
                 font: {
-                    fontSize: "16dp"
+                    fontSize: "13dp"
                 },
                 type: "deactive",
                 backgroundColor: friendStyle["deactive"]["bg"],
-                height: "30dp",
+                height: Ti.UI.SIZE,
                 width: Ti.UI.SIZE,
                 left: "5dp",
                 top: "5dp",
@@ -304,7 +313,7 @@ function Controller() {
                 color: "#735832",
                 textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
                 font: {
-                    fontSize: "16sp"
+                    fontSize: "13sp"
                 }
             }));
         }
@@ -354,7 +363,7 @@ function Controller() {
     });
     $.__views.schedule.add($.__views.main);
     $.__views.calendarTitle = Ti.UI.createView({
-        height: "40dp",
+        height: "30dp",
         width: Ti.UI.FILL,
         top: 0,
         left: "10dp",
@@ -430,7 +439,7 @@ function Controller() {
     $.__views.calendarTitle.add($.__views.nextMonth);
     $.__views.days = Ti.UI.createView({
         top: 0,
-        height: "22dp",
+        height: "15dp",
         width: Ti.UI.FILL,
         id: "days"
     });
@@ -452,7 +461,7 @@ function Controller() {
     $.__views.main.add($.__views.scheduleInfo);
     $.__views.scheduleTitle = Ti.UI.createView({
         width: Ti.UI.FILL,
-        height: "45dp",
+        height: "30dp",
         backgroundColor: "#fff",
         id: "scheduleTitle"
     });
@@ -463,22 +472,22 @@ function Controller() {
         color: "#8d8d8d",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "24sp"
+            fontSize: "18sp"
         },
-        left: "25dp",
+        left: "20dp",
         id: "scheduleDateInfo"
     });
     $.__views.scheduleTitle.add($.__views.scheduleDateInfo);
     $.__views.dayName = Ti.UI.createLabel({
-        width: "25dp",
-        height: "25dp",
+        width: "20dp",
+        height: "20dp",
         color: "#fff",
         textAlign: "center",
         font: {
-            fontSize: "14dp"
+            fontSize: "12dp"
         },
         backgroundImage: "/icons/bg-circle.png",
-        left: "105dp",
+        left: "85dp",
         id: "dayName"
     });
     $.__views.scheduleTitle.add($.__views.dayName);
@@ -490,9 +499,9 @@ function Controller() {
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.SIZE,
         font: {
-            fontSize: "14dp"
+            fontSize: "12dp"
         },
-        height: "30dp",
+        height: Ti.UI.SIZE,
         backgroundColor: "#f3acbd",
         backgroundFocusedColor: "#ef8fa6",
         backgroundSelectedColor: "#ef8fa6",
@@ -500,7 +509,7 @@ function Controller() {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
         right: "10dp",
-        title: "＋予定を追加",
+        title: " ＋予定を追加 ",
         id: "__alloyId42"
     });
     $.__views.scheduleTitle.add($.__views.__alloyId42);
@@ -529,8 +538,8 @@ function Controller() {
     });
     $.__views.__alloyId43.add($.__views.__alloyId44);
     $.__views.openAllFriend = Ti.UI.createImageView({
-        width: "35dp",
-        height: "35dp",
+        width: "25dp",
+        height: "25dp",
         right: "10dp",
         touchEnabled: true,
         zIndex: 5,
@@ -580,11 +589,11 @@ function Controller() {
     $.__views.groupAllFriend.add($.__views.allFriend);
     $.__views.editFriend = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
-        width: "120dp",
+        width: Ti.UI.SIZE,
         font: {
-            fontSize: "14dp"
+            fontSize: "12dp"
         },
-        height: "30dp",
+        height: Ti.UI.SIZE,
         backgroundColor: "#f3acbd",
         backgroundFocusedColor: "#ef8fa6",
         backgroundSelectedColor: "#ef8fa6",
@@ -594,7 +603,7 @@ function Controller() {
         right: "10dp",
         bottom: "10dp",
         top: "10dp",
-        title: "メンバー設定",
+        title: " メンバー設定 ",
         id: "editFriend"
     });
     $.__views.groupAllFriend.add($.__views.editFriend);
@@ -618,10 +627,14 @@ function Controller() {
         }
     };
     var friendInSchedule = {};
+    var globalSelectedDate = func.globalSelectedDate();
     if (args["date"]) {
         var _date = args["date"].split("-");
         currentMonth = moment(args["date"]);
         day = _date[2];
+    } else if (globalSelectedDate) {
+        currentMonth = moment(globalSelectedDate.format("YYYY-MM-DD"));
+        choiceDay = globalSelectedDate;
     }
     getAllFriend();
     createCalendar();

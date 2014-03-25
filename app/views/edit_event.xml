@@ -4,8 +4,8 @@
 			<View id="titleEvent">
 				<Label width="Ti.UI.SIZE" color="#fff" text="予定編集"/>
 			</View>
-			<ScrollView top="0">
-				<View  id="content" layout="vertical">
+			<ScrollView top="0" height="Ti.UI.SIZE">
+				<View  id="content" layout="vertical" bottom="80dp">
 					<View height="60dp" width="120dp">
 						<Label id="date"/>
 						<Label id="dayName"/>
@@ -21,25 +21,27 @@
 						<Label left="90dp" id="endTime"/>
 						<Label class="delete" type="delete"  id="clearEndTime" onClick="clearTime" text="削除" />
 					</View>
-					<TextArea maxLength="300" height="130dp" id="memo" hintText="メモを入力できます"/>
+					<TextArea height="130dp" id="memo" hintText="メモを入力できます"/>
 					<View id="wicon">
 						<View id="listIcon"/>
 						<View id="buttonTabs"/>
 					</View>
-					<View id="groupButton">
-						<Button id="cancel" class="button" left="0"
-						backgroundColor = '#cfba9c'
-						backgroundFocusedColor = '#c0ad91'
-						backgroundSelectedColor = '#c0ad91'
-						title="キャンセル"/>
-						<Button onClick="saveSchedule" right="0" class="button"
-						backgroundColor = '#f3acbd'
-						backgroundFocusedColor = '#e6a3b3'
-						backgroundSelectedColor = '#e6a3b3'
-						title="保存"/>
-					</View>
 				</View>
 			</ScrollView>
+		</View>
+		<View id="groupButton">
+			<Button id="cancel" class="button" left="0"
+			backgroundColor = '#cfba9c'
+			backgroundFocusedColor = '#c0ad91'
+			backgroundSelectedColor = '#c0ad91'
+			left = "10dp"
+			title="キャンセル"/>
+			<Button onClick="saveSchedule" right="0" class="button"
+			backgroundColor = '#f3acbd'
+			backgroundFocusedColor = '#e6a3b3'
+			backgroundSelectedColor = '#e6a3b3'
+			right="10dp"
+			title="保存"/>
 		</View>
 	</Window>
 </Alloy>

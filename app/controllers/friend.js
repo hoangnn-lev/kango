@@ -27,7 +27,13 @@ $.addFriend.addEventListener('click', function(e) {
 
 	friendModel.add(friend);
 	friend.save();
-	$.friendList.add(customeRowFriend(friend.get('id'), ''), 1);
+
+	var newRow = customeRowFriend(friend.get('id'), '');
+
+	$.friendList.add(newRow, 1);
+	addEventForRow(newRow);
+	newRow.label.focus();
+
 	delete_view('schedule');
 
 });
@@ -43,6 +49,7 @@ function loadFriend() {
 
 	var n = friendCols.models.length;
 	friendList = friendCols.models;
+
 	var row = [];
 	row.push(Ti.UI.createTableView());
 
@@ -55,8 +62,53 @@ function loadFriend() {
 		} else {
 			var createRow = customeRowFriend(friendList[i].get('id'), friendList[i].get('name'), friendList[i].get('flag'));
 			$.friendList.add(createRow);
+			addEventForRow(createRow);
 		}
 	}
+}
+
+function addEventForRow(row) {
+
+	row.label.addEventListener('focus', function() {
+		onBlur = this;
+	});
+
+	row.label.addEventListener('change', function(e) {
+		var data = {
+			id : e.source.id,
+			name : e.source.value,
+			flag : 1,
+		};
+
+		var friendModel = Alloy.Collections.friend;
+		var friend = Alloy.createModel('friend', data);
+
+		friendModel.add(friend);
+		friend.save();
+		
+		delete_view('schedule');
+	});
+
+	row.flag.addEventListener('click', function(e) {
+
+		var checkflag = e.source.friend_flag;
+
+		row.flag.setBackgroundColor( checkflag ? '#ccc' : '#f3acbd');
+		row.flag.setTitle( checkflag ? 'OFF' : 'ON');
+
+		e.source.friend_flag = !checkflag;
+		var friendModel = Alloy.Collections.friend;
+		var data = {
+			id : e.source.id,
+			name : name,
+			flag : checkflag ? 0 : 1
+		};
+
+		var friend = Alloy.createModel('friend', data);
+		friendModel.add(friend);
+		friend.save();
+
+	});
 }
 
 //create row friend
@@ -72,8 +124,9 @@ function customeRowFriend(id, name, friend_flag) {
 	row.label = Ti.UI.createTextField({
 		left : '10dp',
 		height : '50dp',
-		width : '200dp',
+		width : Ti.UI.FILL,
 		hintText : 'タップで名前入力',
+		softKeyboardOnFocus : Titanium.UI.Android.SOFT_KEYBOARD_SHOW_ON_FOCUS,
 		value : name,
 		id : id,
 		flag : friend_flag,
@@ -86,22 +139,9 @@ function customeRowFriend(id, name, friend_flag) {
 		zIndex : 9,
 		className : 'friend-name'
 	});
-	row.label.addEventListener('focus', function() {
-		onBlur = this;
-	});
-	row.label.addEventListener('change', function(e) {
-		var data = {
-			id : id,
-			name : e.source.value,
-			flag : 1,
-		};
-		var friendModel = Alloy.Collections.friend;
-		var friend = Alloy.createModel('friend', data);
-		friendModel.add(friend);
-		friend.save();
-		delete_view('schedule');
-	});
+
 	row.flag = Ti.UI.createButton({
+		id : id,
 		height : '30dp',
 		width : '60dp',
 		right : '10dp',
@@ -118,27 +158,6 @@ function customeRowFriend(id, name, friend_flag) {
 		textAlign : 'center',
 		className : 'button-flag'
 	});
-	row.flag.addEventListener('click', function(e) {
-
-		var checkflag = e.source.friend_flag;
-
-		row.flag.setBackgroundColor( checkflag ? '#ccc' : '#f3acbd');
-		row.flag.setTitle( checkflag ? 'OFF' : 'ON');
-
-		e.source.friend_flag = !checkflag;
-		var friendModel = Alloy.Collections.friend;
-		var data = {
-			id : id,
-			name : name,
-			flag : checkflag ? 0 : 1
-		};
-
-		var friend = Alloy.createModel('friend', data);
-		friendModel.add(friend);
-		friend.save();
-
-		delete_view('schedule');
-	});
 
 	row.add(row.label);
 	row.add(row.flag);
@@ -152,6 +171,6 @@ function customeRowFriend(id, name, friend_flag) {
 }
 
 $.main.addEventListener('click', function(e) {
-	if (onBlur && e.source.className != 'friend-name')
+	if (onBlur && e.source.className != 'friend-name' && e.source.id != 'addFriend')
 		onBlur.blur();
 });

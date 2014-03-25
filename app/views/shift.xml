@@ -19,9 +19,11 @@
 					<Label id="dayName"/>
 					<View id="shiftLabel"/>
 				</View>
-				<View id="shiftList"/>
-				<View class="buttonShiftSetting">
-					<Button title="シフト設定" id="shiftSetting"/>
+				<View backgroundColor="#fff" height="Ti.UI.FILL" layout="vertical" top="2dp">
+					<View id="shiftList"/>
+					<View class="buttonShiftSetting">
+						<Button title="シフト設定" id="shiftSetting"/>
+					</View>
 				</View>
 			</ScrollView>
 		</View>

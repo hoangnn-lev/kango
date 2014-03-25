@@ -7,7 +7,7 @@
 	top:'5dp'
 },
 "#calendarTitle":{
-	height:'40dp',
+	height:'30dp',
 	width:Ti.UI.FILL,
 	top:0,
 	left:'10dp',
@@ -53,35 +53,34 @@
 "#shiftDateInfo":{
 	color:'#8d8d8d',
 	font:{
-		fontSize:'24sp'
+		fontSize:'18sp'
 	},
 	left:'20dp'
 },
 '#days': {
     top: 0,
-    height: '22dp',
+    height: '15dp',
     width:Ti.UI.FILL
 },
 "#dayName":{
 	backgroundImage:'/icons/bg-circle.png',
-	height: '25dp',
-	width:'25dp',
+	height: '20dp',
+	width:'20dp',
 	color:'#fff',
 	font:{
-		fontSize:'14dp'
+		fontSize:'12dp'
 	},
 	textAlign:'center',
-	left:'105dp'
+	left:'85dp'
 },
 "#scheduleInfo":{
-	height:Ti.UI.SIZE,
+	height:Ti.UI.FILL,
 	layout:'vertical'
 },
 "#scheduleList":{
 	top:'1dp'
 },
 "#shiftList":{
-	top:'2dp',
 	backgroundColor:'#fff',
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE,
@@ -93,7 +92,7 @@
 },
 ".scheduleTitle":{
 	width:Ti.UI.FILL,
-	height:'40dp',
+	height:'30dp',
 	backgroundColor:'#fff'
 },
 ".calendarButton":{
@@ -112,7 +111,6 @@
 	height:Ti.UI.SIZE
 },
 "#shiftSetting":{
-	bottom:'20dp',
 	height:'25dp',
 	width:'120dp',
 	right:'20dp',

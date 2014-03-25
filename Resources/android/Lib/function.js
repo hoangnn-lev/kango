@@ -101,7 +101,6 @@ exports.loadShiftsList = function(view) {
                 height: buttonWidth - 20 + "dp",
                 width: buttonWidth + "dp",
                 top: "10dp",
-                bottom: "10dp",
                 left: "20dp",
                 border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
                 borderRadius: 10,
@@ -124,7 +123,6 @@ exports.loadShiftsList = function(view) {
             height: buttonWidth - 20 + "dp",
             width: buttonWidth + "dp",
             top: "10dp",
-            bottom: "10dp",
             left: "20dp",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
@@ -412,4 +410,10 @@ exports.alert = function(msg) {
         buttonNames: [ "OK" ],
         message: msg
     }).show();
+};
+
+exports.globalSelectedDate = function(date, view) {
+    Ti.API.GLOBAL_SELECTED && Ti.API.GLOBAL_SELECTED != date && delete_view(view);
+    date && (Ti.API.GLOBAL_SELECTED = date);
+    return Ti.API.GLOBAL_SELECTED;
 };

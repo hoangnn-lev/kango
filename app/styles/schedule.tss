@@ -7,7 +7,7 @@
 },
 ".scheduleTitle":{
 	width:Ti.UI.FILL,
-	height:'45dp',
+	height:'30dp',
 	backgroundColor:'#fff'
 },
 "#calendar":{
@@ -15,7 +15,7 @@
 	top:'5dp'
 },
 "#calendarTitle":{
-	height:'40dp',
+	height:'30dp',
 	width:Ti.UI.FILL,
 	top:0,
 	left:'10dp',
@@ -66,33 +66,33 @@
 "#scheduleDateInfo":{
 	color:'#8d8d8d',
 	font:{
-		fontSize:'24sp'
+		fontSize:'18sp'
 	},
-	left:'25dp'
+	left:'20dp'
 },
 ".editScheduleButton":{
 	font:{
-		fontSize:'14dp'
+		fontSize:'12dp'
 	},
 	backgroundColor:'#f3acbd',
-	height:'30dp'
+	height:Ti.UI.SIZE
 },
 '#days': {
     top: 0,
-    height: '22dp',
+    height: '15dp',
     width:Ti.UI.FILL
     
 },
 "#dayName":{
 	backgroundImage:'/icons/bg-circle.png',
-	height: '25dp',
-	width:'25dp',
+	height: '20dp',
+	width:'20dp',
 	color:'#fff',
 	font:{
-		fontSize:'14dp'
+		fontSize:'12dp'
 	},
 	textAlign:'center',
-	left:'105dp'
+	left:'85dp'
 },
 "#blockFriend":{
 	top:'2dp',
@@ -127,18 +127,21 @@
 	top:'2dp'
 },
 "#openAllFriend":{
-	width:"35dp",
-	height:"35dp",
+	width:"25dp",
+	height:"25dp",
 	right:"10dp",
 	touchEnabled:true,
 	zIndex:5
 },
 "#editFriend":{
-	width:'120dp',
+	width:Ti.UI.SIZE,
 	right:'10dp',
 	bottom:'10dp',
 	top:'10dp',
-	height:'30dp'
+	height:Ti.UI.SIZE,
+	font:{
+		fontSize:'12dp'
+	}
 },
 '.line':{
 	height:'1sp',

@@ -3,6 +3,10 @@ function Controller() {
         var title = $.title.getValue(), startTime = $.startTime.getText(), endTime = $.endTime.getText(), content = $.memo.getValue();
         $.title.blur();
         $.memo.blur();
+        if (!(title || startTime || endTime || content || Ti.API.selectedIcon)) {
+            func.alert("内容を入力しないと保存できません");
+            return;
+        }
         var scheduleDetailModel = Alloy.Collections.schedule_detail;
         var data = {
             schedule_id: func.getScheduleId(args["data"].day),
@@ -98,6 +102,7 @@ function Controller() {
     $.__views.__alloyId3 = Ti.UI.createScrollView({
         top: "0",
         bottom: 20,
+        height: Ti.UI.SIZE,
         id: "__alloyId3"
     });
     $.__views.main.add($.__views.__alloyId3);
@@ -105,10 +110,9 @@ function Controller() {
         top: 0,
         left: "10dp",
         right: "10dp",
-        height: Ti.UI.FILL,
-        bottom: "20dp",
         id: "content",
-        layout: "vertical"
+        layout: "vertical",
+        bottom: "80dp"
     });
     $.__views.__alloyId3.add($.__views.content);
     $.__views.__alloyId4 = Ti.UI.createView({
@@ -285,7 +289,6 @@ function Controller() {
             fontSize: "16sp"
         },
         color: "#000",
-        maxLength: "300",
         id: "memo",
         hintText: "メモを入力できます"
     });
@@ -319,10 +322,13 @@ function Controller() {
     $.__views.wicon.add($.__views.buttonTabs);
     $.__views.groupButton = Ti.UI.createView({
         width: Ti.UI.FILL,
-        height: Ti.UI.SIZE,
+        height: "70dp",
+        bottom: 0,
+        backgroundImage: "/transparent.png",
+        backgroundColor: "transparent",
         id: "groupButton"
     });
-    $.__views.content.add($.__views.groupButton);
+    $.__views.edit_event.add($.__views.groupButton);
     $.__views.cancel = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "45%",
@@ -337,8 +343,9 @@ function Controller() {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: "15",
         top: "15dp",
+        bottom: "15dp",
         id: "cancel",
-        left: "0",
+        left: "10dp",
         title: "キャンセル"
     });
     $.__views.groupButton.add($.__views.cancel);
@@ -356,7 +363,8 @@ function Controller() {
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: "15",
         top: "15dp",
-        right: "0",
+        bottom: "15dp",
+        right: "10dp",
         title: "保存",
         id: "__alloyId9"
     });
@@ -387,6 +395,8 @@ function Controller() {
     $.dayName.setText(func.convertDayName(new Date(args["data"].day).getDay()));
     func.createBoxIcon($.buttonTabs, $.listIcon, Ti.API.selectedIcon);
     $.edit_event.addEventListener("android:back", function() {
+        $.title.blur();
+        $.memo.blur();
         openView("schedule");
     });
     $.cancel.addEventListener("click", function(e) {
@@ -407,14 +417,24 @@ function Controller() {
             openView("schedule", {
                 date: args["data"].day
             });
-        } else openView("schedule");
+        } else {
+            $.title.blur();
+            $.memo.blur();
+            openView("schedule");
+        }
     });
     $.main.addEventListener("click", function(e) {
         if ("title" != e.source.id && "memo" != e.source.id) {
+            $.memo.value = $.memo.value;
             $.title.blur();
             $.memo.blur();
         }
     });
+    $.memo.addEventListener("change", function(e) {
+        e.value.length > 200 ? e.source.value = e.source.oldValue : e.source.oldValue = e.value;
+    });
+    var top = Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.dpi / 160);
+    $.groupButton.setTop(top - 90 + "dp");
     __defers["$.__views.__alloyId5!click!timeSet"] && $.__views.__alloyId5.addEventListener("click", timeSet);
     __defers["$.__views.clearStartTime!click!clearTime"] && $.__views.clearStartTime.addEventListener("click", clearTime);
     __defers["$.__views.__alloyId7!click!timeSet"] && $.__views.__alloyId7.addEventListener("click", timeSet);

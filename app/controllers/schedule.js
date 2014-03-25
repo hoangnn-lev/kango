@@ -10,11 +10,17 @@ var on_flag = true, day, showMember = 1, choiceDay, activeWidget, dateIsEvent, d
 	}
 };
 var friendInSchedule = {};
+var globalSelectedDate = func.globalSelectedDate();
+
 if (args['date']) {
 	var _date = (args['date']).split('-');
 	currentMonth = moment(args['date']);
 	day = _date[2];
+} else if (globalSelectedDate) {
+	currentMonth = moment(globalSelectedDate.format('YYYY-MM-DD'));
+	choiceDay = globalSelectedDate;
 }
+
 getAllFriend();
 createCalendar();
 
@@ -27,9 +33,9 @@ createCalendar();
 
 function clickCalendar(e) {
 
-	var wday = activeWidget.selectedDate();
-	choiceDay = wday;
+	var wday = choiceDay = activeWidget.selectedDate();
 	var gdate = wday.format('MM / DD');
+	
 	day = wday.format('DD');
 
 	if (gdate != $.scheduleDateInfo.getText()) {
@@ -43,12 +49,12 @@ function clickCalendar(e) {
 		if (shiftOfMonth[_sDate]) {
 			$.shiftLabel.add(Ti.UI.createLabel({
 				text : shiftOfMonth[_sDate]['text'],
-				left : '140dp',
+				left : '115dp',
 				backgroundColor : shiftOfMonth[_sDate]['color'],
 				color : '#fff',
-				width : '60dp',
+				width : '50dp',
 				font : {
-					fontSize : '16sp'
+					fontSize : '12sp'
 				},
 				textAlign : 'center',
 				border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -61,6 +67,8 @@ function clickCalendar(e) {
 		getEvent(day);
 
 	}
+
+	func.globalSelectedDate(wday, 'shift');
 }
 
 /*
@@ -102,7 +110,7 @@ function getEvent(day) {
 			id : 'empty',
 			text : '予定はありません',
 			font : {
-				fontSize : '14dp',
+				fontSize : '13dp',
 			},
 			color : '#676767',
 			height : '40dp',
@@ -123,10 +131,10 @@ function getEvent(day) {
 			id : 'empty',
 			text : '予定はありません',
 			font : {
-				fontSize : '14dp',
+				fontSize : '13dp',
 			},
 			color : '#676767',
-			height : '40dp',
+			height : '30dp',
 			backgroundColor : '#fff',
 			width : Ti.UI.SIZE,
 			left : '10dp'
@@ -163,7 +171,7 @@ function getEvent(day) {
 			bottom : '10dp',
 			color : '#676767',
 			font : {
-				fontSize : '16sp'
+				fontSize : '13dp'
 			},
 			touchEnabled : false,
 			className : 'title-event'
@@ -173,7 +181,7 @@ function getEvent(day) {
 
 			scheduleTitle.setLeft('50dp');
 			row.add(Ti.UI.createImageView({
-				width : '40dp',
+				width : '25dp',
 				image : data[i].get('img'),
 				left : '10dp',
 				touchEnabled : false,
@@ -188,7 +196,7 @@ function getEvent(day) {
 			row.add(Ti.UI.createLabel({
 				text : data[i].get('start_time') + '~' + data[i].get('end_time'),
 				font : {
-					fontSize : '16dp'
+					fontSize : '13dp'
 				},
 				touchEnabled : false,
 				color : '#676767',
@@ -244,6 +252,7 @@ function loadCalendarBody() {
 
 	var calendar_shift = Alloy.Collections.calendar_shift;
 	day = currentMonth.format('DD');
+	var selectedDay = currentMonth.format('D');
 
 	//load shift by month
 	calendar_shift.fetch({
@@ -263,8 +272,10 @@ function loadCalendarBody() {
 
 	}
 
-	if (choiceDay)
+	if (choiceDay) {
+		selectedDay = choiceDay.format('D');
 		day = choiceDay.format('DD');
+	}
 
 	if (activeWidget) {
 		activeWidget = null;
@@ -284,7 +295,7 @@ function loadCalendarBody() {
 
 	$.calendar.add(c);
 
-	activeWidget.select(day);
+	activeWidget.select(selectedDay);
 	$.calendar.fireEvent('click');
 
 	if (current)
@@ -385,7 +396,7 @@ function loadFriendByDay(date) {
 						color : "#735832",
 						textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
 						font : {
-							fontSize : '16sp'
+							fontSize : '13sp'
 						}
 					}));
 				}
@@ -429,7 +440,14 @@ function openAllFriend() {
 	});
 
 	$.openAllFriend.setImage( on_flag ? '/icons/btn_Close.png' : '/icons/btn_Open.png');
+
 	on_flag = !on_flag;
+	
+	$.friend.animate({
+		height : on_flag ? Ti.UI.SIZE : 0,
+		duration : 300,
+		curve : Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
+	});
 
 }
 
@@ -456,11 +474,11 @@ function getAllFriend() {
 			id : getAllFriend[i].get('id'),
 			color : friendStyle['deactive']['text'],
 			font : {
-				fontSize : '16dp'
+				fontSize : '13dp'
 			},
 			type : 'deactive',
 			backgroundColor : friendStyle['deactive']['bg'],
-			height : '30dp',
+			height : Ti.UI.SIZE,
 			width : Ti.UI.SIZE,
 			left : '5dp',
 			top : '5dp',
@@ -507,7 +525,7 @@ function updateFriend(name, id) {
 			color : "#735832",
 			textAlign : Ti.UI.TEXT_ALIGNMENT_LEFT,
 			font : {
-				fontSize : '16sp'
+				fontSize : '13sp'
 			}
 		}));
 

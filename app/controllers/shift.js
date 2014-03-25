@@ -1,5 +1,6 @@
 //create collection users
 var selectedDate, selectedDay, lastDayOfMonth = 0, _calendar, dateIsEvent, dateIsFriendNoEvent, shiftOfMonth = [], moment = require('alloy/moment'), month = moment(), dayOffset, dateShiftDB = {}, shiftMonthId, allShifts = {}, args = arguments[0] || {};
+var globalSelectedDate = func.globalSelectedDate();
 
 if (args['date']) {
 	var _date = (args['date']).split('-');
@@ -8,6 +9,8 @@ if (args['date']) {
 	$.prevMonth.setVisible(false);
 	$.nextMonth.setVisible(false);
 	$.scheduleInfo.removeAllChildren();
+} else if (globalSelectedDate) {
+	month = moment(globalSelectedDate.format('YYYY-MM-DD'));
 }
 
 createCalendar();
@@ -141,12 +144,12 @@ function clickCalendar(e) {
 
 		$.shiftLabel.add(Ti.UI.createLabel({
 			text : shiftOfMonth[date]['text'],
-			left : '140dp',
+			left : '115dp',
 			backgroundColor : shiftOfMonth[date]['color'],
 			color : '#fff',
-			width : '60dp',
+			width : '50dp',
 			font : {
-				fontSize : '16sp'
+				fontSize : '12sp'
 			},
 			textAlign : 'center',
 			border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
@@ -155,7 +158,7 @@ function clickCalendar(e) {
 		}));
 
 	}
-
+	func.globalSelectedDate(selectedDate, 'schedule');
 }
 
 function doPrevMonth() {
@@ -211,9 +214,8 @@ function updateShift(date, shift_source) {
 
 $.shiftList.addEventListener('click', function(e) {
 	if (e.source.id != 'shiftList') {
+
 		updateShift(selectedDay, e.source);
-		if (e.source.id == 13)
-			return;
 		selectedDay = parseInt(selectedDay, 10) + 1;
 
 		if (selectedDay > lastDayOfMonth) {
@@ -227,17 +229,8 @@ $.shiftList.addEventListener('click', function(e) {
 });
 //add back button
 $.shift.addEventListener('android:back', function(e) {
-	var confirm = Ti.UI.createAlertDialog({
-		title : 'ペリカレ！',
-		message : '終了しますか？',
-		buttonNames : ['はい', 'いいえ']
-	});
-	confirm.addEventListener('click', function(e) {
-		if (e.index == 0) {
-			Titanium.Android.currentActivity.finish();
-		}
-	});
-	confirm.show();
+	Ti.API.activeTab = 2;
+	openView('schedule');
 });
 
 //add swipe left right for calendar
@@ -253,10 +246,10 @@ $.shiftSetting.addEventListener('click', function(e) {
 	});
 });
 
-$.prevMonth.addEventListener('click',function(){
+$.prevMonth.addEventListener('click', function() {
 	doPrevMonth();
 });
-$.nextMonth.addEventListener('click',function(){
+$.nextMonth.addEventListener('click', function() {
 	doNextMonth();
 });
 

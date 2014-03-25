@@ -71,18 +71,19 @@ function Controller() {
         var date = selectedDate.format("D");
         shiftOfMonth[date] && $.shiftLabel.add(Ti.UI.createLabel({
             text: shiftOfMonth[date]["text"],
-            left: "140dp",
+            left: "115dp",
             backgroundColor: shiftOfMonth[date]["color"],
             color: "#fff",
-            width: "60dp",
+            width: "50dp",
             font: {
-                fontSize: "16sp"
+                fontSize: "12sp"
             },
             textAlign: "center",
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
             height: Ti.UI.SIZE
         }));
+        func.globalSelectedDate(selectedDate, "schedule");
     }
     function doPrevMonth() {
         month = month.subtract("months", 1);
@@ -150,7 +151,7 @@ function Controller() {
     });
     $.__views.shift.add($.__views.main);
     $.__views.calendarTitle = Ti.UI.createView({
-        height: "40dp",
+        height: "30dp",
         width: Ti.UI.FILL,
         top: 0,
         left: "10dp",
@@ -226,7 +227,7 @@ function Controller() {
     $.__views.calendarTitle.add($.__views.nextMonth);
     $.__views.days = Ti.UI.createView({
         top: 0,
-        height: "22dp",
+        height: "15dp",
         width: Ti.UI.FILL,
         id: "days"
     });
@@ -241,14 +242,14 @@ function Controller() {
     $.__views.scheduleInfo = Ti.UI.createScrollView({
         top: 20,
         bottom: 20,
-        height: Ti.UI.SIZE,
+        height: Ti.UI.FILL,
         layout: "vertical",
         id: "scheduleInfo"
     });
     $.__views.main.add($.__views.scheduleInfo);
     $.__views.scheduleTitle = Ti.UI.createView({
         width: Ti.UI.FILL,
-        height: "40dp",
+        height: "30dp",
         backgroundColor: "#fff",
         id: "scheduleTitle"
     });
@@ -259,22 +260,22 @@ function Controller() {
         color: "#8d8d8d",
         textAlign: Ti.UI.TEXT_ALIGNMENT_LEFT,
         font: {
-            fontSize: "24sp"
+            fontSize: "18sp"
         },
         left: "20dp",
         id: "shiftDateInfo"
     });
     $.__views.scheduleTitle.add($.__views.shiftDateInfo);
     $.__views.dayName = Ti.UI.createLabel({
-        width: "25dp",
-        height: "25dp",
+        width: "20dp",
+        height: "20dp",
         color: "#fff",
         textAlign: "center",
         font: {
-            fontSize: "14dp"
+            fontSize: "12dp"
         },
         backgroundImage: "/icons/bg-circle.png",
-        left: "105dp",
+        left: "85dp",
         id: "dayName"
     });
     $.__views.scheduleTitle.add($.__views.dayName);
@@ -282,21 +283,28 @@ function Controller() {
         id: "shiftLabel"
     });
     $.__views.scheduleTitle.add($.__views.shiftLabel);
-    $.__views.shiftList = Ti.UI.createView({
+    $.__views.__alloyId108 = Ti.UI.createView({
+        backgroundColor: "#fff",
+        height: Ti.UI.FILL,
+        layout: "vertical",
         top: "2dp",
+        id: "__alloyId108"
+    });
+    $.__views.scheduleInfo.add($.__views.__alloyId108);
+    $.__views.shiftList = Ti.UI.createView({
         backgroundColor: "#fff",
         width: Ti.UI.FILL,
         height: Ti.UI.SIZE,
         layout: "horizontal",
         id: "shiftList"
     });
-    $.__views.scheduleInfo.add($.__views.shiftList);
-    $.__views.__alloyId108 = Ti.UI.createView({
+    $.__views.__alloyId108.add($.__views.shiftList);
+    $.__views.__alloyId109 = Ti.UI.createView({
         backgroundColor: "#fff",
         height: Ti.UI.SIZE,
-        id: "__alloyId108"
+        id: "__alloyId109"
     });
-    $.__views.scheduleInfo.add($.__views.__alloyId108);
+    $.__views.__alloyId108.add($.__views.__alloyId109);
     $.__views.shiftSetting = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "120dp",
@@ -310,16 +318,16 @@ function Controller() {
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
-        bottom: "20dp",
         right: "20dp",
         top: "20dp",
         title: "シフト設定",
         id: "shiftSetting"
     });
-    $.__views.__alloyId108.add($.__views.shiftSetting);
+    $.__views.__alloyId109.add($.__views.shiftSetting);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var selectedDate, selectedDay, _calendar, dateIsEvent, dateIsFriendNoEvent, dayOffset, shiftMonthId, lastDayOfMonth = 0, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};
+    var globalSelectedDate = func.globalSelectedDate();
     if (args["date"]) {
         args["date"].split("-");
         month = moment(args["date"]);
@@ -327,12 +335,11 @@ function Controller() {
         $.prevMonth.setVisible(false);
         $.nextMonth.setVisible(false);
         $.scheduleInfo.removeAllChildren();
-    }
+    } else globalSelectedDate && (month = moment(globalSelectedDate.format("YYYY-MM-DD")));
     createCalendar();
     $.shiftList.addEventListener("click", function(e) {
         if ("shiftList" != e.source.id) {
             updateShift(selectedDay, e.source);
-            if (13 == e.source.id) return;
             selectedDay = parseInt(selectedDay, 10) + 1;
             if (selectedDay > lastDayOfMonth) {
                 doNextMonth();
@@ -343,15 +350,8 @@ function Controller() {
         }
     });
     $.shift.addEventListener("android:back", function() {
-        var confirm = Ti.UI.createAlertDialog({
-            title: "ペリカレ！",
-            message: "終了しますか？",
-            buttonNames: [ "はい", "いいえ" ]
-        });
-        confirm.addEventListener("click", function(e) {
-            0 == e.index && Titanium.Android.currentActivity.finish();
-        });
-        confirm.show();
+        Ti.API.activeTab = 2;
+        openView("schedule");
     });
     $.calendar.addEventListener("swipe", function(e) {
         "left" == e.direction ? doNextMonth() : "right" == e.direction && doPrevMonth();

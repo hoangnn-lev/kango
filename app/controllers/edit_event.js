@@ -42,6 +42,11 @@ function saveSchedule(e) {
 	$.title.blur();
 	$.memo.blur();
 
+	if (!title && !startTime && !endTime && !content && !Ti.API.selectedIcon) {
+		func.alert('内容を入力しないと保存できません');
+		return;
+	}
+
 	//create collection users
 	var scheduleDetailModel = Alloy.Collections.schedule_detail;
 
@@ -108,6 +113,8 @@ function pad_2(number) {
 
 //add back button
 $.edit_event.addEventListener('android:back', function(e) {
+	$.title.blur();
+	$.memo.blur();
 	openView('schedule');
 });
 
@@ -144,6 +151,8 @@ $.cancel.addEventListener('click', function(e) {
 		});
 
 	} else {
+		$.title.blur();
+		$.memo.blur();
 		openView('schedule');
 	}
 
@@ -151,8 +160,21 @@ $.cancel.addEventListener('click', function(e) {
 
 $.main.addEventListener('click', function(e) {
 	if (e.source.id != 'title' && e.source.id != 'memo') {
+		$.memo.value = $.memo.value;
 		$.title.blur();
 		$.memo.blur();
 	}
 });
 
+$.memo.addEventListener('change', function(e) {
+	if (e.value.length > 200) {
+		e.source.value = e.source.oldValue;
+	} else {
+		e.source.oldValue = e.value;
+	}
+
+});
+
+//set button group on bottom
+var top = Ti.Platform.displayCaps.platformHeight / (Ti.Platform.displayCaps.dpi / 160);
+$.groupButton.setTop(top - 90 + 'dp');

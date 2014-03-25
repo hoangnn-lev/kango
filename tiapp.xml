@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ti:app xmlns:ti="http://ti.appcelerator.org">
-    <id>kango.lev</id>
+    <id>jp.kango_oshigoto.perikare</id>
     <name>Kango</name>
     <version>1.0.1</version>
     <publisher>hoangnn@leverages.jp</publisher>
@@ -67,7 +67,7 @@
     <!-- put your sender_id here -->
     <property name="com.activate.gcm.icon" type="int">2130837504</property>
     <!-- get this from R.java, but converted to decimal, 0x7f020000 give you 2130837504 (type "0x7f020000 to decimal" in google) -->
-    <property name="com.activate.gcm.component" type="string">leverages.kango/.KangoActivity</property>
+    <property name="com.activate.gcm.component" type="string">jp.kango_oshigoto.perikare/.KangoActivity</property>
     <property name="ti.android.bug2373.finishfalseroot" type="bool">true</property>
     <!-- [package name]/[package name].[activity name] -->
     <deployment-targets>
