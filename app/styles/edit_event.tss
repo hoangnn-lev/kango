@@ -65,7 +65,7 @@
 	width:Ti.UI.FILL,
 	height:'70dp',
 	bottom:0,
-	backgroundImage:'/transparent.png',
+	backgroundImage:'/black60.png',
 	backgroundColor: 'transparent'
 },
 ".button":{

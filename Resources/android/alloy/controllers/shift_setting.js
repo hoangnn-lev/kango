@@ -27,7 +27,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId119 = Ti.UI.createLabel({
+    $.__views.__alloyId77 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -36,22 +36,22 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "シフト設定",
-        id: "__alloyId119"
+        id: "__alloyId77"
     });
-    $.__views.title.add($.__views.__alloyId119);
-    $.__views.__alloyId120 = Ti.UI.createScrollView({
+    $.__views.title.add($.__views.__alloyId77);
+    $.__views.__alloyId78 = Ti.UI.createScrollView({
         top: "0",
         bottom: 20,
-        id: "__alloyId120"
+        id: "__alloyId78"
     });
-    $.__views.main.add($.__views.__alloyId120);
+    $.__views.main.add($.__views.__alloyId78);
     $.__views.shift = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         layout: "vertical",
         id: "shift"
     });
-    $.__views.__alloyId120.add($.__views.shift);
+    $.__views.__alloyId78.add($.__views.shift);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var shiftsCols = Alloy.Collections.shifts;
@@ -120,7 +120,7 @@ function Controller() {
             shiftcolor: shift[i].get("color"),
             flag: shift[i].get("flag"),
             height: "30dp",
-            width: "50dp",
+            width: "80dp",
             backgroundColor: background,
             backgroundSelectedColor: background,
             right: "10dp",

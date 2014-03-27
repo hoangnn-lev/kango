@@ -7,7 +7,7 @@
 	top:'5dp'
 },
 "#calendarTitle":{
-	height:'30dp',
+	height:'32dp',
 	width:Ti.UI.FILL,
 	top:0,
 	left:'10dp',
@@ -33,7 +33,7 @@
 "#month":{
 	color:'#666666',
 	font:{
-		fontSize:'28dp'
+		fontSize:'24dp'
 	},
 	left:'42dp',
 	height:Ti.UI.FILL,
@@ -58,7 +58,7 @@
 	left:'20dp'
 },
 '#days': {
-    top: 0,
+    top: '5dp',
     height: '15dp',
     width:Ti.UI.FILL
 },
@@ -97,8 +97,9 @@
 },
 ".calendarButton":{
 	zIndex:9999,
-	width:"20dp",
-	height:"20dp" 
+	width:"25dp",
+	height:"25dp",
+	top:'5dp'
 },
 ".editScheduleButton":{
 	font:{

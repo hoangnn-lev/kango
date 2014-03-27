@@ -1,8 +1,8 @@
 function Controller() {
     function saveSchedule() {
         var title = $.title.getValue(), startTime = $.startTime.getText(), endTime = $.endTime.getText(), content = $.memo.getValue();
-        $.title.blur();
-        $.memo.blur();
+        Titanium.App.fireEvent("hideKeyboardToolbar");
+        Ti.UI.Android.hideSoftKeyboard();
         if (!(title || startTime || endTime || content || Ti.API.selectedIcon)) {
             func.alert("内容を入力しないと保存できません");
             return;
@@ -26,8 +26,8 @@ function Controller() {
         });
     }
     function timeSet(e) {
-        $.title.blur();
-        $.memo.blur();
+        Titanium.App.fireEvent("hideKeyboardToolbar");
+        Ti.UI.Android.hideSoftKeyboard();
         if ("delete" == e.source.type) return;
         var get_time = new Date(), child = this.getChildren();
         var time = child[1].text ? child[1].text.split(":") : [ 0, 0 ];
@@ -324,7 +324,7 @@ function Controller() {
         width: Ti.UI.FILL,
         height: "70dp",
         bottom: 0,
-        backgroundImage: "/transparent.png",
+        backgroundImage: "/black60.png",
         backgroundColor: "transparent",
         id: "groupButton"
     });
@@ -395,8 +395,8 @@ function Controller() {
     $.dayName.setText(func.convertDayName(new Date(args["data"].day).getDay()));
     func.createBoxIcon($.buttonTabs, $.listIcon, Ti.API.selectedIcon);
     $.edit_event.addEventListener("android:back", function() {
-        $.title.blur();
-        $.memo.blur();
+        Titanium.App.fireEvent("hideKeyboardToolbar");
+        Ti.UI.Android.hideSoftKeyboard();
         openView("schedule");
     });
     $.cancel.addEventListener("click", function(e) {
@@ -418,16 +418,16 @@ function Controller() {
                 date: args["data"].day
             });
         } else {
-            $.title.blur();
-            $.memo.blur();
+            Titanium.App.fireEvent("hideKeyboardToolbar");
+            Ti.UI.Android.hideSoftKeyboard();
             openView("schedule");
         }
     });
     $.main.addEventListener("click", function(e) {
         if ("title" != e.source.id && "memo" != e.source.id) {
             $.memo.value = $.memo.value;
-            $.title.blur();
-            $.memo.blur();
+            Titanium.App.fireEvent("hideKeyboardToolbar");
+            Ti.UI.Android.hideSoftKeyboard();
         }
     });
     $.memo.addEventListener("change", function(e) {

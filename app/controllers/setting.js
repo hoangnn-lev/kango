@@ -182,6 +182,10 @@ $.allHospital.addEventListener('click', function(e) {
 	Titanium.Platform.openURL('http://ac.ebis.ne.jp/tr_set.php?argument=MemwrhsW&ai=a5322c6cdd990e');
 });
 
+$.chPlay.addEventListener('click', function(e) {
+	Titanium.Platform.openURL('https://play.google.com/store/apps/details?id=jp.kango_oshigoto.perikare');
+});
+
 $.about.addEventListener('click', function(e) {
 	openView('about');
 });

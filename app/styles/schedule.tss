@@ -7,7 +7,7 @@
 },
 ".scheduleTitle":{
 	width:Ti.UI.FILL,
-	height:'30dp',
+	height:'40dp',
 	backgroundColor:'#fff'
 },
 "#calendar":{
@@ -15,7 +15,7 @@
 	top:'5dp'
 },
 "#calendarTitle":{
-	height:'30dp',
+	height:'32dp',
 	width:Ti.UI.FILL,
 	top:0,
 	left:'10dp',
@@ -23,8 +23,9 @@
 },
 ".calendarButton":{
 	zIndex:9999,
-	width:"20dp",
-	height:"20dp" 
+	width:"25dp",
+	height:"25dp",
+	top:'5dp'
 },
 "#dateInfo":{
 	width:'110dp',
@@ -46,7 +47,7 @@
 "#month":{
 	color:'#666666',
 	font:{
-		fontSize:'28dp'
+		fontSize:'24dp'
 	},
 	left:'42dp',
 	height:Ti.UI.FILL,
@@ -75,10 +76,12 @@
 		fontSize:'12dp'
 	},
 	backgroundColor:'#f3acbd',
-	height:Ti.UI.SIZE
+	height:'20dp',
+	right:"10dp",
+	width:Ti.UI.SIZE
 },
 '#days': {
-    top: 0,
+    top: '5dp',
     height: '15dp',
     width:Ti.UI.FILL
     
@@ -105,7 +108,7 @@
 	height:Ti.UI.SIZE,
 	left:'10dp',
 	top:'0',
-	bottom:'10dp',
+	bottom:'5dp',
 	layout:"horizontal"
 },
 "#serviceMember":{
@@ -127,8 +130,8 @@
 	top:'2dp'
 },
 "#openAllFriend":{
-	width:"25dp",
-	height:"25dp",
+	width:"30dp",
+	height:"30dp",
 	right:"10dp",
 	touchEnabled:true,
 	zIndex:5
@@ -136,9 +139,9 @@
 "#editFriend":{
 	width:Ti.UI.SIZE,
 	right:'10dp',
-	bottom:'10dp',
+	bottom:'5dp',
 	top:'10dp',
-	height:Ti.UI.SIZE,
+	height:'20dp',
 	font:{
 		fontSize:'12dp'
 	}

@@ -1,7 +1,6 @@
 var on_flag = true;
 var friendList;
 var args = arguments[0] || {};
-var onBlur;
 loadFriend();
 
 //add back button
@@ -69,10 +68,6 @@ function loadFriend() {
 
 function addEventForRow(row) {
 
-	row.label.addEventListener('focus', function() {
-		onBlur = this;
-	});
-
 	row.label.addEventListener('change', function(e) {
 		var data = {
 			id : e.source.id,
@@ -85,7 +80,7 @@ function addEventForRow(row) {
 
 		friendModel.add(friend);
 		friend.save();
-		
+
 		delete_view('schedule');
 	});
 
@@ -100,14 +95,14 @@ function addEventForRow(row) {
 		var friendModel = Alloy.Collections.friend;
 		var data = {
 			id : e.source.id,
-			name : name,
+			name : row.label.value,
 			flag : checkflag ? 0 : 1
 		};
 
 		var friend = Alloy.createModel('friend', data);
 		friendModel.add(friend);
 		friend.save();
-
+		delete_view('schedule');
 	});
 }
 
@@ -143,8 +138,9 @@ function customeRowFriend(id, name, friend_flag) {
 	row.flag = Ti.UI.createButton({
 		id : id,
 		height : '30dp',
-		width : '60dp',
+		width : '80dp',
 		right : '10dp',
+		name : name,
 		font : {
 			fontSize : '14dp'
 		},
@@ -171,6 +167,8 @@ function customeRowFriend(id, name, friend_flag) {
 }
 
 $.main.addEventListener('click', function(e) {
-	if (onBlur && e.source.className != 'friend-name' && e.source.id != 'addFriend')
-		onBlur.blur();
+	if (e.source.className != 'friend-name' && e.source.id != 'addFriend') {
+		Titanium.App.fireEvent("hideKeyboardToolbar");
+		Ti.UI.Android.hideSoftKeyboard();
+	}
 });

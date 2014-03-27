@@ -18,10 +18,10 @@
 					<Label id="scheduleDateInfo"/>
 					<Label id="dayName"/>
 					<View id="shiftLabel"/>
-					<Button right="10dp" width="Ti.UI.SIZE" title=" ＋予定を追加 " class="editScheduleButton" onClick="addEvent"/>
+					<Button  title=" ＋予定を追加 " class="editScheduleButton" onClick="addEvent"/>
 				</View>
 				<View id="blockFriend">
-					<View height="Ti.UI.SIZE" top="10dp">
+					<View height="Ti.UI.SIZE" top="5dp">
 						<ImageView image="/icons/ttlMember.png" touchEnabled="false" height="15dp" left="10dp" />
 						<ImageView image="/icons/btn_Open.png" id="openAllFriend" onClick="openAllFriend" type="open" />
 					</View>

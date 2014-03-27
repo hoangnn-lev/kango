@@ -39,8 +39,8 @@ func.createBoxIcon($.buttonTabs, $.listIcon, Ti.API.selectedIcon);
 function saveSchedule(e) {
 	var title = $.title.getValue(), startTime = $.startTime.getText(), endTime = $.endTime.getText(), content = $.memo.getValue();
 
-	$.title.blur();
-	$.memo.blur();
+	Titanium.App.fireEvent("hideKeyboardToolbar");
+	Ti.UI.Android.hideSoftKeyboard();
 
 	if (!title && !startTime && !endTime && !content && !Ti.API.selectedIcon) {
 		func.alert('内容を入力しないと保存できません');
@@ -75,8 +75,8 @@ function saveSchedule(e) {
 }
 
 function timeSet(e) {
-	$.title.blur();
-	$.memo.blur();
+	Titanium.App.fireEvent("hideKeyboardToolbar");
+	Ti.UI.Android.hideSoftKeyboard();
 	if (e.source.type == 'delete')
 		return;
 
@@ -113,8 +113,8 @@ function pad_2(number) {
 
 //add back button
 $.edit_event.addEventListener('android:back', function(e) {
-	$.title.blur();
-	$.memo.blur();
+	Titanium.App.fireEvent("hideKeyboardToolbar");
+	Ti.UI.Android.hideSoftKeyboard();
 	openView('schedule');
 });
 
@@ -151,8 +151,8 @@ $.cancel.addEventListener('click', function(e) {
 		});
 
 	} else {
-		$.title.blur();
-		$.memo.blur();
+		Titanium.App.fireEvent("hideKeyboardToolbar");
+		Ti.UI.Android.hideSoftKeyboard();
 		openView('schedule');
 	}
 
@@ -161,8 +161,8 @@ $.cancel.addEventListener('click', function(e) {
 $.main.addEventListener('click', function(e) {
 	if (e.source.id != 'title' && e.source.id != 'memo') {
 		$.memo.value = $.memo.value;
-		$.title.blur();
-		$.memo.blur();
+		Titanium.App.fireEvent("hideKeyboardToolbar");
+		Ti.UI.Android.hideSoftKeyboard();
 	}
 });
 

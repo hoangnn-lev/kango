@@ -113,7 +113,7 @@ function getEvent(day) {
 				fontSize : '13dp',
 			},
 			color : '#676767',
-			height : '40dp',
+			height : '30dp',
 			backgroundColor : '#fff',
 			width : Ti.UI.SIZE,
 			left : '10dp'
@@ -166,9 +166,9 @@ function getEvent(day) {
 
 		var scheduleTitle = Ti.UI.createLabel({
 			height : Ti.UI.SIZE,
-			top : '10dp',
+			top : '8dp',
 			text : event_title,
-			bottom : '10dp',
+			bottom : '8dp',
 			color : '#676767',
 			font : {
 				fontSize : '13dp'
@@ -478,7 +478,7 @@ function getAllFriend() {
 			},
 			type : 'deactive',
 			backgroundColor : friendStyle['deactive']['bg'],
-			height : Ti.UI.SIZE,
+			height : '20dp',
 			width : Ti.UI.SIZE,
 			left : '5dp',
 			top : '5dp',

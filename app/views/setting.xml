@@ -34,7 +34,7 @@
 						<ImageView image="/icons/bkgIconArrow.png" class="rightIcon"/>
 					</View>
 					<Label class="line"/>
-					<View class="customeTableViewRow">
+					<View class="customeTableViewRow" id="chPlay">
 						<Label left="10dp"  text="アプリのご感想・ご要望"/>
 						<ImageView image="/icons/bkgIconArrow.png" class="rightIcon"/>
 					</View>

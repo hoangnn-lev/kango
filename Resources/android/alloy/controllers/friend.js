@@ -17,9 +17,6 @@ function Controller() {
         }
     }
     function addEventForRow(row) {
-        row.label.addEventListener("focus", function() {
-            onBlur = this;
-        });
         row.label.addEventListener("change", function(e) {
             var data = {
                 id: e.source.id,
@@ -40,12 +37,13 @@ function Controller() {
             var friendModel = Alloy.Collections.friend;
             var data = {
                 id: e.source.id,
-                name: name,
+                name: row.label.value,
                 flag: checkflag ? 0 : 1
             };
             var friend = Alloy.createModel("friend", data);
             friendModel.add(friend);
             friend.save();
+            delete_view("schedule");
         });
     }
     function customeRowFriend(id, name, friend_flag) {
@@ -75,8 +73,9 @@ function Controller() {
         row.flag = Ti.UI.createButton({
             id: id,
             height: "30dp",
-            width: "60dp",
+            width: "80dp",
             right: "10dp",
+            name: name,
             font: {
                 fontSize: "14dp"
             },
@@ -129,7 +128,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId21 = Ti.UI.createLabel({
+    $.__views.__alloyId10 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -138,17 +137,17 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "勤務メンバー設定",
-        id: "__alloyId21"
+        id: "__alloyId10"
     });
-    $.__views.title.add($.__views.__alloyId21);
-    $.__views.__alloyId22 = Ti.UI.createScrollView({
+    $.__views.title.add($.__views.__alloyId10);
+    $.__views.__alloyId11 = Ti.UI.createScrollView({
         top: "0",
         bottom: 20,
         layout: "vertical",
         height: Ti.UI.FILL,
-        id: "__alloyId22"
+        id: "__alloyId11"
     });
-    $.__views.main.add($.__views.__alloyId22);
+    $.__views.main.add($.__views.__alloyId11);
     $.__views.friendList = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
@@ -158,7 +157,7 @@ function Controller() {
         separatorColor: "#ccc",
         id: "friendList"
     });
-    $.__views.__alloyId22.add($.__views.friendList);
+    $.__views.__alloyId11.add($.__views.friendList);
     $.__views.addFriend = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: Ti.UI.FILL,
@@ -178,12 +177,11 @@ function Controller() {
         id: "addFriend",
         title: "＋メンバーを追加"
     });
-    $.__views.__alloyId22.add($.__views.addFriend);
+    $.__views.__alloyId11.add($.__views.addFriend);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var friendList;
     var args = arguments[0] || {};
-    var onBlur;
     loadFriend();
     $.friend.addEventListener("android:back", function() {
         Ti.API.activeTab = args["tab"];
@@ -208,7 +206,10 @@ function Controller() {
         delete_view("schedule");
     });
     $.main.addEventListener("click", function(e) {
-        onBlur && "friend-name" != e.source.className && "addFriend" != e.source.id && onBlur.blur();
+        if ("friend-name" != e.source.className && "addFriend" != e.source.id) {
+            Titanium.App.fireEvent("hideKeyboardToolbar");
+            Ti.UI.Android.hideSoftKeyboard();
+        }
     });
     _.extend($, exports);
 }

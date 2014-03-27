@@ -74,7 +74,7 @@ for (var i = 0; i < n; i++) {
 		flag : shift[i].get('flag'),
 
 		height : '30dp',
-		width : '50dp',
+		width : '80dp',
 		backgroundColor : background,
 		backgroundSelectedColor : background,
 		right : '10dp',
