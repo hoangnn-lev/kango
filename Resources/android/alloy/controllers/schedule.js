@@ -458,6 +458,7 @@ function Controller() {
         bottom: 20,
         height: Ti.UI.FILL,
         layout: "vertical",
+        disableBounce: true,
         id: "scheduleInfo"
     });
     $.__views.main.add($.__views.scheduleInfo);

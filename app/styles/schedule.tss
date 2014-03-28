@@ -123,7 +123,8 @@
 "#scheduleInfo":{
 	height:Ti.UI.FILL,
 	layout:'vertical',
-	top:'10dp'
+	top:'10dp',
+	disableBounce:true
 },
 "#scheduleList":{
 	backgroundColor:'#fff',
