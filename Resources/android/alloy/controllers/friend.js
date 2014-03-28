@@ -1,5 +1,11 @@
 function Controller() {
     function loadFriend() {
+        hiddenField = Ti.UI.createTextField({
+            height: 0,
+            width: 0,
+            id: "hidden"
+        });
+        $.friendList.add(hiddenField);
         var friendCols = Alloy.Collections.friend;
         friendCols.fetch({
             query: "SELECT * from friend"
@@ -29,6 +35,9 @@ function Controller() {
             friend.save();
             delete_view("schedule");
         });
+        row.label.addEventListener("return", function(e) {
+            e.source.id == max && hiddenField.focus();
+        });
         row.flag.addEventListener("click", function(e) {
             var checkflag = e.source.friend_flag;
             row.flag.setBackgroundColor(checkflag ? "#ccc" : "#f3acbd");
@@ -47,6 +56,7 @@ function Controller() {
         });
     }
     function customeRowFriend(id, name, friend_flag) {
+        max = id;
         friend_flag = 0 == friend_flag ? false : true;
         var row = Ti.UI.createView({
             height: Ti.UI.SIZE,
@@ -182,6 +192,7 @@ function Controller() {
     _.extend($, $.__views);
     var friendList;
     var args = arguments[0] || {};
+    var hiddenField, max = 0;
     loadFriend();
     $.friend.addEventListener("android:back", function() {
         Ti.API.activeTab = args["tab"];
@@ -209,6 +220,7 @@ function Controller() {
         if ("friend-name" != e.source.className && "addFriend" != e.source.id) {
             Titanium.App.fireEvent("hideKeyboardToolbar");
             Ti.UI.Android.hideSoftKeyboard();
+            hiddenField.focus();
         }
     });
     _.extend($, exports);

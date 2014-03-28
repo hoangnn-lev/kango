@@ -13,14 +13,6 @@ module.exports = [ {
     }
 }, {
     isApi: true,
-    priority: 1000.0002,
-    key: "View",
-    style: {
-        width: Ti.UI.FILL,
-        height: Ti.UI.FILL
-    }
-}, {
-    isApi: true,
     priority: 1000.0003,
     key: "Button",
     style: {
@@ -106,17 +98,12 @@ module.exports = [ {
         bottom: 20
     }
 }, {
-    isClass: true,
-    priority: 10000.0006,
-    key: "week",
+    isApi: true,
+    priority: 1000.0012,
+    key: "View",
     style: {
-        color: "#fff",
-        top: -10,
-        textAlign: "center",
-        font: {
-            fontSize: "18sp"
-        },
-        width: "14%"
+        width: Ti.UI.FILL,
+        height: Ti.UI.FILL
     }
 }, {
     isClass: true,
@@ -129,41 +116,25 @@ module.exports = [ {
         color: "red"
     }
 }, {
+    isClass: true,
+    priority: 10000.0016,
+    key: "week",
+    style: {
+        color: "#fff",
+        top: -10,
+        textAlign: "center",
+        font: {
+            fontSize: "18sp"
+        },
+        width: "14%"
+    }
+}, {
     isId: true,
     priority: 100000.0002,
     key: "main",
     style: {
         top: "50dp",
         height: Ti.UI.FILL,
-        width: Ti.UI.FILL
-    }
-}, {
-    isId: true,
-    priority: 100000.0003,
-    key: "container",
-    style: {
-        top: 0,
-        left: 0,
-        width: Ti.Platform.displayCaps.platformWidth,
-        height: Ti.UI.FILL
-    }
-}, {
-    isId: true,
-    priority: 100000.0004,
-    key: "days",
-    style: {
-        layout: "horizontal",
-        top: 0,
-        height: "22dp"
-    }
-}, {
-    isId: true,
-    priority: 100000.0005,
-    key: "dates",
-    style: {
-        layout: "vertical",
-        height: Ti.UI.FILL,
-        left: "1dp",
         width: Ti.UI.FILL
     }
 }, {
@@ -175,5 +146,34 @@ module.exports = [ {
         width: Ti.UI.FILL,
         height: "50dp",
         layout: "horizontal"
+    }
+}, {
+    isId: true,
+    priority: 100000.0013,
+    key: "container",
+    style: {
+        top: 0,
+        left: 0,
+        width: Ti.Platform.displayCaps.platformWidth,
+        height: Ti.UI.FILL
+    }
+}, {
+    isId: true,
+    priority: 100000.0014,
+    key: "days",
+    style: {
+        layout: "horizontal",
+        top: 0,
+        height: "22dp"
+    }
+}, {
+    isId: true,
+    priority: 100000.0015,
+    key: "dates",
+    style: {
+        layout: "vertical",
+        height: Ti.UI.FILL,
+        left: "1dp",
+        width: Ti.UI.FILL
     }
 } ];

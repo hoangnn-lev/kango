@@ -1,7 +1,0 @@
-<Alloy>
-	<Window>
-		<View id="main">
-			<WebView url="http://ac.ebis.ne.jp/tr_set.php?argument=MemwrhsW&ai=a5322c6cdd990e"/>
-		</View>
-	</Window>
-</Alloy>

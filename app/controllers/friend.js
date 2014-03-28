@@ -1,6 +1,7 @@
 var on_flag = true;
 var friendList;
 var args = arguments[0] || {};
+var hiddenField, max = 0;
 loadFriend();
 
 //add back button
@@ -39,6 +40,13 @@ $.addFriend.addEventListener('click', function(e) {
 
 //load all friend
 function loadFriend() {
+
+	hiddenField = Ti.UI.createTextField({
+		height : 0,
+		width : 0,
+		id : 'hidden'
+	});
+	$.friendList.add(hiddenField);
 
 	var friendCols = Alloy.Collections.friend;
 
@@ -84,6 +92,13 @@ function addEventForRow(row) {
 		delete_view('schedule');
 	});
 
+	//hide cursor when last field click done
+	row.label.addEventListener('return', function(e) {
+		if (e.source.id == max) {
+			hiddenField.focus();
+		}
+	});
+
 	row.flag.addEventListener('click', function(e) {
 
 		var checkflag = e.source.friend_flag;
@@ -109,6 +124,7 @@ function addEventForRow(row) {
 //create row friend
 function customeRowFriend(id, name, friend_flag) {
 
+	max = id;
 	friend_flag = (friend_flag == 0) ? false : true;
 
 	var row = Ti.UI.createView({
@@ -170,5 +186,6 @@ $.main.addEventListener('click', function(e) {
 	if (e.source.className != 'friend-name' && e.source.id != 'addFriend') {
 		Titanium.App.fireEvent("hideKeyboardToolbar");
 		Ti.UI.Android.hideSoftKeyboard();
+		hiddenField.focus();
 	}
 });

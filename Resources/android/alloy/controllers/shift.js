@@ -285,14 +285,14 @@ function Controller() {
         id: "shiftLabel"
     });
     $.__views.scheduleTitle.add($.__views.shiftLabel);
-    $.__views.__alloyId66 = Ti.UI.createView({
+    $.__views.__alloyId60 = Ti.UI.createView({
         backgroundColor: "#fff",
         height: Ti.UI.FILL,
         layout: "vertical",
         top: "2dp",
-        id: "__alloyId66"
+        id: "__alloyId60"
     });
-    $.__views.scheduleInfo.add($.__views.__alloyId66);
+    $.__views.scheduleInfo.add($.__views.__alloyId60);
     $.__views.shiftList = Ti.UI.createView({
         backgroundColor: "#fff",
         width: Ti.UI.FILL,
@@ -300,13 +300,13 @@ function Controller() {
         layout: "horizontal",
         id: "shiftList"
     });
-    $.__views.__alloyId66.add($.__views.shiftList);
-    $.__views.__alloyId67 = Ti.UI.createView({
+    $.__views.__alloyId60.add($.__views.shiftList);
+    $.__views.__alloyId61 = Ti.UI.createView({
         backgroundColor: "#fff",
         height: Ti.UI.SIZE,
-        id: "__alloyId67"
+        id: "__alloyId61"
     });
-    $.__views.__alloyId66.add($.__views.__alloyId67);
+    $.__views.__alloyId60.add($.__views.__alloyId61);
     $.__views.shiftSetting = Ti.UI.createButton({
         textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "120dp",
@@ -325,7 +325,7 @@ function Controller() {
         title: "シフト設定",
         id: "shiftSetting"
     });
-    $.__views.__alloyId67.add($.__views.shiftSetting);
+    $.__views.__alloyId61.add($.__views.shiftSetting);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var selectedDate, selectedDay, _calendar, dateIsEvent, dateIsFriendNoEvent, dayOffset, shiftMonthId, lastDayOfMonth = 0, shiftOfMonth = [], moment = require("alloy/moment"), month = moment(), dateShiftDB = {}, allShifts = {}, args = arguments[0] || {};

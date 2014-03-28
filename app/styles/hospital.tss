@@ -1,8 +1,0 @@
-"#main":{
-	height:Ti.UI.FILL,
-	top:0
-},
-"#WebView":{
-	height:Ti.UI.FILL,
-	width:Ti.UI.FILL
-}
