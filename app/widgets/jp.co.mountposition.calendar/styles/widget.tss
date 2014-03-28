@@ -20,13 +20,4 @@
     height: Ti.UI.FILL,
     left:'1dp',
     width:Ti.UI.FILL
-},
-".week":{
-	color:'#fff',
-	top:-10,
-	textAlign:'center',
-	font:{
-		fontSize:'18sp'
-	},
-	width:'14%'
 }

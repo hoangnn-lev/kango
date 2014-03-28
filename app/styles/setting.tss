@@ -26,31 +26,11 @@
 	width:Ti.UI.FILL,
 	height:"1"
 },
-".item":{
-	borderRadius:0,
-	color:'#000',
-	left:'10dp',
-	width:Ti.UI.FILL,
-	backgroundColor:'#fff',
-	font:{
-		fontSize:'14dp'
-	},
-	height:'35dp',
-	textAlign:'left'
-},
 "#content":{
 	 width:Ti.UI.FILL,
 	 height:Ti.UI.FILL,
 	 layout:"vertical",
 	 backgroundColor:'#f5f1e9'
-},
-'.title':{
-	 color:"#000",
-	 top:'20dp',
-	 bottom:"0",
-	 height:"20dp",
-	 width:Ti.UI.FILL,
-	 textAlign:'left'
 },
 ".off":{
 	width:'70dp',
@@ -61,13 +41,6 @@
 	right:'10dp',
 	backgroundColor:'#ccc',
 	backgroundSelectedColor:'#ccc'
-},
-".sTitle":{
-	color:"#000",
-	top:"5dp",
-	font:{
-		fontSize:'14dp'
-	},
 },
 ".customeTableViewRow":{
 	height:'55dp',

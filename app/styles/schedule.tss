@@ -1,10 +1,6 @@
 "#main":{
 	backgroundColor:'#f5f1e9'
 },
-".calenderTitle":{
-	color:'#fff',
-	height:Ti.UI.SIZE
-},
 ".scheduleTitle":{
 	width:Ti.UI.FILL,
 	height:'40dp',
@@ -110,15 +106,6 @@
 	top:'0',
 	bottom:'5dp',
 	layout:"horizontal"
-},
-"#serviceMember":{
-	height:Ti.UI.SIZE,
-	font:{
-		fontSize:'14dp',
-		fontWeight:'bold'
-	},
-	color:'#666',
-	left:'35dp'
 },
 "#scheduleInfo":{
 	height:Ti.UI.FILL,

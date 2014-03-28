@@ -85,10 +85,6 @@
 	width:Ti.UI.FILL,
 	height:Ti.UI.SIZE,
 	layout:"horizontal"
-}
-".calenderTitle":{
-	color:'#fff',
-	height:Ti.UI.SIZE
 },
 ".scheduleTitle":{
 	width:Ti.UI.FILL,
