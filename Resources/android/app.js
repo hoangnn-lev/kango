@@ -2,6 +2,7 @@ function openView(view, data) {
     var action;
     action = data ? customView[view] = Alloy.createController(view, data).getView() : customView[view] ? customView[view] : customView[view] = Alloy.createController(view).getView();
     func.nextView(action);
+    analytics.trackPageview("/" + view);
 }
 
 function delete_view(view) {
@@ -12,21 +13,27 @@ var Alloy = require("alloy"), _ = Alloy._, Backbone = Alloy.Backbone;
 
 require("config");
 
-Alloy.Collections.schedule = Alloy.createCollection("schedule");
+var colls = [ "schedule", "configs", "shifts", "calendar_shift", "schedule_detail", "friend" ], customView = {};
 
-Alloy.Collections.configs = Alloy.createCollection("configs");
+var func = require("Lib/function"), kango = require("Lib/kango"), gaModule = require("Lib/Ti.Google.Analytics");
 
-Alloy.Collections.shifts = Alloy.createCollection("shifts");
+var analytics = new gaModule("UA-49393515-1");
 
-Alloy.Collections.calendar_shift = Alloy.createCollection("calendar_shift");
+for (var i = 0; colls.length > i; i++) Alloy.Collections[colls[i]] = Alloy.createCollection(colls[i]);
 
-Alloy.Collections.schedule_detail = Alloy.createCollection("schedule_detail");
+Ti.App.addEventListener("analytics_trackPageview", function(e) {
+    analytics.trackPageview("/android" + e.pageUrl);
+});
 
-Alloy.Collections.friend = Alloy.createCollection("friend");
+Ti.App.addEventListener("analytics_trackEvent", function(e) {
+    analytics.trackEvent(e.category, e.action, e.label, e.value);
+});
 
-var func = require("Lib/function"), kango = require("Lib/kango");
+analytics.start(10, true);
 
-var customView = {};
+Titanium.App.addEventListener("close", function() {
+    analytics.stop();
+});
 
 var uid = func.getUID();
 

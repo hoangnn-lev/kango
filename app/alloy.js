@@ -1,15 +1,27 @@
 require('config');
 
-Alloy.Collections.schedule = Alloy.createCollection('schedule');
-Alloy.Collections.configs = Alloy.createCollection('configs');
-Alloy.Collections.shifts = Alloy.createCollection('shifts');
-Alloy.Collections.calendar_shift = Alloy.createCollection('calendar_shift');
-Alloy.Collections.schedule_detail = Alloy.createCollection('schedule_detail');
-Alloy.Collections.friend = Alloy.createCollection('friend');
+var colls = ['schedule', 'configs', 'shifts', 'calendar_shift', 'schedule_detail', 'friend'], customView = {};
+var func = require('Lib/function'), kango = require('Lib/kango'), gaModule = require('Lib/Ti.Google.Analytics');
+var analytics = new gaModule('UA-49393515-1');
 
-var func = require('Lib/function'), kango = require('Lib/kango');
+for (var i = 0; i < colls.length; i++) {
+	Alloy.Collections[colls[i]] = Alloy.createCollection(colls[i]);
+}
 
-var customView = {};
+Ti.App.addEventListener('analytics_trackPageview', function(e) {
+	analytics.trackPageview('/android' + e.pageUrl);
+});
+
+Ti.App.addEventListener('analytics_trackEvent', function(e) {
+	analytics.trackEvent(e.category, e.action, e.label, e.value);
+});
+
+// Function takes an integer which is the dispatch interval in seconds
+analytics.start(10, true);
+
+Titanium.App.addEventListener('close', function(e) {
+	analytics.stop();
+});
 
 /*
  * function openView
@@ -28,7 +40,11 @@ function openView(view, data) {
 		action = customView[view] = Alloy.createController(view).getView();
 	}
 
+	//open next page
 	func.nextView(action);
+	
+	//google track page view
+	analytics.trackPageview('/' + view);
 }
 
 /*
