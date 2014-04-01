@@ -1,32 +1,19 @@
-var lastValue = {
-	month : new Date()
-};
-lastValue['month'].setDate(1);
+var pc = require('Lib/picker');
+var lastValue = new Date();
 
-$.month.setText(formatDate(lastValue['month']));
+$.month.setText(pc.formatDate(lastValue));
 
 /* create picker select date */
 function showPicker(e1) {
 
-	var picker = Titanium.UI.createPicker({
-		type : Titanium.UI.PICKER_TYPE_DATE,
-		selectionIndicator : true
-	});
-
-	picker.showDatePickerDialog({
-		value : lastValue['month'],
-		callback : function(e) {
-			if (!e.cancel) {
-				var result = lastValue['month'] = e.value;
-				$.month.setText(formatDate(result));
-			}
+	var p = pc.showPicker(lastValue);
+	p.addEventListener('click', function(e) {
+		if (e.index == 0) {
+			lastValue = pc.getSelectedDate();
+			$.month.text = pc.formatDate(lastValue);
 		}
 	});
-}
-
-/* format date japan */
-function formatDate(date) {
-	return date.getFullYear() + '年' + (date.getMonth() + 1) + '月';
+	p.show();
 }
 
 $.share_by_image.addEventListener('android:back', function(e) {
@@ -36,7 +23,7 @@ $.share_by_image.addEventListener('android:back', function(e) {
 /* share shift by image */
 function share(e) {
 
-	var day = lastValue['month'];
+	var day = lastValue;
 	var f = Alloy.createController('shift', {
 		date : day.getFullYear() + '-' + (day.getMonth() + 1) + '-' + day.getDate()
 	}).getView('main').toImage().media;
@@ -53,4 +40,3 @@ function share(e) {
 		emailDialog.open();
 	}
 }
-

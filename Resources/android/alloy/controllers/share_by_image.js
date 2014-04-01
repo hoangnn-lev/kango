@@ -1,24 +1,16 @@
 function Controller() {
     function showPicker() {
-        var picker = Titanium.UI.createPicker({
-            type: Titanium.UI.PICKER_TYPE_DATE,
-            selectionIndicator: true
-        });
-        picker.showDatePickerDialog({
-            value: lastValue["month"],
-            callback: function(e) {
-                if (!e.cancel) {
-                    var result = lastValue["month"] = e.value;
-                    $.month.setText(formatDate(result));
-                }
+        var p = pc.showPicker(lastValue);
+        p.addEventListener("click", function(e) {
+            if (0 == e.index) {
+                lastValue = pc.getSelectedDate();
+                $.month.text = pc.formatDate(lastValue);
             }
         });
-    }
-    function formatDate(date) {
-        return date.getFullYear() + "年" + (date.getMonth() + 1) + "月";
+        p.show();
     }
     function share(e) {
-        var day = lastValue["month"];
+        var day = lastValue;
         var f = Alloy.createController("shift", {
             date: day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate()
         }).getView("main").toImage().media;
@@ -170,11 +162,9 @@ function Controller() {
     share ? $.__views.__alloyId50.addEventListener("click", share) : __defers["$.__views.__alloyId50!click!share"] = true;
     exports.destroy = function() {};
     _.extend($, $.__views);
-    var lastValue = {
-        month: new Date()
-    };
-    lastValue["month"].setDate(1);
-    $.month.setText(formatDate(lastValue["month"]));
+    var pc = require("Lib/picker");
+    var lastValue = new Date();
+    $.month.setText(pc.formatDate(lastValue));
     $.share_by_image.addEventListener("android:back", function() {
         openView("share");
     });
