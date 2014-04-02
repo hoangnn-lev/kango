@@ -161,7 +161,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "__alloyId17"
     });
     $.__views.__alloyId16.add($.__views.__alloyId17);
@@ -206,7 +206,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "__alloyId21"
     });
     $.__views.__alloyId16.add($.__views.__alloyId21);
@@ -251,7 +251,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "__alloyId25"
     });
     $.__views.__alloyId16.add($.__views.__alloyId25);
@@ -278,7 +278,7 @@ function Controller() {
         height: "35dp",
         backgroundColor: "#ccc",
         backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ccc",
+        backgroundSelectedColor: "#bbbbbb",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
@@ -307,7 +307,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "__alloyId28"
     });
     $.__views.__alloyId16.add($.__views.__alloyId28);
@@ -334,7 +334,7 @@ function Controller() {
         height: "35dp",
         backgroundColor: "#ccc",
         backgroundFocusedColor: "#ef8fa6",
-        backgroundSelectedColor: "#ccc",
+        backgroundSelectedColor: "#bbbbbb",
         color: "#fff",
         border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
         borderRadius: 10,
@@ -350,7 +350,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#f5f1e9",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         touchEnabled: "false",
         id: "__alloyId30"
     });
@@ -359,6 +359,7 @@ function Controller() {
         height: "55dp",
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "allHospital"
     });
     $.__views.__alloyId30.add($.__views.allHospital);
@@ -389,7 +390,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "__alloyId33"
     });
     $.__views.__alloyId16.add($.__views.__alloyId33);
@@ -434,7 +435,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "chPlay"
     });
     $.__views.__alloyId16.add($.__views.chPlay);
@@ -478,7 +479,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "report"
     });
     $.__views.__alloyId16.add($.__views.report);
@@ -522,7 +523,7 @@ function Controller() {
         width: Ti.UI.FILL,
         backgroundColor: "#fff",
         selectionStyle: "none",
-        selectedBackgroundColor: "#fff",
+        backgroundSelectedColor: "#f3f3f3",
         id: "about"
     });
     $.__views.__alloyId16.add($.__views.about);

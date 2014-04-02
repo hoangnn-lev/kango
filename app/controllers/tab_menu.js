@@ -9,19 +9,20 @@ for (var i = 0, n = menu.length; i < n; i++) {
 
 	activeTab = i + 1;
 
-	var button = Ti.UI.createImageView({
-		width :'25%',
+	var button = Ti.UI.createButton({
+		width : '25%',
 		height : '50dp',
-		image : menu[i].img,
+		backgroundImage : menu[i].img,
+		backgroundSelectedImage : menu[i].img_active,
 		action : menu[i].action,
 		tab : activeTab	});
 
 	if (!Ti.API.activeTab && i == 1) {
 		Ti.API.activeTab = activeTab;
-		button.setImage(menu[i].img_active);
+		button.setBackgroundImage(menu[i].img_active);
 
 	} else if (Ti.API.activeTab && (i + 1) == Ti.API.activeTab) {
-		button.setImage(menu[i].img_active);
+		button.setBackgroundImage(menu[i].img_active);
 	}
 
 	button.addEventListener('click', function(e) {

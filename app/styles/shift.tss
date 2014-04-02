@@ -75,7 +75,13 @@
 },
 "#scheduleInfo":{
 	height:Ti.UI.FILL,
-	layout:'vertical'
+	layout:'vertical',
+	backgroundColor:'#fff'
+},
+".line2":{
+	backgroundColor:'#f5f1e9',
+	height:'2dp',
+	width:Ti.UI.FILL
 },
 "#scheduleList":{
 	top:'1dp'
@@ -99,7 +105,9 @@
 	zIndex:9999,
 	width:"25dp",
 	height:"25dp",
-	top:'5dp'
+	top:'5dp',
+	backgroundColor:'tranfarent',
+	backgroundSelectedColor:'tranparent'
 },
 ".editScheduleButton":{
 	font:{
@@ -115,6 +123,7 @@
 	height:'25dp',
 	width:'120dp',
 	right:'20dp',
-	top:'20dp'
+	top:'20dp',
+	bottom:'20dp'
 }
 

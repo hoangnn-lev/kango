@@ -76,10 +76,18 @@ function loadFriend() {
 
 function addEventForRow(row) {
 
-	row.label.addEventListener('change', function(e) {
+	row.label.addEventListener('blur', function(e) {
+
+		var get_name = e.source.value;
+
+		if (get_name.length > 8) {
+			func.alert('文字数を超えているので、8文字以内で再入力してください');
+			get_name = e.source.value = get_name.substring(0, 8);
+		}
+
 		var data = {
 			id : e.source.id,
-			name : e.source.value,
+			name : get_name,
 			flag : 1,
 		};
 
@@ -90,6 +98,7 @@ function addEventForRow(row) {
 		friend.save();
 
 		delete_view('schedule');
+
 	});
 
 	//hide cursor when last field click done
@@ -146,7 +155,6 @@ function customeRowFriend(id, name, friend_flag) {
 		},
 		backgroundColor : 'transparent',
 		color : '#000',
-		maxLength : 8,
 		zIndex : 9,
 		className : 'friend-name'
 	});
@@ -163,6 +171,7 @@ function customeRowFriend(id, name, friend_flag) {
 		title : friend_flag ? 'ON' : 'OFF',
 		friend_flag : friend_flag,
 		backgroundColor : friend_flag ? '#f3acbd' : '#ccc',
+		backgroundSelectedColor : '#bbbbbb',
 		color : '#fff',
 		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		borderRadius : 10,

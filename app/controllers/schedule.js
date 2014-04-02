@@ -35,7 +35,7 @@ function clickCalendar(e) {
 
 	var wday = choiceDay = activeWidget.selectedDate();
 	var gdate = wday.format('MM / DD');
-	
+
 	day = wday.format('DD');
 
 	if (gdate != $.scheduleDateInfo.getText()) {
@@ -78,7 +78,13 @@ function clickCalendar(e) {
  * output : void
  * */
 function doPrevMonth() {
+
 	currentMonth = currentMonth.subtract('months', 1);
+
+	if (currentMonth.format('YYYY') < 2010) {
+		currentMonth = currentMonth.add('months', 1);
+		return;
+	}
 	loadCalendarBody();
 }
 
@@ -156,6 +162,7 @@ function getEvent(day) {
 			id : data[i].get('id'),
 			height : Ti.UI.SIZE,
 			backgroundColor : '#fff',
+			backgroundSelectedColor : '#f3f3f3',
 			className : 'row-event'
 		});
 
@@ -439,10 +446,11 @@ function openAllFriend() {
 		curve : Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
 	});
 
-	$.openAllFriend.setImage( on_flag ? '/icons/btn_Close.png' : '/icons/btn_Open.png');
+	$.openAllFriend.setBackgroundImage( on_flag ? '/icons/btn_Close.png' : '/icons/btn_Open.png');
+	$.openAllFriend.setBackgroundSelectedImage( on_flag ? '/icons/btn_Close_selected.png' : '/icons/btn_Open_selected.png');
 
 	on_flag = !on_flag;
-	
+
 	$.friend.animate({
 		height : on_flag ? Ti.UI.SIZE : 0,
 		duration : 300,

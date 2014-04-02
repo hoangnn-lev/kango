@@ -162,7 +162,14 @@ function clickCalendar(e) {
 }
 
 function doPrevMonth() {
+
 	month = month.subtract('months', 1);
+
+	if (month.format('YYYY') < 2010) {
+		month = month.add('months', 1);
+		return;
+	}
+
 	loadCalendarBody();
 }
 
@@ -174,7 +181,7 @@ function doNextMonth() {
 function updateShift(date, shift_source) {
 
 	var _get_shift_selected = {
-		text : shift_source.text,
+		text : shift_source.title,
 		color : shift_source.backgroundColor
 	};
 

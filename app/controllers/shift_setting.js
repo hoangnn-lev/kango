@@ -13,7 +13,7 @@ var row = [];
 for (var i = 0; i < n; i++) {
 	var item = Ti.UI.createView({
 		touchEnabled : true,
-		selectedBackgroundColor : 'transparent',
+		backgroundSelectedColor : '#f3f3f3',
 		width : Ti.UI.FILL,
 		height : '50dp',
 		id : shift[i].get('id'),
@@ -76,7 +76,7 @@ for (var i = 0; i < n; i++) {
 		height : '30dp',
 		width : '80dp',
 		backgroundColor : background,
-		backgroundSelectedColor : background,
+		backgroundSelectedColor : '#bbbbbb',
 		right : '10dp',
 		touchEnabled : true,
 		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,

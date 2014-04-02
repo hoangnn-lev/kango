@@ -23,16 +23,17 @@ function Controller() {
     var menu = Ti.API.TABMENU;
     for (var i = 0, n = menu.length; n > i; i++) {
         activeTab = i + 1;
-        var button = Ti.UI.createImageView({
+        var button = Ti.UI.createButton({
             width: "25%",
             height: "50dp",
-            image: menu[i].img,
+            backgroundImage: menu[i].img,
+            backgroundSelectedImage: menu[i].img_active,
             action: menu[i].action,
             tab: activeTab
         });
-        if (Ti.API.activeTab || 1 != i) Ti.API.activeTab && i + 1 == Ti.API.activeTab && button.setImage(menu[i].img_active); else {
+        if (Ti.API.activeTab || 1 != i) Ti.API.activeTab && i + 1 == Ti.API.activeTab && button.setBackgroundImage(menu[i].img_active); else {
             Ti.API.activeTab = activeTab;
-            button.setImage(menu[i].img_active);
+            button.setBackgroundImage(menu[i].img_active);
         }
         button.addEventListener("click", function(e) {
             Ti.API.activeTab = e.source.tab;

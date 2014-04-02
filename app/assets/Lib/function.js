@@ -131,14 +131,15 @@ exports.loadShiftsList = function(view) {
 
 			if (index >= n) {
 
-				var label = Ti.UI.createLabel({
-					text : ' なし ',
+				var label = Ti.UI.createButton({
+					title : ' なし ',
 					id : 13,
 					color : '#666',
 					font : {
 						fontSize : '14dp'
 					},
 					backgroundColor : '#c6c6c6',
+					backgroundSelectedColor : '#bbbbbb',
 					height : (buttonWidth - 20) + 'dp',
 					width : buttonWidth + 'dp',
 					top : '10dp',
@@ -155,14 +156,15 @@ exports.loadShiftsList = function(view) {
 				return allShifts;
 			}
 
-			var label = Ti.UI.createLabel({
-				text : ' ' + shift_data[index].get('name') + ' ',
+			var label = Ti.UI.createButton({
+				title : ' ' + shift_data[index].get('name') + ' ',
 				id : shift_data[index].get('id'),
 				color : '#fff',
 				font : {
 					fontSize : '14dp'
 				},
 				backgroundColor : shift_data[index].get('color'),
+				backgroundSelectedColor : '#bbbbbb',
 				height : (buttonWidth - 20) + 'dp',
 				width : buttonWidth + 'dp',
 				top : '10dp',

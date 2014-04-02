@@ -48,7 +48,7 @@ doClick = function(e) {
 
 		$.selected = e.source;
 
-		return ( _ref1 = $.selected) != null ? ( _ref2 = _ref1.children[0]) != null ? _ref2.getParent().borderColor = '#a1a1a0' :
+		return ( _ref1 = $.selected) != null ? ( _ref2 = _ref1.children[0]) != null ? _ref2.getParent().borderColor = '#8f8f8f' :
 		void 0 :
 		void 0;
 	}
@@ -144,7 +144,7 @@ for ( i = _k = 1, _ref2 = period.daysInMonth(); 1 <= _ref2 ? _k <= _ref2 : _k >=
 		border : Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
 		borderRadius : 10,
 		borderColor : '#fff',
-		borderWidth : '1',
+		borderWidth : 2,
 		className : 'row'
 	});
 

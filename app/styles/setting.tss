@@ -60,7 +60,7 @@
 	},
 	right:'10dp',
 	backgroundColor:'#ccc',
-	backgroundSelectedColor:'#ccc'
+	backgroundSelectedColor : '#bbbbbb',
 },
 ".sTitle":{
 	color:"#000",
@@ -73,7 +73,7 @@
 	height:'55dp',
 	backgroundColor:'#fff',
 	selectionStyle : 'none',
-	selectedBackgroundColor : '#fff'
+	backgroundSelectedColor : '#f3f3f3',
 },
 "TableView":{
 	height:Ti.UI.SIZE
@@ -81,7 +81,8 @@
 ".customeRowView":{
 	height:'55dp',
 	backgroundColor:'#fff',
-	width:Ti.UI.FILL
+	width:Ti.UI.FILL,
+	backgroundSelectedColor : '#f3f3f3',
 },
 ".rightIcon":{
 	right:'10dp',

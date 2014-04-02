@@ -71,7 +71,7 @@ function Controller() {
         if (null != e.source.date) {
             null != $.selected && null != (_ref = $.selected.children[0]) && (_ref.getParent().borderColor = "#fff");
             $.selected = e.source;
-            return null != (_ref1 = $.selected) ? null != (_ref2 = _ref1.children[0]) ? _ref2.getParent().borderColor = "#a1a1a0" : void 0 : void 0;
+            return null != (_ref1 = $.selected) ? null != (_ref2 = _ref1.children[0]) ? _ref2.getParent().borderColor = "#8f8f8f" : void 0 : void 0;
         }
     };
     $.calendar = {};
@@ -142,7 +142,7 @@ function Controller() {
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
             borderRadius: 10,
             borderColor: "#fff",
-            borderWidth: "1",
+            borderWidth: 2,
             className: "row"
         });
         currentDate == calendarMonth.format("YYYY-MM-") + i && tile.setBackgroundColor("#fffeb3");

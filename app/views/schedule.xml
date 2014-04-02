@@ -3,13 +3,13 @@
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main" layout="vertical">
 			<View id="calendarTitle">
-				<ImageView image="/icons/prev.png" class="calendarButton"  id="prevMonth" left="0"/>
+				<Button backgroundImage="/icons/prev.png" backgroundSelectedImage="/icons/prev_selected.png" class="calendarButton"  id="prevMonth" left="0"/>
 				<View id="dateInfo">
 					<Label  id="year"/>
 					<Label  id="month"/>
 					<Label  id="monthName"/>
 				</View>
-				<ImageView  image="/icons/next.png"  class="calendarButton"  id="nextMonth" right="0"/>
+				<Button backgroundImage="/icons/next.png" backgroundSelectedImage="/icons/next_selected.png" class="calendarButton"  id="nextMonth" right="0"/>
 			</View>
 			<View id="days"/>
 			<View id="calendar" onClick="clickCalendar" />
@@ -23,7 +23,7 @@
 				<View id="blockFriend">
 					<View height="Ti.UI.SIZE" top="5dp">
 						<ImageView image="/icons/ttlMember.png" touchEnabled="false" height="15dp" left="10dp" />
-						<ImageView image="/icons/btn_Open.png" id="openAllFriend" onClick="openAllFriend" type="open" />
+						<Button backgroundImage="/icons/btn_Open.png" backgroundSelectedImage="/icons/btn_Open_selected.png" id="openAllFriend" onClick="openAllFriend" type="open" />
 					</View>
 					<View id="friend"/>
 					<View id="groupAllFriend">

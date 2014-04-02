@@ -25,7 +25,9 @@
 	zIndex:9999,
 	width:"25dp",
 	height:"25dp",
-	top:'5dp'
+	top:'5dp',
+	backgroundColor:'tranfarent',
+	backgroundSelectedColor:'tranparent'
 },
 "#dateInfo":{
 	width:'110dp',

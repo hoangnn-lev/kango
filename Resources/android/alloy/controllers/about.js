@@ -55,6 +55,9 @@ function Controller() {
     $.about.addEventListener("android:back", function() {
         openView("setting");
     });
+    Ti.App.addEventListener("openBrowser", function(e) {
+        Ti.Platform.openURL(e.URL);
+    });
     _.extend($, exports);
 }
 

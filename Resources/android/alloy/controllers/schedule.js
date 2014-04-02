@@ -28,6 +28,10 @@ function Controller() {
     }
     function doPrevMonth() {
         currentMonth = currentMonth.subtract("months", 1);
+        if (2010 > currentMonth.format("YYYY")) {
+            currentMonth = currentMonth.add("months", 1);
+            return;
+        }
         loadCalendarBody();
     }
     function doNextMonth() {
@@ -84,6 +88,7 @@ function Controller() {
                 id: data[i].get("id"),
                 height: Ti.UI.SIZE,
                 backgroundColor: "#fff",
+                backgroundSelectedColor: "#f3f3f3",
                 className: "row-event"
             });
             var event_title = data[i].get("title");
@@ -251,7 +256,8 @@ function Controller() {
             duration: 300,
             curve: Ti.UI.ANIMATION_CURVE_EASE_IN_OUT
         });
-        $.openAllFriend.setImage(on_flag ? "/icons/btn_Close.png" : "/icons/btn_Open.png");
+        $.openAllFriend.setBackgroundImage(on_flag ? "/icons/btn_Close.png" : "/icons/btn_Open.png");
+        $.openAllFriend.setBackgroundSelectedImage(on_flag ? "/icons/btn_Close_selected.png" : "/icons/btn_Open_selected.png");
         on_flag = !on_flag;
         $.friend.animate({
             height: on_flag ? Ti.UI.SIZE : 0,
@@ -371,12 +377,23 @@ function Controller() {
         id: "calendarTitle"
     });
     $.__views.main.add($.__views.calendarTitle);
-    $.__views.prevMonth = Ti.UI.createImageView({
-        zIndex: 9999,
+    $.__views.prevMonth = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "25dp",
+        font: {
+            fontSize: "14dp"
+        },
         height: "25dp",
+        backgroundColor: "tranfarent",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "tranparent",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        zIndex: 9999,
         top: "5dp",
-        image: "/icons/prev.png",
+        backgroundImage: "/icons/prev.png",
+        backgroundSelectedImage: "/icons/prev_selected.png",
         id: "prevMonth",
         left: "0"
     });
@@ -429,12 +446,23 @@ function Controller() {
         id: "monthName"
     });
     $.__views.dateInfo.add($.__views.monthName);
-    $.__views.nextMonth = Ti.UI.createImageView({
-        zIndex: 9999,
+    $.__views.nextMonth = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "25dp",
+        font: {
+            fontSize: "14dp"
+        },
         height: "25dp",
+        backgroundColor: "tranfarent",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "tranparent",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
+        zIndex: 9999,
         top: "5dp",
-        image: "/icons/next.png",
+        backgroundImage: "/icons/next.png",
+        backgroundSelectedImage: "/icons/next_selected.png",
         id: "nextMonth",
         right: "0"
     });
@@ -540,13 +568,24 @@ function Controller() {
         id: "__alloyId14"
     });
     $.__views.__alloyId13.add($.__views.__alloyId14);
-    $.__views.openAllFriend = Ti.UI.createImageView({
+    $.__views.openAllFriend = Ti.UI.createButton({
+        textAlign: Ti.UI.TEXT_ALIGNMENT_CENTER,
         width: "30dp",
+        font: {
+            fontSize: "14dp"
+        },
         height: "30dp",
+        backgroundColor: "#f3acbd",
+        backgroundFocusedColor: "#ef8fa6",
+        backgroundSelectedColor: "#ef8fa6",
+        color: "#fff",
+        border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,
+        borderRadius: 10,
         right: "10dp",
         touchEnabled: true,
         zIndex: 5,
-        image: "/icons/btn_Open.png",
+        backgroundImage: "/icons/btn_Open.png",
+        backgroundSelectedImage: "/icons/btn_Open_selected.png",
         id: "openAllFriend",
         type: "open"
     });

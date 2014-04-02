@@ -24,7 +24,7 @@
 						<Button id="monday_set" onClick="changeDayOffset" class="off" title="OFF" />
 					</View>
 					<View class="customeTableViewRow"  touchEnabled="false" backgroundColor="#f5f1e9" height="70dp">
-						<View class="customeRowView" id="allHospital" >
+						<View class="customeRowView" id="allHospital">
 							<Label left="10dp"  text="全国の病院情報をみる"/>
 							<ImageView image="/icons/bkgIconArrow.png" class="rightIcon"/>
 						</View>

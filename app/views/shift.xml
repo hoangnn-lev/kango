@@ -3,13 +3,13 @@
 		<Require type="view" src="tab_menu" id="tabMenu"/>
 		<View id="main" layout="vertical">
 			<View id="calendarTitle">
-				<ImageView image="/icons/prev.png" class="calendarButton"  id="prevMonth" left="0"/>
+				<Button backgroundImage="/icons/prev.png" backgroundSelectedImage="/icons/prev_selected.png" class="calendarButton"  id="prevMonth" left="0"/>
 				<View id="dateInfo">
 					<Label id="year"/>
 					<Label id="month"/>
 					<Label id="monthName"/>
 				</View>
-				<ImageView image="/icons/next.png"  class="calendarButton"  id="nextMonth" right="0"/>
+				<Button backgroundImage="/icons/next.png" backgroundSelectedImage="/icons/next_selected.png" class="calendarButton"  id="nextMonth" right="0"/>
 			</View>
 			<View id="days"/>
 			<View id="calendar" onClick="clickCalendar" />
@@ -19,7 +19,8 @@
 					<Label id="dayName"/>
 					<View id="shiftLabel"/>
 				</View>
-				<View backgroundColor="#fff" height="Ti.UI.FILL" layout="vertical" top="2dp">
+				<Label class="line2"/>
+				<View backgroundColor="#fff" height="Ti.UI.SIZE" layout="vertical">
 					<View id="shiftList"/>
 					<View class="buttonShiftSetting">
 						<Button title="シフト設定" id="shiftSetting"/>

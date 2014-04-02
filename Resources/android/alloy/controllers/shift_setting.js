@@ -27,7 +27,7 @@ function Controller() {
         id: "title"
     });
     $.__views.main.add($.__views.title);
-    $.__views.__alloyId71 = Ti.UI.createLabel({
+    $.__views.__alloyId72 = Ti.UI.createLabel({
         width: Ti.UI.SIZE,
         height: Ti.UI.SIZE,
         color: "#fff",
@@ -36,22 +36,22 @@ function Controller() {
             fontSize: "16sp"
         },
         text: "シフト設定",
-        id: "__alloyId71"
-    });
-    $.__views.title.add($.__views.__alloyId71);
-    $.__views.__alloyId72 = Ti.UI.createScrollView({
-        top: "0",
-        bottom: 20,
         id: "__alloyId72"
     });
-    $.__views.main.add($.__views.__alloyId72);
+    $.__views.title.add($.__views.__alloyId72);
+    $.__views.__alloyId73 = Ti.UI.createScrollView({
+        top: "0",
+        bottom: 20,
+        id: "__alloyId73"
+    });
+    $.__views.main.add($.__views.__alloyId73);
     $.__views.shift = Ti.UI.createView({
         height: Ti.UI.SIZE,
         width: Ti.UI.FILL,
         layout: "vertical",
         id: "shift"
     });
-    $.__views.__alloyId72.add($.__views.shift);
+    $.__views.__alloyId73.add($.__views.shift);
     exports.destroy = function() {};
     _.extend($, $.__views);
     var shiftsCols = Alloy.Collections.shifts;
@@ -65,7 +65,7 @@ function Controller() {
     for (var i = 0; n > i; i++) {
         var item = Ti.UI.createView({
             touchEnabled: true,
-            selectedBackgroundColor: "transparent",
+            backgroundSelectedColor: "#f3f3f3",
             width: Ti.UI.FILL,
             height: "50dp",
             id: shift[i].get("id"),
@@ -122,7 +122,7 @@ function Controller() {
             height: "30dp",
             width: "80dp",
             backgroundColor: background,
-            backgroundSelectedColor: background,
+            backgroundSelectedColor: "#bbbbbb",
             right: "10dp",
             touchEnabled: true,
             border: Ti.UI.INPUT_BORDERSTYLE_ROUNDED,

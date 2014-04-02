@@ -222,7 +222,7 @@
 						<li class="mar_b5">本アプリに関する利用者から当社に対するお問い合わせその他会員から当社に対する連絡または通知は、本アプリに設置する「お問い合わせ」または当社の公式ウェブサイトに設置する問い合わせフォームより行っていただきます。</li>
 						<li class="mar_b5">当社は、本アプリに関するお問い合わせ対応等のため、利用者の返信先メールアドレス、お問い合わせ内容等を取得することができるものとします。</li>
 						<li class="mar_b5">当社は、法令に定める場合等の例外を除き、利用者から取得した個人情報を利用者の同意なく当社以外の第三者へ提供することはいたしません。また、利用目的の達成に必要な範囲で当社の提携企業に預託することがあります。</li>
-						<li class="mar_b5">当社は、お預かりする利用者の個人情報については、「<a href="http://leverages.jp/privacypolicy/policy.html" target="_blank">個人情報保護方針</a>」に従って管理いたします。</li>
+						<li class="mar_b5">当社は、お預かりする利用者の個人情報については、「<a onclick="return gotoLink('http://leverages.jp/privacypolicy/policy.html');" href="http://leverages.jp/privacypolicy/policy.html">個人情報保護方針</a>」に従って管理いたします。</li>
 					</ol>
 					
 					<h3 class="ttlSub02 pad_t15">第13条（損害賠償責任）</h3>
@@ -248,5 +248,13 @@
 				<div class="txt">2.3.3以上</div>
 			</div>
 	</section>
+	<script>
+		function gotoLink(url) {
+			var eventObject = new Object;
+			eventObject['URL'] = url;
+			Ti.App.fireEvent('openBrowser', eventObject);
+			return false;
+		}
+	</script>
 	</body>
 </html>
